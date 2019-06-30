@@ -362,6 +362,16 @@ $(document).ready(function () {
         }
       }
     },
+    sidebarToggle: function (integrator) {
+      sidebarToggleMotion.init();
+      integrator.next();
+      // 可以不加if直接显示
+      // 加if的话，要在主题配置文件里面修改 sidebar: always
+      if (CONFIG.sidebar === 'always') {
+        // 模拟点击一下侧边栏按钮
+        sidebarToggleMotion.clickHandler();
+      }
+    },
     sidebar: function (integrator) {
       if (CONFIG.sidebar.display === 'always') {
         NexT.utils.displaySidebar();
