@@ -397,6 +397,10 @@ kbd {
   color: #999
 }
 
+.highlight, code, pre, table {
+  font-size: 13px
+}
+
 .scrollbar-measure {
   width: 100px;
   height: 100px;
@@ -415,7 +419,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
   border: 1px solid #ddd;
-  font-size: 14px;
   table-layout: fixed;
   word-wrap: break-all
 }
@@ -469,7 +472,7 @@ body, html {
 }
 
 .main-inner {
-  width: 700px
+  width: 780px
 }
 
 @media (min-width:1600px) {
@@ -501,7 +504,6 @@ body, html {
   overflow: auto;
   margin: 20px 0;
   padding: 0;
-  font-size: 13px;
   color: #c5c8c6;
   background: #1d1f21;
   line-height: 1.6
@@ -523,8 +525,7 @@ code {
   padding: 2px 4px;
   color: #555;
   background: #eee;
-  border-radius: 3px;
-  font-size: 13px
+  border-radius: 3px
 }
 
 pre {
@@ -1636,6 +1637,18 @@ pre .javascript .function, pre .keyword {
   font-family: UKIJ Ekran
 }
 
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  border-bottom: 1px solid #0593d3
+}
+
+.post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc8a17
+}
+
 .sidebar {
   top: 0;
   z-index: 1040
@@ -1797,7 +1810,7 @@ pre .javascript .function, pre .keyword {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fffaf9
+  background: #ffdf90
 }
 
 .links-of-blogroll {
@@ -2664,7 +2677,7 @@ pre .javascript .function, pre .keyword {
 .header {
   position: relative;
   margin: 0 auto;
-  width: 960px
+  width: 1050px
 }
 
 @media (min-width:768px) and (max-width:991px) {
@@ -2725,7 +2738,7 @@ pre .javascript .function, pre .keyword {
 }
 
 .container .main-inner {
-  width: 960px
+  width: 1050px
 }
 
 @media (min-width:768px) and (max-width:991px) {
@@ -2743,9 +2756,10 @@ pre .javascript .function, pre .keyword {
 .content-wrap {
   float: right;
   box-sizing: border-box;
-  padding: 40px;
-  width: 700px;
-  min-height: 700px
+  padding: 30px;
+  width: 780px;
+  min-height: 700px;
+  margin-right: 30px
 }
 
 .sidebar, .sidebar-position-right .content-wrap {
@@ -2784,7 +2798,7 @@ pre .javascript .function, pre .keyword {
 }
 
 .footer-inner {
-  width: 960px;
+  width: 1050px;
   padding-left: 260px
 }
 
@@ -3059,12 +3073,6 @@ pre .javascript .function, pre .keyword {
   overflow: hidden
 }
 
-@media (max-width:767px) {
-  .post-body {
-    text-align: justify
-  }
-}
-
 .post {
   margin-top: 0;
   margin-bottom: 60px;
@@ -3075,4 +3083,31 @@ pre .javascript .function, pre .keyword {
 
 .post-toc .nav .nav-child {
   display: block
+}
+
+.post .aplayer {
+  width: 520px;
+  margin: 0 auto
+}
+
+@media (max-width:767px) {
+  .post-body {
+    text-align: justify
+  }
+  .post .aplayer {
+    width: auto;
+    margin: 0 auto
+  }
+}
+
+.post .aplayer .post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+  border-bottom: 1px solid #0593d3
+}
+
+.post .aplayer .post-body p a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423
 }

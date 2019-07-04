@@ -46,10 +46,15 @@
   <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
   <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
 
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
 
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet" type="text/css">
 
   <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
                                                                                   type="text/css">
@@ -143,6 +148,9 @@
   </script>
 
 </head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
 
 <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -276,7 +284,7 @@
               <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
 
                 <div class="post-block">
-                  <link itemprop="mainEntityOfPage" href="http://xixili.online/2019/07/01/hexo-github/">
+                  <link itemprop="mainEntityOfPage" href="http://xixili.online/2019/07/04/数据库原理（关系型）/">
 
                   <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
                     <meta itemprop="name" content="WHF">
@@ -292,7 +300,7 @@
 
                     <h1 class="post-title" itemprop="name headline">
 
-                      <a class="post-title-link" href="/2019/07/01/hexo-github/" itemprop="url">hexo + github 搭建个人博客</a>
+                      <a class="post-title-link" href="/2019/07/04/数据库原理（关系型）/" itemprop="url">数据库原理（关系型）</a>
                     </h1>
 
                     <div class="post-meta">
@@ -304,8 +312,101 @@
 
                         <span class="post-meta-item-text">发表于</span>
 
-                        <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T14:49:31+08:00">
-                          2019-07-01
+                        <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T23:36:05+08:00">
+                          2019-07-04
+                        </time>
+
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          11,430
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          40
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context" itemprop="articleBody">
+
+                    基础 O(1) vs O(n^2) 时间复杂度 概念 时间复杂度用来检验某个算法处理一定量的数据要花多长时间。为了描述这个复杂度，计算机科学家使用数学上的『简明解释算法中的大O符号』
+                    ...
+                    <!--noindex-->
+                    <div class="post-button text-center">
+                      <a class="btn" href="/2019/07/04/数据库原理（关系型）/#more" rel="contents">
+                        阅读全文 &raquo;
+                      </a>
+                    </div>
+                    <!--/noindex-->
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div>
+
+                    </div>
+
+                    <div class="post-eof"></div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage" href="http://xixili.online/2019/07/04/hexo-github/">
+
+                  <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content="">
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+
+                      <a class="post-title-link" href="/2019/07/04/hexo-github/" itemprop="url">hexo + github 搭建个人博客</a>
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-04T23:32:06+08:00">
+                          2019-07-04
                         </time>
 
                       </span>
@@ -339,12 +440,13 @@
                     </div>
                   </header>
 
-                  <div class="post-body" itemprop="articleBody">
+                  <div class="post-body han-init-context" itemprop="articleBody">
 
-                    github准备 注册github 创建github仓库 仓库名称为： Github昵称.github.io 添加秘钥 环境准备 安装git,以及node ...
+                    ## **github准备** 注册github 创建github仓库 仓库名称为： Github昵称.github.io 添加秘钥 环境准备 安装git,以及no
+                    ...
                     <!--noindex-->
                     <div class="post-button text-center">
-                      <a class="btn" href="/2019/07/01/hexo-github/#more" rel="contents">
+                      <a class="btn" href="/2019/07/04/hexo-github/#more" rel="contents">
                         阅读全文 &raquo;
                       </a>
                     </div>
@@ -353,6 +455,10 @@
                   </div>
 
                   <footer class="post-footer">
+
+                    <div>
+
+                    </div>
 
                     <div class="post-eof"></div>
 
@@ -407,7 +513,7 @@
                         <span class="post-meta-item-text">字数统计&#58;</span>
 
                         <span title="字数统计">
-                          4,720
+                          4,765
                         </span>
 
                         <span class="post-meta-divider">|</span>
@@ -419,7 +525,7 @@
                         <span class="post-meta-item-text">阅读时长 &asymp;</span>
 
                         <span title="阅读时长">
-                          17
+                          18
                         </span>
 
                       </div>
@@ -427,10 +533,10 @@
                     </div>
                   </header>
 
-                  <div class="post-body" itemprop="articleBody">
+                  <div class="post-body han-init-context" itemprop="articleBody">
 
-                    [toc] 网络协议 OSI是指Open System Interconnect，意为开放式系统互联。 TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。
-                    ...
+                    #### 网络协议 OSI是指Open System Interconnect，意为开放式系统互联。 TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。
+                    ![2262850b74a ...
                     <!--noindex-->
                     <div class="post-button text-center">
                       <a class="btn" href="/2019/06/30/HTTP基本原理/#more" rel="contents">
@@ -442,6 +548,10 @@
                   </div>
 
                   <footer class="post-footer">
+
+                    <div>
+
+                    </div>
 
                     <div class="post-eof"></div>
 
@@ -516,10 +626,10 @@
                     </div>
                   </header>
 
-                  <div class="post-body" itemprop="articleBody">
+                  <div class="post-body han-init-context" itemprop="articleBody">
 
-                    快速排序 分而治之 （divide and conquer， D&amp;C） ——一种著名的递归式问题解决方法。 使用D&amp;C解决问题的过程包括两个步骤。
-                    找出基线条件 ...
+                    #### 快速排序 ##### 分而治之 （divide and conquer， D&C） ——一种著名的递归式问题解决方法。 使用D&C解决问题的过程包括两个步骤。
+                    找出基线条件，这种条 ...
                     <!--noindex-->
                     <div class="post-button text-center">
                       <a class="btn" href="/2019/06/30/算法图解（二）/#more" rel="contents">
@@ -531,6 +641,10 @@
                   </div>
 
                   <footer class="post-footer">
+
+                    <div>
+
+                    </div>
 
                     <div class="post-eof"></div>
 
@@ -605,7 +719,7 @@
                     </div>
                   </header>
 
-                  <div class="post-body" itemprop="articleBody">
+                  <div class="post-body han-init-context" itemprop="articleBody">
 
                     算法图解1-4章 1、二分法 仅当列表是有序的时候，二分查找才管用 对数运算是幂运算的逆运算。 本书使用大O表示法（稍后介绍）讨论运行时间时，log指的都是log2
                     。 ...
@@ -620,6 +734,10 @@
                   </div>
 
                   <footer class="post-footer">
+
+                    <div>
+
+                    </div>
 
                     <div class="post-eof"></div>
 
@@ -674,7 +792,7 @@
                         <span class="post-meta-item-text">字数统计&#58;</span>
 
                         <span title="字数统计">
-                          1,145
+                          1,144
                         </span>
 
                         <span class="post-meta-divider">|</span>
@@ -694,10 +812,10 @@
                     </div>
                   </header>
 
-                  <div class="post-body" itemprop="articleBody">
+                  <div class="post-body han-init-context" itemprop="articleBody">
 
-                    [toc] ubuntu环境 ###- 安装git ###- 代码托管网站ssh秘钥添加 ###- 相关python包安装 - step1:更新软件列表 sudo
-                    apt-get upda ...
+                    ## ubuntu环境 ###- 安装git ###- 代码托管网站ssh秘钥添加 ###- 相关python包安装 #### - step1:更新软件列表 sudo
+                    apt-get update ...
                     <!--noindex-->
                     <div class="post-button text-center">
                       <a class="btn" href="/2017/08/16/odoo8-ubuntu14-04部署/#more" rel="contents">
@@ -709,6 +827,10 @@
                   </div>
 
                   <footer class="post-footer">
+
+                    <div>
+
+                    </div>
 
                     <div class="post-eof"></div>
 
@@ -750,14 +872,14 @@
 
                     <a href="/archives/">
 
-                      <span class="site-state-item-count">5</span>
+                      <span class="site-state-item-count">6</span>
                       <span class="site-state-item-name">日志</span>
                     </a>
                   </div>
 
                   <div class="site-state-item site-state-tags">
                     <a href="/tags/index.html">
-                      <span class="site-state-item-count">3</span>
+                      <span class="site-state-item-count">4</span>
                       <span class="site-state-item-name">标签</span>
                     </a>
                   </div>
@@ -854,7 +976,7 @@
 
           <span class="post-meta-item-text">Site words total count&#58;</span>
 
-          <span title="Site words total count">10.8k</span>
+          <span title="Site words total count">22.3k</span>
 
         </div>
 
@@ -868,22 +990,22 @@
 
         <div class="theme-info">
           <div class="powered-by"></div>
-          <span class="post-count">博客全站共10.8k字</span>
+          <span class="post-count">博客全站共22.3k字</span>
         </div>
 
         <div class="busuanzi-count">
           <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
           <span class="site-uv">
-            <i class="fa fa-user"></i>
+            访客数
             <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-
+            人
           </span>
 
           <span class="site-pv">
-            <i class="fa fa-eye"></i>
+            总访问量
             <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-
+            次
           </span>
 
         </div>
@@ -1275,6 +1397,6 @@
                                                                                     ; } }); </script>
       <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":200,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>

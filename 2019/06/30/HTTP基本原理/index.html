@@ -46,10 +46,15 @@
   <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
   <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
 
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
 
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet" type="text/css">
 
   <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
                                                                                   type="text/css">
@@ -68,23 +73,19 @@
 
   <link rel="alternate" href="/atom.xml" title="Xixili" type="application/atom+xml">
 
-  <meta name="description" content="[toc]    网络协议 OSI是指Open System Interconnect，意为开放式系统互联。   TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。                             HTTP和HTTPS    HTTP：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器端请求和应答的标准（TCP），用于从WWW服务器传输超文本到本地">
+  <meta name="description" content="#### 网络协议 OSI是指Open System Interconnect，意为开放式系统互联。 TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。 ![2262850b74a03a1690e5a172300296ff.png](HTTP基本原理/QQ20190630-220308@2x.png) ![56a77ae33e291afc6e161968012408bc.png">
   <meta name="keywords" content="网络协议">
   <meta property="og:type" content="article">
   <meta property="og:title" content="HTTP基本原理">
   <meta property="og:url" content="http://xixili.online/2019/06/30/HTTP基本原理/index.html">
   <meta property="og:site_name" content="Xixili">
-  <meta property="og:description" content="[toc]    网络协议 OSI是指Open System Interconnect，意为开放式系统互联。   TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。                             HTTP和HTTPS    HTTP：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器端请求和应答的标准（TCP），用于从WWW服务器传输超文本到本地">
+  <meta property="og:description" content="#### 网络协议 OSI是指Open System Interconnect，意为开放式系统互联。 TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。 ![2262850b74a03a1690e5a172300296ff.png](HTTP基本原理/QQ20190630-220308@2x.png) ![56a77ae33e291afc6e161968012408bc.png">
   <meta property="og:locale" content="zh-Hans">
-  <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220308@2x.png">
-  <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220532@2x.png">
-  <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220546@2x.png">
-  <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220611@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220630@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220645@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220658@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220710@2x.png">
-  <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220721@2x.png">
+  <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220730@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220730@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220741@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220806@2x.png">
@@ -95,11 +96,11 @@
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220939@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220953@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-221005@2x.png">
-  <meta property="og:updated_time" content="2019-06-30T15:23:55.024Z">
+  <meta property="og:updated_time" content="2019-07-04T15:32:06.639Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="HTTP基本原理">
-  <meta name="twitter:description" content="[toc]    网络协议 OSI是指Open System Interconnect，意为开放式系统互联。   TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。                             HTTP和HTTPS    HTTP：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器端请求和应答的标准（TCP），用于从WWW服务器传输超文本到本地">
-  <meta name="twitter:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220308@2x.png">
+  <meta name="twitter:description" content="#### 网络协议 OSI是指Open System Interconnect，意为开放式系统互联。 TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。 ![2262850b74a03a1690e5a172300296ff.png](HTTP基本原理/QQ20190630-220308@2x.png) ![56a77ae33e291afc6e161968012408bc.png">
+  <meta name="twitter:image" content="http://xixili.online/2019/06/30/HTTP基本原理/QQ20190630-220630@2x.png">
 
   <script type="text/javascript" id="hexo.configurations">
     var NexT = window.NexT || {};
@@ -165,6 +166,9 @@
   </script>
 
 </head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
 
 <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -330,7 +334,7 @@
 
                       <span class="post-meta-divider">|</span>
                       <span class="page-pv">
-                        <i class="fa fa-file-o"></i>
+                        <i class="fa fa-file-o"></i> 阅读数
                         <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
                       </span>
 
@@ -343,7 +347,7 @@
                         <span class="post-meta-item-text">字数统计&#58;</span>
 
                         <span title="字数统计">
-                          4,720
+                          4,765
                         </span>
 
                         <span class="post-meta-divider">|</span>
@@ -355,7 +359,7 @@
                         <span class="post-meta-item-text">阅读时长 &asymp;</span>
 
                         <span title="阅读时长">
-                          17
+                          18
                         </span>
 
                       </div>
@@ -363,33 +367,26 @@
                     </div>
                   </header>
 
-                  <div class="post-body" itemprop="articleBody">
+                  <div class="post-body han-init-context" itemprop="articleBody">
 
                     
                     
                     
-                    <p>[toc]</p>
-                    <h4 id="网络协议">
-                      <a href="#网络协议" class="headerlink" title="网络协议"></a>网络协议</h4>
-                    <p>OSI是指Open System Interconnect，意为开放式系统互联。
-                      <br>TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220308@2x.png" alt="2262850b74a03a1690e5a172300296ff.png">
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220532@2x.png" alt="56a77ae33e291afc6e161968012408bc.png">
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220546@2x.png" alt="93c6d9aa6c98e6e1a6490f45faab0e13.png">
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220611@2x.png" alt="59f2d62f0479cd0fb36a55ee7990ec28.png">
-                    </p>
+                    <meta name="referrer" content="no-referrer"> #### 网络协议 OSI是指Open System Interconnect，意为开放式系统互联。 TCP/IP是指传输控制协议/网间协议，是目前世界上应用最广的协议。
+                    ![2262850b74a03a1690e5a172300296ff.png](HTTP基本原理/QQ20190630-220308@2x.png)
+                    ![56a77ae33e291afc6e161968012408bc.png](HTTP基本原理/QQ20190630-220532@2x.png)
+                    ![93c6d9aa6c98e6e1a6490f45faab0e13.png](HTTP基本原理/QQ20190630-220546@2x.png)
+                    ![59f2d62f0479cd0fb36a55ee7990ec28.png](HTTP基本原理/QQ20190630-220611@2x.png)
+
                     <h4 id="HTTP和HTTPS">
                       <a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h4>
                     <ul>
                       <li>HTTP：是互联网上应用最为广泛的一种网络协议，是一个客户端和服务器端请求和应答的标准（TCP），用于从WWW服务器传输超文本到本地浏览器的传输协议，它可以使浏览器更加高效，使网络传输减少。</li>
                       <li>HTTPS：是以安全为目标的HTTP通道，简单讲是HTTP的安全版，即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。
-                        <h5 id="HTTP">
-                          <a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h5>
-                        <img src="/2019/06/30/HTTP基本原理/QQ20190630-220630@2x.png" alt="e3a228adeed7dcf89f404385cb7ec3ac.png">
+                        <h5 id="HTTP请求">
+                          <a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h5>
+                        <img src="/2019/06/30/HTTP基本原理/QQ20190630-220630@2x.png" title="HTTP请求">
+
                       </li>
                     </ul>
                     <h6 id="GET与POST方法区别">
@@ -415,12 +412,11 @@
                         <strong>多次请求结果</strong>。 GET请求的数据是幂等的，而POST不是</li>
                       <li>
                         <strong>对数据类型的限制</strong>。GET只允许 ASCII 字符。而POST没有限制。也允许二进制数据。
-                        <h6 id="HTTP请求">
-                          <a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h6>
-                        <img src="/2019/06/30/HTTP基本原理/QQ20190630-220645@2x.png" alt="e668bbcfa924504d57b6e6d3135302a5.png">
-                        <br>或者
-                        <br>
-                        <img src="/2019/06/30/HTTP基本原理/QQ20190630-220658@2x.png" alt="0dd63e860be3818e6fff79d66fe9939e.png">
+                        <h6 id="HTTP请求-1">
+                          <a href="#HTTP请求-1" class="headerlink" title="HTTP请求"></a>HTTP请求</h6>
+                        <img src="/2019/06/30/HTTP基本原理/QQ20190630-220645@2x.png" title="HTTP请求"> 或者
+                        <img src="/2019/06/30/HTTP基本原理/QQ20190630-220658@2x.png" title="HTTP请求">
+
                       </li>
                     </ol>
                     <p>请求：</p>
@@ -461,32 +457,28 @@
                         </ul>
                       </li>
                     </ul>
-                    <p>常见的请求头
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220710@2x.png" alt="9f2cef8f2b4ba7d5784892f85df476d7.png">
-                      <br>POST请求报文
-                      <br>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
-                            </td>
-                            <td class="code">
-                              <pre><span class="line">POST 　/index.php　HTTP/1.1 　　 请求行</span><br><span class="line">Host: localhost</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 5.1; rv:10.0.2) Gecko/20100101 Firefox/10.0.2　　请求头</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,/;q=0.8</span><br><span class="line">Accept-Language: zh-cn,zh;q=0.5</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Referer: http://localhost/</span><br><span class="line">Content-Length：25</span><br><span class="line">Content-Type：application/x-www-form-urlencoded</span><br><span class="line">　　空行</span><br><span class="line">username=aa&amp;password=1234　　请求数据</span><br></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                    </p>
+                    <p>常见的请求头</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220710@2x.png" title="常见的请求头">
+                    <p>POST请求报文</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">POST 　/index.php　HTTP/1.1 　　 请求行</span><br><span class="line">Host: localhost</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 5.1; rv:10.0.2) Gecko/20100101 Firefox/10.0.2　　请求头</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,/;q=0.8</span><br><span class="line">Accept-Language: zh-cn,zh;q=0.5</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Referer: http://localhost/</span><br><span class="line">Content-Length：25</span><br><span class="line">Content-Type：application/x-www-form-urlencoded</span><br><span class="line">　　空行</span><br><span class="line">username=aa&amp;password=1234　　请求数据</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
                     <h6 id="HTTP响应">
                       <a href="#HTTP响应" class="headerlink" title="HTTP响应"></a>HTTP响应</h6>
-                    <p>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220721@2x.png" alt="dab06addeb80c644075f94fc04ce5c22.png">
-                      <br>或者
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220730@2x.png" alt="658ee84de7af3fe255147c9062d6a258.png">
-                    </p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220730@2x.png" title="HTTP响应">
+                    <p>或者</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220730@2x.png" title="HTTP响应">
+
                     <p>HTTP响应报文主要由状态行、响应头部、空行以及响应数据组成。</p>
                     <ul>
                       <li>状态行
@@ -519,25 +511,23 @@
                         </ul>
                       </li>
                     </ul>
-                    <p>常见响应头部如下
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220741@2x.png" alt="3f631ab861df9acd5d63ad0165db85de.png">
-                    </p>
-                    <p>面是一个响应报文的实例：
-                      <br>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
-                            </td>
-                            <td class="code">
-                              <pre><span class="line">HTTP/1.1 200 OK              状态行     </span><br><span class="line">Server: nginx/1.6.3              响应头部开始</span><br><span class="line">Date: Mon, 15 Oct 2018 03:30:28 GMT </span><br><span class="line">Content-Type: application/json;charset=UTF-8      </span><br><span class="line">Pragma: no-cache</span><br><span class="line">Cache-Control: no-cache</span><br><span class="line">Expires: Thu, 01 Jan 1970 00:00:00 GMT</span><br><span class="line">Content-Encoding: gzip      </span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Proxy-Connection: Keep-alive   响应头部开始       </span><br><span class="line">            空行</span><br><span class="line">&#123;&quot;errno&quot;:0,&quot;dialogInfo&quot;:null,&quot;body&quot;:&#123;&quot;list&quot;:[&#123;&quot;flag&quot;:2,&quot;group_id&quot;:1557,&quot;group_name&quot;:&quot;港股&quot;,&quot;count&quot;:1&#125;,&#123;&quot;flag&quot;:3,&quot;group_id&quot;:1558,&quot;group_name&quot;:&quot;美股&quot;,&quot;count&quot;:7&#125;,&#123;&quot;flag&quot;:1,&quot;group_id&quot;:1556,&quot;group_name&quot;:&quot;全部&quot;,&quot;count&quot;:8&#125;]&#125;,&quot;message&quot;:&quot;success&quot;&#125;  响应数据</span><br></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                    </p>
+                    <p>常见响应头部如下</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220741@2x.png" title="常见响应头部">
+
+                    <p>面是一个响应报文的实例：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">HTTP/1.1 200 OK              状态行     </span><br><span class="line">Server: nginx/1.6.3              响应头部开始</span><br><span class="line">Date: Mon, 15 Oct 2018 03:30:28 GMT </span><br><span class="line">Content-Type: application/json;charset=UTF-8      </span><br><span class="line">Pragma: no-cache</span><br><span class="line">Cache-Control: no-cache</span><br><span class="line">Expires: Thu, 01 Jan 1970 00:00:00 GMT</span><br><span class="line">Content-Encoding: gzip      </span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Proxy-Connection: Keep-alive   响应头部开始       </span><br><span class="line">            空行</span><br><span class="line">&#123;&quot;errno&quot;:0,&quot;dialogInfo&quot;:null,&quot;body&quot;:&#123;&quot;list&quot;:[&#123;&quot;flag&quot;:2,&quot;group_id&quot;:1557,&quot;group_name&quot;:&quot;港股&quot;,&quot;count&quot;:1&#125;,&#123;&quot;flag&quot;:3,&quot;group_id&quot;:1558,&quot;group_name&quot;:&quot;美股&quot;,&quot;count&quot;:7&#125;,&#123;&quot;flag&quot;:1,&quot;group_id&quot;:1556,&quot;group_name&quot;:&quot;全部&quot;,&quot;count&quot;:8&#125;]&#125;,&quot;message&quot;:&quot;success&quot;&#125;  响应数据</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
                     <p>响应：</p>
                     <ol>
                       <li>响应状态码（Response Status Code）</li>
@@ -547,12 +537,10 @@
                     <h6 id="TCP三次握手">
                       <a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h6>
                     <p>为什么要三次握手？
-                      <br>为了防止已失效的连接请求报文段突然又传送到了服务端，避免server资源浪费
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220806@2x.png" alt="e9b575acd89957e9329939f2ac8dba3e.png">
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220842@2x.png" alt="e9b575acd89957e9329939f22ac8dba3e.png">
-                    </p>
+                      <br>为了防止已失效的连接请求报文段突然又传送到了服务端，避免server资源浪费</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220806@2x.png" title="TCP三次握手">
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220842@2x.png" title="四次挥手">
+
                     <p>
                       <strong>ACK：响应标识，1表示响应，连接建立成功之后，所有报文段ACK的值都为1
                         <br>SYN：连接标识，1表示建立连接，连接请求和连接接受报文段SYN=1，其他情况都是0
@@ -565,10 +553,9 @@
                       <br>
                       <strong>第二次握手</strong>：确认连接请求。服务器收到客户端的SYN报文段，需要对该请求进行确认，设置ack=x+1（即客户端seq+1）。同时自己也要发送SYN请求信息，即SYN置为1，seq=y。服务器将SYN和ACK信息放在一个报文段中，一并发送给客户端，服务器进入SYN_RECV状态。
                       <br>
-                      <strong>第三次握手</strong>：客户端收到SYN+ACK报文段，将ack设置为y+1，向服务器发送ACK报文段，这个报文段发送完毕，客户端和服务券进入ESTABLISHED状态，完成Tcp三次握手。
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220854@2x.png" alt="31494cee420df794b7424c9edca70e47.png">
-                    </p>
+                      <strong>第三次握手</strong>：客户端收到SYN+ACK报文段，将ack设置为y+1，向服务器发送ACK报文段，这个报文段发送完毕，客户端和服务券进入ESTABLISHED状态，完成Tcp三次握手。</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220854@2x.png" title="常见响应头部">
+
                     <h6 id="HTTP流程">
                       <a href="#HTTP流程" class="headerlink" title="HTTP流程"></a>HTTP流程</h6>
                     <p>第一步：建立TCP/IP连接，客户端与服务器通过Socket三次握手进行连接
@@ -584,9 +571,8 @@
                     <p>CA证书，就是CA颁发的证书，可用于验证网站是否可信（针对HTTPS）、验证某文件是否可信（是否被篡改）等，也可以用一个证书来证明另一个证书是真实可信，最顶级的证书称为根证书。除了根证书（自己证明自己是可靠），其它证书都要依靠上一级的证书，来证明自己。</p>
                     <h6 id="HTTPS流程">
                       <a href="#HTTPS流程" class="headerlink" title="HTTPS流程"></a>HTTPS流程</h6>
-                    <p>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220905@2x.png" alt="b4909f2b1b1e2c26436e97ebcf7cb47f.png">
-                    </p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220905@2x.png" title="HTTPS流程">
+
                     <ol>
                       <li>客户端发起HTTPS请求</li>
                       <li>服务端的配置
@@ -609,10 +595,9 @@
                     </ol>
                     <p>SSL/TLS协议基本思路是采用公钥加密法（
                       <strong>最有名的是RSA加密算法，属于非对称加密</strong>）。大概流程是，客户端向服务器索要公钥，然后用公钥加密信息，服务器收到密文，用自己的私钥解密。
-                      <br>为了防止公钥被篡改，把公钥放在数字证书中，证书可信则公钥可信。公钥加密计算量很大，为了提高效率，服务端和客户端都生成对话秘钥，用它加密信息，而对话秘钥是对称加密，速度非常快。而公钥用来机密对话秘钥。
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220919@2x.png" alt="cfa1da5f7631e400140ff335e7f1d721.png">
-                    </p>
+                      <br>为了防止公钥被篡改，把公钥放在数字证书中，证书可信则公钥可信。公钥加密计算量很大，为了提高效率，服务端和客户端都生成对话秘钥，用它加密信息，而对话秘钥是对称加密，速度非常快。而公钥用来机密对话秘钥。</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220919@2x.png" title="SSL原理及运行过程">
+
                     <ol>
                       <li>客户端给出协议版本号、一个客户端随机数A（Client random）以及客户端支持的加密方式</li>
                       <li>服务端确认双方使用的加密方式，并给出数字证书、一个服务器生成的随机数B（Server random）</li>
@@ -624,16 +609,13 @@
                       </li>
                     </ol>
                     <p>证书有很多类型，按认证级别分类：1.域名认证；2.公司认证；3.扩展认证
-                      <br>域名认证（DV=Domain Validation）：最低级别的认证，可以确认申请人拥有这个域名
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220939@2x.png" alt="bd868c6f72a1942d758bf3bd4c553a08.png">
-                      <br>公司认证（OV=Organization Validation）：确认域名所有人是哪家公司，证书里面包含公司的信息
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-220953@2x.png" alt="b1736de5a50795b4cb92d748de9d93fc.png">
-                      <br>扩展认证（EV=Extended Validation）：最高级别认证，浏览器地址栏会显示公司名称。
-                      <br>
-                      <img src="/2019/06/30/HTTP基本原理/QQ20190630-221005@2x.png" alt="1f27d2e8b246617bd67a216e3b010de4.png">
-                    </p>
+                      <br>域名认证（DV=Domain Validation）：最低级别的认证，可以确认申请人拥有这个域名</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220939@2x.png" title="域名认证">
+                    <p>公司认证（OV=Organization Validation）：确认域名所有人是哪家公司，证书里面包含公司的信息</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-220953@2x.png" title="公司认证">
+                    <p>扩展认证（EV=Extended Validation）：最高级别认证，浏览器地址栏会显示公司名称。</p>
+                    <img src="/2019/06/30/HTTP基本原理/QQ20190630-221005@2x.png" title="扩展认证">
+
                     <h6 id="RSA加密和DH加密">
                       <a href="#RSA加密和DH加密" class="headerlink" title="RSA加密和DH加密"></a>RSA加密和DH加密</h6>
                     <p>加密算法分为对称加密、非对称加密和Hash加密算法。</p>
@@ -667,21 +649,20 @@
                       <a href="#网页基础" class="headerlink" title="网页基础"></a>网页基础</h4>
                     <h5 id="HTML">
                       <a href="#HTML" class="headerlink" title="HTML"></a>HTML</h5>
-                    <p>超文本标记语言（HYper Text Markup Language）
-                      <br>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
-                            </td>
-                            <td class="code">
-                              <pre><span class="line">html实例</span><br><span class="line">&lt;!DOCTYPE html&gt;用来标记文档类型</span><br><span class="line">&lt;html&gt; </span><br><span class="line">    &lt;head&gt;       # 网页头</span><br><span class="line">       &lt;meta charset=&quot;UTF-8&quot;&gt;  #指定网页编码</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;&lt;/body&gt;  # 网页体</span><br><span class="line">&lt;html/&gt;</span><br></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                    </p>
+                    <p>超文本标记语言（HYper Text Markup Language）</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">html实例</span><br><span class="line">&lt;!DOCTYPE html&gt;用来标记文档类型</span><br><span class="line">&lt;html&gt; </span><br><span class="line">    &lt;head&gt;       # 网页头</span><br><span class="line">       &lt;meta charset=&quot;UTF-8&quot;&gt;  #指定网页编码</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;&lt;/body&gt;  # 网页体</span><br><span class="line">&lt;html/&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
                     <h5 id="CSS">
                       <a href="#CSS" class="headerlink" title="CSS"></a>CSS</h5>
                     <p>层叠样式表（cascading Style Sheets）</p>
@@ -775,21 +756,53 @@
                           <td>.</td>
                           <td>.</td>
                           <td>.</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>##### JavaScript</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>##### Session和Cookies</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>###### 产生</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>web请求与响应基于http，而http是无状态协议</strong>。所以我们为了跨越多个请求保留用户的状态，需要利用某种工具帮助我们记录与识别每一次请求及请求的其他信息。</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>cookie 是一种发送到客户浏览器的文本串句柄，并保存在客户机硬盘上，可以用来在某个WEB站点会话间持久的保持数据。</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>通过cookies的值可以确定是哪个session</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>###### Session</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                         </tr>
                       </tbody>
                     </table>
-                    <h5 id="JavaScript">
-                      <a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h5>
-                    <h5 id="Session和Cookies">
-                      <a href="#Session和Cookies" class="headerlink" title="Session和Cookies"></a>Session和Cookies</h5>
-                    <h6 id="产生">
-                      <a href="#产生" class="headerlink" title="产生"></a>产生</h6>
-                    <p>
-                      <strong>web请求与响应基于http，而http是无状态协议</strong>。所以我们为了跨越多个请求保留用户的状态，需要利用某种工具帮助我们记录与识别每一次请求及请求的其他信息。
-                      <br>cookie 是一种发送到客户浏览器的文本串句柄，并保存在客户机硬盘上，可以用来在某个WEB站点会话间持久的保持数据。
-                      <br>通过cookies的值可以确定是哪个session</p>
-                    <h6 id="Session">
-                      <a href="#Session" class="headerlink" title="Session"></a>Session</h6>
                     <p>当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。这个Session是保存在服务端的，有一个唯一标识。在服务端保存Session的方法很多，内存、数据库、文件都有。</p>
                     <p>session其实指的就是访问者从到达某个特定主页到离开为止的那段时间。Session其实是利用Cookie进行信息处理的，当用户首先进行了请求后，服务端就在用户浏览器上创建了一个Cookie，当这个Session结束时，其实就是意味着这个Cookie就过期了。注：为这个用户创建的Cookie的名称是aspsessionid。这个Cookie的唯一目的就是为每一个用户提供不同的身份认证。</p>
                     <p>
@@ -845,12 +858,23 @@
 
                       <div class="post-nav-prev post-nav-item">
 
-                        <a href="/2019/07/01/hexo-github/" rel="prev" title="hexo + github 搭建个人博客">
+                        <a href="/2019/07/04/hexo-github/" rel="prev" title="hexo + github 搭建个人博客">
                           hexo + github 搭建个人博客
                           <i class="fa fa-chevron-right"></i>
                         </a>
 
                       </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div style="text-align:center;color: #ccc;font-size:14px;">------ 本文--
+                          <i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
                     </div>
 
                   </footer>
@@ -935,14 +959,14 @@
 
                     <a href="/archives/">
 
-                      <span class="site-state-item-count">5</span>
+                      <span class="site-state-item-count">6</span>
                       <span class="site-state-item-name">日志</span>
                     </a>
                   </div>
 
                   <div class="site-state-item site-state-tags">
                     <a href="/tags/index.html">
-                      <span class="site-state-item-count">3</span>
+                      <span class="site-state-item-count">4</span>
                       <span class="site-state-item-name">标签</span>
                     </a>
                   </div>
@@ -1000,57 +1024,50 @@
                 <div class="post-toc-content">
                   <ol class="nav">
                     <li class="nav-item nav-level-4">
-                      <a class="nav-link" href="#网络协议">
-                        <span class="nav-number">1.</span>
-                        <span class="nav-text">
-                          网络协议</span>
-                      </a>
-                    </li>
-                    <li class="nav-item nav-level-4">
                       <a class="nav-link" href="#HTTP和HTTPS">
-                        <span class="nav-number">2.</span>
+                        <span class="nav-number">1.</span>
                         <span class="nav-text">
                           HTTP和HTTPS</span>
                       </a>
                       <ol class="nav-child">
                         <li class="nav-item nav-level-5">
-                          <a class="nav-link" href="#HTTP">
-                            <span class="nav-number">2.1.</span>
+                          <a class="nav-link" href="#HTTP请求">
+                            <span class="nav-number">1.1.</span>
                             <span class="nav-text">
-                              HTTP</span>
+                              HTTP请求</span>
                           </a>
                           <ol class="nav-child">
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#GET与POST方法区别">
-                                <span class="nav-number">2.1.1.</span>
+                                <span class="nav-number">1.1.1.</span>
                                 <span class="nav-text">
                                   GET与POST方法区别</span>
                               </a>
                             </li>
                             <li class="nav-item nav-level-6">
-                              <a class="nav-link" href="#HTTP请求">
-                                <span class="nav-number">2.1.2.</span>
+                              <a class="nav-link" href="#HTTP请求-1">
+                                <span class="nav-number">1.1.2.</span>
                                 <span class="nav-text">
                                   HTTP请求</span>
                               </a>
                             </li>
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#HTTP响应">
-                                <span class="nav-number">2.1.3.</span>
+                                <span class="nav-number">1.1.3.</span>
                                 <span class="nav-text">
                                   HTTP响应</span>
                               </a>
                             </li>
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#TCP三次握手">
-                                <span class="nav-number">2.1.4.</span>
+                                <span class="nav-number">1.1.4.</span>
                                 <span class="nav-text">
                                   TCP三次握手</span>
                               </a>
                             </li>
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#HTTP流程">
-                                <span class="nav-number">2.1.5.</span>
+                                <span class="nav-number">1.1.5.</span>
                                 <span class="nav-text">
                                   HTTP流程</span>
                               </a>
@@ -1059,35 +1076,35 @@
                         </li>
                         <li class="nav-item nav-level-5">
                           <a class="nav-link" href="#HTTPS">
-                            <span class="nav-number">2.2.</span>
+                            <span class="nav-number">1.2.</span>
                             <span class="nav-text">
                               HTTPS</span>
                           </a>
                           <ol class="nav-child">
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#HTTPS流程">
-                                <span class="nav-number">2.2.1.</span>
+                                <span class="nav-number">1.2.1.</span>
                                 <span class="nav-text">
                                   HTTPS流程</span>
                               </a>
                             </li>
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#SSL原理及运行过程">
-                                <span class="nav-number">2.2.2.</span>
+                                <span class="nav-number">1.2.2.</span>
                                 <span class="nav-text">
                                   SSL原理及运行过程</span>
                               </a>
                             </li>
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#SSL证书">
-                                <span class="nav-number">2.2.3.</span>
+                                <span class="nav-number">1.2.3.</span>
                                 <span class="nav-text">
                                   SSL证书</span>
                               </a>
                             </li>
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#RSA加密和DH加密">
-                                <span class="nav-number">2.2.4.</span>
+                                <span class="nav-number">1.2.4.</span>
                                 <span class="nav-text">
                                   RSA加密和DH加密</span>
                               </a>
@@ -1096,7 +1113,7 @@
                         </li>
                         <li class="nav-item nav-level-5">
                           <a class="nav-link" href="#HTTP和HTTPS区别">
-                            <span class="nav-number">2.3.</span>
+                            <span class="nav-number">1.3.</span>
                             <span class="nav-text">
                               HTTP和HTTPS区别</span>
                           </a>
@@ -1105,72 +1122,42 @@
                     </li>
                     <li class="nav-item nav-level-4">
                       <a class="nav-link" href="#网页基础">
-                        <span class="nav-number">3.</span>
+                        <span class="nav-number">2.</span>
                         <span class="nav-text">
                           网页基础</span>
                       </a>
                       <ol class="nav-child">
                         <li class="nav-item nav-level-5">
                           <a class="nav-link" href="#HTML">
-                            <span class="nav-number">3.1.</span>
+                            <span class="nav-number">2.1.</span>
                             <span class="nav-text">
                               HTML</span>
                           </a>
                         </li>
                         <li class="nav-item nav-level-5">
                           <a class="nav-link" href="#CSS">
-                            <span class="nav-number">3.2.</span>
+                            <span class="nav-number">2.2.</span>
                             <span class="nav-text">
                               CSS</span>
                           </a>
                           <ol class="nav-child">
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#选择器">
-                                <span class="nav-number">3.2.1.</span>
+                                <span class="nav-number">2.2.1.</span>
                                 <span class="nav-text">
                                   选择器</span>
                               </a>
                             </li>
-                          </ol>
-                        </li>
-                        <li class="nav-item nav-level-5">
-                          <a class="nav-link" href="#JavaScript">
-                            <span class="nav-number">3.3.</span>
-                            <span class="nav-text">
-                              JavaScript</span>
-                          </a>
-                        </li>
-                        <li class="nav-item nav-level-5">
-                          <a class="nav-link" href="#Session和Cookies">
-                            <span class="nav-number">3.4.</span>
-                            <span class="nav-text">
-                              Session和Cookies</span>
-                          </a>
-                          <ol class="nav-child">
-                            <li class="nav-item nav-level-6">
-                              <a class="nav-link" href="#产生">
-                                <span class="nav-number">3.4.1.</span>
-                                <span class="nav-text">
-                                  产生</span>
-                              </a>
-                            </li>
-                            <li class="nav-item nav-level-6">
-                              <a class="nav-link" href="#Session">
-                                <span class="nav-number">3.4.2.</span>
-                                <span class="nav-text">
-                                  Session</span>
-                              </a>
-                            </li>
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#Cookies">
-                                <span class="nav-number">3.4.3.</span>
+                                <span class="nav-number">2.2.2.</span>
                                 <span class="nav-text">
                                   Cookies</span>
                               </a>
                             </li>
                             <li class="nav-item nav-level-6">
                               <a class="nav-link" href="#区别">
-                                <span class="nav-number">3.4.4.</span>
+                                <span class="nav-number">2.2.3.</span>
                                 <span class="nav-text">
                                   区别</span>
                               </a>
@@ -1232,7 +1219,7 @@
 
           <span class="post-meta-item-text">Site words total count&#58;</span>
 
-          <span title="Site words total count">10.8k</span>
+          <span title="Site words total count">22.3k</span>
 
         </div>
 
@@ -1246,22 +1233,22 @@
 
         <div class="theme-info">
           <div class="powered-by"></div>
-          <span class="post-count">博客全站共10.8k字</span>
+          <span class="post-count">博客全站共22.3k字</span>
         </div>
 
         <div class="busuanzi-count">
           <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
           <span class="site-uv">
-            <i class="fa fa-user"></i>
+            访客数
             <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-
+            人
           </span>
 
           <span class="site-pv">
-            <i class="fa fa-eye"></i>
+            总访问量
             <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-
+            次
           </span>
 
         </div>
@@ -1670,6 +1657,6 @@
                                                                                     ; } }); </script>
       <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"left","width":200,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
