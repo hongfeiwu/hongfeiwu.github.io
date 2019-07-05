@@ -73,13 +73,13 @@
 
   <link rel="alternate" href="/atom.xml" title="Xixili" type="application/atom+xml">
 
-  <meta name="description" content="#### 快速排序 ##### 分而治之 （divide and conquer， D&amp;C） ——一种著名的递归式问题解决方法。 使用D&amp;C解决问题的过程包括两个步骤。     找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件                         1234">
+  <meta name="description" content="快速排序    分而治之 （divide and conquer， D&amp;amp;C） ——一种著名的递归式问题解决方法。    使用D&amp;amp;C解决问题的过程包括两个步骤。    找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件">
   <meta name="keywords" content="算法">
   <meta property="og:type" content="article">
   <meta property="og:title" content="算法图解（二）">
   <meta property="og:url" content="http://xixili.online/2019/06/30/算法图解（二）/index.html">
   <meta property="og:site_name" content="Xixili">
-  <meta property="og:description" content="#### 快速排序 ##### 分而治之 （divide and conquer， D&amp;C） ——一种著名的递归式问题解决方法。 使用D&amp;C解决问题的过程包括两个步骤。     找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件                         1234">
+  <meta property="og:description" content="快速排序    分而治之 （divide and conquer， D&amp;amp;C） ——一种著名的递归式问题解决方法。    使用D&amp;amp;C解决问题的过程包括两个步骤。    找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件">
   <meta property="og:locale" content="zh-Hans">
   <meta property="og:image" content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215529@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215647@2x.png">
@@ -87,10 +87,10 @@
   <meta property="og:image" content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215835@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215909@2x.png">
   <meta property="og:image" content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215926@2x.png">
-  <meta property="og:updated_time" content="2019-07-04T15:32:06.629Z">
+  <meta property="og:updated_time" content="2019-07-05T02:19:10.197Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="算法图解（二）">
-  <meta name="twitter:description" content="#### 快速排序 ##### 分而治之 （divide and conquer， D&amp;C） ——一种著名的递归式问题解决方法。 使用D&amp;C解决问题的过程包括两个步骤。     找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件                         1234">
+  <meta name="twitter:description" content="快速排序    分而治之 （divide and conquer， D&amp;amp;C） ——一种著名的递归式问题解决方法。    使用D&amp;amp;C解决问题的过程包括两个步骤。    找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件">
   <meta name="twitter:image" content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215529@2x.png">
 
   <script type="text/javascript" id="hexo.configurations">
@@ -363,9 +363,14 @@
                     
                     
                     
-                    <meta name="referrer" content="no-referrer"> #### 快速排序 ##### 分而治之 （divide and conquer， D&C） ——一种著名的递归式问题解决方法。
-                    使用D&C解决问题的过程包括两个步骤。
+                    <meta name="referrer" content="no-referrer">
 
+                    <h4 id="快速排序">
+                      <a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4>
+                    <h5 id="分而治之">
+                      <a href="#分而治之" class="headerlink" title="分而治之"></a>分而治之</h5>
+                    <p>（divide and conquer， D&amp;C） ——一种著名的递归式问题解决方法。
+                      <br> 使用D&amp;C解决问题的过程包括两个步骤。</p>
                     <ol>
                       <li>找出基线条件，这种条件必须尽可能简单。</li>
                       <li>不断将问题分解（或者说缩小规模），直到符合基线条件。</li>
@@ -384,8 +389,8 @@
                       </table>
                     </figure>
 
-                    <h5 id="快速排序">
-                      <a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5>
+                    <h5 id="快速排序-1">
+                      <a href="#快速排序-1" class="headerlink" title="快速排序"></a>快速排序</h5>
                     <p>原理</p>
                     <ol>
                       <li>首先，从数组中选择一个元素，这个元素被称为基准值（pivot）。</li>
@@ -698,148 +703,164 @@
 
                 <div class="post-toc-content">
                   <ol class="nav">
-                    <li class="nav-item nav-level-5">
+                    <li class="nav-item nav-level-4">
                       <a class="nav-link" href="#快速排序">
                         <span class="nav-number">1.</span>
                         <span class="nav-text">
                           快速排序</span>
                       </a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#分而治之">
+                            <span class="nav-number">1.1.</span>
+                            <span class="nav-text">
+                              分而治之</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#快速排序-1">
+                            <span class="nav-number">1.2.</span>
+                            <span class="nav-text">
+                              快速排序</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#合并排序-（merge-sort）">
+                            <span class="nav-number">1.3.</span>
+                            <span class="nav-text">
+                              合并排序 （merge sort）</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#平均情况和最糟情况">
+                            <span class="nav-number">1.4.</span>
+                            <span class="nav-text">
+                              平均情况和最糟情况</span>
+                          </a>
+                        </li>
+                      </ol>
                     </li>
-                    <li class="nav-item nav-level-5">
-                      <a class="nav-link" href="#合并排序-（merge-sort）">
+                    <li class="nav-item nav-level-4">
+                      <a class="nav-link" href="#散列表（hash-table）">
                         <span class="nav-number">2.</span>
                         <span class="nav-text">
-                          合并排序 （merge sort）</span>
+                          散列表（hash table）</span>
                       </a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#散列函数">
+                            <span class="nav-number">2.1.</span>
+                            <span class="nav-text">
+                              散列函数</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#应用">
+                            <span class="nav-number">2.2.</span>
+                            <span class="nav-text">
+                              应用</span>
+                          </a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6">
+                              <a class="nav-link" href="#用于查找：DNS解析，介个查找">
+                                <span class="nav-number">2.2.1.</span>
+                                <span class="nav-text">
+                                  用于查找：DNS解析，介个查找</span>
+                              </a>
+                            </li>
+                            <li class="nav-item nav-level-6">
+                              <a class="nav-link" href="#防止重复：投票">
+                                <span class="nav-number">2.2.2.</span>
+                                <span class="nav-text">
+                                  防止重复：投票</span>
+                              </a>
+                            </li>
+                            <li class="nav-item nav-level-6">
+                              <a class="nav-link" href="#用于缓存：-缓存-记住数据，以免服务器再通过处理来生成它们，提升速度">
+                                <span class="nav-number">2.2.3.</span>
+                                <span class="nav-text">
+                                  用于缓存： 缓存/记住数据，以免服务器再通过处理来生成它们，提升速度</span>
+                              </a>
+                            </li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#冲突">
+                            <span class="nav-number">2.3.</span>
+                            <span class="nav-text">
+                              冲突</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#性能">
+                            <span class="nav-number">2.4.</span>
+                            <span class="nav-text">
+                              性能</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#填装因子">
+                            <span class="nav-number">2.5.</span>
+                            <span class="nav-text">
+                              填装因子</span>
+                          </a>
+                        </li>
+                      </ol>
                     </li>
-                    <li class="nav-item nav-level-5">
-                      <a class="nav-link" href="#平均情况和最糟情况">
+                    <li class="nav-item nav-level-4">
+                      <a class="nav-link" href="#广度搜索优先（找出两样之间最少的路径）">
                         <span class="nav-number">3.</span>
                         <span class="nav-text">
-                          平均情况和最糟情况</span>
+                          广度搜索优先（找出两样之间最少的路径）</span>
                       </a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#最短路径问题（shorterst-path-problem）">
+                            <span class="nav-number">3.1.</span>
+                            <span class="nav-text">
+                              最短路径问题（shorterst-path problem）</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#图">
+                            <span class="nav-number">3.2.</span>
+                            <span class="nav-text">
+                              图</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#队列">
+                            <span class="nav-number">3.3.</span>
+                            <span class="nav-text">
+                              队列</span>
+                          </a>
+                        </li>
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#实现图">
+                            <span class="nav-number">3.4.</span>
+                            <span class="nav-text">
+                              实现图</span>
+                          </a>
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4">
+                      <a class="nav-link" href="#狄克斯特拉算法（-找出最快的路径）">
+                        <span class="nav-number">4.</span>
+                        <span class="nav-text">
+                          狄克斯特拉算法（ 找出最快的路径）</span>
+                      </a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5">
+                          <a class="nav-link" href="#术语">
+                            <span class="nav-number">4.1.</span>
+                            <span class="nav-text">
+                              术语</span>
+                          </a>
+                        </li>
+                      </ol>
                     </li>
                   </ol>
-                  <li class="nav-item nav-level-4">
-                    <a class="nav-link" href="#散列表（hash-table）">
-                      <span class="nav-number"></span>
-                      <span class="nav-text">
-                        散列表（hash table）</span>
-                    </a>
-                    <ol class="nav-child">
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#散列函数">
-                          <span class="nav-number">1.</span>
-                          <span class="nav-text">
-                            散列函数</span>
-                        </a>
-                      </li>
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#应用">
-                          <span class="nav-number">2.</span>
-                          <span class="nav-text">
-                            应用</span>
-                        </a>
-                        <ol class="nav-child">
-                          <li class="nav-item nav-level-6">
-                            <a class="nav-link" href="#用于查找：DNS解析，介个查找">
-                              <span class="nav-number">2.1.</span>
-                              <span class="nav-text">
-                                用于查找：DNS解析，介个查找</span>
-                            </a>
-                          </li>
-                          <li class="nav-item nav-level-6">
-                            <a class="nav-link" href="#防止重复：投票">
-                              <span class="nav-number">2.2.</span>
-                              <span class="nav-text">
-                                防止重复：投票</span>
-                            </a>
-                          </li>
-                          <li class="nav-item nav-level-6">
-                            <a class="nav-link" href="#用于缓存：-缓存-记住数据，以免服务器再通过处理来生成它们，提升速度">
-                              <span class="nav-number">2.3.</span>
-                              <span class="nav-text">
-                                用于缓存： 缓存/记住数据，以免服务器再通过处理来生成它们，提升速度</span>
-                            </a>
-                          </li>
-                        </ol>
-                      </li>
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#冲突">
-                          <span class="nav-number">3.</span>
-                          <span class="nav-text">
-                            冲突</span>
-                        </a>
-                      </li>
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#性能">
-                          <span class="nav-number">4.</span>
-                          <span class="nav-text">
-                            性能</span>
-                        </a>
-                      </li>
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#填装因子">
-                          <span class="nav-number">5.</span>
-                          <span class="nav-text">
-                            填装因子</span>
-                        </a>
-                      </li>
-                    </ol>
-                  </li>
-                  <li class="nav-item nav-level-4">
-                    <a class="nav-link" href="#广度搜索优先（找出两样之间最少的路径）">
-                      <span class="nav-number"></span>
-                      <span class="nav-text">
-                        广度搜索优先（找出两样之间最少的路径）</span>
-                    </a>
-                    <ol class="nav-child">
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#最短路径问题（shorterst-path-problem）">
-                          <span class="nav-number">1.</span>
-                          <span class="nav-text">
-                            最短路径问题（shorterst-path problem）</span>
-                        </a>
-                      </li>
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#图">
-                          <span class="nav-number">2.</span>
-                          <span class="nav-text">
-                            图</span>
-                        </a>
-                      </li>
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#队列">
-                          <span class="nav-number">3.</span>
-                          <span class="nav-text">
-                            队列</span>
-                        </a>
-                      </li>
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#实现图">
-                          <span class="nav-number">4.</span>
-                          <span class="nav-text">
-                            实现图</span>
-                        </a>
-                      </li>
-                    </ol>
-                  </li>
-                  <li class="nav-item nav-level-4">
-                    <a class="nav-link" href="#狄克斯特拉算法（-找出最快的路径）">
-                      <span class="nav-number"></span>
-                      <span class="nav-text">
-                        狄克斯特拉算法（ 找出最快的路径）</span>
-                    </a>
-                    <ol class="nav-child">
-                      <li class="nav-item nav-level-5">
-                        <a class="nav-link" href="#术语">
-                          <span class="nav-number">1.</span>
-                          <span class="nav-text">
-                            术语</span>
-                        </a>
-                      </li>
-                    </ol>
-                  </li>
                 </div>
 
               </div>
@@ -892,7 +913,7 @@
 
           <span class="post-meta-item-text">Site words total count&#58;</span>
 
-          <span title="Site words total count">22.3k</span>
+          <span title="Site words total count">22.2k</span>
 
         </div>
 
@@ -906,7 +927,7 @@
 
         <div class="theme-info">
           <div class="powered-by"></div>
-          <span class="post-count">博客全站共22.3k字</span>
+          <span class="post-count">博客全站共22.2k字</span>
         </div>
 
         <div class="busuanzi-count">
