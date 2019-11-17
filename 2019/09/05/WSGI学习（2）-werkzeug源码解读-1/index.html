@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="WSGI,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="wsgi wsgi server (比如uWSGI） 要和 wsgi application（比如django ）交互，uwsgi需要将过来的请求转给django   处理，那么uWSGI 和 django的交互和调用就需要一个统一的规范，这个规范就是WSGI WSGI（Web Server Gateway   Interface） Python Web Server Gateway Inte">
+  <meta name="keywords" content="WSGI">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="WSGI学习（2）---werkzeug源码解读(1)">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="wsgi wsgi server (比如uWSGI） 要和 wsgi application（比如django ）交互，uwsgi需要将过来的请求转给django   处理，那么uWSGI 和 django的交互和调用就需要一个统一的规范，这个规范就是WSGI WSGI（Web Server Gateway   Interface） Python Web Server Gateway Inte">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2968">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2971">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2969">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2970">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.551Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="WSGI学习（2）---werkzeug源码解读(1)">
+  <meta name="twitter:description"
+                                                                                  content="wsgi wsgi server (比如uWSGI） 要和 wsgi application（比如django ）交互，uwsgi需要将过来的请求转给django   处理，那么uWSGI 和 django的交互和调用就需要一个统一的规范，这个规范就是WSGI WSGI（Web Server Gateway   Interface） Python Web Server Gateway Inte">
+  <meta name="twitter:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2968">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/">
+
+  <title>WSGI学习（2）---werkzeug源码解读(1) | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      WSGI学习（2）---werkzeug源码解读(1)</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-09-05T15:40:13+08:00">
+                          2019-09-05
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          1,944
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          7
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h5 id="wsgi"><a href="#wsgi" class="headerlink"
+                                                                                                      title="wsgi"></a>wsgi
+                    </h5>
+                    <p>wsgi server (比如uWSGI） 要和 wsgi application（比如django
+                      ）交互，uwsgi需要将过来的请求转给django
+                      处理，那么uWSGI 和 django的交互和调用就需要一个统一的规范，这个规范就是WSGI WSGI（Web
+                      Server Gateway
+                      Interface）</p>
+                    <p>Python Web Server Gateway Interface，翻译过来时Python
+                      web服务器网关接口，这东西是一个Gateway，也就是网关。<strong>网关的作用就是在协议之间进行转换</strong>。实际上就是一种协议,是在PEP333中(PEP3333进行了补充)定义的一种协议<br>目的是将http底层和框架层解耦，WSGI协议分为两部分，分别为<strong>WSGI
+                        Server</strong>和<strong>WSGI
+                        Application</strong><br>WSGI
+                      Server负责接受客户端请求、解析请求、并按照协议规范将请求转发给WSGI
+                      Application，同时负责接受WSGI
+                      Application的响应并发送给客户端；WSGI Application负责接受由WSGI
+                      Server发送过来的请求，实现业务处理逻辑，并将标准的响应发回给WSGI Server：<br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2968"
+                                                                                                      alt="07fd4914697167ace692eb4c0ae18b41.png">
+                    </p>
+                    <p>WSGI Server解析客户端由socket发送过来的http数据包，将请求的http
+                      version、method、host、path等包装成environ参数，并提供start_response回调函数，并将environ和
+                    </p>
+                    <p>start_response函数作为参数传递给由WSGI
+                      Application提供的callable对象，获取callable对象的返回结果，处理后依照http协议传递给客户端，完成一次请求。
+                    </p>
+                    <h5 id="两种模式"><a href="#两种模式" class="headerlink"
+                                                                                                      title="两种模式"></a>两种模式
+                    </h5>
+                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2971"
+                                                                                                      alt="c8b7bdc0b045286fe2368f7181edd1f1.png">
+                    </p>
+                    <h6 id="1、WSGI-APP应用程序-框架"><a href="#1、WSGI-APP应用程序-框架" class="headerlink"
+                                                                                                      title="1、WSGI APP应用程序/框架"></a>1、WSGI
+                      APP应用程序/框架</h6>
+                    <p>一个基本的wsgi应用，需要实现以下功能：</p>
+                    <ol>
+                      <li>必须是一个可调用的对象(一个函数、方法、类、或者带有 <code>__call__</code>
+                        方法的对象实例都可以用来当做应用程序对象。)应用程序对象必须可以被多次调用，实质上所有的服务器/网关（除了CGI）都会产生这样的重复请求。
+                      </li>
+                      <li>
+                        接收两个必选参数environ、start_response，以及一个可选参数exc_info。服务器或网关必须用这两个必选参数（注意不是关键字参数）来调用应用程序对象。参数名不是固定的，这就意味着你必须使用位置参数而非关键字参数(这应该是用来约束wsgi服务器的)
+                        <ol>
+                          <li>environ存放CGI规定的变量一及别的变量。</li>
+                          <li>start_response
+                            是一个可调用对象（callable，通过类似start_response(‘200
+                            OK’,[(‘Content-Type’,’text/html’))来发送http的相应头部。<ul>
+                              <li>它接受两个必要的位置参数和一个可选参数</li>
+                              <li><strong>status</strong>（是一个形式如“999 Message
+                                here”这样的状态字符串），<strong>response_headers</strong>（是一个包含有（header_name,header_value）参数列表的元组，用来描述HTTP的响应头）和
+                                <strong>exc_info</strong>（可选，只有在应用程序捕获到了错误并试图在浏览器中显示错误的时候才会被用到。）
+                              </li>
+                              <li>可调用者（callable）必须返回一个 write(body_data)
+                                可调用者（callable），write(body_data)接受一个位置参数：一个将会被当作HTTP响应体的一部分而输出的字符串
+                              </li>
+                            </ul>
+                          </li>
+                          <li>exc_info
+                            只有start_response()被错误处理程序调用时，这个参数才会提供，并且是有应用对象提供。
+                          </li>
+                        </ol>
+                      </li>
+                      <li>返回值是字节类型的元组，用来表示http body</li>
+                    </ol>
+                    <h6 id="2、WSGI-SERVER服务器-网关"><a href="#2、WSGI-SERVER服务器-网关" class="headerlink"
+                                                                                                      title="2、WSGI SERVER服务器/网关"></a>2、WSGI
+                      SERVER服务器/网关</h6>
+                    <p>
+                      每一次，当HTTP客户端冲着应用程序发来一个请求，服务器/网关都会调用应用程序可调用者（callable）。<br>服务器或者网关必须将产生的字符串以一种无缓冲的方式传送到客户端，并且总是在一个字符串传完之后再去请求下一个字符串。（换句话说，也就是应用程序必须自己负责实现缓冲机制。
+                    </p>
+                    <h6 id="3、中间件"><a href="#3、中间件" class="headerlink"
+                                                                                                      title="3、中间件"></a>3、中间件
+                    </h6>
+                    <p>可扮演两端角色的组件
+                      我们注意到，单个对象可以作为请求应用程序的服务器存在，也可以作为被服务器调用的应用程序存在。<u><strong>中间件的存在对于“服务器/网关”和“应用程序/框架”来说是透明的</strong></u><br>这样的“中间件”可以执行以下这些功能：
+                    </p>
+                    <ul>
+                      <li>在相应地重写environ变量之后，根据目标URL地址将请求路由到不同的应用程序对象。</li>
+                      <li>允许多个应用程序或框架在同一个进程中并行运行。</li>
+                      <li>通过在网络上转发请求和应答，实现负载均衡和远程处理。</li>
+                      <li>对上下文（content）进行后加工（postprocessing），比如应用xsl样式表等。</li>
+                    </ul>
+                    <h6 id="必要变量"><a href="#必要变量" class="headerlink"
+                                                                                                      title="必要变量"></a>必要变量
+                    </h6>
+                    <p>除了CGI定义的变量，<code>environ</code>
+                      字典也可以包含任何操作系统相关的环境变量，并且必须包含下面这些WSGI定义的变量：</p>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>变量</th>
+                          <th>变量值</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><code>wsgi.version</code></td>
+                          <td>元组tuple (1, 0)，代表WSGI版本 1.0。</td>
+                        </tr>
+                        <tr>
+                          <td><code>wsgi.url_scheme</code></td>
+                          <td>
+                            应用程序被调用过程中的一个字符串，表示URL中的”scheme”部分。正常情况下，它的值是“http”或者“https”，视场合而定。
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><code>wsgi.input</code></td>
+                          <td>一个能被HTTP请求主体（body）读取的输入流（类文件对象）
+                            （由于应用程序是不定时发来请求，服务器或网关在读取的时候可能是按需读取。或者它们会预读取客户端的请求体然后缓存在内存或者磁盘中，又或者根据它们自己的参数，利用其他技术来提供这样一种输入流。)
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><code>wsgi.errors</code></td>
+                          <td>
+                            输出流（类文件对象），用来写错误信息的，目的是记录程序或者其他标准化及可能的中心化错误。它应该是一个“文本模式”的流；举一个例子，应用程序应该用“\n”作为行结束符，并且默认服务器/网关能将它转换成正确的行结束符。对很多服务器来说，<code>wsgi.errors</code>是服务器的主要错误日志。当然也有其它选择，比如<code>sys.stderr</code>，或者干脆是某种形式的日志文件。服务器的文档应当包含以下这类解释：比如该如何配置这些日志，又或者该从哪里去查找这些记录下来的输出。如果需要，一个服务器或网关还可以向不同的应用程序提供不同的错误流。
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><code>wsgi.multithread</code></td>
+                          <td>
+                            如果一个应用程序对象同时被处于同一个进程中的不同线程调用，则这个参数值应该为“true”，否则就为“false”。
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><code>wsgi.multiprocess</code></td>
+                          <td>如果相同的应用程序对象同时被其他进程调用，则此参数值应该为“true”；否则就为“false”。
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><code>wsgi.run_once</code></td>
+                          <td>
+                            如果服务器/网关期待（但不保证）应用程序在它所在的进程生命期间只会被调用一次，则这个值应该为“true”。正常情况下，对于那些基于CGI（或类似）的网关，这个值只可能是“true”。
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <h5 id="uWSGI、WSGI和uwsgi"><a href="#uWSGI、WSGI和uwsgi" class="headerlink"
+                                                                                                      title="uWSGI、WSGI和uwsgi"></a>uWSGI、WSGI和uwsgi
+                    </h5>
+                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2969"
+                                                                                                      alt="85a43d7de8c1f266672facbf9506ed36.jpeg"><br><img
+                                                                                                      src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2970"
+                                                                                                      alt="06a0083fd409d38ada45fbad48ca402e.png">
+                    </p>
+                    <h5 id="Werkzeug介绍"><a href="#Werkzeug介绍" class="headerlink"
+                                                                                                      title="Werkzeug介绍"></a>Werkzeug介绍
+                    </h5>
+                    <p>Werkzeug是一个WSGI工具包，他可以作为一个Web框架的底层库。这里稍微说一下， werkzeug
+                      不是一个web服务器，也不是一个web框架，而是一个工具包，官方的介绍说是一个 WSGI 工具包，它可以作为一个
+                      Web 框架的底层库，因为它封装好了很多
+                      Web 框架的东西，例如 Request，Response 等等。</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">#!/usr/bin/env python</span><br><span class="line"># encoding: utf-8</span><br><span class="line">import os</span><br><span class="line"> </span><br><span class="line">from werkzeug.serving import run_simple</span><br><span class="line">from werkzeug.wrappers import Request, Response</span><br><span class="line">from werkzeug.wsgi import SharedDataMiddleware</span><br><span class="line"> </span><br><span class="line">class Shortly(object):</span><br><span class="line">    def dispatch_request(self, request):</span><br><span class="line">        return Response(&apos;Hello Werkzeug!&apos;)</span><br><span class="line"> </span><br><span class="line">    def wsgi_app(self, environ, start_response):</span><br><span class="line">        request = Request(environ)</span><br><span class="line">        response = self.dispatch_request(request)</span><br><span class="line">        return response(environ, start_response)</span><br><span class="line"> </span><br><span class="line">    def __call__(self, environ, start_response):</span><br><span class="line">        return self.wsgi_app(environ, start_response)</span><br><span class="line"> </span><br><span class="line">def create_app(with_static=True):</span><br><span class="line">    app = Shortly()</span><br><span class="line">    if with_static:</span><br><span class="line">        app.wsgi_app = SharedDataMiddleware(app.wsgi_app, &#123;</span><br><span class="line">            &apos;/static&apos;: os.path.join(os.path.dirname(__file__), &apos;static&apos;)</span><br><span class="line">        &#125;)</span><br><span class="line">    return app</span><br><span class="line"> </span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app = create_app()</span><br><span class="line">    run_simple(&apos;127.0.0.1&apos;, 6666, app, use_debugger=True, use_reloader=True)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/WSGI/" rel="tag"># WSGI</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/09/05/WSGI学习（1）-python自带库-wsgiref/" rel="next"
+                                                                                                        title="WSGI学习（1）--python自带库--wsgiref">
+                          <i class="fa fa-chevron-left"></i>
+                          WSGI学习（1）--python自带库--wsgiref
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/09/12/Qweb使用/" rel="prev" title="Qweb使用">
+                          Qweb使用 <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#wsgi"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">wsgi</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#两种模式"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">两种模式</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#1、WSGI-APP应用程序-框架"><span
+                                                                                                            class="nav-number">2.1.</span>
+                            <span class="nav-text">1、WSGI
+                              APP应用程序/框架</span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#2、WSGI-SERVER服务器-网关"><span
+                                                                                                            class="nav-number">2.2.</span>
+                            <span class="nav-text">2、WSGI
+                              SERVER服务器/网关</span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#3、中间件"><span
+                                                                                                            class="nav-number">2.3.</span>
+                            <span class="nav-text">3、中间件</span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#必要变量"><span
+                                                                                                            class="nav-number">2.4.</span>
+                            <span class="nav-text">必要变量</span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#uWSGI、WSGI和uwsgi"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">uWSGI、WSGI和uwsgi
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#Werkzeug介绍"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">Werkzeug介绍
+                        </span></a></li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

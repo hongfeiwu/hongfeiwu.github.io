@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="算法,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="快速排序 分而治之 （divide and conquer， D&amp;amp;C） ——一种著名的递归式问题解决方法。 使用D&amp;amp;C解决问题的过程包括两个步骤。     找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件                         123456">
+  <meta name="keywords" content="算法">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="算法图解（二）">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/06/30/算法图解（二）/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="快速排序 分而治之 （divide and conquer， D&amp;amp;C） ——一种著名的递归式问题解决方法。 使用D&amp;amp;C解决问题的过程包括两个步骤。     找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件                         123456">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215529@2x.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215647@2x.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215720@2x.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215835@2x.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215909@2x.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215926@2x.png">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.635Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="算法图解（二）">
+  <meta name="twitter:description"
+                                                                                  content="快速排序 分而治之 （divide and conquer， D&amp;amp;C） ——一种著名的递归式问题解决方法。 使用D&amp;amp;C解决问题的过程包括两个步骤。     找出基线条件，这种条件必须尽可能简单。   不断将问题分解（或者说缩小规模），直到符合基线条件。  找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件                         123456">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2019/06/30/算法图解（二）/QQ20190630-215529@2x.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://xixili.online/2019/06/30/算法图解（二）/">
+
+  <title>算法图解（二） | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/06/30/算法图解（二）/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">算法图解（二）</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-06-30T21:54:41+08:00">
+                          2019-06-30
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          1,632
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          6
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="快速排序"><a href="#快速排序" class="headerlink"
+                                                                                                      title="快速排序"></a>快速排序
+                    </h4>
+                    <h5 id="分而治之"><a href="#分而治之" class="headerlink"
+                                                                                                      title="分而治之"></a>分而治之
+                    </h5>
+                    <p>（divide and conquer， D&amp;C） ——一种著名的递归式问题解决方法。<br>
+                      使用D&amp;C解决问题的过程包括两个步骤。
+                    </p>
+                    <ol>
+                      <li>找出基线条件，这种条件必须尽可能简单。</li>
+                      <li>不断将问题分解（或者说缩小规模），直到符合基线条件。</li>
+                    </ol>
+                    <p>找基线条件类似于找最大公约数，尽量找一个适合所有元素情况的条件</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">使用循环求和：</span><br><span class="line">def sum(arr):</span><br><span class="line">    total = 0</span><br><span class="line">    for x in arr:</span><br><span class="line">        total += x</span><br><span class="line">    return total</span><br><span class="line"></span><br><span class="line">print sum([1, 2, 3, 4])</span><br><span class="line"></span><br><span class="line">使用递归求和：</span><br><span class="line">def sum（arr）：</span><br><span class="line">    if len(arr) == 0:      #  </span><br><span class="line">        return 0</span><br><span class="line">    else:</span><br><span class="line">        return arr[0] + sum[1:]</span><br><span class="line">        </span><br><span class="line"> 一个递归函数来计算列表包含的元素数:</span><br><span class="line">def count(arr):</span><br><span class="line">    if arr  == []:    # 基线条件：数组为空</span><br><span class="line">        return 0</span><br><span class="line">    else:</span><br><span class="line">        return 1 + count(arr[1:])</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="快速排序-1"><a href="#快速排序-1" class="headerlink"
+                                                                                                      title="快速排序"></a>快速排序
+                    </h5>
+                    <p>原理</p>
+                    <ol>
+                      <li>首先，从数组中选择一个元素，这个元素被称为基准值（pivot）。</li>
+                      <li>接下来，找出比基准值小的元素以及比基准值大的元素。</li>
+                      <li>对这两个子数组进行快速排序。</li>
+                      <li>进行递归操作<figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">快速排序（采用递归）</span><br><span class="line"> def quicksort(array):</span><br><span class="line">    if len(array) &lt; 2:</span><br><span class="line">        return array</span><br><span class="line">    else:</span><br><span class="line">        pivot = array[0]</span><br><span class="line">        less = [i for i in array[1:] if i &lt;= pivot]</span><br><span class="line">        greater = [i for i in array[1:] if i &gt; pivot]</span><br><span class="line">    return quicksort(less) + [pivot] + quicksort(greater)</span><br><span class="line"></span><br><span class="line">print quicksort([10, 5, 2, 3])</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ol>
+                    <p>常见的大O运行时间</p>
+                    <img src="/2019/06/30/算法图解（二）/QQ20190630-215529@2x.png"
+                                                                                                    title="大O运行时间">
+
+                    <h5 id="合并排序-（merge-sort）"><a href="#合并排序-（merge-sort）" class="headerlink"
+                                                                                                      title="合并排序 （merge sort）"></a>合并排序
+                      （merge sort）</h5>
+                    <p> 合并排序的运行时间总是O(n log n)</p>
+                    <h5 id="平均情况和最糟情况"><a href="#平均情况和最糟情况" class="headerlink"
+                                                                                                      title="平均情况和最糟情况"></a>平均情况和最糟情况
+                    </h5>
+                    <p>快速排序依赖于选择的基准值<br>[1,2,3,4,5,6,7,8]<br>基准值为1，<br>基准值为4,
+                    </p>
+                    <h4 id="散列表（hash-table）"><a href="#散列表（hash-table）" class="headerlink"
+                                                                                                      title="散列表（hash table）"></a>散列表（hash
+                      table）</h4>
+                    <p>在python中就是dict<br>
+                      学习散列表——最有用的基本数据结构之一。散列表用途广泛，本章将介绍其常见的用途。<br>
+                      学习散列表的内部机制：实现、冲突和散列函数。这将帮助你理解如何分析散列表的性能。</p>
+                    <h5 id="散列函数"><a href="#散列函数" class="headerlink"
+                                                                                                      title="散列函数"></a>散列函数
+                    </h5>
+                    <p> 散列函数是这样的函数，即无论你给它什么数据，它都还你一个数字， 散列函数必须满足一些要求</p>
+                    <ol>
+                      <li>
+                        它必须是一致的。例如，假设你输入apple时得到的是4，那么每次输入apple时，得到的都必须为4。如果不是这样，散列表将毫无用处。
+                      </li>
+                      <li><strong>它应将不同的输入映射到不同的数字</strong>。 例如，
+                        如果一个散列函数不管输入是什么都返回1，它就不是好的散列函数。最理想的情况是，将不同的输入映射到不同的数字。<br>使用散列函数和数组创建了一种被称为散列表（hash
+                        table）的数据结构。数组和链表都被直接映射到内存，但散列表更复杂，它使用散列函数来确定元素的存储位置。<br>需要注意的是这里注重映射，
+                        使用散列表来检查是否重复，速度非常快</li>
+                    </ol>
+                    <h5 id="应用"><a href="#应用" class="headerlink"
+                                                                                                      title="应用"></a>应用
+                    </h5>
+                    <h6 id="用于查找：DNS解析，介个查找"><a href="#用于查找：DNS解析，介个查找" class="headerlink"
+                                                                                                      title="用于查找：DNS解析，介个查找"></a>用于查找：DNS解析，介个查找
+                    </h6>
+                    <h6 id="防止重复：投票"><a href="#防止重复：投票" class="headerlink"
+                                                                                                      title="防止重复：投票"></a>防止重复：投票
+                    </h6>
+                    <h6 id="用于缓存：-缓存-记住数据，以免服务器再通过处理来生成它们，提升速度"><a href="#用于缓存：-缓存-记住数据，以免服务器再通过处理来生成它们，提升速度"
+                                                                                                      class="headerlink"
+                                                                                                      title="用于缓存： 缓存/记住数据，以免服务器再通过处理来生成它们，提升速度"></a>用于缓存：
+                      缓存/记住数据，以免服务器再通过处理来生成它们，提升速度</h6>
+                    <h5 id="冲突"><a href="#冲突" class="headerlink"
+                                                                                                      title="冲突"></a>冲突
+                    </h5>
+                    <p> 冲突（collision） ：给两个键分配的位置相同<br>
+                      如果两个键映射到了同一个位置，就在这个位置存储一个链表，
+                      如果散列表存储的链表很长，散列表的速度将急剧下降。</p>
+                    <h5 id="性能"><a href="#性能" class="headerlink"
+                                                                                                      title="性能"></a>性能
+                    </h5>
+                    <p> 在使用散列表时，避开最糟情况至关重要。为此，需要避免冲突。而要避免冲突，需要有：</p>
+                    <ol>
+                      <li>较低的填装因子；</li>
+                      <li>良好的散列函数</li>
+                    </ol>
+                    <h5 id="填装因子"><a href="#填装因子" class="headerlink"
+                                                                                                      title="填装因子"></a>填装因子
+                    </h5>
+                    <p> 填装因子度量的是散列表中有多少位置是空的。</p>
+                    <img src="/2019/06/30/算法图解（二）/QQ20190630-215647@2x.png"
+                                                                                                    title="填装因子">
+                    <p>
+                      填装因子大于1意味着商品数量超过了数组的位置数。一旦填装因子开始增大，你就需要在散列表中添加位置，这被称为调整长度（resizing）
+                      。</p>
+                    <ol>
+                      <li>你可以结合散列函数和数组来创建散列表。</li>
+                      <li>冲突很糟糕，你应使用可以最大限度减少冲突的散列函数。</li>
+                      <li>散列表的查找、插入和删除速度都非常快。</li>
+                      <li>散列表适合用于模拟映射关系。</li>
+                      <li>一旦填装因子超过0.7，就该调整散列表的长度。</li>
+                      <li>散列表可用于缓存数据（例如，在Web服务器上）。</li>
+                      <li>散列表非常适合用于防止重复。</li>
+                    </ol>
+                    <h4 id="广度搜索优先（找出两样之间最少的路径）"><a href="#广度搜索优先（找出两样之间最少的路径）" class="headerlink"
+                                                                                                      title="广度搜索优先（找出两样之间最少的路径）"></a>广度搜索优先（找出两样之间最少的路径）
+                    </h4>
+                    <p>
+                      一度关系胜过二度关系，二度关系胜过三度关系，以此类推。因此，你应先在一度关系中搜索，确定其中没有芒果销售商后，才在二度关系中搜索。广度优先搜索就是这样做的！
+                    </p>
+                    <h5 id="最短路径问题（shorterst-path-problem）"><a href="#最短路径问题（shorterst-path-problem）" class="headerlink"
+                                                                                                      title="最短路径问题（shorterst-path problem）"></a>最短路径问题（shorterst-path
+                      problem）</h5>
+                    <p> 需要两个步骤。<br>(1) 使用图来建立问题模型。<br>(2) 使用广度优先搜索解决问题</p>
+                    <h5 id="图"><a href="#图" class="headerlink" title="图"></a>图
+                    </h5>
+                    <p> 图模拟一组连接。 由节点和边组成。一个节点可能与众多节点直接相连，这些节点被称为邻居。</p>
+                    <ol>
+                      <li>第一类问题：我要买水果，寻找卖水果的吗？</li>
+                      <li>第二类问题：从节点A出发，前往节点B的哪条路径最短？</li>
+                    </ol>
+                    <h5 id="队列"><a href="#队列" class="headerlink"
+                                                                                                      title="队列"></a>队列
+                    </h5>
+                    <p>按照添加顺序进行检查<br>先进先出，后进后出<br> 队列是一种先进先出（First In First Out，
+                      FIFO）的数据结构，而栈是一种后进先出（Last In First Out， LIFO）的数据结构。</p>
+                    <img src="/2019/06/30/算法图解（二）/QQ20190630-215720@2x.png"
+                                                                                                    title="堆和栈">
+                    <h5 id="实现图"><a href="#实现图" class="headerlink"
+                                                                                                      title="实现图"></a>实现图
+                    </h5>
+                    <p> 有向图（directed graph） ，其中的关系是单向的。<br> 无向图（undirected
+                      graph）没有箭头，直接相连的节点互为邻居
+                    </p>
+                    <img src="/2019/06/30/算法图解（二）/QQ20190630-215835@2x.png"
+                                                                                                    title="实现图">
+                    <img src="/2019/06/30/算法图解（二）/QQ20190630-215909@2x.png"
+                                                                                                    title="实现图">
+                    <h4 id="狄克斯特拉算法（-找出最快的路径）"><a href="#狄克斯特拉算法（-找出最快的路径）" class="headerlink"
+                                                                                                      title="狄克斯特拉算法（ 找出最快的路径）"></a>狄克斯特拉算法（
+                      找出最快的路径）</h4>
+                    <p> 狄克斯特拉算法包含4个步骤。<br>(1) 找出最便宜的节点，即可在最短时间内前往的节点。<br>(2)
+                      对于该节点的邻居，检查是否有前往它们的更短路径，如果有，就更新其开销。<br>(3)
+                      重复这个过程，直到对图中的每个节点都这样做了。<br>(4)
+                      计算最终路径。</p>
+                    <h5 id="术语"><a href="#术语" class="headerlink"
+                                                                                                      title="术语"></a>术语
+                    </h5><img src="/2019/06/30/算法图解（二）/QQ20190630-215926@2x.png"
+                                                                                                    title="术语">
+                    <p> 狄克斯特拉算法用于每条边都有关联数字的图，这些数字称为权重（weight）。<br>
+                      带权重的图称为加权图（weighted
+                      graph），不带权重的图称为非加权图（unweighted graph）。<br>
+                      狄克斯特拉算法只适用于有向无环图（directed acyclic
+                      graph， DAG）</p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/算法/" rel="tag"># 算法</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/06/30/算法图解（一）/" rel="next"
+                                                                                                        title="算法图解（一）">
+                          <i class="fa fa-chevron-left"></i> 算法图解（一）
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/06/30/HTTP基本原理/" rel="prev"
+                                                                                                        title="HTTP基本原理">
+                          HTTP基本原理 <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#快速排序"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">快速排序</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#分而治之"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">分而治之</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#快速排序-1"><span
+                                                                                                            class="nav-number">1.2.</span>
+                            <span class="nav-text">快速排序</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#合并排序-（merge-sort）"><span
+                                                                                                            class="nav-number">1.3.</span>
+                            <span class="nav-text">合并排序
+                              （merge sort）</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#平均情况和最糟情况"><span
+                                                                                                            class="nav-number">1.4.</span>
+                            <span class="nav-text">平均情况和最糟情况
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#散列表（hash-table）"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">散列表（hash
+                          table）</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#散列函数"><span
+                                                                                                            class="nav-number">2.1.</span>
+                            <span class="nav-text">散列函数</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#应用"><span
+                                                                                                            class="nav-number">2.2.</span>
+                            <span class="nav-text">应用</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#用于查找：DNS解析，介个查找"><span
+                                                                                                                class="nav-number">2.2.1.</span>
+                                <span class="nav-text">用于查找：DNS解析，介个查找
+                                </span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#防止重复：投票"><span
+                                                                                                                class="nav-number">2.2.2.</span>
+                                <span class="nav-text">防止重复：投票
+                                </span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#用于缓存：-缓存-记住数据，以免服务器再通过处理来生成它们，提升速度"><span
+                                                                                                                class="nav-number">2.2.3.</span>
+                                <span class="nav-text">用于缓存：
+                                  缓存/记住数据，以免服务器再通过处理来生成它们，提升速度</span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#冲突"><span
+                                                                                                            class="nav-number">2.3.</span>
+                            <span class="nav-text">冲突</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#性能"><span
+                                                                                                            class="nav-number">2.4.</span>
+                            <span class="nav-text">性能</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#填装因子"><span
+                                                                                                            class="nav-number">2.5.</span>
+                            <span class="nav-text">填装因子</span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#广度搜索优先（找出两样之间最少的路径）"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">广度搜索优先（找出两样之间最少的路径）
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#最短路径问题（shorterst-path-problem）"><span
+                                                                                                            class="nav-number">3.1.</span>
+                            <span class="nav-text">最短路径问题（shorterst-path
+                              problem）</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#图"><span
+                                                                                                            class="nav-number">3.2.</span>
+                            <span class="nav-text">图</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#队列"><span
+                                                                                                            class="nav-number">3.3.</span>
+                            <span class="nav-text">队列</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#实现图"><span
+                                                                                                            class="nav-number">3.4.</span>
+                            <span class="nav-text">实现图</span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#狄克斯特拉算法（-找出最快的路径）"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">狄克斯特拉算法（
+                          找出最快的路径）</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#术语"><span
+                                                                                                            class="nav-number">4.1.</span>
+                            <span class="nav-text">术语</span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

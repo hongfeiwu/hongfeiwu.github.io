@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="odoo,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="1.通用结构          name (必填) 只是用来在列表视图里面作为描述显示或者排序           model 模型链接到视图（它不适用于QWeb视图）           priority 客户端可以通过 id ， 或者 (model, type) 请求视图。 对于后者，       将会搜索出所有正确类型和模型的视图，并且将返回最小 priority 编号的视图 (它是“默">
+  <meta name="keywords" content="odoo">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="odoo视图属性">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/09/01/odoo视图属性/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="1.通用结构          name (必填) 只是用来在列表视图里面作为描述显示或者排序           model 模型链接到视图（它不适用于QWeb视图）           priority 客户端可以通过 id ， 或者 (model, type) 请求视图。 对于后者，       将会搜索出所有正确类型和模型的视图，并且将返回最小 priority 编号的视图 (它是“默">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=4cdf2119d98f28e45f5a3e819a2a2d72">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=e410ad5cd49d94aa1d5eab5794b69ecd">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=b9aa4cdfd115b593d5c186f2dbdd787a">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=d05d9b360094c391760fc2ff97ab73e4">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=a010914e88985a91134044721b80d0ab">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=e9ddf1845b58480ddf1551881ced8b2a">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.574Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="odoo视图属性">
+  <meta name="twitter:description"
+                                                                                  content="1.通用结构          name (必填) 只是用来在列表视图里面作为描述显示或者排序           model 模型链接到视图（它不适用于QWeb视图）           priority 客户端可以通过 id ， 或者 (model, type) 请求视图。 对于后者，       将会搜索出所有正确类型和模型的视图，并且将返回最小 priority 编号的视图 (它是“默">
+  <meta name="twitter:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=4cdf2119d98f28e45f5a3e819a2a2d72">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://xixili.online/2019/09/01/odoo视图属性/">
+
+  <title>odoo视图属性 | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/09/01/odoo视图属性/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">odoo视图属性
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-09-01T22:58:09+08:00">
+                          2019-09-01
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          5,470
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          20
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="1-通用结构"><a href="#1-通用结构" class="headerlink"
+                                                                                                      title="1.通用结构"></a>1.通用结构
+                    </h4>
+                    <ul>
+                      <li>
+                        <p>name (必填)<br> 只是用来在列表视图里面作为描述显示或者排序</p>
+                      </li>
+                      <li>
+                        <p>model<br> 模型链接到视图（它不适用于QWeb视图）</p>
+                      </li>
+                      <li>
+                        <p>priority<br> 客户端可以通过 id ， 或者 (model, type) 请求视图。
+                          对于后者，
+                          将会搜索出所有正确类型和模型的视图，并且将返回最小 priority 编号的视图
+                          (它是“默认视图”)。<br> priority
+                          也定义了视图继承期间的应用顺序 视图继承</p>
+                      </li>
+                      <li>
+                        <p>arch<br> 视图布局的描述</p>
+                      </li>
+                      <li>
+                        <p>groups_id<br> Many2many 字段允许查看/使用当前视图的分组</p>
+                      </li>
+                      <li>
+                        <p>inherit_id<br> 当前视图的父视图，详情可查阅 继承 ，默认情况下没有设置</p>
+                      </li>
+                      <li>
+                        <p>mode<br> 继承模型， 详情可查阅 继承。如果 inherit_id 未设置，则 mode 只能为
+                          primary。 如果设置了
+                          inherit_id ， 默认情况下为 extension ，但可以设置为 primary</p>
+                      </li>
+                      <li>
+                        <p>application<br> 网站功能定义可切换的视图。默认情况下，始终应用该视图</p>
+                        <h4 id="2-列表"><a href="#2-列表" class="headerlink"
+                                                                                                          title="2. 列表"></a>2.
+                          列表
+                        </h4>
+                        <h5 id="2-1根tree元素"><a href="#2-1根tree元素" class="headerlink"
+                                                                                                          title="2.1根tree元素"></a>2.1根tree元素
+                        </h5>
+                      </li>
+                      <li>
+                        <p>editable<br> 默认情况下, 选择列表视图的行打开对应的 form view 。
+                          editable
+                          属性可以让列表视图在原文进行编辑。<br> 验证值是 top 和 bottom
+                          ，使创建的新纪录分别出现在列表的顶部或底部.<br> 内联 form
+                          view 的体系结构派生自列表视图。在 form view
+                          的字段和按钮上大多数有效的属性因此被列表视图所接受，如果列表视图是不可编辑的，它们可能没有任何意义</p>
+                      </li>
+                      <li>
+                        <p>default_order<br> 覆盖视图的顺序，替换模型的默认顺序。该值是以逗号最为分割，列表后缀以
+                          desc 反向排序</p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">&lt;tree default_order=&quot;sequence,name desc&quot;&gt;</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+                      </li>
+                      <li>
+                        <p>decoration-{$name}<br> 允许基于记录的属性更改行文本的样式<br>
+                          其值是Python的表达式。对于每个记录，计算表达式将所记录的属性作为上下文值，如果为 true,
+                          相应的样式将应用于该行。其他上下文值为 uid
+                          (当前用户的id) 和 current_date (当前日期为 yyyy-MM-dd
+                          形式的字符串)。<br> {$name} 可以是 bf
+                          (font-weight: bold)， it (font-style: italic), 或任何
+                          引导上下文颜色 (danger, info,
+                          muted, primary, success 或 warning)。</p>
+                      </li>
+                      <li>
+                        <p>create, edit, delete<br> 通过将相应的属性设置为 false 来 禁用
+                          视图中的相应操作</p>
+                      </li>
+                      <li>
+                        <p>on_write<br> 只有在 editable
+                          列表中才有意义。列表模型上方法的名称。在创建或编辑该记录（在数据库中）后，将使用记录的 id
+                          来调用该方法。</p>
+                      </li>
+                      <li>
+                        <p>该方法应返回其他记录的id列表以方便加载或更新</p>
+                        <h5 id="2-2-tree子元素"><a href="#2-2-tree子元素" class="headerlink"
+                                                                                                          title="2.2 tree子元素"></a>2.2
+                          tree子元素</h5>
+                        <h6 id="2-2-1-button"><a href="#2-2-1-button" class="headerlink"
+                                                                                                          title="2.2.1 button"></a>2.2.1
+                          button</h6>
+                        <p>在列表单元格中显示按钮</p>
+                      </li>
+                      <li>
+                        <p>icon<br> 图标，用于显示按钮</p>
+                      </li>
+                      <li>
+                        <p>string<br> 如果没有 icon ， 那么就是按钮的文本<br> 如果有 icon ，则为 alt
+                          的替代文本</p>
+                      </li>
+                      <li>
+                        <p>type<br> 按钮的类型，提示如何点击它影响Odoo：</p>
+                        <ul>
+                          <li>workflow (默认)<br>向工作流发送信号。按钮的 name
+                            是工作流信号，行的记录作为参数传递给信号</li>
+                          <li>object<br>调用列表模型上的方法。按钮的 name
+                            是方法，它使用当前记录的id以及在当前上下文中调用。</li>
+                          <li>action<br>加载执行一个 ir.actions ，按钮的 name
+                            动作的数据库id。上下文中使用的列表模型(作为
+                            active_model)扩展，当前行的记录(active_id)和列表中当前加载的所有记录
+                            (active_ids，可能只是一个子集数据库记录匹配当前的搜索)</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>name<br> 详情请查阅 type</p>
+                      </li>
+                      <li>
+                        <p>args<br> 详情请查阅 type</p>
+                      </li>
+                      <li>
+                        <p>attrs<br> 基于记录值的动态属性<br> 属性到域, 域的映射在当前记录的上下文中说明，如果为
+                          True
+                          ，则在单元上设置相应的属性<br> 可能的属性是 invisible (隐藏按钮)和 readonly
+                          (禁用按钮，但扔显示)</p>
+                      </li>
+                      <li>
+                        <p>states<br> invisible attrs 的简写: 状态列表，逗号分隔，要求模型具有
+                          state 字段，并且它在视图中<br>
+                          如果记录 不是 在所列出的状态当中，使按钮 invisible</p>
+                      </li>
+                      <li>
+                        <p>context<br> 在执行按钮的Odoo调用时合并到视图的上下文中</p>
+                      </li>
+                      <li>
+                        <p>confirm<br> 确认消息以在执行按钮的Odoo调用之前显示 (并且供用户接受)</p>
+                      </li>
+                    </ul>
+                    <h6 id="2-2-2-field（字段）"><a href="#2-2-2-field（字段）" class="headerlink"
+                                                                                                      title="2.2.2 field（字段）"></a>2.2.2
+                      field（字段）</h6>
+                    <ul>
+                      <li>name<br> 要在当前模型中显示的字段名称。给定的名称对每个视图只能使用一次</li>
+                      <li>string<br> 字段列的标题 (默认情况下, 使用模型字段的 string)</li>
+                      <li>invisible<br> 提取和存储字段，但不显示列中。对于不应该显示但是需使用的字段是非常有必要的。例如
+                        @colors</li>
+                      <li>groups<br> 列出应该能够看到字段的分组</li>
+                      <li>widget<br> 字段显示的表示，可能的列表视图值包括:<ul>
+                          <li>progressbar<br>将 float 字段显示为进度条。</li>
+                          <li>many2onebutton<br>如果字段是填充的，则通过复选标记替换m2o字段的值</li>
+                          <li>handle<br>对于 sequence
+                            字段，而不是所显示字段的值只显示一个dra&amp;drop图标</li>
+                        </ul>
+                      </li>
+                      <li>sum, avg<br> 在列的底部显示相应的总数。总数仅在 当前显示的 记录上计算。总数操作必须与相应字段
+                        的 group_operator 匹配
+                      </li>
+                      <li>attrs<br> 基于记录集的动态属性。只影响当前字段，invisible
+                        将会隐藏字段，但使其他记录的相同字段可见，它不会隐藏列本身</li>
+                    </ul>
+                    <h4 id="3-form"><a href="#3-form" class="headerlink"
+                                                                                                      title="3. form"></a>3.
+                      form
+                    </h4>
+                    <h5 id="3-1-结构组件"><a href="#3-1-结构组件" class="headerlink"
+                                                                                                      title="3.1 结构组件"></a>3.1
+                      结构组件</h5>
+                    <p>结构组件提供少逻辑的结构或”视觉”特征。它们用作窗体视图中的元素或元素集。</p>
+                    <ul>
+                      <li>notebook<br> 定义标题部分。每个选项卡通过一个 page 子元素定义。页面可以具有以下属性：
+                        <ul>
+                          <li>string (必填)–标签的标题</li>
+                          <li>accesskey–HTML accesskey</li>
+                          <li>attrs–基于记录值的标准动态属性</li>
+                        </ul>
+                      </li>
+                      <li>group<br> 用在表单中定义列。默认情况下，组定义两列并且组的最直接子项采用单列。 field
+                        组的直接子元素默认显示一个标题，标题和字段本身的列为1。<br> group 中的列数可以用 col
+                        属性来计算，元素所用的列数可以用 colspan
+                        属性来计算。<br> 子元素的横向布局（试着在改变行之前填充下一列）<br> 分组可以有一个 string
+                        属性，它显示为分组的标题</li>
+                      <li>newline<br> 只用于 group 元素，提前结束当前行并立即切换到新行
+                        (没有提前填充任何剩下的列)</li>
+                      <li>separator<br> 小的横向间距，带有 string 属性的为一个节标题</li>
+                      <li>sheet<br> 可以作为一个直接的子 form，显示为一个美观的表单形式</li>
+                      <li>header<br> 与 sheet
+                        结合，在工作表上方预留着宽的位置，通常用于显示工作流的按钮和状态的小部件</li>
+                    </ul>
+                    <h5 id="3-2-语义组件"><a href="#3-2-语义组件" class="headerlink"
+                                                                                                      title="3.2 语义组件"></a>3.2
+                      语义组件</h5>
+                    <ul>
+                      <li>
+                        <p>button<br> 调用进去Odoo系统，类似于 list view buttons</p>
+                      </li>
+                      <li>
+                        <p>field<br> 渲染 (并允许编辑)当前记录的单个字段。可能的属性包括</p>
+                      </li>
+                      <li>
+                        <p>name (必填)<br> 要呈现的字段的名称</p>
+                      </li>
+                      <li>
+                        <p>widget<br> 字段具有基于其类型的默认呈现( 例如 Char ，Many2one)。 widget
+                          属性允许使用不同的渲染方法和上下文
+                        </p>
+                      </li>
+                      <li>
+                        <p>options<br> JSON 对象指定字段窗口小部件的配置(包括默认的窗口小部件)</p>
+                        <ul>
+                          <li>Many2one字段时<br>随便一个值设置为true或者false即可，默认为true<ol>
+                              <li>no_quick_createIt will remove Create and edit…
+                                option.</li>
+                              <li>no_create_edit - It will remove Create
+                                “entered text” option.</li>
+                              <li>no_create - no_quick_create and no_create_edit
+                                combined.</li>
+                              <li>no_open - in read mode: do not render as a
+                                link.</li>
+                            </ol>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>class<br> HTML类在生成的元素上设置，公共字段有：</p>
+                        <ul>
+                          <li>oe_inline – 避免换行符后面的字段</li>
+                          <li>oe_left, oe_right– floats 字段到相应的地方</li>
+                          <li>oe_read_only, oe_edit_only—只显示相应表单模式中的字段</li>
+                          <li>oe_no_button—-避免显示导航按钮在 Many2one</li>
+                          <li>oe_avatar—对于图像字段，将图像显示为”头像”
+                            (正方形,最大尺寸为90x90，某些图像装饰)</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>groups<br> 仅显示特定用户的字段</p>
+                      </li>
+                      <li>
+                        <p>on_change<br> 在编辑此字段的值时调用指定的方法，可以为用户生成更新的其他字段或显示警告
+                        </p>
+                        <pre><code>8.0 版后已移除: 在模型上使用 odoo.api.onchange()</code></pre>
+                      </li>
+                      <li>
+                        <p>attrs<br> 基于记录值的动态元参数</p>
+                      </li>
+                      <li>
+                        <p>domain<br> 仅用于关系字段；显示现有记录以供选择应用的过滤器</p>
+                      </li>
+                      <li>
+                        <p>context<br> 仅用于关系字段，上下文在获取可能的值时传递</p>
+                      </li>
+                      <li>
+                        <p>readonly<br> 在只读和编辑模式下显示字段，但永远不可编辑</p>
+                      </li>
+                      <li>
+                        <p>required<br> 如果字段没有值，则会生成错误并阻止保存记录</p>
+                      </li>
+                      <li>
+                        <p>nolabel<br> 不自动显示字段的标签，只有当字段是 group 元素的直接子元素时才有意义</p>
+                      </li>
+                      <li>
+                        <p>placeholder<br> 帮助消息显示在 空 字段中。可以替换复杂表单中的的字段标签。不应该
+                          是数据，因为用户可能会将占
+                          位符文本与填充字段混淆</p>
+                      </li>
+                      <li>
+                        <p>mode<br> One2many，显示模式（视图类型）用于字段的链接记录。 一个 tree ， form
+                          ， kanban 或 graph
+                          。默认是 tree (一个列表显示)</p>
+                      </li>
+                      <li>
+                        <p>help<br> 悬停在字段或标签时为用户显示说明提示</p>
+                      </li>
+                      <li>
+                        <p>filename<br> 对于二进制字段，提供文件相关字段的名称</p>
+                      </li>
+                      <li>
+                        <p>password<br> 表示 Char 字段存储密码，并且不应显示其数据</p>
+                        <h5 id="3-3-form状态栏"><a href="#3-3-form状态栏" class="headerlink"
+                                                                                                          title="3.3 form状态栏"></a>3.3
+                          form状态栏</h5>
+                        <p>突出显示的按钮（默认为红色）强调逻辑下一步，以帮助用户。它通常是第一个活动按钮。另一方面，cancel
+                          按钮 必须是 保持灰色
+                          (正常)。例如，在发票中，按钮 Refund 绝不能是红色的。<br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=4cdf2119d98f28e45f5a3e819a2a2d72"
+                                                                                                          alt="4cdf2119d98f28e45f5a3e819a2a2d72.png"><br>技术上，按钮通过添加类
+                          “oe_highlight” 突出显示:</p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">&lt;button class=&quot;oe_highlight&quot; name=&quot;...&quot; type=&quot;...&quot; states=&quot;...&quot;/&gt;</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <h6 id="3-3-1-状态statusbar"><a href="#3-3-1-状态statusbar" class="headerlink"
+                                                                                                      title="3.3.1 状态statusbar"></a>3.3.1
+                      状态statusbar</h6>
+                    <p>使用 statusbar
+                      窗口小部件，并且以红色显示当前状态。所有流程共有的国家(例如，销售订单以报价开头，然后我们发送，然后成为完整的销售订单，最后完成)应该始终可见，但是根据特定子流程的异常或状态应该仅在当前可见。<br><img
+                                                                                                      src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=e410ad5cd49d94aa1d5eab5794b69ecd"
+                                                                                                      alt="e410ad5cd49d94aa1d5eab5794b69ecd.png"><br>状态按照字段中使用的顺序显示
+                      (选择字段中的列表等)。始终可见的状态使用属性 <strong>statusbar_visible</strong>
+                      指定</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;field name=&quot;state&quot; widget=&quot;statusbar&quot;</span><br><span class="line">    statusbar_visible=&quot;draft,sent,progress,invoiced,done&quot; /&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="3-4-工作表"><a href="#3-4-工作表" class="headerlink"
+                                                                                                      title="3.4 工作表"></a>3.4
+                      工作表</h5>
+                    <ol>
+                      <li>
+                        <form> 或 <page> 中的元素不定义组，元素在其内部按照正常的HTML规则布局。它们的内容可以 使用
+                            <group> 或者 <div>
+                                元素显示分组。.
+                              </div>
+                            </group>
+                          </page>
+                        </form>
+                      </li>
+                      <li>默认情况下，元素 <group> 在里面定义两列，除非属性 col=”n” 被使用。列具有相同的宽度(1/n
+                          th 组的宽度)。使用 <group>
+                            元素来产生一列字段。</group>
+                        </group>
+                      </li>
+                      <li>为了给一部分赋予标题，向 <group> 元素中添加 string 属性:<figure
+                                                                                                          class="highlight plain">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><span class="line">1</span><br></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><span class="line">&lt;group string=&quot;Time-sensitive operations&quot;&gt;</span><br></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
+
+                        </group>
+                      </li>
+                    </ol>
+                    <p>这取代了以前使用
+                      <separator string="XXX"> 。</separator>
+                    </p>
+                    <ol start="4">
+                      <li>
+                        <field> 元素不会产生标签，除了 <group> element1 的直 接子元素。使用
+                            &lt;label
+                            for=”field_name&gt; 以产生字段的标签。
+                          </group>
+                        </field>
+                      </li>
+                    </ol>
+                    <h6 id="3-4-1-工作表表头"><a href="#3-4-1-工作表表头" class="headerlink"
+                                                                                                      title="3.4.1 工作表表头"></a>3.4.1
+                      工作表表头</h6>
+                    <p>某些工作表具有包含一个或多个字段的标题，并且这些字段的标签仅在编辑模式下显示<br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=b9aa4cdfd115b593d5c186f2dbdd787a"
+                                                                                                      alt="b9aa4cdfd115b593d5c186f2dbdd787a.png"><br>使用HTML文本，
+                      <div>, <h1>, <h2>… 生成较好的标题，<label> 使用 类 oe_edit_only
+                              仅在编辑模式下显示字段的标签。类
+                              oe_inline
+                              将使字段内联(而不是分段)：字段后面的内容将显示在同一行而不是下一行中。上面的表单由以下XML生成:</label>
+                          </h2>
+                        </h1>
+                      </div>
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;label for=&quot;name&quot; class=&quot;oe_edit_only&quot;/&gt;</span><br><span class="line">&lt;h1&gt;&lt;field name=&quot;name&quot;/&gt;&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">&lt;label for=&quot;planned_revenue&quot; class=&quot;oe_edit_only&quot;/&gt;</span><br><span class="line">&lt;h2&gt;</span><br><span class="line">    &lt;field name=&quot;planned_revenue&quot; class=&quot;oe_inline&quot;/&gt;</span><br><span class="line">    &lt;field name=&quot;company_currency&quot; class=&quot;oe_inline oe_edit_only&quot;/&gt; at</span><br><span class="line">    &lt;field name=&quot;probability&quot; class=&quot;oe_inline&quot;/&gt; % success rate</span><br><span class="line">&lt;/h2&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="3-4-2-按钮箱"><a href="#3-4-2-按钮箱" class="headerlink"
+                                                                                                      title="3.4.2 按钮箱"></a>3.4.2
+                      按钮箱</h6>
+                    <p>
+                      许多相关动作或链接可以在表单中显示。例如，在表单中，动作“安排呼叫”和“安排会议”在使用CRM时具有重要的地位。而不是将它们放在“更多”菜单中，将它们直接放在工作表中作为按钮（在顶部），使它们更加明显，更容易访问。<br><img
+                                                                                                      src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=d05d9b360094c391760fc2ff97ab73e4"
+                                                                                                      alt="d05d9b360094c391760fc2ff97ab73e4.png"><br>从技术上来说，这些按钮放在一个
+                      <div> 内，以便将它们分组为表格顶部的块</div>
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;div class=&quot;oe_button_box&quot; name=&quot;button_box&quot;&gt;</span><br><span class="line">    &lt;button string=&quot;Schedule/Log Call&quot; name=&quot;...&quot; type=&quot;action&quot;/&gt;</span><br><span class="line">    &lt;button string=&quot;Schedule Meeting&quot; name=&quot;action_makeMeeting&quot; type=&quot;object&quot;/&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="3-4-3-组和标题"><a href="#3-4-3-组和标题" class="headerlink"
+                                                                                                      title="3.4.3 组和标题"></a>3.4.3
+                      组和标题</h6>
+                    <p>现在使用一个 <group> 元素生成一列字段，并带有一个可选的标题。<img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=a010914e88985a91134044721b80d0ab"
+                                                                                                        alt="a010914e88985a91134044721b80d0ab.png">
+                      </group>
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;group string=&quot;Payment Options&quot;&gt;</span><br><span class="line">    &lt;field name=&quot;writeoff_amount&quot;/&gt;</span><br><span class="line">    &lt;field name=&quot;payment_option&quot;/&gt;</span><br><span class="line">&lt;/group&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>建议表单上有两列字段。为此，只需将包含字段的 <group> 元素放在顶层的 <group>
+                          元素中即可<br>要使 view extension
+                          更简单, 建议在 <group> 元素上放置一个 name 属性，可以很容易在正确的地方添加
+                          </group>
+                        </group>
+                      </group>
+                    </p>
+                    <h6 id="3-4-4-图片"><a href="#3-4-4-图片" class="headerlink"
+                                                                                                      title="3.4.4 图片"></a>3.4.4
+                      图片</h6>
+                    <p>图像，如头像，应显示在工作表的右侧。产品形式如下：<br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENNote/p689?hash=e9ddf1845b58480ddf1551881ced8b2a"
+                                                                                                      alt="e9ddf1845b58480ddf1551881ced8b2a.png"><br>上面的表单包含以sheet开头的
+                      <sheet>元素：</sheet>
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;field name=&quot;product_image&quot; widget=&quot;image&quot; class=&quot;oe_avatar oe_right&quot;/&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h4 id="4-图表（graph）"><a href="#4-图表（graph）" class="headerlink"
+                                                                                                      title="4.图表（graph）"></a>4.图表（graph）
+                    </h4>
+                    <h5 id="4-1-根元素graph"><a href="#4-1-根元素graph" class="headerlink"
+                                                                                                      title="4.1 根元素graph"></a>4.1
+                      根元素graph</h5>
+                    <ul>
+                      <li>
+                        <p>type<br> bar (默认), pie 和 line 使用的图形类型</p>
+                      </li>
+                      <li>
+                        <p>stacked<br> 只用于 bar 图表。如果存在并设置为 True，则堆栈条在一个组内<br>
+                          图形视图中唯一允许的元素是 field
+                          ，它可以有以下属性：</p>
+                      </li>
+                      <li>
+                        <p>name (必填)<br> 要在图形视图中使用的字段名称。用于分组（而不是总和）</p>
+                      </li>
+                      <li>
+                        <p>type<br> 指示该字段是否应用作分组标准或组内的总和值。可能的值为：</p>
+                        <ul>
+                          <li>row
+                            (默认)<br>组按指定字段。所有图形的类型支持至少是一个级别的分组，一些可能支持更多。对于数据透视图，每个组都有自
+                            己的行
+                          </li>
+                          <li>col<br>仅由数据透视表使用，按列组创建</li>
+                          <li>measure<br>字段在组内聚合</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>interval<br> 日期和日期时间字段，按指定的时间间隔分组(day ，week ， month ，
+                          quarter 或 year
+                          )而不是按特定的datetime上分组（固定二次决议）或日期（固定日决议）</p>
+                        <h6 id="4-2-枢轴"><a href="#4-2-枢轴" class="headerlink"
+                                                                                                          title="4.2 枢轴"></a>4.2
+                          枢轴</h6>
+                        <p>枢轴视图用于将聚合可视化为 pivot table。它的根元素是 <pivot>
+                            ，它可以具有以下属性。<br>disable_linking<br> 设置为 True
+                            以将表单元格的链接删除到列表视图。<br>display_quantity<br> 默认情况下，设置为
+                            true
+                            以显示列数<br>在枢轴视图中允许的元素与图形视图中相同</pivot>
+                        </p>
+                        <h4 id="5-看板（kanban）"><a href="#5-看板（kanban）" class="headerlink"
+                                                                                                          title="5.看板（kanban）"></a>5.看板（kanban）
+                        </h4>
+                        <p>板视图是一个可视化的 kanban board ：它将记录显示为”卡片”，位于 list view
+                          和一个不可编辑的 form
+                          view。记录可以按列分组以用于工作流可视化或操纵（例如，任务或工作进度管理）或未分组（仅用于可视化记录）
+                        </p>
+                        <h5 id="5-1-根元素是"><a href="#5-1-根元素是" class="headerlink"
+                                                                                                          title="5.1 根元素是 "></a>5.1
+                          根元素是 <kanban>
+                          </kanban>
+                        </h5>
+                      </li>
+                      <li>
+                        <p>default_group_by<br>
+                          如果通过动作或当前搜索未指定分组，是否应该将看板视图分组。应该是要分组的字段的名称，否则不指定分组
+                        </p>
+                      </li>
+                      <li>
+                        <p>default_order<br> 按顺序排序，如果用户尚未对记录进行排序（通过列表视图）</p>
+                      </li>
+                      <li>
+                        <p>class<br> 将HTML类添加到“看板”视图的根HTML元素中</p>
+                      </li>
+                      <li>
+                        <p>quick_create<br> 是否可以创建记录而不切换到表单视图。默认情况下，quick_create
+                          在看板视图分组时启用， 否则禁用。
+                        </p>
+                        <p> 如果设置为 true 则始终启用，否则为 false 则始终禁用。</p>
+                        <h5 id="5-2-子元素"><a href="#5-2-子元素" class="headerlink"
+                                                                                                          title="5.2 子元素"></a>5.2
+                          子元素</h5>
+                      </li>
+                      <li>
+                        <p>field<br> 声明要聚合或在看板 逻辑 中使用的字段。如果字段只显示在看板视图中，则不需要预先声明。
+                        </p>
+                        <ul>
+                          <li>name (必填)<br>要提取的字段的名称</li>
+                          <li>sum, avg, min, max,
+                            count<br>显示相应的总数在看板列的顶部，该字段的值是总（字符串）的标签。仅支持每个字段的总动作。
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>templates<br> 定义了一个列表 QWeb 模板。为了能看的更清楚，卡片定义可以分割为多个模板，
+                          但是看版式图 必须 至少定义一个根模板
+                          kanban-box，它将为每个记录渲染一次。<br> 看板视图主要的使用标准 javascript
+                          qweb 并提供以下的上下文 变量：</p>
+                        <ul>
+                          <li>
+                            <p>instance<br>当前的 网络客户端(Web Client) 实例</p>
+                          </li>
+                          <li>
+                            <p>widget<br>当前
+                              KanbanRecord()，可以用来获取一些元信息。这些方法也可以直接在模板上下文中使用，
+                              不需要通过
+                              widget 来访问</p>
+                          </li>
+                          <li>
+                            <p>record<br>有所有请求字段作为其属性的对象。每个字段有两个属性 value 和
+                              raw_value，前者根据当前的
+                              用户参数进行格式化，后者是从a read() (对于根据用户的区域设置格式化的 日期和日期时间字段
+                              formatted according
+                              to user’s locale)</p>
+                          </li>
+                          <li>
+                            <p>formats<br>web.formats() 模块来操作和转换值</p>
+                          </li>
+                          <li>
+                            <p>read_only_mode</p>
+                          </li>
+                          <li>
+                            <p>按钮和字段<br> 虽然大多数看板的模板是标准的 QWeb，特别是看板进程的 field ，
+                              button 和 a 元素：<br>
+                              默认字段由其格式化的值替换，除非它们匹配特定的看板视图的窗口小部件<br> 按钮和具有 type
+                              属性的链接会执行Odoo相关的操作，而不是它们的标准HTML函数。可能的类型有：</p>
+                            <ul>
+                              <li>action, object–标准行为 Odoo
+                                buttons，可以使用与标准Odoo按钮相 关的大多数属性</li>
+                              <li>open–以只读模式在表单视图中打开卡的记录</li>
+                              <li>edit–在可编辑模式下以表单视图打开卡的记录</li>
+                              <li>delete–删除卡的记录并删除卡</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <h4 id="6、日历（calendar）"><a href="#6、日历（calendar）" class="headerlink"
+                                                                                                      title="6、日历（calendar）"></a>6、日历（calendar）
+                    </h4>
+                    <h5 id="6-1-根元素"><a href="#6-1-根元素" class="headerlink"
+                                                                                                      title="6.1 根元素"></a>6.1
+                      根元素<calendar>
+                      </calendar>
+                    </h5>
+                    <ul>
+                      <li>
+                        <p>date_start (必填)<br> 保存事件的开始日期记录的字段名称</p>
+                      </li>
+                      <li>
+                        <p>date_stop<br> 保存事件的结束日期记录字段的名称，如果提供了 date_stop
+                          记录，则记录在日历中直接可移动（通 过拖放）</p>
+                      </li>
+                      <li>
+                        <p>date_delay<br> 替代 date_stop，提供事件的持续事件，而不是结束日期</p>
+                      </li>
+                      <li>
+                        <p>color<br> 用于 颜色分割
+                          记录字段的名称。同一色段中的记录在日历中被分配相同的高亮颜色，颜色是随机地分配</p>
+                      </li>
+                      <li>
+                        <p>event_open_popup<br> 在对话框中打开事件，而不是切换到表单视图，默认情况下禁用</p>
+                      </li>
+                      <li>
+                        <p>quick_add<br> 在点击时启用快速事件创建：只询问用户一个
+                          name，并试图创建一个新的事件，只有那个和点击的事件时
+                          间。如果快速创建失败，则返回到完整表单对话框</p>
+                      </li>
+                      <li>
+                        <p>display<br> 用于事件显示的格式字符串，字段名称应该在括号中 [ and ]</p>
+                      </li>
+                      <li>
+                        <p>all_day<br>
+                          记录上的布尔字段的名称，其指示相应的事件是否被标记为day-long（并且持续时间是不相关的）</p>
+                      </li>
+                      <li>
+                        <p>mode<br> 加载日历时默认显示模式。 可能的属性有: day, week, month</p>
+                        <h4 id="7、甘特（gantt）"><a href="#7、甘特（gantt）" class="headerlink"
+                                                                                                          title="7、甘特（gantt）"></a>7、甘特（gantt）
+                        </h4>
+                        <h5 id="7-1根元素-，它没有子元素"><a href="#7-1根元素-，它没有子元素" class="headerlink"
+                                                                                                          title="7.1根元素 ，它没有子元素"></a>7.1根元素
+                          <gantt>，它没有子元素</gantt>
+                        </h5>
+                      </li>
+                      <li>
+                        <p>date_start (必填)<br> 为每个记录提供事件的开始日期时间的字段名称。</p>
+                      </li>
+                      <li>
+                        <p>date_stop<br> 为每个记录提供时间的结束持续时间的字段名称。可以替换为 date_delay
+                          。必须提供 date_stop 和
+                          date_delay 中的一个（且只有一个）<br> 如果记录的字段为 False
+                          ，则假定它是一个“点事件”，结束日期将设置为开始日期</p>
+                      </li>
+                      <li>
+                        <p>date_delay<br> 提供时间持续时间的字段的名称</p>
+                      </li>
+                      <li>
+                        <p>duration_unit<br> 其中之一 minute, hour (默认), day, week,
+                          month, year</p>
+                      </li>
+                      <li>
+                        <p>default_group_by<br> 要对任务进行分组的字段名</p>
+                      </li>
+                      <li>
+                        <p>type</p>
+                        <ol>
+                          <li>gantt 经典甘特视图（默认）</li>
+                          <li>consolidate 第一个子项的值被合并在甘特的任务中</li>
+                          <li>planning 子项显示在甘特的任务中</li>
+                        </ol>
+                      </li>
+                      <li>
+                        <p>consolidation<br> 字段名称以在记录单元中显示合并值</p>
+                      </li>
+                      <li>
+                        <p>consolidation_max<br> 具有 “group by”
+                          字段作为键的字典和在以红色显示单元格之间可以达到的最大合并值(例如
+                          {“user_id”: 100})</p>
+                      </li>
+                      <li>
+                        <p>string<br> 要显示在合并值旁边的字符串，如果未指定，则将使用合并字段的标签</p>
+                      </li>
+                      <li>
+                        <p>fold_last_level<br> 如果设置了值，则折叠最后一个分组级别</p>
+                      </li>
+                      <li>
+                        <p>round_dnd_dates<br> 可以将任务的开始和结束日期四舍五入为最接近的刻度</p>
+                      </li>
+                      <li>
+                        <p>drag_resize<br> 调整任务大小，默认为 true</p>
+                      </li>
+                    </ul>
+                    <h4 id="8-图表（diagram）"><a href="#8-图表（diagram）" class="headerlink"
+                                                                                                      title="8.图表（diagram）"></a>8.图表（diagram）
+                    </h4>
+                    <h5 id="8-1-根元素-不带任何属性"><a href="#8-1-根元素-不带任何属性" class="headerlink"
+                                                                                                      title="8.1 根元素 不带任何属性"></a>8.1
+                      根元素<diagram> 不带任何属性</diagram>
+                    </h5>
+                    <h5 id="8-2-子元素"><a href="#8-2-子元素" class="headerlink"
+                                                                                                      title="8.2 子元素"></a>8.2
+                      子元素</h5>
+                    <ul>
+                      <li>node (必填，1)<br> 定义图形的节点。其属性是：<ul>
+                          <li>object<br> 节点的Odoo模型</li>
+                          <li>shape<br> 条件形状映射类似于颜色和字体 the listview。唯一有效的形状是 矩形
+                            (默认形状是省略号)</li>
+                          <li>bgcolor<br> 与 shape
+                            相同，但有条件地为节点映射背景颜色。默认背景颜色是白色，唯一有效的替代是 grey 。</li>
+                        </ul>
+                      </li>
+                      <li>arrow (必填，1)<br> 定义图像的有向边。其属性是：<ul>
+                          <li>object (必填)–边缘的Odoo模型</li>
+                          <li>source (必填)–Many2one 指向的边缘模型的字段的边缘的源节点记录</li>
+                          <li>destination (不可或缺)–Many2one 字段的边缘模型指向边缘的节点记录</li>
+                          <li>label–Python 属性列表 (引用字符串)。相应的属性的值将被连接并显示为边的标签</li>
+                        </ul>
+                      </li>
+                      <li>label–图表的说明， string 属性定义了笔记的内容，每个 label
+                        作为图表标题中的段落输出，容易看见，但没有特别强调</li>
+                    </ul>
+                    <h4 id="9-搜索（search）"><a href="#9-搜索（search）" class="headerlink"
+                                                                                                      title="9.搜索（search）"></a>9.搜索（search）
+                    </h4>
+                    <h5 id="9-1根元素是-不需要属性"><a href="#9-1根元素是-不需要属性" class="headerlink"
+                                                                                                      title="9.1根元素是 ,不需要属性"></a>9.1根元素是
+                      <search>,不需要属性</search>
+                    </h5>
+                    <h5 id="9-2子元素"><a href="#9-2子元素" class="headerlink"
+                                                                                                      title="9.2子元素"></a>9.2子元素
+                    </h5>
+                    <ol>
+                      <li>field</li>
+                      <li>
+                        filter–过滤器是搜索视图中的预定义切换，它只能启用或禁用。它的主要目的是将数据添加到搜索上下文（传递到数据视
+                        图进行搜索/过滤的上下文），或者将新的部分添加到搜索过滤器<ul>
+                          <li>string (必填)—-过滤器的标签</li>
+                          <li>domain—-一个 Odoo domain ，将作为搜索域的一部分附加到操作域中</li>
+                          <li>context—-一个Python字典，合并到操作域中以生成搜索域</li>
+                          <li>name—-过滤器的逻辑名，可 默认情况下启动，也可 继承</li>
+                          <li>help—-过滤器的更长的说明文本，可以显示为工具提示</li>
+                          <li>groups—-是过滤器仅适用于特定用户</li>
+                        </ul>
+                      </li>
+                      <li>separator–可用于在简单搜索视图中分离过滤器组</li>
+                      <li>group—可以用于分离过滤器组，在复杂搜索视图中比 separator 更易读<h5
+                                                                                                        id="9-3-搜索默认值">
+                          <a href="#9-3-搜索默认值" class="headerlink"
+                                                                                                          title="9.3 搜索默认值"></a>9.3
+                          搜索默认值</h5>搜索字段和过滤器可以通过操作 context 使用 ： samp:[UNKNOWN
+                        NODE title_reference]
+                        keys来配置。对于字段，值应该是在字段中设置的值，对于过滤器，它是一个布尔值。例如：假设 foo 是一个字段，
+                        bar 是一个动作上下文的过滤器：
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">&#123;</span><br><span class="line">  &apos;search_default_foo&apos;: &apos;acro&apos;,</span><br><span class="line">  &apos;search_default_bar&apos;: 1</span><br><span class="line">&#125;</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ol>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/odoo/" rel="tag"># odoo</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/09/01/GO学习2-方法与接口（2）/" rel="next"
+                                                                                                        title="GO学习2--方法与接口（2）">
+                          <i class="fa fa-chevron-left"></i> GO学习2--方法与接口（2）
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/09/04/odoo用户视图中groups-id权限字段的实现/" rel="prev"
+                                                                                                        title="odoo用户视图中groups_id权限字段的实现">
+                          odoo用户视图中groups_id权限字段的实现 <i
+                                                                                                          class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#1-通用结构"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">1.通用结构
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#2-列表"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">2. 列表
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#2-1根tree元素"><span
+                                                                                                            class="nav-number">2.1.</span>
+                            <span class="nav-text">2.1根tree元素
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#2-2-tree子元素"><span
+                                                                                                            class="nav-number">2.2.</span>
+                            <span class="nav-text">2.2
+                              tree子元素</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#2-2-1-button"><span
+                                                                                                                class="nav-number">2.2.1.</span>
+                                <span class="nav-text">2.2.1
+                                  button</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#2-2-2-field（字段）"><span
+                                                                                                                class="nav-number">2.2.2.</span>
+                                <span class="nav-text">2.2.2
+                                  field（字段）</span></a></li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#3-form"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">3. form
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#3-1-结构组件"><span
+                                                                                                            class="nav-number">3.1.</span>
+                            <span class="nav-text">3.1
+                              结构组件</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#3-2-语义组件"><span
+                                                                                                            class="nav-number">3.2.</span>
+                            <span class="nav-text">3.2
+                              语义组件</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#3-3-form状态栏"><span
+                                                                                                            class="nav-number">3.3.</span>
+                            <span class="nav-text">3.3
+                              form状态栏</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#3-3-1-状态statusbar"><span
+                                                                                                                class="nav-number">3.3.1.</span>
+                                <span class="nav-text">3.3.1
+                                  状态statusbar</span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#3-4-工作表"><span
+                                                                                                            class="nav-number">3.4.</span>
+                            <span class="nav-text">3.4
+                              工作表</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#3-4-1-工作表表头"><span
+                                                                                                                class="nav-number">3.4.1.</span>
+                                <span class="nav-text">3.4.1
+                                  工作表表头</span></a></li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                  </ol>
+                  <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                    href="#null"><span
+                                                                                                      class="nav-number"></span>
+                      <span class="nav-text">, … 生成较好的标题， 使用 类 oe_edit_only
+                        仅在编辑模式下显示字段的标签。类
+                        oe_inline
+                        将使字段内联(而不是分段)：字段后面的内容将显示在同一行而不是下一行中。上面的表单由以下XML生成:</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                        href="#null"><span
+                                                                                                          class="nav-number"></span>
+                          <span class="nav-text">… 生成较好的标题， 使用 类 oe_edit_only
+                            仅在编辑模式下显示字段的标签。类
+                            oe_inline
+                            将使字段内联(而不是分段)：字段后面的内容将显示在同一行而不是下一行中。上面的表单由以下XML生成:</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                            href="#3-4-2-按钮箱"><span
+                                                                                                              class="nav-number">0.0.1.</span>
+                              <span class="nav-text">3.4.2
+                                按钮箱</span></a></li>
+                          <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                            href="#3-4-3-组和标题"><span
+                                                                                                              class="nav-number">0.0.2.</span>
+                              <span class="nav-text">3.4.3
+                                组和标题</span></a></li>
+                          <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                            href="#3-4-4-图片"><span
+                                                                                                              class="nav-number">0.0.3.</span>
+                              <span class="nav-text">3.4.4
+                                图片</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                    href="#4-图表（graph）"><span
+                                                                                                      class="nav-number">1.</span>
+                      <span class="nav-text">4.图表（graph）
+                      </span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#4-1-根元素graph"><span
+                                                                                                          class="nav-number">1.1.</span>
+                          <span class="nav-text">4.1
+                            根元素graph</span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                            href="#4-2-枢轴"><span
+                                                                                                              class="nav-number">1.1.1.</span>
+                              <span class="nav-text">4.2
+                                枢轴</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                    href="#5-看板（kanban）"><span
+                                                                                                      class="nav-number">2.</span>
+                      <span class="nav-text">5.看板（kanban）
+                      </span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#5-1-根元素是"><span
+                                                                                                          class="nav-number">2.1.</span>
+                          <span class="nav-text">5.1
+                            根元素是
+                          </span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#5-2-子元素"><span
+                                                                                                          class="nav-number">2.2.</span>
+                          <span class="nav-text">5.2
+                            子元素</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                    href="#6、日历（calendar）"><span
+                                                                                                      class="nav-number">3.</span>
+                      <span class="nav-text">6、日历（calendar）
+                      </span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#6-1-根元素"><span
+                                                                                                          class="nav-number">3.1.</span>
+                          <span class="nav-text">6.1
+                            根元素
+                          </span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                    href="#7、甘特（gantt）"><span
+                                                                                                      class="nav-number">4.</span>
+                      <span class="nav-text">7、甘特（gantt）
+                      </span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#7-1根元素-，它没有子元素"><span
+                                                                                                          class="nav-number">4.1.</span>
+                          <span class="nav-text">7.1根元素
+                            ，它没有子元素</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                    href="#8-图表（diagram）"><span
+                                                                                                      class="nav-number">5.</span>
+                      <span class="nav-text">8.图表（diagram）
+                      </span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#8-1-根元素-不带任何属性"><span
+                                                                                                          class="nav-number">5.1.</span>
+                          <span class="nav-text">8.1
+                            根元素 不带任何属性</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#8-2-子元素"><span
+                                                                                                          class="nav-number">5.2.</span>
+                          <span class="nav-text">8.2
+                            子元素</span></a></li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                    href="#9-搜索（search）"><span
+                                                                                                      class="nav-number">6.</span>
+                      <span class="nav-text">9.搜索（search）
+                      </span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#9-1根元素是-不需要属性"><span
+                                                                                                          class="nav-number">6.1.</span>
+                          <span class="nav-text">9.1根元素是
+                            ,不需要属性</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#9-2子元素"><span
+                                                                                                          class="nav-number">6.2.</span>
+                          <span class="nav-text">9.2子元素
+                          </span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#9-3-搜索默认值"><span
+                                                                                                          class="nav-number">6.3.</span>
+                          <span class="nav-text">9.3
+                            搜索默认值</span></a></li>
+                    </ol>
+                  </li>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

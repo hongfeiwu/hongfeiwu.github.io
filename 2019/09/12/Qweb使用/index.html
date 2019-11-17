@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="odoo,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="Qweb官方定义  Qweb被用作OpenERP的Web客户端模板引擎。它是一种基于XML的模板语言，主要用于生成HTML片段和页面.同Genshi,   Thymeleaf、Facelets模板具有相似并且具有以下特性：    完全在客户端浏览器中完成渲染；   一个模板文件中可以包含多个模板，通常一个模板文件中包含一个模板；  Qweb分析器查找模板中的特殊指令，并用动态生成的HTML替换">
+  <meta name="keywords" content="odoo">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Qweb使用">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/09/12/Qweb使用/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="Qweb官方定义  Qweb被用作OpenERP的Web客户端模板引擎。它是一种基于XML的模板语言，主要用于生成HTML片段和页面.同Genshi,   Thymeleaf、Facelets模板具有相似并且具有以下特性：    完全在客户端浏览器中完成渲染；   一个模板文件中可以包含多个模板，通常一个模板文件中包含一个模板；  Qweb分析器查找模板中的特殊指令，并用动态生成的HTML替换">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.549Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Qweb使用">
+  <meta name="twitter:description"
+                                                                                  content="Qweb官方定义  Qweb被用作OpenERP的Web客户端模板引擎。它是一种基于XML的模板语言，主要用于生成HTML片段和页面.同Genshi,   Thymeleaf、Facelets模板具有相似并且具有以下特性：    完全在客户端浏览器中完成渲染；   一个模板文件中可以包含多个模板，通常一个模板文件中包含一个模板；  Qweb分析器查找模板中的特殊指令，并用动态生成的HTML替换">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://xixili.online/2019/09/12/Qweb使用/">
+
+  <title>Qweb使用 | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/09/12/Qweb使用/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">Qweb使用</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-09-12T23:26:46+08:00">
+                          2019-09-12
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          3,135
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          12
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="Qweb官方定义"><a href="#Qweb官方定义" class="headerlink"
+                                                                                                      title="Qweb官方定义"></a>Qweb官方定义
+                    </h4>
+                    <p>
+                      Qweb被用作OpenERP的Web客户端模板引擎。它是一种基于XML的模板语言，主要用于生成HTML片段和页面.同Genshi,
+                      Thymeleaf、Facelets模板具有相似并且具有以下特性：</p>
+                    <ul>
+                      <li>完全在客户端浏览器中完成渲染；</li>
+                      <li>一个模板文件中可以包含多个模板，通常一个模板文件中包含一个模板；</li>
+                    </ul>
+                    <p><strong>Qweb分析器查找模板中的特殊指令，并用动态生成的HTML替换。这些指令是XML元素属性，可用于任何有效的标记或元素，如
+                        <div>,
+                          <span>, 或 <field>.。</field></span></div></strong></p>
+                    <p>有时我们想用一个Qweb指令但不想放在任何在我们的模板的XML元素。在这种情况下，我们有一个特殊的元素<t>
+                        ，可以有Qweb指令，如t-if或t-foreach，但是不会产生任何的XML /HTML输出。</t>
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;p&gt;</span><br><span class="line">    &lt;t t-esc=&quot;value&quot;/&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>使用值 value 设置为 42 ，产生:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;p&gt;42&lt;/p&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>t-esc指令计算表达式并将其作为一个html转码值</p>
+                    <h4 id="Qweb实现方式"><a href="#Qweb实现方式" class="headerlink"
+                                                                                                      title="Qweb实现方式"></a>Qweb实现方式
+                    </h4>
+                    <p>有两种不同的Qweb实现方法：客户端使用JavaScript、服务器端使用Python。</p>
+                    <ul>
+                      <li>报表和网站页面使用服务器端Python实现</li>
+                      <li>
+                        看板视图使用客户端JavaScript实现，这意味着使用看板视图使用Qweb表达式，它使用JavaScript的语法，而不是Python。<br>
+                        当显示看板视图时，内部步骤大致如下：<ol>
+                          <li>获取用于渲染的模板的xml。</li>
+                          <li>调用服务器read()方法得到模板中的字段的数据。</li>
+                          <li>定位kanban-box模板，使用Qweb解析，输出最终的HTML片段。<h4
+                                                                                                            id="QWeb-JavaScript评估上下文">
+                              <a href="#QWeb-JavaScript评估上下文" class="headerlink"
+                                                                                                              title="QWeb JavaScript评估上下文"></a>QWeb
+                              JavaScript评估上下文</h4>
+                          </li>
+                        </ol>
+                      </li>
+                    </ul>
+                    <p>
+                      许多的Qweb指令使用表达式计算并产生一定的结果。当从客户端使用时，正如看板视图的情况一样，这些表达式是用JavaScript编写的。它们在上下文被计算，上下文有一些有用的变量可用。
+                    </p>
+                    <p>
+                      <strong>一个记录对象可用，表示由服务器请求的字段所组成的记录被渲染。</strong>该字段的值可以使用raw_value或value属性访问：
+                    </p>
+                    <ul>
+                      <li>raw_value 是服务器read()方法返回的值，所以它更适合用在条件表达式。</li>
+                      <li>value 是根据用户设置进行格式化的值，并用于在用户界面中显示。这通常是与date/datetime
+                        and
+                        float/monetary字段相关。</li>
+                    </ul>
+                    <p>
+                      <strong>Qweb上下文计算也被JavaScript的Web客户端实例引用</strong>。为了充分利用它们，我们需要对Web客户端架构有一个很好的理解，但是我们不能详细地理解它。作为参考，以下标识符在Qweb表达式求值是可用的：
+                    </p>
+                    <ul>
+                      <li>widget
+                        是参考当前kanbanrecord()部件对象，负责当前把记录渲染到看板卡片。它暴露了一些有用的辅助功能，我们可以使用。
+                      </li>
+                      <li>record 是 widget.records 的快捷方式，并提供对可利用的字段的访问。</li>
+                      <li>read_only_mode
+                        显示当前视图是否是只读模式（非编辑模式），它是widget.view.options.read_only_mode的快捷方式。
+                      </li>
+                      <li>instance是全WEB客户端实例的引用。</li>
+                    </ul>
+                    <p>
+                      值得注意的是，一些字符是不允许内表达式。小写的符号（&lt;）就是这样的情况。这是因为XML标准中，这样的字符具有特殊的含义，不应该被用于XML内容中，非&gt;
+                      =是对&lt;的替代，但通常的做法是使用下面的替代符号，可用于不等式操作：</p>
+                    <ul>
+                      <li>lt 小于 </li>
+                      <li>lte 小于等于</li>
+                      <li>gt 大于</li>
+                      <li>gte大于等于</li>
+                    </ul>
+                    <h4 id="语法"><a href="#语法" class="headerlink"
+                                                                                                      title="语法"></a>语法
+                    </h4>
+                    <h5 id="条件"><a href="#条件" class="headerlink"
+                                                                                                      title="条件"></a>条件
+                    </h5>
+                    <p>QWeb有一个条件指令 if ，如果条件是成立的，则呈现元素，它计算表达式作为属性的值:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-if=&quot;condition&quot;&gt;</span><br><span class="line">    &lt;p&gt;ok&lt;/p&gt;</span><br><span class="line">&lt;/t&gt;</span><br><span class="line">&lt;t t-else=&quot;condition&quot;&gt;</span><br><span class="line">    &lt;p&gt;no&lt;/p&gt;</span><br><span class="line">&lt;/t&gt;</span><br><span class="line">condition成立时，结果：</span><br><span class="line">&lt;p&gt;ok&lt;/p&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>条件渲染适用于指令的载体，它不必是 <t>
+                      </t>
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p t-if=&quot;user.birthday == today()&quot;&gt;Happy bithday!&lt;/p&gt;</span><br><span class="line">    &lt;p t-elif=&quot;user.login == &apos;root&apos;&quot;&gt;Welcome master!&lt;/p&gt;</span><br><span class="line">    &lt;p t-else=&quot;&quot;&gt;Welcome!&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="循环"><a href="#循环" class="headerlink"
+                                                                                                      title="循环"></a>循环
+                    </h5>
+                    <p>通过循环可以重复一个HTML块。我们可以用它将任务跟进者的图像添加到任务看板卡中。</p>
+                    <p>QWeb有一个迭代指令 foreach，它接受一个表达式返回集合迭代，第二个参数 t-as 提供迭代的
+                      “当前项目”的名称:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-foreach=&quot;[1, 2, 3]&quot; t-as=&quot;i&quot;&gt;</span><br><span class="line">    &lt;p&gt;&lt;t t-esc=&quot;i&quot;/&gt;&lt;/p&gt;</span><br><span class="line">&lt;/t&gt;</span><br><span class="line">结果</span><br><span class="line">&lt;p&gt;1&lt;/p&gt;</span><br><span class="line">&lt;p&gt;2&lt;/p&gt;</span><br><span class="line">&lt;p&gt;3&lt;/p&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>跟条件一样， foreach 适用于带有指令属性的元素</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;p t-foreach=&quot;[1, 2, 3]&quot; t-as=&quot;i&quot;&gt;</span><br><span class="line">    &lt;t t-esc=&quot;i&quot;/&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="属性"><a href="#属性" class="headerlink"
+                                                                                                      title="属性"></a>属性
+                    </h5>
+                    <p>QWeb 可以即时计算属性并设置计算结果在输出节点。这是 通过 t-att
+                      (属性)指令来实现的，它存在3种不同的形式：</p>
+                    <ol>
+                      <li>t-att-$name</li>
+                      <li>t-attf-$name</li>
+                      <li>t-att=mapping</li>
+                    </ol>
+                    <h6 id="1-t-att-name"><a href="#1-t-att-name" class="headerlink"
+                                                                                                      title="1.t-att-$name"></a>1.t-att-$name
+                    </h6>
+                    <p>创建一个名为 $name 的属性，对属性值进行求值并将结果设置为属性的值:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;div t-att-a=&quot;42&quot;/&gt;</span><br><span class="line">将被渲染为:</span><br><span class="line">&lt;div a=&quot;42&quot;&gt;&lt;/div&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="2-t-attf-name"><a href="#2-t-attf-name" class="headerlink"
+                                                                                                      title="2.t-attf-$name"></a>2.t-attf-$name
+                    </h6>
+                    <p>与上一个相同，但是参数是一个 format string 而不是一个表达式，通常用于混合字面值和非
+                      字面值字符串（例如类）:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-foreach=&quot;[1, 2, 3]&quot; t-as=&quot;item&quot;&gt;</span><br><span class="line">    &lt;li t-attf-class=&quot;row &#123;&#123; item_parity &#125;&#125;&quot;&gt;&lt;t t-esc=&quot;item&quot;/&gt;&lt;/li&gt;</span><br><span class="line">&lt;/t&gt;</span><br><span class="line">结果为</span><br><span class="line">&lt;li class=&quot;row even&quot;&gt;1&lt;/li&gt;</span><br><span class="line">&lt;li class=&quot;row odd&quot;&gt;2&lt;/li&gt;</span><br><span class="line">&lt;li class=&quot;row even&quot;&gt;3&lt;/li&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="3-t-att-mapping"><a href="#3-t-att-mapping" class="headerlink"
+                                                                                                      title="3.t-att=mapping"></a>3.t-att=mapping
+                    </h6>
+                    <p>如果参数是映射，则每个（键，值）对将生成一个新属性及其值:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;div t-att=&quot;&#123;&apos;a&apos;: 1, &apos;b&apos;: 2&#125;&quot;/&gt;</span><br><span class="line">将呈现为:</span><br><span class="line">&lt;div a=&quot;1&quot; b=&quot;2&quot;&gt;&lt;/div&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="4-t-att-pair"><a href="#4-t-att-pair" class="headerlink"
+                                                                                                      title="4.t-att=pair"></a>4.t-att=pair
+                    </h6>
+                    <p>如果参数是一对（2元素的元组或数组），则该对的第一项是属性的名称，第二项是值:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;div t-att=&quot;[&apos;a&apos;, &apos;b&apos;]&quot;/&gt;</span><br><span class="line">将呈现为:</span><br><span class="line">&lt;div a=&quot;b&quot;&gt;&lt;/div&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="设置变量"><a href="#设置变量" class="headerlink"
+                                                                                                      title="设置变量"></a>设置变量
+                    </h5>
+                    <p>QWeb允许从模板内创建变量，记住计算（使用它多次），给一堆数据一个明显的名称 …<br>这是通过 set
+                      指令完成的，它接受要创建的变量的名称。要设置的值可以通过两种方式提供:<br>一个包含表达式的 t-value
+                      属性，其计算结果将被设置:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-set=&quot;foo&quot; t-value=&quot;2 + 1&quot;/&gt;</span><br><span class="line">&lt;t t-esc=&quot;foo&quot;/&gt;</span><br><span class="line">结果为 打印一个3</span><br><span class="line">3</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>如果没有 t-value 属性，则渲染节点的主体并将设置为变量的值:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-set=&quot;foo&quot;&gt;</span><br><span class="line">    &lt;li&gt;ok&lt;/li&gt;</span><br><span class="line">&lt;/t&gt;</span><br><span class="line">&lt;t t-esc=&quot;foo&quot;/&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="调用子模板"><a href="#调用子模板" class="headerlink"
+                                                                                                      title="调用子模板"></a>调用子模板
+                    </h5>
+                    <p>QWeb模板可以用于顶级渲染，但也可以从另一个模板（避免重复或给部分模板命名）通过使用 t-call
+                      指令来使用它们:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-call=&quot;other-template&quot;/&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>这将调用具有具有执行上下文命名的父模板，如果 other_template 定义为:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;p&gt;&lt;t t-value=&quot;var&quot;/&gt;&lt;/p&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>上面的调用将被渲染为
+                    </p>
+                    <p> (无内容):</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-set=&quot;var&quot; t-value=&quot;1&quot;/&gt;</span><br><span class="line">&lt;t t-call=&quot;other-template&quot;/&gt;</span><br><span class="line">最终显示将被渲染为 </span><br><span class="line">&lt;p&gt;1&lt;/p&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>call 指令的主体可以是任意复杂的(而不仅仅是 set 指令)，并且它的呈现形式将在被调用的模板中作为一个神奇的
+                      0 变量使用:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;div&gt;</span><br><span class="line">    This template was called with content:</span><br><span class="line">    &lt;t t-raw=&quot;0&quot;/&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>因此被称为:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-call=&quot;other-template&quot;&gt;</span><br><span class="line">    &lt;em&gt;content&lt;/em&gt;</span><br><span class="line">&lt;/t&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>将导致:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;div&gt;</span><br><span class="line">    This template was called with content:</span><br><span class="line">    &lt;em&gt;content&lt;/em&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h4 id="Qweb-Python指令"><a href="#Qweb-Python指令" class="headerlink"
+                                                                                                      title="Qweb Python指令"></a>Qweb
+                      Python指令</h4>
+                    <p>t-field 指令智能在“智能记录”( browse 方法)的结果中执行字段访问( a.b
+                      )时使用。它能够基于字段类型自动格式化，并集成在网站的副文本版本中。</p>
+                    <p>t-options 可以用于自定义字段，最常见的选项是 widget ，其它选项是依赖于字段或者widget的。
+                    </p>
+                    <p>调试<br>t-debug<br> 使用PDB的 set_trace
+                      API调用调试器。参数应该是一个模块的名称，在其上调用 set_trace 方法:
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-debug=&quot;pdb&quot;/&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>相当于 importlib.import_module(“pdb”).set_trace()</p>
+                    <h4 id="Qweb调用"><a href="#Qweb调用" class="headerlink"
+                                                                                                      title="Qweb调用"></a>Qweb调用
+                    </h4>
+                    <h5 id="基于请求"><a href="#基于请求" class="headerlink"
+                                                                                                      title="基于请求"></a>基于请求
+                    </h5>
+                    <p>QWeb的大多数Python端使用都在控制器中(在HTTP请求期间)，在这种情况下，存储在数据库中的模板(如
+                      views) 可以简单地通过调用
+                      odoo.http.HttpRequest.render():</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">response = http.request.render(&apos;my-template&apos;, &#123;</span><br><span class="line">    &apos;context_value&apos;: 42</span><br><span class="line">&#125;)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>这自动创建一个 Response 对象可以从控制器返回（或进一步定制合适的）。</p>
+                    <h5 id="基于视图"><a href="#基于视图" class="headerlink"
+                                                                                                      title="基于视图"></a>基于视图
+                    </h5>
+                    <p>在比以前的帮助者更深层次的是 ir.ui.view 的 render 方法:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">render(cr, uid, id[, values][, engine=&apos;ir.qweb][, context])</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>通过数据库id或 external id 呈现QWeb视图/模板。模板从 ir.ui.view
+                      记录自动加载。<br>在呈现上下文中设置多个默认值：
+                    </p>
+                    <ul>
+                      <li>request–当前 WebRequest 对象，如果有</li>
+                      <li>debug–当前请求（如果有）是否在 debug 模式</li>
+                      <li>quote_plus–url编码效用函数</li>
+                      <li>json-相应的标准库模块</li>
+                      <li>time–相应的标准库模块</li>
+                      <li>datetime–相应的标准库模块</li>
+                    </ul>
+                    <h5 id="Javascript调用Qweb"><a href="#Javascript调用Qweb" class="headerlink"
+                                                                                                      title="Javascript调用Qweb"></a>Javascript调用Qweb
+                    </h5>
+                    <h6 id="定义模板"><a href="#定义模板" class="headerlink"
+                                                                                                      title="定义模板"></a>定义模板
+                    </h6>
+                    <p>t-name 指令智能放在模板文件的顶层（直接子文件到文档根）:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;templates&gt;</span><br><span class="line">    &lt;t t-name=&quot;template-name&quot;&gt;</span><br><span class="line">        &lt;!-- template code --&gt;</span><br><span class="line">    &lt;/t&gt;</span><br><span class="line">&lt;/templates&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>它不需要其它参数，但可以使用一个 <t> 元素或任何其它的。使用 <t> 元素，<t> 应该有一个子元素。</t>
+                        </t>
+                      </t>
+                    </p>
+                    <p>模板名称是任意字符串，但是当多个模板相关时（例如称为子模板），通常使用点分割的名称来指示分层关系。</p>
+                    <h6 id="模板继承"><a href="#模板继承" class="headerlink"
+                                                                                                      title="模板继承"></a>模板继承
+                    </h6>
+                    <p>模板继承用于就地改变现有模板，例如，以向其他模块所创建的模板添加信息。<br>模板继承通过 t-extend
+                      指令执行，它将模板的名称作为参数修改。<br>然后使用任意数量的 t-jquery 子命令执行更改:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-extend=&quot;base.template&quot;&gt;</span><br><span class="line">    &lt;t t-jquery=&quot;ul&quot; t-operation=&quot;append&quot;&gt;</span><br><span class="line">        &lt;li&gt;new element&lt;/li&gt;</span><br><span class="line">    &lt;/t&gt;</span><br><span class="line">&lt;/t&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>t-jquery 指令采用一个 CSS selector 。此选择器用于扩展模板以选择应用指定的
+                      t-operation 的 上下文节点 :</p>
+                    <ul>
+                      <li>append–节点的主体被附加在上下文节点的末尾（在上下文节点的最后一个子节点之后）</li>
+                      <li>prepend–节点的主体被添加到上下文节点（在上下文节点的第一个子节点之前插入）</li>
+                      <li>before–节点的主体被插入在上下文节点之前</li>
+                      <li>after–节点的主体被插入在上下文节点之后</li>
+                      <li>inner–节点的主体替换上下文节点的子节点</li>
+                      <li>replace–该节点的主体用于替换上下文节点本身</li>
+                      <li>无操作—如果没有指定 t-operation
+                        ，那么模板主体被解释为javascript代码，并使用上下文节点作 为 this 来执行。</li>
+                    </ul>
+                    <h6 id="调试"><a href="#调试" class="headerlink"
+                                                                                                      title="调试"></a>调试
+                    </h6>
+                    <p>javascript
+                      QWeb实现提供了一些调试:<br>t-log<br>使用表达式参数，在呈现过程中计算表达式并使用
+                      console.log
+                      记录其结果:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-set=&quot;foo&quot; t-value=&quot;42&quot;/&gt;</span><br><span class="line">&lt;t t-log=&quot;foo&quot;/&gt;</span><br><span class="line">将打印 42 到控制台</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>t-debug<br>在模板渲染期间触发调试器断点:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;t t-if=&quot;a_test&quot;&gt;</span><br><span class="line">    &lt;t t-debug=&quot;&quot;&gt;</span><br><span class="line">&lt;/t&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>如果调试活跃度较高（确切的条件取决于浏览器及其开发工具）将停止执行</p>
+                    <h6 id="API—class-QWeb2-Engine"><a href="#API—class-QWeb2-Engine" class="headerlink"
+                                                                                                      title="API—class QWeb2.Engine()"></a>API—class
+                      QWeb2.Engine()</h6>
+                    <p>class QWeb2.Engine()是QWeb “renderer”
+                      ，处理大多数QWeb的逻辑（加载，解析，编辑和渲染模板）。<br>OpenERP
+                      Web在核心模块中为用户实例化一个，并将其导出到 core.qweb
+                      。它还将各种模块的所有模板文件加载到QWeb实例中。<br>QWeb2.Engine() 也用作”模板命名空间”.
+                    </p>
+                    <p>QWeb2.Engine.render(template[, context])<br>使用 context
+                      (如果提供有)将先前加载的模板呈现给字符串，以找到在模板呈现期间访问的变量(例如要显示的字符串)。</p>
+                    <blockquote>
+                      <p>参数<br>template (String) – 要呈现的模板的名称<br>context (Object)
+                        –
+                        用于模板渲染的基本命名空间<br>返回 字符串</p>
+                    </blockquote>
+                    <p>引擎提供了另一种方法，在某些情况下可能是有用的(例如，如果你需要一个单独的模板命名空间，在OpenERP
+                      Web中，看板视图有自己的
+                      QWeb2.Engine()
+                      实例，所以他们的模板不会与更一般的“模块”模板碰撞):<br>QWeb2.Engine.add_template(templates)
+                    </p>
+                    <p>在QWeb实例中装入模板文件（模板集合）。模板可以指定为:</p>
+                    <ul>
+                      <li>XML字符串—QWeb尝试将其解析为XML文档，然后加载它。</li>
+                      <li>网址—QWeb将尝试下载网址内容，然后加载生成的XML字符串。</li>
+                      <li>一个 Document 或
+                        Node—QWeb将遍历文档的第一级（提供根的子节点）并加载任何命名的模板或模板覆盖。</li>
+                    </ul>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/odoo/" rel="tag"># odoo</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/" rel="next"
+                                                                                                        title="WSGI学习（2）---werkzeug源码解读(1)">
+                          <i class="fa fa-chevron-left"></i>
+                          WSGI学习（2）---werkzeug源码解读(1)
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/11/07/关闭odoo复制copy-duplicate/" rel="prev"
+                                                                                                        title="关闭odoo复制copy(duplicate)">
+                          关闭odoo复制copy(duplicate) <i
+                                                                                                          class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#Qweb官方定义"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">Qweb官方定义
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#Qweb实现方式"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">Qweb实现方式
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#QWeb-JavaScript评估上下文"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">QWeb
+                          JavaScript评估上下文</span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#语法"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">语法</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#条件"><span
+                                                                                                            class="nav-number">4.1.</span>
+                            <span class="nav-text">条件</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#循环"><span
+                                                                                                            class="nav-number">4.2.</span>
+                            <span class="nav-text">循环</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#属性"><span
+                                                                                                            class="nav-number">4.3.</span>
+                            <span class="nav-text">属性</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#1-t-att-name"><span
+                                                                                                                class="nav-number">4.3.1.</span>
+                                <span class="nav-text">1.t-att-$name
+                                </span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#2-t-attf-name"><span
+                                                                                                                class="nav-number">4.3.2.</span>
+                                <span class="nav-text">2.t-attf-$name
+                                </span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#3-t-att-mapping"><span
+                                                                                                                class="nav-number">4.3.3.</span>
+                                <span class="nav-text">3.t-att=mapping
+                                </span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#4-t-att-pair"><span
+                                                                                                                class="nav-number">4.3.4.</span>
+                                <span class="nav-text">4.t-att=pair
+                                </span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#设置变量"><span
+                                                                                                            class="nav-number">4.4.</span>
+                            <span class="nav-text">设置变量</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#调用子模板"><span
+                                                                                                            class="nav-number">4.5.</span>
+                            <span class="nav-text">调用子模板</span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#Qweb-Python指令"><span
+                                                                                                        class="nav-number">5.</span>
+                        <span class="nav-text">Qweb
+                          Python指令</span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#Qweb调用"><span
+                                                                                                        class="nav-number">6.</span>
+                        <span class="nav-text">Qweb调用
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#基于请求"><span
+                                                                                                            class="nav-number">6.1.</span>
+                            <span class="nav-text">基于请求</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#基于视图"><span
+                                                                                                            class="nav-number">6.2.</span>
+                            <span class="nav-text">基于视图</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#Javascript调用Qweb"><span
+                                                                                                            class="nav-number">6.3.</span>
+                            <span class="nav-text">Javascript调用Qweb
+                            </span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#定义模板"><span
+                                                                                                                class="nav-number">6.3.1.</span>
+                                <span class="nav-text">定义模板</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#模板继承"><span
+                                                                                                                class="nav-number">6.3.2.</span>
+                                <span class="nav-text">模板继承</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#调试"><span
+                                                                                                                class="nav-number">6.3.3.</span>
+                                <span class="nav-text">调试</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#API—class-QWeb2-Engine"><span
+                                                                                                                class="nav-number">6.3.4.</span>
+                                <span class="nav-text">API—class
+                                  QWeb2.Engine()</span></a></li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

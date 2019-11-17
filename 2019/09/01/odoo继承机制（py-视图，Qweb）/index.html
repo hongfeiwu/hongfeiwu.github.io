@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="odoo,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="1.model继承(python文件)  继承种类_inherit和_inherits  类继承    _inherit：单一继承。值为所继承父类_name标识。如子类不定义_name属性，则在父类中增加该子类下的字段或方法，不创建新对象；  原型继承(带name继承，创建新的表)  如子类定义_name属性，则创建新对象，新对象拥有父类所有的字段或方法，父类不受影响。    格式：_inhe">
+  <meta name="keywords" content="odoo">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="odoo继承机制（py, 视图，Qweb）">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/09/01/odoo继承机制（py-视图，Qweb）/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="1.model继承(python文件)  继承种类_inherit和_inherits  类继承    _inherit：单一继承。值为所继承父类_name标识。如子类不定义_name属性，则在父类中增加该子类下的字段或方法，不创建新对象；  原型继承(带name继承，创建新的表)  如子类定义_name属性，则创建新对象，新对象拥有父类所有的字段或方法，父类不受影响。    格式：_inhe">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.573Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="odoo继承机制（py, 视图，Qweb）">
+  <meta name="twitter:description"
+                                                                                  content="1.model继承(python文件)  继承种类_inherit和_inherits  类继承    _inherit：单一继承。值为所继承父类_name标识。如子类不定义_name属性，则在父类中增加该子类下的字段或方法，不创建新对象；  原型继承(带name继承，创建新的表)  如子类定义_name属性，则创建新对象，新对象拥有父类所有的字段或方法，父类不受影响。    格式：_inhe">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2019/09/01/odoo继承机制（py-视图，Qweb）/">
+
+  <title>odoo继承机制（py, 视图，Qweb） | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/09/01/odoo继承机制（py-视图，Qweb）/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">odoo继承机制（py,
+                      视图，Qweb）</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-09-01T21:40:05+08:00">
+                          2019-09-01
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          2,312
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          10
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="1-model继承-python文件"><a href="#1-model继承-python文件" class="headerlink"
+                                                                                                      title="1.model继承(python文件)"></a>1.model继承(python文件)
+                    </h4>
+                    <h5 id="继承种类-inherit和-inherits"><a href="#继承种类-inherit和-inherits" class="headerlink"
+                                                                                                      title="继承种类_inherit和_inherits"></a>继承种类_inherit和_inherits
+                    </h5>
+                    <h6 id="类继承"><a href="#类继承" class="headerlink"
+                                                                                                      title="类继承"></a>类继承
+                    </h6>
+                    <p>
+                      _inherit：<u><strong>单一继承</strong></u>。值为所继承父类_name标识。如子类不定义_name属性，则在父类中增加该子类下的字段或方法，不创建新对象；
+                    </p>
+                    <h6 id="原型继承-带name继承，创建新的表"><a href="#原型继承-带name继承，创建新的表" class="headerlink"
+                                                                                                      title="原型继承(带name继承，创建新的表)"></a>原型继承(带name继承，创建新的表)
+                    </h6>
+                    <p>如子类定义_name属性，则创建新对象，新对象拥有父类所有的字段或方法，父类不受影响。</p>
+                    <blockquote>
+                      <p>格式：_inherit = ‘父类 _name’</p>
+                    </blockquote>
+                    <h6 id="代理继承（委托继承）【以成员变量的形式把父类对象包含进来】"><a href="#代理继承（委托继承）【以成员变量的形式把父类对象包含进来】" class="headerlink"
+                                                                                                      title="代理继承（委托继承）【以成员变量的形式把父类对象包含进来】"></a>代理继承（委托继承）【以成员变量的形式把父类对象包含进来】
+                    </h6>
+                    <p>
+                      _inherits：<u><strong>多重继承</strong></u>。子类通过关联字段与父类关联，子类不拥有父类的字段或方法，但是可以直接操作父类的字段或方法。<br>使用_inherits属性，它允许一个模型以透明的方式包含其他模型。通过字典映射继承模型与字段的关系，并关联它们。
+                    </p>
+                    <pre><code>通俗解释：（相当于成员变量：引用一个外部的类对象赋值给这个模型的一个成员，但是对象的值是保存在被引用的类的数据库表中的。但是在当前类通过成员修改了变量值，则会同步到被引用的类的数据库表中）</code></pre>
+                    <blockquote>
+                      <p>格式：_inherits = {‘父类 _name’: ‘关联字段’}</p>
+                    </blockquote>
+                    <p>三种常用继承 (在model中操作):</p>
+                    <ul>
+                      <li>_inherit 没重定义_name 这样数据库不会新建对象表，用被继承的表</li>
+                      <li>_inherit 重定义_name 这样数据库会创建新的对象表存储</li>
+                      <li>_inherits 是复合继承，有模型对象，有字段对象</li>
+                    </ul>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">class MyModelExtended(Model):</span><br><span class="line">    _inherit = &apos;a.model&apos;                       # direct heritage(直接继承)</span><br><span class="line">    _inherit = [&apos;a.model, &apos;a.other.model&apos;]     # direct heritage(直接继承)</span><br><span class="line">    _inherits = &#123;&apos;a.model&apos;: &apos;field_name&apos;&#125;      # polymorphic heritage（多态继承）</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="1-1继承增加字段"><a href="#1-1继承增加字段" class="headerlink"
+                                                                                                      title="1.1继承增加字段"></a>1.1继承增加字段
+                    </h5>
+                    <p>只需要通过_inherit继承原model，添加新field即可</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">from odoo import models,fields,api</span><br><span class="line">class TodoTask(models.Model)</span><br><span class="line">     _inherit = &apos;todo.task&apos;     # 继承todo.task</span><br><span class="line"></span><br><span class="line">     date_deadline = fields.Date(&apos;Deadline&apos;)    # 增加date_deadline字段</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="1-2修改已有的field"><a href="#1-2修改已有的field" class="headerlink"
+                                                                                                      title="1.2修改已有的field"></a>1.2修改已有的field
+                    </h5>
+                    <p>加入todo.task中已有原字段</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">name = fields.Char(u&apos;问题&apos;)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>继承后重新定义字段</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">name = fields.Char(help=&quot;can I help you&quot;)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>这样额外增加了help帮助信息，实际上最终的字段实际为</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">name = fields.Char(u&apos;问题&apos;，help=&quot;can I help you&quot;)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="1-3重载原模型的方法"><a href="#1-3重载原模型的方法" class="headerlink"
+                                                                                                      title="1.3重载原模型的方法"></a>1.3重载原模型的方法
+                    </h5>
+                    <p> super(TodoTask,self) 两个参数 一个是具体父类的类名和 self<br>
+                      假如在todo.task中已有函数</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.multi</span><br><span class="line">def do_clear_done(self):</span><br><span class="line">    domain = [(’is_done’, ’=’, True),</span><br><span class="line">    ’|’, (’user_id’, ’=’, ’self.env.uid’),</span><br><span class="line">    (’user_id’,’=’,False)]</span><br><span class="line">    done_recs = self.search(domain)</span><br><span class="line">    done_recs.write(&#123;’active’:False&#125;)</span><br><span class="line">return True</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>继承todo.task后，写函数</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.one</span><br><span class="line">def do_toggle_done(self):</span><br><span class="line">    if self.user_id != self.env.user:</span><br><span class="line">        raise Exception(’Only the responsible can do this!’)</span><br><span class="line">    else:</span><br><span class="line">        return super(TodoTask, self).do_toggle_done()</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>要某该记录的 user_id 等于当前用户的 id self.env.uid ，要某 user_id 值为
+                      False<br> @api.multi
+                      告诉我们这个函数里面的self是一个recordset<br> @api.one 自动遍历目标
+                      recordset，然后方法里面的 self 就是一个
+                      record。</p>
+                    <h5 id="1-4-添加方法"><a href="#1-4-添加方法" class="headerlink"
+                                                                                                      title="1.4 添加方法"></a>1.4
+                      添加方法</h5>
+                    <p>添加新方法很简单：只需在继承类中声明新的函数。</p>
+                    <h5 id="1-5-多态继承"><a href="#1-5-多态继承" class="headerlink"
+                                                                                                      title="1.5 多态继承"></a>1.5
+                      多态继承</h5>
+                    <p> _inherit 可以继承多个模型</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">_name=&apos;todo.task&apos;</span><br><span class="line">_inherit = [&apos;todo.task&apos;,&apos;mail.thread&apos;]</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>继承了todo.task的特性，以及mail.thread模块</p>
+                    <h4 id="2-继承（XML）"><a href="#2-继承（XML）" class="headerlink"
+                                                                                                      title="2.继承（XML）"></a>2.继承（XML）
+                    </h4>
+                    <h5 id="2-1-视图"><a href="#2-1-视图" class="headerlink"
+                                                                                                      title="2.1 视图"></a>2.1
+                      视图
+                    </h5>
+                    <p>表单，列表和搜索视图是使用arch XML结构定义的，要扩展视图，我们需要一种方法来修改这个XML。
+                      这意味着需要定位XML中的元素位置，然后在这些位置引入修改。<br>对于XML，在其中定位元素的最好方法是使用XPath表达式，如果XPath表达式匹配到多个元素，只有第一个元素会被修改<br>因此，表达式应该使用独特的属性以使其指定尽可能具体，使用name属性是确保我们找到扩展点的确切xml元素的最简单方法。
+                      因此，在我们的视图XML元素上定义name属性是很重要的。<br> Xpath表达式的格式：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">expr=&quot;//标签名[@属性]=&apos;属性值&apos;&quot;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>意思是：找到 属性=属性值 的标签的位置。</p>
+                    <h6 id="2-1-1-form视图"><a href="#2-1-1-form视图" class="headerlink"
+                                                                                                      title="2.1.1 form视图"></a>2.1.1
+                      form视图</h6>
+                    <p>
+                      在odoo里可以通过继承的方式来改写已经存在的view<br>对比view的定义视图定义中写法多了inherit_id<br>inherit_id指向要改写的view
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;field name=&quot;inherit_id&quot; ref=&quot;id_category_list&quot;/&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      如果是跨模块的修改，则需要在视图前加上模块名字，比如base.id_category_list<br>在arch里用xpath定位改写的元素
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;!-- 改写 ibuilding list 列表视图 --&gt;</span><br><span class="line">&lt;record id=&quot;building_list_view&quot; model=&quot;ir.ui.view&quot;&gt;</span><br><span class="line">    &lt;field name=&quot;name&quot;&gt;building.list.view&lt;/field&gt;</span><br><span class="line">    &lt;field name=&quot;model&quot;&gt;ibuilding.list&lt;/field&gt;</span><br><span class="line">    &lt;field name=&quot;inherit_id&quot; ref=&quot;building_list&quot;/&gt;</span><br><span class="line">    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;</span><br><span class="line">        &lt;!-- 找到ids字段，在其后添加idea_id字段 --&gt;</span><br><span class="line">        &lt;xpath expr=&quot;//field[@name=&apos;ids&apos;]&quot; position=&quot;after&quot;&gt;</span><br><span class="line">          &lt;field name=&quot;idea_id&quot; string=&quot;Number of ideas&quot;/&gt;</span><br><span class="line">        &lt;/xpath&gt;</span><br><span class="line">        &lt;!-- 找到 upload 字段，在其后添加idea_ids字段 --&gt;</span><br><span class="line">        &lt;xpath expr=&quot;//field[@name=&apos;upload&apos;]&quot; position=&quot;replace&quot;&gt;</span><br><span class="line">          &lt;field name=&quot;download&quot; string=&quot;下载一个文件&quot;/&gt;</span><br><span class="line">        &lt;/xpath&gt;</span><br><span class="line">    &lt;/field&gt;</span><br><span class="line">&lt;/record&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>注意找到的元素必须是一个，如果定位出多个元素或者是空，都会报错。<br>expr
+                      Xpath表达式用来选择父视图中的某个元素，如果没找到或找到多个元素会抛出一个异常<br>position定位有如下选择:
+                    </p>
+                    <ul>
+                      <li>after:将内容添加到父元素之中，匹配的节点之后。</li>
+                      <li>before:添加内容在匹配节点之前。</li>
+                      <li>inside（默认值）:匹配节点内的追加内容。</li>
+                      <li>replace:替换匹配的节点。如果使用空内容，它将删除该匹配的元素。</li>
+                      <li>attributes：修改匹配元素的XML属性。在元素内容使用<attribute
+                                                                                                        name="“attr-name”">
+                          实现给标签设置新属性值attr-name。<ol>
+                            <li>如果<attribute></attribute>
+                              之间有值，就在匹配的节点上添加以name命名的、以内容
+                              主体为值的属性或是修改原同名属性值。</li>
+                            <li>如果<attribute></attribute>
+                              没有值，就将匹配节点上名字为name的属性删除，如果原节点上没有对应的属性，抛出一个错误。</li>
+                          </ol>
+                        </attribute>
+                      </li>
+                    </ul>
+                    <p>当仅匹配一个field时，odoo还提供了更加方便的标记方法, 可以避免使用XPath,
+                      上面的XML可以用简化为下面的内容，erpr表达式可以简化如下
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;xpath expr=&quot;//field[@name=&apos;upload&apos;]&quot; position=&quot;replace&quot;&gt;</span><br><span class="line">    &lt;field name=&quot;download&quot; /&gt;</span><br><span class="line">&lt;/xpath&gt;</span><br><span class="line">&lt;field name=&quot;upload&quot; position=&quot;replace&quot;&gt;</span><br><span class="line">    &lt;field name=&quot;download&quot; /&gt;</span><br><span class="line">&lt;/field&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      <field>用于确定新字段显示位置的定位, 除此之外, <sheet>, <group>, <div>
+                              等都有类似特性.<br>相应地,
+                              name属性是经常用到的资源查找方式, 但是也可以使用其他的方式,
+                              例如如果需要查找显示某些特定字符串的label或者CSS类名,
+                              就可以使用string.
+                            </div>
+                          </group>
+                        </sheet>
+                      </field>
+                    </p>
+                    <h6 id="2-1-2-tree视图扩展"><a href="#2-1-2-tree视图扩展" class="headerlink"
+                                                                                                      title="2.1.2 tree视图扩展"></a>2.1.2
+                      tree视图扩展</h6>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;record id=&quot;view_tree_模型名_inherited&quot; model=&quot;ir.ui.view&quot;&gt;</span><br><span class="line">   &lt;field name=&quot;name&quot;&gt;模型名 extension&lt;/field&gt;</span><br><span class="line">   &lt;field name=&quot;model&quot;&gt;模型&lt;/field&gt;</span><br><span class="line">   &lt;field name=&quot;inherit_id&quot; ref=&quot;被继承的tree视图id&quot;/&gt;</span><br><span class="line">   &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;//在arch中进行扩展</span><br><span class="line">        &lt;field name=&quot;定位标签name&quot; position=&quot;扩展位置&quot;&gt; </span><br><span class="line">            &lt;field ....进行扩展 /&gt;</span><br><span class="line">        &lt;/field&gt;</span><br><span class="line">   &lt;/field&gt;</span><br><span class="line">&lt;/record&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="2-1-3-扩展搜索视图"><a href="#2-1-3-扩展搜索视图" class="headerlink"
+                                                                                                      title="2.1.3 扩展搜索视图"></a>2.1.3
+                      扩展搜索视图</h6>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;record id=&quot;view_filter_模型名_inherited&quot; model=&quot;ir.ui.view&quot;&gt;</span><br><span class="line">   &lt;field name=&quot;name&quot;&gt;xxxextension&lt;/field&gt;</span><br><span class="line">   &lt;field name=&quot;model&quot;&gt;模型名&lt;/field&gt;</span><br><span class="line">   &lt;field name=&quot;inherit_id&quot; ref=&quot;被继承的搜索视图id&quot;/&gt;</span><br><span class="line">   &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt; //下面进行定位、扩展举例</span><br><span class="line">       &lt;field name=&quot;定位的标签name&quot; position=&quot;after&quot;&gt;</span><br><span class="line">           //引入的修改，可以是增加过滤field，也可以定义 filter</span><br><span class="line">       &lt;/field&gt; </span><br><span class="line">   &lt;/field&gt;</span><br><span class="line">&lt;/record&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="删除记录"><a href="#删除记录" class="headerlink"
+                                                                                                      title="删除记录"></a>删除记录
+                    </h6>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;delete model=”ir.rule” search=”[(’id’, ’=’,</span><br><span class="line">         ref(’todo_app.todo_task_user_rule’))]” /&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="更新数据"><a href="#更新数据" class="headerlink"
+                                                                                                      title="更新数据"></a>更新数据
+                    </h6>
+                    <record id="”x”" model="”y”">
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                            </td>
+                            <td class="code">
+                              <pre><span class="line">&lt;record id=”todo_task_per_user_rule” model=”ir.rule”&gt;</span><br><span class="line">    &lt;field name=”name”&gt;ToDo Tasks only for owner&lt;/field&gt;</span><br><span class="line">    &lt;field name=”model_id” ref=”model_todo_task”/&gt;</span><br><span class="line">    &lt;field name=”groups” eval=”[(4, ref(’base.group_user’))]”/&gt;</span><br><span class="line">    &lt;field name=”domain_force”&gt;</span><br><span class="line">        [’|’,(’user_id’,’in’, [user.id,False]),</span><br><span class="line">        (’message_follower_ids’,’in’,[user.partner_id.id])]</span><br><span class="line">    &lt;/field&gt;</span><br><span class="line"> &lt;/record&gt;</span><br></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+
+                      <h4 id="Qweb继承"><a href="#Qweb继承" class="headerlink"
+                                                                                                        title="Qweb继承"></a>Qweb继承
+                      </h4>
+                      <p>
+                        Qweb继承是通过qweb语法来书写的。但是思路一致：定位——&gt;引入扩展<br>Qweb文件继承分两种：Qweb视图类型的文件和data类型的文件，二者继承修改的方式不同。
+                      </p>
+                      <h5 id="1、视图类型的qweb文件继承"><a href="#1、视图类型的qweb文件继承" class="headerlink"
+                                                                                                        title="1、视图类型的qweb文件继承"></a>1、视图类型的qweb文件继承
+                      </h5>
+                      <p>
+                        视图类型的qweb文件，一般定义的都是一些视图模板，template中的内容大多用html+qweb语句编写，如widget的视图定义、odoo中各个界面的定义。<br>1）在statc/xml目录下新建一个xml文件
+                      </p>
+                      <p>2）编写以下内容</p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                            </td>
+                            <td class="code">
+                              <pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;template id=&quot;唯一的id&quot; xml:space=&quot;preserve&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;t t-extend=&quot;要继承扩展的template的name属性值&quot;&gt;</span><br><span class="line">        &lt;t t-jquery=&quot;使用选择器来定位&quot; t-operation=&quot;相当于position&quot;&gt;</span><br><span class="line">            //扩展的内容，一般用html语法+qweb语句编写</span><br><span class="line">        &lt;/t&gt;</span><br><span class="line">    &lt;/t&gt;</span><br><span class="line"></span><br><span class="line">&lt;/template&gt;</span><br></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+
+                      <p>3）在manifest文件中，配置到qweb配置项：</p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                            </td>
+                            <td class="code">
+                              <pre><span class="line">&quot;qweb&quot;: [</span><br><span class="line">        &quot;static/src/xml/qweb_file.xml&quot;,</span><br><span class="line">    ],</span><br></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+
+                      <h5 id="2、data类型的qweb文件继承"><a href="#2、data类型的qweb文件继承" class="headerlink"
+                                                                                                        title="2、data类型的qweb文件继承"></a>2、data类型的qweb文件继承
+                      </h5>
+                      <p>
+                        data类型的qweb文件，一般是一些辅助界面qweb的文件，大多用于定义、引入css文件等，多处于view目录下。
+                      </p>
+                      <p>1）在views目录下新建一个xml文件<br>2）编写以下内容</p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                            </td>
+                            <td class="code">
+                              <pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;odoo&gt;</span><br><span class="line">    &lt;template id=&quot;唯一id&quot; inherit_id=&quot;模块.继承的templateid&quot;&gt;</span><br><span class="line">        &lt;xpath expr=&quot;xpath定位语句&quot;&gt;</span><br><span class="line">            //引入的内容，一般是link标签和script标签，把static/src目录下的css、js子目录的文件引入</span><br><span class="line">        &lt;/xpath&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">&lt;/odoo&gt;</span><br></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+
+                      <p>3）在manifest文件中配置data，把文件加载</p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                            </td>
+                            <td class="code">
+                              <pre><span class="line">&quot;data&quot;: [</span><br><span class="line">        &quot;views/XXX.xml&quot;,</span><br><span class="line">    ],</span><br></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                    </record>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/odoo/" rel="tag"># odoo</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/08/26/试玩OpenCV（一）/" rel="next"
+                                                                                                        title="试玩OpenCV（一）">
+                          <i class="fa fa-chevron-left"></i> 试玩OpenCV（一）
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/09/01/GO学习1-基本语法及数据结构（1）/" rel="prev"
+                                                                                                        title="GO学习1--基本语法及数据结构（1）">
+                          GO学习1--基本语法及数据结构（1） <i
+                                                                                                          class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#1-model继承-python文件"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">1.model继承(python文件)
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#继承种类-inherit和-inherits"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">继承种类_inherit和_inherits
+                            </span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#类继承"><span
+                                                                                                                class="nav-number">1.1.1.</span>
+                                <span class="nav-text">类继承</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#原型继承-带name继承，创建新的表"><span
+                                                                                                                class="nav-number">1.1.2.</span>
+                                <span class="nav-text">原型继承(带name继承，创建新的表)
+                                </span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#代理继承（委托继承）【以成员变量的形式把父类对象包含进来】"><span
+                                                                                                                class="nav-number">1.1.3.</span>
+                                <span
+                                                                                                                class="nav-text">代理继承（委托继承）【以成员变量的形式把父类对象包含进来】
+                                </span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#1-1继承增加字段"><span
+                                                                                                            class="nav-number">1.2.</span>
+                            <span class="nav-text">1.1继承增加字段
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#1-2修改已有的field"><span
+                                                                                                            class="nav-number">1.3.</span>
+                            <span class="nav-text">1.2修改已有的field
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#1-3重载原模型的方法"><span
+                                                                                                            class="nav-number">1.4.</span>
+                            <span class="nav-text">1.3重载原模型的方法
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#1-4-添加方法"><span
+                                                                                                            class="nav-number">1.5.</span>
+                            <span class="nav-text">1.4
+                              添加方法</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#1-5-多态继承"><span
+                                                                                                            class="nav-number">1.6.</span>
+                            <span class="nav-text">1.5
+                              多态继承</span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#2-继承（XML）"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">2.继承（XML）
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#2-1-视图"><span
+                                                                                                            class="nav-number">2.1.</span>
+                            <span class="nav-text">2.1 视图
+                            </span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#2-1-1-form视图"><span
+                                                                                                                class="nav-number">2.1.1.</span>
+                                <span class="nav-text">2.1.1
+                                  form视图</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#2-1-2-tree视图扩展"><span
+                                                                                                                class="nav-number">2.1.2.</span>
+                                <span class="nav-text">2.1.2
+                                  tree视图扩展</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#2-1-3-扩展搜索视图"><span
+                                                                                                                class="nav-number">2.1.3.</span>
+                                <span class="nav-text">2.1.3
+                                  扩展搜索视图</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#删除记录"><span
+                                                                                                                class="nav-number">2.1.4.</span>
+                                <span class="nav-text">删除记录</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#更新数据"><span
+                                                                                                                class="nav-number">2.1.5.</span>
+                                <span class="nav-text">更新数据</span></a></li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#Qweb继承"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">Qweb继承
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#1、视图类型的qweb文件继承"><span
+                                                                                                            class="nav-number">3.1.</span>
+                            <span class="nav-text">1、视图类型的qweb文件继承
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#2、data类型的qweb文件继承"><span
+                                                                                                            class="nav-number">3.2.</span>
+                            <span class="nav-text">2、data类型的qweb文件继承
+                            </span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="odoo,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="一、self是什么  目前新版的Odoo中使用到的self，是对游标cr、用户ID、模型、上下文、记录集、缓存   的封装。我们可以通过 self.XX 获取到这些封装的东西，比如：对象self.env可以访问请求参数和其他有用的东西：    self.env.cr或self._cr是数据库光标对象; 它是用于查询数据库   self.env.uid或self._uid是当前用户的数据库ID">
+  <meta name="keywords" content="odoo">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="修饰器、ENVIRONMENT (ENV) 简析 (odoo8.0开始)">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/11/07/修饰器、ENVIRONMENT-ENV-简析-odoo8-0开始/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="一、self是什么  目前新版的Odoo中使用到的self，是对游标cr、用户ID、模型、上下文、记录集、缓存   的封装。我们可以通过 self.XX 获取到这些封装的东西，比如：对象self.env可以访问请求参数和其他有用的东西：    self.env.cr或self._cr是数据库光标对象; 它是用于查询数据库   self.env.uid或self._uid是当前用户的数据库ID">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/11/07/修饰器、ENVIRONMENT-ENV-简析-odoo8-0开始/1.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/11/07/修饰器、ENVIRONMENT-ENV-简析-odoo8-0开始/2.png">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.587Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="修饰器、ENVIRONMENT (ENV) 简析 (odoo8.0开始)">
+  <meta name="twitter:description"
+                                                                                  content="一、self是什么  目前新版的Odoo中使用到的self，是对游标cr、用户ID、模型、上下文、记录集、缓存   的封装。我们可以通过 self.XX 获取到这些封装的东西，比如：对象self.env可以访问请求参数和其他有用的东西：    self.env.cr或self._cr是数据库光标对象; 它是用于查询数据库   self.env.uid或self._uid是当前用户的数据库ID">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2019/11/07/修饰器、ENVIRONMENT-ENV-简析-odoo8-0开始/1.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2019/11/07/修饰器、ENVIRONMENT-ENV-简析-odoo8-0开始/">
+
+  <title>修饰器、ENVIRONMENT (ENV) 简析 (odoo8.0开始) | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/11/07/修饰器、ENVIRONMENT-ENV-简析-odoo8-0开始/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      修饰器、ENVIRONMENT (ENV) 简析 (odoo8.0开始)</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-11-07T22:26:37+08:00">
+                          2019-11-07
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          2,169
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          9
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="一、self是什么"><a href="#一、self是什么" class="headerlink"
+                                                                                                      title="一、self是什么"></a>一、self是什么
+                    </h4>
+                    <p>
+                      目前新版的Odoo中使用到的self，是<u><strong>对游标cr、用户ID、模型、上下文、记录集、缓存</strong></u>
+                      的封装。<br>我们可以通过 self.XX
+                      获取到这些封装的东西，比如：<br>对象self.env可以访问请求参数和其他有用的东西：</p>
+                    <ul>
+                      <li>self.env.cr或self._cr是数据库光标对象; 它是用于查询数据库</li>
+                      <li>self.env.uid或self._uid是当前用户的数据库ID</li>
+                      <li>self.env.user是当前用户的记录</li>
+                      <li>self.env.content或self._context是上下文字典</li>
+                      <li>self.env.ref（xml_id）返回对应于一个XML ID的记录</li>
+                      <li>self.env [MODEL_NAME]返回给定模型的实例</li>
+                    </ul>
+                    <h4 id="二、通过直接设置属性来改变数据库中字段值"><a href="#二、通过直接设置属性来改变数据库中字段值" class="headerlink"
+                                                                                                      title="二、通过直接设置属性来改变数据库中字段值"></a>二、通过直接设置属性来改变数据库中字段值
+                    </h4>
+                    <p>我们在查出某模型的记录后，可以通过 record.XX = value
+                      来直接修改记录的字段内容。<br>同样，在重写模型的write方法中，也可以通过
+                      self.XX = value 来指定新增记录中某字段的值。<br>这里需要注意两点：</p>
+                    <ol>
+                      <li>修改查出来的记录字段值来改变数据库内容，是通过改变缓存中的值出发数据库写记录来达到的。</li>
+                      <li>重写write方法时，在write方法中每调用一次 self.XX = value
+                        语句，都会触发数据库写操作，因此一般采用如下写法:<figure
+                                                                                                        class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">for rec in self:</span><br><span class="line">    rec.XX = XX</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ol>
+                    <h4 id="三、environment环境"><a href="#三、environment环境" class="headerlink"
+                                                                                                      title="三、environment环境"></a>三、environment环境
+                    </h4>
+                    <p>Environment 是 odoo 中操作db的总句柄，以下几种方式可以获得</p>
+                    <p>
+                      environment类提供了对ORM对象的封装，同时提供了对注册类的访问，记录集的缓存，以及管理重计算的数据结构。
+                    </p>
+                    <ul>
+                      <li>在
+                        12,11,10,9,8版本中，对于继承Model类来说可以直接通过self.env对environment进行操作。
+                      </li>
+                      <li>在请求的Controller可以通过request.env()得到Environment</li>
+                    </ul>
+                    <p>通过模型类或模型类对象获取，self.env、cls.env、product.env</p>
+                    <h6 id="1、操作缓存"><a href="#1、操作缓存" class="headerlink"
+                                                                                                      title="1、操作缓存"></a>1、操作缓存
+                    </h6>
+                    <p>
+                      环境储存了模型的缓存记录集，因此我们可以通过环境来获取、增加、修改、删除记录，而触发数据库更改，从而达到操作数据库的目的。
+                    </p>
+                    <ol>
+                      <li>新增一条记录<br>self.env[‘模型’].create(vals)</li>
+                      <li>
+                        改变用户权限<br>我们可以通过self.sudo()获得超级权限，从而确保我们的操作能够进行<br>self.env[‘model’].sudo().create(vals)
+                      </li>
+                      <li>获取属性 <ol>
+                          <li>user：返回当前用户<br> self.env.user<br> idself.env.uid
+                          </li>
+                          <li>lang：返回当前语言代码<br> self.env.lang </li>
+                          <li>in_draft:返回是否处于草稿状态<br> self.env.in_draft </li>
+                          <li>in_onchange:返回是否处于on_change草稿模式<br>
+                            self.env.in_onchange </li>
+                          <li>cr：当前数据库连接<br>
+                            self.env.cr<br>另外还有registery,cache,prefetch,computed,dirty,todo,mode,all
+                          </li>
+                        </ol>
+                      </li>
+                      <li>获取XML的ID<br>self.env.ref(‘external id’)</li>
+                      <li>更新缓存，触发数据库操作<br>self.env.invalidate_all()<h6
+                                                                                                        id="2、self常用接口">
+                          <a href="#2、self常用接口" class="headerlink"
+                                                                                                          title="2、self常用接口"></a>2、self常用接口
+                        </h6>1:普通查询：返回记录集，后续通过修改记录值来触发数据库修改<figure
+                                                                                                        class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">self.search(domain) //从当前模型的self中查询</span><br><span class="line">self.env[&apos;model&apos;].search(domain) // 获取某个model的环境，查询其中的记录集</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ol>
+                    <p>2:只读查询：返回列表，只能提取内容，不能触发数据库修改</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">self.search_read(domain,[&apos;要查询的字段&apos;])</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>3:统计数量：返回符合条件的记录条数</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">self.search_count(domain)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>4:浏览：通过一系列id值，返回对应的记录集</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">self.browse([id])</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>5:删除</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">self.unlink(domain)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="应用说明"><a href="#应用说明" class="headerlink"
+                                                                                                      title="应用说明"></a>应用说明
+                    </h6>
+                    <ol>
+                      <li>利用env[model]获取类对象<br>
+                        self.env[‘ir.model’].search([(‘state’,’!=’,’manual’)])
+                      </li>
+                      <li>利用cr执行sql语句<br> self.env.cr.execute(query,(value,))
+                      </li>
+                      <li>Model装饰<br> Model装饰起的作用是返回一个集合列表 </li>
+                    </ol>
+                    <h4 id="四、NEW-ids"><a href="#四、NEW-ids" class="headerlink"
+                                                                                                      title="四、NEW ids"></a>四、NEW
+                      ids</h4>
+                    <p>Odoo在创建一个新记录时，会使用models.ids虚拟一个记录id。<br>可以通过如下语句来判断：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">if is instance(record.id,models.NewId)：</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h4 id="装饰器"><a href="#装饰器" class="headerlink"
+                                                                                                      title="装饰器"></a>装饰器
+                    </h4>
+                    <h5 id="api-one-一次处理一条记录-one装饰的方法会返回一个list，-None"><a href="#api-one-一次处理一条记录-one装饰的方法会返回一个list，-None"
+                                                                                                      class="headerlink"
+                                                                                                      title="api.one  一次处理一条记录,one装饰的方法会返回一个list，[None]"></a>api.one
+                      一次处理一条记录,one装饰的方法会返回一个list，[None]</h5>
+                    <p>
+                      one的用法主要用于self为单一记录的情况，意思是指：self仅代表当前正在操作的记录。<br>返回值为[None]
+                    </p>
+                    <h5 id="api-multi-一次处理一个记录集，有返回值"><a href="#api-multi-一次处理一个记录集，有返回值" class="headerlink"
+                                                                                                      title="api.multi  一次处理一个记录集，有返回值"></a>api.multi
+                      一次处理一个记录集，有返回值</h5>
+                    <p>
+                      multi则指self是多个记录的合集。因此，常使用for—in语句遍历self。<br>multi通常用于：在tree视图中点选多条记录，然后执行某方法，那么那个方法必须用@api.multi修饰，而参数中的self则代表选中的多条记录。
+                    </p>
+                    <p>如果仅仅是在form视图下操作，那么self中通常只有当前正在操作的记录。<br>经常使用的<br>unlink
+                      删除记录<br> 原型：def
+                      unlink(self)<br>write 修改记录<br> 原型：def write(self,
+                      vals)<br> vals：修改属性值字典</p>
+                    <h5 id="api-model-类级别静态方法"><a href="#api-model-类级别静态方法" class="headerlink"
+                                                                                                      title="api.model    类级别静态方法"></a>api.model
+                      类级别静态方法</h5>
+                    <p>model要求self是一个记录集，env中并不包含ids参数</p>
+                    <ol>
+                      <li>
+                        <p>create 创建记录<br> 原型：def create(self, vals)<br>
+                          vals：记录属性值字典</p>
+                      </li>
+                      <li>
+                        <p>search和_search方法 查找记录<br> 原型：def search(self, args,
+                          offset=0, limit=None,
+                          order=None,
+                          count=False)<br>args：domain格式的条件列表；offset：结果忽略条数；limit：最大查询条数
+                        </p>
+                        <p>_search<br>_search(self, args, offset=0, limit=None,
+                          order=None,
+                          count=False, access_rights_uid=None)</p>
+                        <pre><code>模型记录的搜索函数，定义了该模型的记录被关联搜索、搜索视图搜索时的条数、排序字段、总数、检索权限等。</code></pre>
+                      </li>
+                      <li>
+                        <p>read 读取记录属性值<br>
+                          返回指定ids记录的指定fields字段值，采用列表加字典的数据结构（[{},{},…]）返回。<br>原型：def
+                          read(self,
+                          fields=None,
+                          load=’_classic_read’):<br>fields：列表可指定要读取的属性名称</p>
+                      </li>
+                      <li>
+                        <p>search_read —-many2one点开搜索更多时调用<br> 原型：def
+                          search_read(self, domain=None,
+                          fields=None, offset=0, limit=None,
+                          order=None)<br>用法即search方法与read方法相结合。
+                        </p>
+                      </li>
+                      <li>
+                        <p>search_count(): 视图中计算记录数时调用</p>
+                      </li>
+                      <li>
+                        <p>name_search(): many2one字段搜索时调用</p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">@api.model</span><br><span class="line">def name_search(self, name, args=None, operator=&apos;ilike&apos;, limit=查找条数):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    名称模糊搜索。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    args = args or []</span><br><span class="line">    domain = []</span><br><span class="line">    domain.append([(更多检索条件)])</span><br><span class="line">    return super(类名, self).name_search(name, domain + args, operator=operator, limit=limit)</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+                      </li>
+                      <li>
+                        <p>read_group(): 搜索视图分组时调用</p>
+                      </li>
+                      <li>
+                        <p>
+                          browse():从数据库中读取指定的记录，并生成对象返回<br>和read等方法不同，本方法不止返回简单的记录返回对象。返回的对象可以直接使用‘.’存取对象的字段和方法，也可以通过关联字段直接访问“相邻”对象。
+                        </p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">addr_obj = self.pool.get(&apos;res.partner.address&apos;).browse(cr,uid,contact_id)</span><br><span class="line">nom = addr_obj.name</span><br><span class="line">compte = addr_obj.partner_id.bank</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ol>
+                    <h5 id="api-return-model-显性返回一个模型"><a href="#api-return-model-显性返回一个模型" class="headerlink"
+                                                                                                      title="api.return(model)  显性返回一个模型"></a>api.return(model)
+                      显性返回一个模型</h5>
+                    <p>returns的用法主要是用来指定返回值的格式，它接受三个参数</p>
+                    <ul>
+                      <li>第一个为返回值的model</li>
+                      <li>第二个为向下兼容的method</li>
+                      <li>第三个为向上兼容的method</li>
+                    </ul>
+                    <h5 id="api-depends（’field’-…）"><a href="#api-depends（’field’-…）" class="headerlink"
+                                                                                                      title="api.depends（’field’,…）"></a>api.depends（’field’,…）
+                    </h5>
+                    <p>depends
+                      主要用于compute方法，对于任何fields都可以通过添加compute属性动态赋值。depends就是用来标该方法依赖于哪些字段的装饰。
+                    </p>
+                    <h5 id="api-onchange-‘field’-…"><a href="#api-onchange-‘field’-…" class="headerlink"
+                                                                                                      title="api.onchange(‘field’,…)"></a>api.onchange(‘field’,…)
+                    </h5>
+                    <p>
+                      onchange的使用方法非常简单，就是当字段发生改变时，触发绑定的函数。<br><u><strong>同时该字段必须写在当前的视图上（可以隐藏），否则无法触发</strong></u>
+                    </p>
+                    <img src="/2019/11/07/修饰器、ENVIRONMENT-ENV-简析-odoo8-0开始/1.png"
+                                                                                                    width="1">
+                    <img src="/2019/11/07/修饰器、ENVIRONMENT-ENV-简析-odoo8-0开始/2.png"
+                                                                                                    width="2">
+
+                    <h5 id="api-constrains-‘field’-…-–字段的代码约束。"><a href="#api-constrains-‘field’-…-–字段的代码约束。"
+                                                                                                      class="headerlink"
+                                                                                                      title="api.constrains(‘field’,…) –字段的代码约束。"></a>api.constrains(‘field’,…)
+                      –字段的代码约束。</h5>
+                    <p>
+                      用于对字段进行限制，作用类似于_sql_constrains<br>首先我们来介绍下Odoo里面的两种Constraints。<br>SQL
+                      Constraints：就是添加一个数据库的约束。<br>_sql_constraints是odoo的属性，是一个元祖的列表，每个元祖是一个数据库约束。元祖的第一个元素是约束名字，第二个元素是约束规则（postgresql约束规则<a
+                                                                                                      href="https://www.postgresql.org/docs/9.4/ddl-constraints.html），第三个参数是如果违反约束弹出来的警告信息。"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">https://www.postgresql.org/docs/9.4/ddl-constraints.html），第三个参数是如果违反约束弹出来的警告信息。</a>
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">_sql_constraints = [</span><br><span class="line">    (&apos;name_description_check&apos;,</span><br><span class="line">     &apos;CHECK(name != description)&apos;,</span><br><span class="line">     &quot;The title of the course should not be the description&quot;),</span><br><span class="line"></span><br><span class="line">    (&apos;name_unique&apos;,</span><br><span class="line">     &apos;UNIQUE(name)&apos;,</span><br><span class="line">     &quot;The course title must be unique&quot;),</span><br><span class="line">]</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>注意在使用SQL
+                      Constraints，需要确保当前数据库里面没有违反该约束的数据，如果有违反约束的数据在更新模块的时候系统日志里面会有警告信息，大家要注意这个。<br>Constraints：
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.constrains(&apos;instructor_id&apos;, &apos;attendee_ids&apos;)</span><br><span class="line">def \_check_instructor_not_in_attendees(self):</span><br><span class="line">    for r in self:</span><br><span class="line">        if r.instructor_id and r.instructor_id in r.attendee_ids:</span><br><span class="line">            raise exceptions.ValidationError(&quot;A session&apos;s instructor can&apos;t be an attendee&quot;)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      odoo的Constraints，是通过装饰器@api.constrains(字段)，该装饰确保被修饰的函数在create,
+                      write,
+                      unlink时被调用的时候，如果包含了装饰器定义的字段就会触发下面的方法，所以需要在方法里面判断是否违反约束，如果违反，则通过raise异常来弹出警告框并阻止记录保存。使用odoo
+                      Constraints的时候就算是系统内已经有违反约束的记录也可以对新记录生效。</p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/odoo/" rel="tag"># odoo</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/11/07/odoo开发context上下文的使用/" rel="next"
+                                                                                                        title="odoo开发context上下文的使用">
+                          <i class="fa fa-chevron-left"></i> odoo开发context上下文的使用
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/11/07/odoo-ORM常用方法/" rel="prev"
+                                                                                                        title="odoo ORM常用方法">
+                          odoo ORM常用方法 <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#一、self是什么"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">一、self是什么
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#二、通过直接设置属性来改变数据库中字段值"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">二、通过直接设置属性来改变数据库中字段值
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#三、environment环境"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">三、environment环境
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#1、操作缓存"><span
+                                                                                                            class="nav-number">3.0.1.</span>
+                            <span class="nav-text">1、操作缓存
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#2、self常用接口"><span
+                                                                                                            class="nav-number">3.0.2.</span>
+                            <span class="nav-text">2、self常用接口
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#应用说明"><span
+                                                                                                            class="nav-number">3.0.3.</span>
+                            <span class="nav-text">应用说明</span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                  <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                    href="#四、NEW-ids"><span
+                                                                                                      class="nav-number">4.</span>
+                      <span class="nav-text">四、NEW
+                        ids</span></a></li>
+                  <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                    href="#装饰器"><span
+                                                                                                      class="nav-number">5.</span>
+                      <span class="nav-text">装饰器</span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#api-one-一次处理一条记录-one装饰的方法会返回一个list，-None"><span
+                                                                                                          class="nav-number">5.1.</span>
+                          <span class="nav-text">api.one
+                            一次处理一条记录,one装饰的方法会返回一个list，[None]</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#api-multi-一次处理一个记录集，有返回值"><span
+                                                                                                          class="nav-number">5.2.</span>
+                          <span class="nav-text">api.multi
+                            一次处理一个记录集，有返回值</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#api-model-类级别静态方法"><span
+                                                                                                          class="nav-number">5.3.</span>
+                          <span class="nav-text">api.model
+                            类级别静态方法</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#api-return-model-显性返回一个模型"><span
+                                                                                                          class="nav-number">5.4.</span>
+                          <span class="nav-text">api.return(model)
+                            显性返回一个模型</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#api-depends（’field’-…）"><span
+                                                                                                          class="nav-number">5.5.</span>
+                          <span class="nav-text">api.depends（’field’,…）
+                          </span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#api-onchange-‘field’-…"><span
+                                                                                                          class="nav-number">5.6.</span>
+                          <span class="nav-text">api.onchange(‘field’,…)
+                          </span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#api-constrains-‘field’-…-–字段的代码约束。"><span
+                                                                                                          class="nav-number">5.7.</span>
+                          <span class="nav-text">api.constrains(‘field’,…)
+                            –字段的代码约束。</span></a></li>
+                    </ol>
+                  </li>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

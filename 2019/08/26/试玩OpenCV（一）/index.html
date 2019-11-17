@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="OpenCV,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="计算机视觉基础  计算机如何读取图像？     计算机将任何图片都读取为一组0到255之间的值。对于任何一张彩色图片，有三个主通道——红色(R)，绿色(G)和蓝色(B)。  工作原理：    对每个原色创建一个矩阵，   组合这些矩阵以提供R, G和B各个颜色的像素值。   每一个矩阵的元素提供与像素的亮度强度有关的数据。     图像的大小被计算为B x A x 3。       注意：对于">
+  <meta name="keywords" content="OpenCV">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="试玩OpenCV（一）">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/08/26/试玩OpenCV（一）/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="计算机视觉基础  计算机如何读取图像？     计算机将任何图片都读取为一组0到255之间的值。对于任何一张彩色图片，有三个主通道——红色(R)，绿色(G)和蓝色(B)。  工作原理：    对每个原色创建一个矩阵，   组合这些矩阵以提供R, G和B各个颜色的像素值。   每一个矩阵的元素提供与像素的亮度强度有关的数据。     图像的大小被计算为B x A x 3。       注意：对于">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/08/26/试玩OpenCV（一）/1.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/08/26/试玩OpenCV（一）/2.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/08/26/试玩OpenCV（一）/3.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/08/26/试玩OpenCV（一）/4.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/08/26/试玩OpenCV（一）/4.png">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.650Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="试玩OpenCV（一）">
+  <meta name="twitter:description"
+                                                                                  content="计算机视觉基础  计算机如何读取图像？     计算机将任何图片都读取为一组0到255之间的值。对于任何一张彩色图片，有三个主通道——红色(R)，绿色(G)和蓝色(B)。  工作原理：    对每个原色创建一个矩阵，   组合这些矩阵以提供R, G和B各个颜色的像素值。   每一个矩阵的元素提供与像素的亮度强度有关的数据。     图像的大小被计算为B x A x 3。       注意：对于">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2019/08/26/试玩OpenCV（一）/1.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://xixili.online/2019/08/26/试玩OpenCV（一）/">
+
+  <title>试玩OpenCV（一） | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/08/26/试玩OpenCV（一）/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">试玩OpenCV（一）
+                    </h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-08-26T15:54:15+08:00">
+                          2019-08-26
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          2,153
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          9
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="计算机视觉基础"><a href="#计算机视觉基础" class="headerlink"
+                                                                                                      title="计算机视觉基础"></a>计算机视觉基础
+                    </h4>
+                    <h6 id="计算机如何读取图像？"><a href="#计算机如何读取图像？" class="headerlink"
+                                                                                                      title="计算机如何读取图像？"></a>计算机如何读取图像？
+                    </h6>
+                    <p>
+                      计算机将任何图片都<u><strong>读取为一组0到255之间的值</strong></u>。<br>对于任何一张彩色图片，有三个主通道——红色(R)，绿色(G)和蓝色(B)。
+                    </p>
+                    <p><strong>工作原理</strong>：</p>
+                    <ol>
+                      <li>对每个原色创建一个矩阵，</li>
+                      <li>组合这些矩阵以提供R, G和B各个颜色的像素值。</li>
+                      <li>每一个矩阵的元素提供与像素的亮度强度有关的数据。<img src="/2019/08/26/试玩OpenCV（一）/1.png"
+                                                                                                        title="试玩OpenCV（一）">
+                        图像的大小被计算为B x A x 3。<blockquote>
+                          <p>注意：对于黑白图片，只有一个单一通道。</p>
+                        </blockquote>
+                      </li>
+                    </ol>
+                    <h6 id="计算机考虑图片的数据？"><a href="#计算机考虑图片的数据？" class="headerlink"
+                                                                                                      title="计算机考虑图片的数据？"></a>计算机考虑图片的数据？
+                    </h6>
+                    <ul>
+                      <li>
+                        <p>高度、宽度<br> 假如一张照片的分辨率为：1920*1080(单位为dpi，全称为 dot per
+                          inch)，1920
+                          就是照片的宽度，1080 就是图片的高度。</p>
+                      </li>
+                      <li>
+                        <p>深度 存储<br> 每个像素所用的位数，比如正常RGB的深度就是 2^8 * 3 = 256 * 3 =
+                          768 ，
+                          那么此类图片中的深度为768，每个像素点都能够代表768中颜色。</p>
+                      </li>
+                      <li>
+                        <p>通道数<br> RGB图片就是有三通道，RGBA类图片就是有四通道</p>
+                      </li>
+                      <li>
+                        <p>颜色格式<br>
+                          是将某种颜色表现为数字形式的模型，或者说是一种记录图像颜色的方式。比较常见的有：RGB模式、RGBA模式、CMYK模式、位图模式、灰度模式、索引颜色模式、双色调模式和多通道模式。
+                        </p>
+                      </li>
+                      <li>
+                        <p>more<br>
+                          图像中的知识点太多，做基本图像处理，了解以上知识个人感觉可以了。等到以后如果做深入研究，或许有机会做更多的学习
+                        </p>
+                        <h6 id="计算机考虑视频的数据？"><a href="#计算机考虑视频的数据？" class="headerlink"
+                                                                                                          title="计算机考虑视频的数据？"></a>计算机考虑视频的数据？
+                        </h6>
+                        <p>原始视频 =
+                          图片序列，视频中的每张有序图片被称为“帧(frame)”。压缩后的视频，会采取各种算法减少数据的容量，其中IPB就是最常见的。
+                        </p>
+                      </li>
+                      <li>
+                        <p>码率<br>
+                          数据传输时单位时间传送的数据位数，通俗一点的理解就是取样率，单位时间取样率越大，精度就越高，即分辨率越高
+                        </p>
+                      </li>
+                      <li>
+                        <p>帧率<br> 每秒传输的帧数，fps（有没有一种似曾相识的感觉~~~），全称为 frames per
+                          second</p>
+                      </li>
+                      <li>
+                        <p>分辨率<br> 每帧图片的分辨率</p>
+                      </li>
+                      <li>
+                        <p>清晰度<br> 平常看片中，有不同清晰度，实际上就对应着不同的分辨率</p>
+                      </li>
+                      <li>
+                        <p>IPB<br>
+                          在网络视频流中，并不是把每一帧图片全部发送到客户端来展示，而是传输每一帧的差别数据（IPB），客户端然后对其进行解析，最终补充每一帧完整图片
+                        </p>
+                      </li>
+                    </ul>
+                    <h5 id="彩色模型"><a href="#彩色模型" class="headerlink"
+                                                                                                      title="彩色模型"></a>彩色模型
+                    </h5>
+                    <h6 id="1-RGB彩色模型"><a href="#1-RGB彩色模型" class="headerlink"
+                                                                                                      title="1.RGB彩色模型"></a>1.RGB彩色模型
+                    </h6>
+                    <p>
+                      在RGB模型中，<strong>每种颜色出现在红(Red)、绿(Green)、蓝(Blue)的原色光谱成分</strong>中。<br>该模型基于笛卡儿坐标系。<br>在RGB彩色模型中表示的图像由3个分量图像组成，每种原色一幅分量图像。<br>当送入RGB监视器时，这3幅图像在屏幕上混合生成一幅合成的彩色图像。
+                    </p>
+                    <p>
+                      见下图，为方便起见，假定所有颜色值均已归一化，即R、G和B的所有值都在区间[0,1]中。0表示不发光，1表示完全发光。以(1,0,0)为例，R为1即完全发光，G与B为0即不发光，最终颜色为红色；以(1,1,0)为例，R与G为1即完全发光，B为0即不发光，即红色跟绿色完全发光，蓝色不发光，最终颜色为黄色。
+                    </p>
+                    <img src="/2019/08/26/试玩OpenCV（一）/2.png"
+                                                                                                    title="试玩OpenCV（一）">
+                    <p>RGB彩色立方体示意图—-沿主对角线的点有从原点的黑点至点(1,1,1)的白色的灰度值</p>
+                    <hr>
+                    <h6 id="2-HSV彩色模型"><a href="#2-HSV彩色模型" class="headerlink"
+                                                                                                      title="2.HSV彩色模型"></a>2.HSV彩色模型
+                    </h6>
+                    <p>
+                      通常用以区别不同颜色特性的是明度、色调和饱和度。明度具体表达了无色的强度概念；色调是光波混合中与主波长有关的属性，表示观察者感知的主要颜色，当我们说一个物体是红色、橙色时，指的是其色调；饱和度指的是相对纯净度，或一种颜色混合白光的数量，所加白光越少饱和度越高。色调与饱和度一起称为色度，因此，颜色可用其明度和色度来表征。
+                    </p>
+                    <p><u>HSV（色调、饱和度、明度）彩色模型，正是由这三个分量组成的图像</u>。</p>
+                    <h6 id="3-从RGB到HSV的彩色转换"><a href="#3-从RGB到HSV的彩色转换" class="headerlink"
+                                                                                                      title="3.从RGB到HSV的彩色转换"></a>3.从RGB到HSV的彩色转换
+                    </h6>
+                    <p>下式中RGB的值需归一化，即所有值在区间[0,1]中。<br>先定义：<br> max=max(R,G,B)
+                      min=min(R,G,B)<br>①
+                      色调H，范围 [0,360]</p>
+                    <img src="/2019/08/26/试玩OpenCV（一）/3.png"
+                                                                                                    title="试玩OpenCV（一）">
+
+                    <p>② 饱和度S，范围 [0,1]</p>
+                    <ul>
+                      <li>max=0<br> S=0 </li>
+                      <li>max≠0<br> S=(max−min)/max</li>
+                    </ul>
+                    <p>③ 亮度V，范围 [0,1]<br> V=max(R,G,B)</p>
+                    <h6 id="4-从HSV到RGB的彩色转换"><a href="#4-从HSV到RGB的彩色转换" class="headerlink"
+                                                                                                      title="4.从HSV到RGB的彩色转换"></a>4.从HSV到RGB的彩色转换
+                    </h6>
+                    <p>其中H HH的取值范围为[0,360]，S、V、R、G、B
+                      S、V、R、G、BS、V、R、G、B的取值范围为[0,1]</p>
+                    <img src="/2019/08/26/试玩OpenCV（一）/4.png"
+                                                                                                    title="试玩OpenCV（一）">
+                    <p>对于每个颜色向量 (r,g,b) (r, g, b)(r,g,b)</p>
+                    <img src="/2019/08/26/试玩OpenCV（一）/4.png"
+                                                                                                    title="试玩OpenCV（一）">
+                    <h6 id="5-RGB和HSV的互换代码实现（Python-OpenCV）"><a href="#5-RGB和HSV的互换代码实现（Python-OpenCV）"
+                                                                                                      class="headerlink"
+                                                                                                      title="5.RGB和HSV的互换代码实现（Python+OpenCV）"></a>5.RGB和HSV的互换代码实现（Python+OpenCV）
+                    </h6>
+                    <p>OpenCV的cvtColor()函数能支持各种彩色模型的转换，其中包括RGB和HSI的转换，部分用法如下：
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">cv2.cvtColor(src, code)</span><br><span class="line">src为要转换的图片，code为转换的格式，code参数：</span><br><span class="line">1、BGR &lt;=&gt; RGB : COLOR_BGR2RGB、COLOR_RGB2BGR</span><br><span class="line">2、BGRA &lt;=&gt; RGBA :COLOR_BGRA2RGBA、 COLOR_RGBA2BGRA</span><br><span class="line">3、BGR 和 RGB 添加 alpha 通道 : COLOR_BGR2BGRA、COLOR_RGB2RGBA</span><br><span class="line">4、BGRA 和 RGBA 删除 alpha 通道 :COLOR_BGRA2BGR、 COLOR_RGBA2RGB</span><br><span class="line">5、BGR 和 RGB &lt;=&gt; HSV :  COLOR_BGR2HSV、COLOR_RGB2HSV、COLOR_HSV2BGR、COLOR_HSV2RGB（转换后H的取值范围为[0,180]，S和V的取值范围为[0,255]）</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>现用一张8位的图片01.jpg演示代码：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">import cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(&apos;01.jpg&apos;) # 获取字节顺序为BGR的图片</span><br><span class="line">img1 = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA) # 添加 alpha 通道</span><br><span class="line">img2 = cv2.cvtColor(img, cv2.COLOR_BGR2HSV) # BGR转HSV</span><br><span class="line">img3 = cv2.cvtColor(img2, cv2.COLOR_HSV2RGB) # HSV 转 RGB</span><br><span class="line"></span><br><span class="line">img[0][0]</span><br><span class="line">img1[0][0]</span><br><span class="line">img2[0][0]</span><br><span class="line">img3[0][0]</span><br><span class="line"></span><br><span class="line"># 显示结果如下：</span><br><span class="line">array([119, 203, 238], dtype=uint8) </span><br><span class="line">array([119, 203, 238, 255], dtype=uint8)  # 增加了第4个分量即 alpha 通道</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">根据上文算法将 BGR 转换成 HSV</span><br><span class="line">H = (G-B) / (max-min) * 60 = (203-119) / (238-119) * 60 = 42.35，H的取值范围在[0,360]，需转换到[0,180]，得42.35/2 = 21</span><br><span class="line">S =  (max-min) / max = (238-119) / 238 = 0.5，0.5 * 255 = 128</span><br><span class="line">V = max(R,G,B) = 238</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">array([ 21, 128, 238], dtype=uint8) </span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">根据上文算法将 HSV 转换成 RGB</span><br><span class="line">将hsv分别转换到范围[0,180]、[0,1]、[0,1] 得 [21*2, 128/255, 238/255] = [42, 0.502, 0.933]</span><br><span class="line">hi = h/60 mod 6 = 42 / 60 mod 6 = 0</span><br><span class="line">f = h/60 - hi = 42 / 60 - 0 = 0.7</span><br><span class="line">p = v*(1-s) =  0.933*(1-0.502) = 0.4646</span><br><span class="line">q = v*(1-f*s) =  0.933*(1-0.7*0.502) = 0.6051</span><br><span class="line">t = v*(1-(1-f)*s) = 0.933*(1-(1-0.7)*0.502) = 0.7925</span><br><span class="line">因为hi = 0，RGB = [v, t, p] = [0.933, 0.7925, 0.4646]，转换到范围[0,255] 得 [238, 202, 118]</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">array([238, 202, 118], dtype=uint8)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="灰度图像"><a href="#灰度图像" class="headerlink"
+                                                                                                      title="灰度图像"></a>灰度图像
+                    </h5>
+                    <h6 id="1-灰度级与灰度图像"><a href="#1-灰度级与灰度图像" class="headerlink"
+                                                                                                      title="1.灰度级与灰度图像"></a>1.灰度级与灰度图像
+                    </h6>
+                    <p>
+                      没有颜色的光称为单色光或无色光。单色光的唯一属性是其强度或大小。因为感知单色光的强度从黑色到灰色变化，最后到白色，灰度级一次通常用来表示单色光的强度。
+                    </p>
+                    <p><strong>从黑到白的单色光的度量值范围通常称为灰度级，而单色图像通常称为灰度图像</strong>。</p>
+                    <h6 id="2-RGB转灰度图像"><a href="#2-RGB转灰度图像" class="headerlink"
+                                                                                                      title="2.RGB转灰度图像"></a>2.RGB转灰度图像
+                    </h6>
+                    <p>使用不同的算法，会得到不同的灰度图像，例如若要查看红色在图像的分布情况，可使用：<br> Gray = 1×R +
+                      0×G +
+                      0×B<br>从上式可知，选择不同的系数，可得到不同的灰度图像，目前常使用下面的一个心理学公式：<br>
+                      Gray=0.299×R+0.587×G+0.114×B </p>
+                    <h6 id="3-RGB转灰度图像代码实现（Python-OpenCV）"><a href="#3-RGB转灰度图像代码实现（Python-OpenCV）" class="headerlink"
+                                                                                                      title="3.RGB转灰度图像代码实现（Python+OpenCV）"></a>3.RGB转灰度图像代码实现（Python+OpenCV）
+                    </h6>
+                    <p>①
+                      cv2.imread()实现RGB转灰度<br>OpenCV的imread()函数能支持各种静态图像文件格式，其中包括RGB转灰度，部分用法如下：
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">cv2.imread(filename[, flags])</span><br><span class="line">该函数返回的图像格式为BGR，与RGB表示的色彩空间相同，但是字节顺序相反。</span><br><span class="line">filename为图片路径，flags表示用何种方式读取图片，默认为IMREAD_COLOR ，flags参数：</span><br><span class="line">1、IMREAD_COLOR = 1 : 加载彩色图像，最多8位</span><br><span class="line">2、IMREAD_GRAYSCALE = 0 : 以灰度模式加载图像，算法为式(1)，最多8位</span><br><span class="line">3、IMREAD_UNCHANGED = -1: 包含alpha通道，可加载8位和16位图像</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>②
+                      cv2.cvtColor()实现RGB转灰度<br>OpenCV的cvtColor()函数能支持各种彩色模型的转换，其中包括RGB和灰度的转换，部分用法如下：
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">cv2.cvtColor(src, code)</span><br><span class="line">src为要转换的图片，code为转换的格式，code参数：</span><br><span class="line">1、BGR =&gt; 灰度 : COLOR_BGR2GRAY</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/08/26/试玩OpenCV（二）/" rel="next"
+                                                                                                        title="试玩OpenCV（二）">
+                          <i class="fa fa-chevron-left"></i> 试玩OpenCV（二）
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/09/01/odoo继承机制（py-视图，Qweb）/" rel="prev"
+                                                                                                        title="odoo继承机制（py, 视图，Qweb）">
+                          odoo继承机制（py, 视图，Qweb） <i
+                                                                                                          class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#计算机视觉基础"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">计算机视觉基础
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#计算机如何读取图像？"><span
+                                                                                                            class="nav-number">1.0.1.</span>
+                            <span class="nav-text">计算机如何读取图像？
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#计算机考虑图片的数据？"><span
+                                                                                                            class="nav-number">1.0.2.</span>
+                            <span class="nav-text">计算机考虑图片的数据？
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#计算机考虑视频的数据？"><span
+                                                                                                            class="nav-number">1.0.3.</span>
+                            <span class="nav-text">计算机考虑视频的数据？
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#彩色模型"><span
+                                                                                                        class="nav-number">1.1.</span>
+                        <span class="nav-text">彩色模型</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#1-RGB彩色模型"><span
+                                                                                                            class="nav-number">1.1.1.</span>
+                            <span class="nav-text">1.RGB彩色模型
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#2-HSV彩色模型"><span
+                                                                                                            class="nav-number">1.1.2.</span>
+                            <span class="nav-text">2.HSV彩色模型
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#3-从RGB到HSV的彩色转换"><span
+                                                                                                            class="nav-number">1.1.3.</span>
+                            <span class="nav-text">3.从RGB到HSV的彩色转换
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#4-从HSV到RGB的彩色转换"><span
+                                                                                                            class="nav-number">1.1.4.</span>
+                            <span class="nav-text">4.从HSV到RGB的彩色转换
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#5-RGB和HSV的互换代码实现（Python-OpenCV）"><span
+                                                                                                            class="nav-number">1.1.5.</span>
+                            <span
+                                                                                                            class="nav-text">5.RGB和HSV的互换代码实现（Python+OpenCV）
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#灰度图像"><span
+                                                                                                        class="nav-number">1.2.</span>
+                        <span class="nav-text">灰度图像</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#1-灰度级与灰度图像"><span
+                                                                                                            class="nav-number">1.2.1.</span>
+                            <span class="nav-text">1.灰度级与灰度图像
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#2-RGB转灰度图像"><span
+                                                                                                            class="nav-number">1.2.2.</span>
+                            <span class="nav-text">2.RGB转灰度图像
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#3-RGB转灰度图像代码实现（Python-OpenCV）"><span
+                                                                                                            class="nav-number">1.2.3.</span>
+                            <span class="nav-text">3.RGB转灰度图像代码实现（Python+OpenCV）
+                            </span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

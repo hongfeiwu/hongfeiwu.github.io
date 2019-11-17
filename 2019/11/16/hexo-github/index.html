@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="工具,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="github准备     注册github    创建github仓库 仓库名称为： Github昵称.github.io   添加秘钥  环境准备  安装git,以及node         全局安装hexo: npm install -g hexo-cli      hexo官网           初始化博客                     建立一个博客文件夹，并初始化博客，为文">
+  <meta name="keywords" content="工具">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="hexo + github 搭建个人博客">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/11/16/hexo-github/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="github准备     注册github    创建github仓库 仓库名称为： Github昵称.github.io   添加秘钥  环境准备  安装git,以及node         全局安装hexo: npm install -g hexo-cli      hexo官网           初始化博客                     建立一个博客文件夹，并初始化博客，为文">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/11/16/hexo-github/github_repo.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/11/16/hexo-github/hexo_s.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/11/16/hexo-github/aliyun_dns.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/11/16/hexo-github/github_404.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/11/16/hexo-github/QQ20190630-223250@2x.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/11/16/hexo-github/QQ20190630-223343@2x.png">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.551Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="hexo + github 搭建个人博客">
+  <meta name="twitter:description"
+                                                                                  content="github准备     注册github    创建github仓库 仓库名称为： Github昵称.github.io   添加秘钥  环境准备  安装git,以及node         全局安装hexo: npm install -g hexo-cli      hexo官网           初始化博客                     建立一个博客文件夹，并初始化博客，为文">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2019/11/16/hexo-github/github_repo.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://xixili.online/2019/11/16/hexo-github/">
+
+  <title>hexo + github 搭建个人博客 | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/11/16/hexo-github/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">hexo +
+                      github 搭建个人博客</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-11-16T10:04:26+08:00">
+                          2019-11-16
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          1,027
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          4
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h2 id="github准备"><a href="#github准备" class="headerlink"
+                                                                                                      title="github准备"></a><strong>github准备</strong>
+                    </h2>
+                    <ul>
+                      <li>注册github </li>
+                      <li>创建github仓库 仓库名称为： Github昵称.github.io</li>
+                      <li>添加秘钥</li>
+                    </ul>
+                    <h2 id="环境准备"><a href="#环境准备" class="headerlink"
+                                                                                                      title="环境准备"></a><strong>环境准备</strong>
+                    </h2>
+                    <p>安装git,以及node</p>
+                    <ol>
+                      <li>
+                        <p>全局安装hexo: npm install -g hexo-cli </p>
+                        <p><a href="http://theme-next.iissnan.com/" target="_blank"
+                                                                                                          rel="noopener">hexo官网</a>
+                        </p>
+                      </li>
+                      <li>
+                        <p>初始化博客</p>
+                        <ul>
+                          <li>
+                            <p>建立一个博客文件夹，并初始化博客，<folder>为文件夹的名称</folder>
+                            </p>
+                            <figure class="highlight plain">
+                              <table>
+                                <tr>
+                                  <td class="gutter">
+                                    <pre><span class="line">1</span><br></pre>
+                                  </td>
+                                  <td class="code">
+                                    <pre><span class="line">$ hexo init &lt;folder&gt;</span><br></pre>
+                                  </td>
+                                </tr>
+                              </table>
+                            </figure>
+                          </li>
+                          <li>
+                            <p>进入博客文件夹，<folder>为文件夹的名称</folder>
+                            </p>
+                            <figure class="highlight plain">
+                              <table>
+                                <tr>
+                                  <td class="gutter">
+                                    <pre><span class="line">1</span><br></pre>
+                                  </td>
+                                  <td class="code">
+                                    <pre><span class="line">cd &lt;folder&gt;</span><br></pre>
+                                  </td>
+                                </tr>
+                              </table>
+                            </figure>
+                          </li>
+                          <li>
+                            <p>根据博客既定的dependencies配置安装所有的依赖包</p>
+                            <figure class="highlight plain">
+                              <table>
+                                <tr>
+                                  <td class="gutter">
+                                    <pre><span class="line">1</span><br></pre>
+                                  </td>
+                                  <td class="code">
+                                    <pre><span class="line">$ npm install</span><br></pre>
+                                  </td>
+                                </tr>
+                              </table>
+                            </figure>
+
+                          </li>
+                        </ul>
+                      </li>
+                    </ol>
+                    <h2 id="配置博客"><a href="#配置博客" class="headerlink"
+                                                                                                      title="配置博客"></a><strong>配置博客</strong>
+                    </h2>
+                    <p>修改_config.yml文件</p>
+                    <ol>
+                      <li>
+                        <p>修改网站相关信息</p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">title: inerdstack</span><br><span class="line">subtitle: the stack of it nerds</span><br><span class="line">description: start from zero</span><br><span class="line">author: inerdstack</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: Asia/Shanghai</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                        <blockquote>
+                          <p>
+                            注意：每一项的填写，其:后面都要保留一个空格，下同。language和timezone都是有输入规范的，详细可参考语言规范和时区规范。
+                          </p>
+                        </blockquote>
+                      </li>
+                      <li>
+                        <p>配置统一资源定位符（个人域名）</p>
+                        <p> url: <a
+                                                                                                          href="http://xixili.online">http://xixili.online</a>
+                          对于root（根目录）、permalink（永久链接）、permalink_defaults（默认永久链接）等其他信息保持默认。
+                        </p>
+                      </li>
+                      <li>
+                        <p>配置部署</p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/iNerdStack/inerdstack.github.io.git</span><br><span class="line">  branch: master</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                        <blockquote>
+                          <p>
+                            此处的repo为github上的仓库地址，使用HTTPS时，需要每次更新都输入用户名以及密码，所以此处使用SSH的URL,<br>
+                            如图：
+                            <img src="/2019/11/16/hexo-github/github_repo.png"
+                                                                                                            title="演示">
+                          </p>
+                        </blockquote>
+                      </li>
+                    </ol>
+                    <h2 id="编写文章"><a href="#编写文章" class="headerlink"
+                                                                                                      title="编写文章"></a>编写文章
+                    </h2>
+                    <ol>
+                      <li>
+                        <p>新建文章： hexo n “文章标题”<br> 完整命令 hexo new</p>
+                        <ul>
+                          <li>
+                            本地博客文件夹source-&gt;_post文件夹下看到我们新建的markdown文件，就可以用md格式编写你的博客了
+                          </li>
+                          <li>同样也可以直接在source-&gt;_deploy文件夹下手动添加md文件</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p>本地发布： hexo s<br> 完整命令 hexo server ,如图：<img src="/2019/11/16/hexo-github/hexo_s.png"
+                                                                                                          title="演示">
+                        </p>
+                      </li>
+                      <li>
+                        <p>生成静态页面： hexo g<br> 完整命令： hexo generate
+                          ,生成静态页面至public目录 </p>
+                      </li>
+                      <li>
+                        <p>部署至github: hexo d<br> 完整命令：hexo deploy
+                          ，即部署到_config.yml中配置的github.</p>
+                        <blockquote>
+                          <ol>
+                            <li>部署之前应git init</li>
+                            <li>在部署HEXO出现ERROR Deployer not found : .git时<br>执行
+                              npm install
+                              hexo-deployer-git –save 之后即可顺利部署</li>
+                          </ol>
+                        </blockquote>
+                      </li>
+                    </ol>
+                    <hr>
+                    <h2 id="绑定域名"><a href="#绑定域名" class="headerlink"
+                                                                                                      title="绑定域名"></a><strong>绑定域名</strong>
+                    </h2>
+                    <ol>
+                      <li>
+                        <p>购买域名，<a href="https://www.aliyun.com" target="_blank"
+                                                                                                          rel="noopener">阿里云</a>为例
+                        </p>
+                      </li>
+                      <li>
+                        <p>域名解析，在<a href="https://netcn.console.aliyun.com/core/domain/list" target="_blank"
+                                                                                                          rel="noopener">阿里云控制台</a>的的域名列表中
+                        </p>
+                        <img src="/2019/11/16/hexo-github/aliyun_dns.png"
+                                                                                                        title="DNS解析">
+                        <p>
+                          点击添加解析按钮，如图一次输入：CNAME、@、Github博客域名。选择保存完成个人域名向个人博客的映射。<br>
+                          添加解析后，在浏览器输入我们新注册的域名：</p>
+                        <img src="/2019/11/16/hexo-github/github_404.png"
+                                                                                                        title="github404">
+                        <p> 网站报出了404错误，这说明我们的域名已经成功映射到了Github网站</p>
+                      </li>
+                      <li>
+                        <p>个人博客向个人域名的映射 </p>
+                        <p>
+                          在source目录下新建一个CNAME文件，文件内容为个人域名，例如我的为xixili.online(注意：没有http:
+                          //，没有
+                          www)，<br> 然后重新生成部署，在浏览器端重新输入我们的域名，就可以发现成功了</p>
+                      </li>
+                    </ol>
+                    <h2 id="其他"><a href="#其他" class="headerlink"
+                                                                                                      title="其他"></a><strong>其他</strong>
+                    </h2>
+                    <p>界面添加图片</p>
+                    <ol>
+                      <li>把主页配置文件_config.yml 里的post_asset_folder 设置为true</li>
+                      <li>hexo目录下执行: npm install hexo-asset-image –save<br>
+                        这是下载安装一个可以上传本地图片的插件，来自dalao：dalao的git</li>
+                      <li>运行hexo n
+                        “文章标题”来生成md博文时，/source/_posts文件夹内除了xxxx.md文件还有一个同名的文件夹,
+                        用于存放图片
+                      </li>
+                      <li>
+                        在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片：<br>
+                        !【你想输入的替代文字】(xxxx/图片名.jpg)</li>
+                      <li>最后检查一下，hexo
+                        g生成页面后，进入public\2017\02\26\index.html文件中查看相关字段，可以发现，<br>
+                        html标签内的语句是&lt; mg
+                        src=”2017/02/26/xxxx/图片名.jpg”&gt;，而不是&lt;img
+                        src=”xxxx/图片名.jpg&gt;。</li>
+                    </ol>
+                    <h2 id="通用的音乐视频插入方法"><a href="#通用的音乐视频插入方法" class="headerlink"
+                                                                                                      title="通用的音乐视频插入方法"></a>通用的音乐视频插入方法
+                    </h2>
+                    <p>播放音乐的aplayer，安装命令</p>
+                    <pre><code>npm install hexo-tag-aplayer</code></pre>
+                    <ol>
+                      <li>iframe 标签</li>
+                    </ol>
+                    <p>代码从网易云音乐获得</p>
+                    <img src="/2019/11/16/hexo-github/QQ20190630-223250@2x.png"
+                                                                                                    width="163">
+                    <img src="/2019/11/16/hexo-github/QQ20190630-223343@2x.png"
+                                                                                                    width="163">
+
+                    <p>在需要添加音乐的地方加上：</p>
+                    <p>网易云音乐</p>
+                    <ol start="2">
+                      <li>dplayer</li>
+                    </ol>
+                    <ol start="3">
+                      <li>
+                        <p>vedio </p>
+                        <video width="480" height="320" controls>
+                          <source src="视频或者音乐的直接链接">
+                        </video>
+                      </li>
+                      <li>
+                        <p>embed 标签(flash） 推荐</p>
+                      </li>
+                    </ol>
+                    <p>网易云音乐举例 可以用<br><embed src="//music.163.com/style/swf/widget.swf?sid=30251317&type=2&auto=1&width=320&height=66"
+                                                                                                      width="340"
+                                                                                                      height="86"
+                                                                                                      allownetworking="all">
+                    </p>
+                    <p>虾米音乐举例 可以用<br><embed src="http://www.xiami.com/widget/292074908_1773801572/singlePlayer.swf"
+                                                                                                      type="application/x-shockwave-flash"
+                                                                                                      width="257"
+                                                                                                      height="33"
+                                                                                                      wmode="transparent">
+                    </p>
+                    <p>爱奇艺举例 可以用<br><embed src="//player.video.iqiyi.com/69357ea5caa02e785650ee9f7ea37f3e/0/0/w_19rzll4019.swf-albumId=21134579009-tvId=21134579009-isPurchase=0-cnId=undefined"
+                                                                                                      allowfullscreen="true"
+                                                                                                      quality="high"
+                                                                                                      width="480"
+                                                                                                      height="350"
+                                                                                                      align="middle"
+                                                                                                      allowscriptaccess="always"
+                                                                                                      type="application/x-shockwave-flash">
+                    </p>
+                    <ol start="5">
+                      <li>iframe</li>
+                    </ol>
+                    <p>爱奇艺 可以用</p>
+                    <iframe src="http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=69357ea5caa02e785650ee9f7ea37f3e&tvId=21134579009&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%"
+                                                                                                    frameborder="0"
+                                                                                                    allowfullscreen="false"
+                                                                                                    width="100%"
+                                                                                                    height="100%"></iframe>
+
+                    <ol start="6">
+                      <li>插入 Bilibili HTML5 播放器 可以用</li>
+                    </ol>
+                    <iframe src="//player.bilibili.com/player.html?aid=18848883&cid=30740620&page=1" scrolling="no"
+                                                                                                    border="0"
+                                                                                                    frameborder="no"
+                                                                                                    framespacing="0"
+                                                                                                    allowfullscreen="true">
+                    </iframe>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/工具/" rel="tag"># 工具</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/11/07/odoo-ORM常用方法/" rel="next"
+                                                                                                        title="odoo ORM常用方法">
+                          <i class="fa fa-chevron-left"></i> odoo ORM常用方法
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/11/17/odoo邮件处理/" rel="prev"
+                                                                                                        title="odoo邮件处理">
+                          odoo邮件处理 <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                      href="#github准备"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">github准备
+                        </span></a></li>
+                    <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                      href="#环境准备"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">环境准备
+                        </span></a></li>
+                    <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                      href="#配置博客"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">配置博客
+                        </span></a></li>
+                    <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                      href="#编写文章"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">编写文章</span></a></li>
+                    <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                      href="#绑定域名"><span
+                                                                                                        class="nav-number">5.</span>
+                        <span class="nav-text">绑定域名
+                        </span></a></li>
+                    <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                      href="#其他"><span
+                                                                                                        class="nav-number">6.</span>
+                        <span class="nav-text">其他
+                        </span></a></li>
+                    <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                      href="#通用的音乐视频插入方法"><span
+                                                                                                        class="nav-number">7.</span>
+                        <span class="nav-text">通用的音乐视频插入方法
+                        </span></a></li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

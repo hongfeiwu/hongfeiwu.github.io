@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="Go,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="Go容器（container）  Go语言数组  类似于C语言声明数组：var 数组变量名 [SIZE] 数组类型                         123                       var balance [10] float32        # 定义了数组 balance 长度为 10 类型为 float32var balance = [5]float32">
+  <meta name="keywords" content="Go">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="GO学习1--基本语法及数据结构（2）---容器">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2019/09/01/GO学习1-基本语法及数据结构（2）-容器/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="Go容器（container）  Go语言数组  类似于C语言声明数组：var 数组变量名 [SIZE] 数组类型                         123                       var balance [10] float32        # 定义了数组 balance 长度为 10 类型为 float32var balance = [5]float32">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2482">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2483">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2485">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2484">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2484">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2486">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2564">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2563">
+  <meta property="og:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2565">
+  <meta property="og:updated_time" content="2019-11-16T02:04:26.300Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="GO学习1--基本语法及数据结构（2）---容器">
+  <meta name="twitter:description"
+                                                                                  content="Go容器（container）  Go语言数组  类似于C语言声明数组：var 数组变量名 [SIZE] 数组类型                         123                       var balance [10] float32        # 定义了数组 balance 长度为 10 类型为 float32var balance = [5]float32">
+  <meta name="twitter:image"
+                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2482">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2019/09/01/GO学习1-基本语法及数据结构（2）-容器/">
+
+  <title>GO学习1--基本语法及数据结构（2）---容器 | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2019/09/01/GO学习1-基本语法及数据结构（2）-容器/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      GO学习1--基本语法及数据结构（2）---容器</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-09-01T21:49:56+08:00">
+                          2019-09-01
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          5,355
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          21
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h3 id="Go容器（container）"><a href="#Go容器（container）" class="headerlink"
+                                                                                                      title="Go容器（container）"></a>Go容器（container）
+                    </h3>
+                    <h4 id="Go语言数组"><a href="#Go语言数组" class="headerlink"
+                                                                                                      title="Go语言数组"></a>Go语言数组
+                    </h4>
+                    <p>类似于C语言<br>声明数组：var 数组变量名 [SIZE] 数组类型</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">var balance [10] float32        # 定义了数组 balance 长度为 10 类型为 float32</span><br><span class="line">var balance = [5]float32&#123;1000.0, 2.0, 3.4, 7.0, 50.0&#125;  # 定义了数组 balance 长度为 5 类型为 float32，同时赋值，初始化数组中 &#123;&#125; 中的元素个数不能大于 [] 中的数字。</span><br><span class="line"> var balance = [...]float32&#123;1000.0, 2.0, 3.4, 7.0, 50.0&#125;    # 忽略 [] 中的数字不设置数组大小，Go 语言会根据元素的个数来设置数组的大小</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <ul>
+                      <li>
+                        <p>数组的每个元素都可以通过索引下标来访问，索引下标的范围是从 0 开始到数组长度减 1 的位置</p>
+                      </li>
+                      <li>
+                        <p>默认情况下，数组的每个元素都被初始化为元素类型对应的零值，对于数字类型来说就是 0</p>
+                      </li>
+                      <li>
+                        <p>在数组字面值中，如果在数组的长度位置出现的是“…”省略号，则表示数组的长度是根据初始化值的个数来计算
+                        </p>
+                      </li>
+                      <li>
+                        <p>数组的长度必须是常量表达式，因为数组的长度需要在编译阶段确定。</p>
+                        <h5 id="Go语言切片（Slice）"><a href="#Go语言切片（Slice）" class="headerlink"
+                                                                                                          title="Go语言切片（Slice）"></a>Go语言切片（Slice）
+                        </h5>
+                      </li>
+                      <li>
+                        <p>Go 语言切片是对<strong>数组一个连续片段的引用</strong>。所以切片是一个引用类型</p>
+                      </li>
+                      <li>
+                        <p>Go语言切片的内部结构包含地址、大小和容量。</p>
+                      </li>
+                      <li>
+                        <p>切片一般用于快速地操作一块数据集合。</p>
+                      </li>
+                      <li>
+                        <p>切片默认指向一段连续内存区域，可以是数组，也可以是切片本身。</p>
+                      </li>
+                    </ul>
+                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2482"
+                                                                                                      alt="e24bb4b70844111fded46602ed12df8a.png">
+                    </p>
+                    <p>Go
+                      数组的长度不可改变，在特定场景中这样的集合就不太适用，Go中提供了一种灵活，功能强悍的内置类型切片(“动态数组”),与数组相比切片的长度是不固定的，可以追加元素，在追加时可能使切片的容量增大。<br>定义：var
+                      切片变量名称 []type</p>
+                    <p>从数组或切片生成新的切片拥有如下特性：</p>
+                    <ul>
+                      <li>取出的元素数量为：结束位置-开始位置。</li>
+                      <li>取出元素不包含结束位置对应的索引，切片最后一个元素使用 slice[len(slice)] 获取。</li>
+                      <li>当缺省开始位置时，表示从连续区域开头到结束位置。</li>
+                      <li>当缺省结束位置时，表示从开始位置到整个连续区域末尾。</li>
+                      <li>两者同时缺省时，与切片本身等效。</li>
+                      <li>两者同时为0时，等效于空切片，一般用于切片复位。<h6 id="slice"><a href="#slice" class="headerlink"
+                                                                                                          title="slice"></a>slice
+                        </h6>从连续内存区域生成切片是常见的操作，格式如下：<figure
+                                                                                                        class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">slice [开始位置:结束位置]</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <p>切片不需要说明长度。或者使用make()函数来创建切片:<br>var slice1 []type =
+                      make([]type, len)</p>
+                    <p>也可以简写为<br>slice1 := make([]type, len)</p>
+                    <p>也可以指定容量，其中capacity为可选参数。</p>
+                    <h6 id="make-T-length-capacity"><a href="#make-T-length-capacity" class="headerlink"
+                                                                                                      title="make([]T, length, capacity)"></a>make([]T,
+                      length, capacity)</h6>
+                    <ul>
+                      <li>T：切片的元素类型。</li>
+                      <li>size：就是为这个类型分配多少个元素。</li>
+                      <li>cap：预分配的元素数量，这个值设定后不影响 size，只是能提前分配空间，降低多次分配空间造成的性能问题。
+                      </li>
+                    </ul>
+                    <p>也可以类似于python对数组的操作<br>只不过这个数组操作之后的地址会变</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">var arr=[4]Int&#123;3，7, 12, 6&#125;</span><br><span class="line"></span><br><span class="line">s :=[] int &#123;1,2,3 &#125;     # 直接初始化切片，[]表示是切片类型，&#123;1,2,3&#125;初始化值依次是1,2,3.其cap=len=3</span><br><span class="line"></span><br><span class="line">s :=make([]int,len,cap)  # 通过内置函数make()初始化切片s,[]int 标识为其元素类型为int的切片</span><br><span class="line">cap() 可以测量切片最长可以达到多少</span><br><span class="line">由 len() 方法获取长度。</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>空(nil)切片:一个切片在未初始化之前默认为 nil，长度为 0<br>切片截取:</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">s := arr[:]     # 初始化切片s,是数组arr的引用</span><br><span class="line">s := arr[1:]    # arr中从下标startIndex到endIndex-1 下的元素创建为一个新的切片</span><br><span class="line">s := arr[:2] </span><br><span class="line">s := arr[1:2]</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>append() 和 copy() 函数</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"> var numbers []int   </span><br><span class="line">printSlice(numbers)   /* 允许追加空切片 */   </span><br><span class="line">numbers = append(numbers, 0)  </span><br><span class="line">printSlice(numbers)   /* 向切片添加一个元素 */   </span><br><span class="line">numbers = append(numbers, 1)  </span><br><span class="line">printSlice(numbers)   /* 同时添加多个元素 */   </span><br><span class="line">numbers = append(numbers, 2,3,4)   </span><br><span class="line">printSlice(numbers)   /* 创建切片 numbers1 是之前切片的两倍容量*/   numbers1 := make([]int, len(numbers), (cap(numbers))*2)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="append-为切片添加元素"><a href="#append-为切片添加元素" class="headerlink"
+                                                                                                      title="append()为切片添加元素"></a>append()为切片添加元素
+                    </h6>
+                    <p>Go语言的内建函数 append() 可以为切片动态添加元素</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">var a []int</span><br><span class="line">a = append(a, 1) // 追加1个元素</span><br><span class="line">a = append(a, 1, 2, 3) // 追加多个元素, 手写解包方式</span><br><span class="line">a = append(a, []int&#123;1,2,3&#125;...) // 追加一个切片, 切片需要解包</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <ul>
+                      <li>在容量不足的情况下， append 的操作会导致重新分配内存（扩容），可能导致巨大的内存分配和复制数据代价。
+                      </li>
+                      <li>即使容量足够，依然需要用 append 函数的返回值来更新切片本身，因为新切片的长度已经发生了变化。
+                      </li>
+                    </ul>
+                    <p>
+                      往一个切片中不断添加元素的过程，类似于公司搬家。公司发展初期，资金紧张，人员很少，所以只需要很小的房间即可容纳所有的员工。随着业务的拓展和收入的增加就需要扩充工位，但是办公地的大小是固定的，无法改变。因此公司选择搬家，每次搬家就需要将所有的人员转移到新的办公点。
+                    </p>
+                    <ul>
+                      <li>
+                        <p>员工和工位就是切片中的元素。</p>
+                      </li>
+                      <li>
+                        <p>办公地就是分配好的内存。</p>
+                      </li>
+                      <li>
+                        <p>搬家就是重新分配内存。</p>
+                      </li>
+                      <li>
+                        <p>无论搬多少次家，公司名称始终不会变，代表外部使用切片的变量名不会修改。</p>
+                      </li>
+                      <li>
+                        <p>因为搬家后地址发生变化，因此内存“地址”也会有修改。</p>
+                        <h6 id="copy（）（切片拷贝）"><a href="#copy（）（切片拷贝）" class="headerlink"
+                                                                                                          title="copy（）（切片拷贝）"></a>copy（）（切片拷贝）
+                        </h6>
+                      </li>
+                      <li>
+                        <p>Go语言的内置函数 copy() 可以将一个数组切片复制到另一个数组切片。</p>
+                      </li>
+                      <li>
+                        <p>如果加入的两个数组切片不一样大，就会按其中较小的那个数组切片的元素个数进行复制。</p>
+                      </li>
+                      <li>
+                        <p>copy 函数将返回成功复制的元素的个数，等于两个 slice 中较小的长度</p>
+                      </li>
+                    </ul>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">slice1 := []int&#123;1, 2, 3, 4, 5&#125;</span><br><span class="line">slice2 := []int&#123;5, 4, 3&#125;</span><br><span class="line">copy(slice2, slice1) // 只会复制slice1的前3个元素到slice2中</span><br><span class="line">copy(slice1, slice2) // 只会复制slice2的3个元素到slice1的前3个位置</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="删除元素（使用切片，copy-append）"><a href="#删除元素（使用切片，copy-append）" class="headerlink"
+                                                                                                      title="删除元素（使用切片，copy, append）"></a>删除元素（使用切片，copy,
+                      append）</h6>
+                    <p>
+                      Go语言并没有对删除切片元素提供专用的语法或者接口，需要使用切片本身的特性来删除元素。根据要删除元素的位置有三种情况：
+                    </p>
+                    <ol>
+                      <li>从开头位置删除，</li>
+                      <li>从中间位置删除，</li>
+                      <li>从尾部删除。</li>
+                    </ol>
+                    <h5 id="多维数组"><a href="#多维数组" class="headerlink"
+                                                                                                      title="多维数组"></a>多维数组
+                    </h5>
+                    <p>多维数组：var 数组名称 [数组大小1][数组大小2]…[数组大小N]
+                      数组类型<br>命名方式以及使用跟一维数组相差无几<br>向函数传递数组</p>
+                    <h4 id="Go语言range关键字"><a href="#Go语言range关键字" class="headerlink"
+                                                                                                      title="Go语言range关键字"></a>Go语言range关键字
+                    </h4>
+                    <p>Go 语言中 range 关键字用于 for
+                      循环中迭代数组(array)、切片(slice)、通道(channel)或集合(map)的元素。<strong>在数组和切片中它返回元素的索引和索引对应的值</strong>，<strong>在集合中返回
+                        key-value 对的 key 值</strong>。</p>
+                    <p><u><strong>range 创建了每个元素的副本，而不是直接返回对该元素的引用</strong></u>
+                    </p>
+                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2483"
+                                                                                                      alt="40f43f6d46fbf20e0423245c16c13872.png">
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">package main</span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line">func main() &#123;   </span><br><span class="line">    nums := []int&#123;2, 3, 4&#125;          //这是我们使用range去求一个slice的和。使用数组跟这个很类似    </span><br><span class="line">    sum := 0   </span><br><span class="line">    for _, num := range nums &#123;   //如果不需要索引值，可以使用占位字符来忽略这个值</span><br><span class="line">        sum += num    </span><br><span class="line">    &#125;   </span><br><span class="line">    fmt.Println(&quot;sum:&quot;, sum)  </span><br><span class="line">    //在数组上使用range将传入index和值两个变量。上面那个例子我们不需要使用该元素的序号，所以我们使用空白符&quot;_&quot;省略了。有时侯我们确实需要知道它的索引。    </span><br><span class="line">    for i, num := range nums &#123;       </span><br><span class="line">        if num == 3 &#123;      \</span><br><span class="line">            fmt.Println(&quot;index:&quot;, i)     </span><br><span class="line">        &#125;    </span><br><span class="line">    &#125;    //range也可以用在map的键值对上           </span><br><span class="line">    kvs := map[string]string&#123;&quot;a&quot;: &quot;apple&quot;, &quot;b&quot;: &quot;banana&quot;&#125;    </span><br><span class="line">    for k, v := range kvs &#123;        </span><br><span class="line">        fmt.Printf(&quot;%s -&gt; %s\n&quot;, k, v)  </span><br><span class="line">    &#125;    //range也可以用来枚举Unicode字符串。第一个参数是字符的索引，第二个是字符（Unicode的值）本身。    </span><br><span class="line">    for i, c := range &quot;go&quot; &#123;  </span><br><span class="line">        fmt.Println(i, c)    </span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h4 id="Go语言Map（映射、集合）"><a href="#Go语言Map（映射、集合）" class="headerlink"
+                                                                                                      title="Go语言Map（映射、集合）"></a>Go语言Map（映射、集合）
+                    </h4>
+                    <ul>
+                      <li>Map 是一种无序的键值对的集合。</li>
+                      <li>Map 最重要的一点是通过 key 来快速检索数据，key 类似于索引，指向数据的值。类似于python字典
+                      </li>
+                      <li>Map 是一种集合，所以我们可以像迭代数组和切片那样迭代它。</li>
+                      <li>map 这种数据结构在其他编程语言中也称为字典（Python）、hash 和 HashTable 等。
+                      </li>
+                      <li>如果不初始化 map，那么就会创建一个 nil map。nil map 不能用来存放键值对</li>
+                    </ul>
+                    <ol>
+                      <li>map 是引用类型：声明变量，默认 map 是 nil<br> <strong>var map变量名称
+                          map[key数据类型]value数据类型</strong></li>
+                      <li>内存用 make 方法来分配<br><strong>map类型变量名称 :=
+                          make(map[key数据类型]value数据类型)</strong><br>map 容量</li>
+                    </ol>
+                    <p>map 可以根据新增的 key-value 对动态的伸缩，因此它不存在固定长度或者最大限制。但是也可以选择标明
+                      map 的初始容量
+                      capacity，格式如下：<br>make(map[keytype]valuetype, cap) 。</p>
+                    <p>当 map 增长到容量上限的时候，如果再增加新的 key-value 对，map 的大小会自动加
+                      1。所以出于性能的考虑，对于大的 map
+                      或者会快速扩张的 map，即使只是大概知道容量，也最好先标明。</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">noteFrequency := map[string]float32 &#123;</span><br><span class="line">&quot;C0&quot;: 16.35, &quot;D0&quot;: 18.35, &quot;E0&quot;: 20.60, &quot;F0&quot;: 21.83,</span><br><span class="line">&quot;G0&quot;: 24.50, &quot;A0&quot;: 27.50, &quot;B0&quot;: 30.87, &quot;A4&quot;: 440&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h6 id="delete-函数"><a href="#delete-函数" class="headerlink"
+                                                                                                      title="delete() 函数"></a>delete()
+                      函数</h6>
+                    <p>用于删除集合的元素, 参数为 map 和其对应的 key。</p>
+                    <pre><code>delete(map, 键)</code></pre>
+                    <ul>
+                      <li>map 为要删除的 map 实例。</li>
+                      <li>键为要删除的 map 键值对中的键。<h6 id="清空-map-中的所有元素"><a href="#清空-map-中的所有元素" class="headerlink"
+                                                                                                          title="清空 map 中的所有元素"></a>清空
+                          map 中的所有元素</h6>Go 语言中并没有为 map 提供任何清空所有元素的函数、方法。清空 map
+                        的唯一办法就是重新 make 一个新的
+                        map。不用担心垃圾回收的效率，Go 语言中的并行垃圾回收效率比写一个清空函数高效多了。<h4
+                                                                                                        id="GO语言的Sync-map">
+                          <a href="#GO语言的Sync-map" class="headerlink"
+                                                                                                          title="GO语言的Sync.map"></a>GO语言的Sync.map
+                        </h4>
+                      </li>
+                    </ul>
+                    <p>Go 语言中的 map 在并发情况下，只读是线程安全的，同时读写线程不安全。<br>Go 语言在 1.9
+                      版本中提供了一种效率较高的并发安全的
+                      sync.Map。sync.Map 和 map 不同，不是以语言原生形态提供，而是在 sync 包下的特殊结构。
+                    </p>
+                    <ul>
+                      <li>sync.Map有以下特性：</li>
+                      <li>无须初始化，直接声明即可。 sync.Map 不能使用 map 的方式进行取值和设置等操作，而是使用
+                        sync.Map 的方法进行调用。</li>
+                      <li>Store 表示存储，Load 表示获取，Delete 表示删除。</li>
+                      <li>使用 Range 配合一个回调函数进行遍历操作，通过回调函数返回内部遍历出来的值。</li>
+                      <li>Range 参数中的回调函数的返回值功能是：需要继续迭代遍历时，返回 true；终止迭代遍历时，返回
+                        false。<figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">      &quot;fmt&quot;</span><br><span class="line">      &quot;sync&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line"></span><br><span class="line">    var scene sync.Map</span><br><span class="line">    scene.Store(&quot;greece&quot;, 97)           // 将键值对保存到sync.Map</span><br><span class="line">    scene.Store(&quot;london&quot;, 100)</span><br><span class="line">    scene.Store(&quot;egypt&quot;, 200)</span><br><span class="line">    </span><br><span class="line">    fmt.Println(scene.Load(&quot;london&quot;))    // 从sync.Map中根据键取值</span><br><span class="line">    </span><br><span class="line">    scene.Delete(&quot;london&quot;)   // 根据键删除对应的键值对</span><br><span class="line"></span><br><span class="line">    scene.Range(func(k, v interface&#123;&#125;) bool &#123;         // 遍历所有sync.Map中的键值对</span><br><span class="line">        fmt.Println(&quot;iterate:&quot;, k, v)</span><br><span class="line">        return true</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">代码输出如下：</span><br><span class="line">100 true</span><br><span class="line">iterate: egypt 200</span><br><span class="line">iterate: greece 97</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <p>sync.Map 没有提供获取 map 数量的方法，替代方法是获取时遍历自行计算数量。<br>sync.Map
+                      为了保证并发安全有一些性能损失，因此在非并发情况下，使用 map 相比使用 sync.Map 会有更好的性能。
+                    </p>
+                    <h4 id="GO语言的list（列表）"><a href="#GO语言的list（列表）" class="headerlink"
+                                                                                                      title="GO语言的list（列表）"></a>GO语言的list（列表）
+                    </h4>
+                    <p>列表与切片和 map 不同的是，列表并没有具体元素类型的限制。</p>
+                    <p>
+                      列表是一种非连续存储的容器，由多个节点组成，节点通过一些变量记录彼此之间的关系。列表有多种实现方法，如单链表、双链表等。<br>假设
+                      A、B、C
+                      三个人都有电话号码，如果 A 把号码告诉给 B，B 把号码告诉给
+                      C，这个过程就建立了一个<u><strong>单链表结构</strong></u><br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2485"
+                                                                                                      alt="ccbdb1061460ed1219c76ebf9d9bf48f.png"><br>如果在这个基础上，再从
+                      C
+                      开始将自己的号码给自己知道号码的人，这样就形成了<u><strong>双链表结构</strong></u><br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2484"
+                                                                                                      alt="8d0f2a392d440563223997fbcad87ba4.png"><br>如果需要获得所有人的号码，只需要从
+                      A 或者 C
+                      开始，要求他们将自己的号码发出来，然后再通知下一个人如此循环。这个过程就是<u><strong>列表遍历</strong></u>。<br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2484"
+                                                                                                      alt="8d0f2a392d440563223997fbcad87ba4.png">
+                    </p>
+                    <p><strong>列表使用 container/list
+                        包来实现，内部的实现原理是双链表。列表能够高效地进行任意位置的元素插入和删除操作。</strong></p>
+                    <p>初始化列表<br>1) 通过 container/list 包的 New 方法初始化 list<br>
+                      <strong>变量名 :=
+                        list.New()</strong><br>2) 通过声明初始化listvar<br> <strong>变量名
+                        list.List</strong>
+                    </p>
+                    <p><strong>在列表中插入元素</strong> PushFront 和 PushBack。</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">l := list.New()</span><br><span class="line"></span><br><span class="line">l.PushBack(&quot;fist&quot;)      // 将 fist 字符串插入到列表的尾部，此时列表是空的，插入后只有一个元素。</span><br><span class="line">l.PushFront(67)         // 将数值 67 放入列表。此时，列表中已经存在 fist 元素，67 这个元素将被放在 fist 的前面。</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2486"
+                                                                                                      alt="cdaacdda4f4363ae1e9a6863669b4389.png">
+                    </p>
+                    <p><strong>从列表中删除元素</strong></p>
+                    <p>列表的插入函数的返回值会提供一个 *list.Element
+                      结构，这个结构记录着列表元素的值及和其他节点之间的关系等信息。从列表中删除元素时，需要用到这个结构进行快速删除。
+                    </p>
+                    <p><strong>遍历列表——访问列表的每一个元素</strong></p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">l := list.New()</span><br><span class="line"></span><br><span class="line">l.PushBack(&quot;canon&quot;)  // 尾部添加</span><br><span class="line">l.PushFront(67)      // 头部添加</span><br><span class="line"></span><br><span class="line">for i := l.Front(); i != nil; i = i.Next() &#123;</span><br><span class="line">    fmt.Println(i.Value)</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>使用 for 语句进行遍历，其中 i:=l.Front() 表示初始赋值，只会在一开始执行一次；每次循环会进行一次
+                      i!=nil 语句判断，如果返回
+                      false，表示退出循环，反之则会执行 i=i.Next()。</p>
+                    <h3 id="Go语言结构体"><a href="#Go语言结构体" class="headerlink"
+                                                                                                      title="Go语言结构体"></a>Go语言结构体
+                    </h3>
+                    <ul>
+                      <li>结构体是一种聚合的数据类型，是由零个或多个任意类型的值聚合成的实体。</li>
+                      <li>每个值称为结构体的成员</li>
+                      <li>
+                        <strong>Go语言的结构体（struct）和其他语言的类（class）有同等的地位</strong>，但
+                        Go语言<strong>放弃了包括继承在内的大量面向对象特性</strong>，只保留了组合（composition）这个最基础的特性。
+                      </li>
+                      <li>
+                        结构体的定义只是一种内存布局的描述，<u><strong>只有当结构体实例化时，才会真正地分配内存</strong></u>
+                      </li>
+                    </ul>
+                    <h5 id="定义"><a href="#定义" class="headerlink"
+                                                                                                      title="定义"></a>定义
+                    </h5>
+                    <p>Go 语言中数组可以存储同一类型的数据，但在结构体中我们可以为不同项定义不同的数据类型。<br>结构体定义需要使用
+                      type 和 struct
+                      语句。struct 语句定义一个新的数据类型，结构体有中有一个或多个成员。type
+                      语句设定了结构体的名称。结构体的格式如下：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">type 类型名 struct &#123;</span><br><span class="line">   member definition;</span><br><span class="line">   member definition;</span><br><span class="line">   ...</span><br><span class="line">   member definition;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>使用“键值对”初始化结构体<br>1) 键值对初始化结构体的书写格式</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">ins := 结构体类型名&#123;    </span><br><span class="line">    字段1: 字段1的值,   </span><br><span class="line">    字段2: 字段2的值,   </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ins := 结构体类型名&#123;   </span><br><span class="line">    字段1的值,   </span><br><span class="line">    字段2的值,   </span><br><span class="line">    …</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>2) 使用键值对填充结构体的例子</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">type People struct &#123;</span><br><span class="line">    name  string</span><br><span class="line">    child *People</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">relation := &amp;People&#123;</span><br><span class="line">    name: &quot;爷爷&quot;,</span><br><span class="line">    child: &amp;People&#123;</span><br><span class="line">        name: &quot;爸爸&quot;,</span><br><span class="line">        child: &amp;People&#123;</span><br><span class="line">                name: &quot;我&quot;,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="初始化匿名结构体"><a href="#初始化匿名结构体" class="headerlink"
+                                                                                                      title="初始化匿名结构体"></a>初始化匿名结构体
+                    </h5>
+                    <p>匿名结构体的初始化写法由结构体定义和键值对初始化两部分组成。</p>
+                    <ul>
+                      <li>结构体定义时没有结构体类型名，只有字段和类型定义。</li>
+                      <li>键值对初始化部分由可选的多个键值对组成，</li>
+                    </ul>
+                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2564"
+                                                                                                      alt="654fd4abd20d751db7b03be7a5e4ce8e.png"><img
+                                                                                                      src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2563"
+                                                                                                      alt="1848349d6f72b7e4ea568f9df55fcf3d.png">
+                    </p>
+                    <h5 id="实例化形式"><a href="#实例化形式" class="headerlink"
+                                                                                                      title="实例化形式"></a>实例化形式
+                    </h5>
+                    <p>结构体本身是一种类型，可以像整型、字符串等类型一样，以 var
+                      的方式声明结构体即可完成实例化。<br>基本实例化格式如下：var ins
+                      T<br>访问结构体成员: 结构体.成员名</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">type Point struct &#123;</span><br><span class="line">    X int</span><br><span class="line">    Y int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var p Point</span><br><span class="line">p.X = 10</span><br><span class="line">p.Y = 20</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="创建指针类型的结构体"><a href="#创建指针类型的结构体" class="headerlink"
+                                                                                                      title="创建指针类型的结构体"></a>创建指针类型的结构体
+                    </h5>
+                    <p><strong>Go语言中，还可以使用 new
+                        关键字对类型（包括结构体、整型、浮点数、字符串等）进行实例化，结构体在实例化后会形成指针类型的结构体。</strong><br>使用
+                      new
+                      的格式如下：<br> ins := new(T)<br>其中：</p>
+                    <ul>
+                      <li>T 为类型，可以是结构体、整型、字符串等。</li>
+                      <li>ins：T 类型被实例化后保存到 ins 变量中，ins 的类型为 *T，属于指针。<figure
+                                                                                                        class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">type Player struct&#123;</span><br><span class="line">    Name string</span><br><span class="line">    HealthPoint int</span><br><span class="line">    MagicPoint int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">tank := new(Player)</span><br><span class="line">tank.Name = &quot;Canon&quot;</span><br><span class="line">tank.HealthPoint = 300</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <h5 id="取结构体的地址实例化"><a href="#取结构体的地址实例化" class="headerlink"
+                                                                                                      title="取结构体的地址实例化"></a>取结构体的地址实例化
+                    </h5>
+                    <p>在 Go语言中，对结构体进行&amp;取地址操作时，视为对该类型进行一次 new
+                      的实例化操作。<br>取地址格式如下：<br> ins :=
+                      &amp;T{}<br>其中：</p>
+                    <ul>
+                      <li>T 表示结构体类型。</li>
+                      <li>ins 为结构体的实例，类型为 *T，是指针类型。<figure
+                                                                                                        class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">type Command struct &#123;</span><br><span class="line">    Name    string    // 指令名称</span><br><span class="line">    Var     *int    // 指令绑定的变量</span><br><span class="line">    Comment string    // 指令的注释</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var version int = 1</span><br><span class="line"></span><br><span class="line">cmd := &amp;Command&#123;&#125;</span><br><span class="line">cmd.Name = &quot;version&quot;</span><br><span class="line">cmd.Var = &amp;version</span><br><span class="line">cmd.Comment = &quot;show version&quot;</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <p>结构体作为函数参数</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">type Books struct &#123;   </span><br><span class="line">    title string   </span><br><span class="line">    author string  </span><br><span class="line">    subject string  </span><br><span class="line">    book_id int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func printBook( book Books )</span><br><span class="line">&#123;   </span><br><span class="line">    .....</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>结构体指针<br>var struct_pointer *Books</p>
+                    <h5 id="接收器（receiver）"><a href="#接收器（receiver）" class="headerlink"
+                                                                                                      title="接收器（receiver）"></a>接收器（receiver）
+                    </h5>
+                    <p>结构体就像是类的一种简化形式，那么面向对象程序员可能会问：类的方法在哪里呢？在
+                      Go语言中有一个概念，它和方法有着同样的名字，并且大体上意思相同：
+                    </p>
+                    <ul>
+                      <li><strong>Go
+                          方法是作用在接收器（receiver）上的一个函数，接收器是某种类型的变量</strong>。因此方法是一种特殊类型的函数。
+                      </li>
+                      <li>
+                        <u><strong>接收器类型可以是（几乎）任何类型</strong></u>，不仅仅是结构体类型：任何类型都可以有方法，甚至可以是函数类型，可以是
+                        int、bool、string 或数组的别名类型。</li>
+                      <li>
+                        但是<u><strong>接收器不能是一个接口类型</strong></u>，因为接口是一个抽象定义，但是方法却是具体实现；如果这样做会引发一个编译错误：invalid
+                        receiver type…。</li>
+                      <li>
+                        <u><strong>接收器不能是一个指针类型</strong></u>，但是它可以是任何其他允许类型的指针。
+                      </li>
+                      <li>一个类型加上它的方法等价于面向对象中的一个类。</li>
+                      <li>
+                        <strong>类型的代码和绑定在它上面的方法</strong>的代码可以不放置在一起，它们可以存在在不同的源文件，唯一的要求是：它们<u><strong>必须是同一个包</strong></u>的。
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">type Bag struct &#123;</span><br><span class="line">    items []int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (b *Bag) Insert(itemid int) &#123;</span><br><span class="line">    b.items = append(b.items, itemid)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    b := new(Bag)</span><br><span class="line">    b.Insert(1001)</span><br><span class="line">&#125;</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <p><strong>每个方法只能有一个接收器</strong><br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2565"
+                                                                                                      alt="360b51f717d49dd7645df58f3869f222.png">
+                    </p>
+                    <h6 id="接收器格式"><a href="#接收器格式" class="headerlink"
+                                                                                                      title="接收器格式"></a>接收器格式
+                    </h6>
+                    <p>接收器的格式如下：<br>func (接收器变量 接收器类型) 方法名(参数列表) (返回参数) {<br>
+                      函数体<br>}<br>对各部分的说明：
+                    </p>
+                    <ul>
+                      <li>
+                        <p>接收器变量：接收器中的参数变量名在命名时，官方建议使用接收器类型名的第一个小写字母，而不是
+                          self、this 之类的命名。例如，Socket
+                          类型的接收器变量应该命名为 s，Connector 类型的接收器变量应该命名为 c 等。</p>
+                      </li>
+                      <li>
+                        <p>接收器类型：接收器类型和参数类似，可以是指针类型和非指针类型。</p>
+                      </li>
+                      <li>
+                        <p>方法名、参数列表、返回参数：格式与函数定义一致。</p>
+                        <h6 id="1-理解指针类型的接收器"><a href="#1-理解指针类型的接收器" class="headerlink"
+                                                                                                          title="1) 理解指针类型的接收器"></a>1)
+                          理解指针类型的接收器</h6>
+                      </li>
+                      <li>
+                        <p>指针类型的接收器由一个结构体的指针组成，更接近于面向对象中的 this 或者 self。</p>
+                      </li>
+                      <li>
+                        <p>由于指针的特性，调用方法时，修改接收器指针的任意成员变量，在方法结束后，修改都是有效的。</p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line"></span><br><span class="line">type Property struct &#123;          // 定义属性结构</span><br><span class="line">    value int  // 属性值</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (p *Property) SetValue(v int) &#123;   // 设置属性值</span><br><span class="line">    p.value = v     // 修改p的成员变量</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (p *Property) Value() int &#123;   // 取属性值</span><br><span class="line">    return p.value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    p := new(Property)  // 实例化属性</span><br><span class="line">    p.SetValue(100)      // 设置值</span><br><span class="line">    fmt.Println(p.Value())     // 打印值</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <h6 id="2-理解非指针类型的接收器"><a href="#2-理解非指针类型的接收器" class="headerlink"
+                                                                                                      title="2) 理解非指针类型的接收器"></a>2)
+                      理解非指针类型的接收器</h6>
+                    <ul>
+                      <li>当方法作用于非指针接收器时，Go语言会在代码运行时将接收器的值复制一份。</li>
+                      <li>在非指针接收器的方法中可以获取接收器的成员值，但修改后无效。</li>
+                    </ul>
+                    <h3 id="语言垃圾回收和SetFinalizer"><a href="#语言垃圾回收和SetFinalizer" class="headerlink"
+                                                                                                      title="语言垃圾回收和SetFinalizer"></a>语言垃圾回收和SetFinalizer
+                    </h3>
+                    <p>在
+                      Go语言运行时中有一个独立的进程，即垃圾收集器（GC），会释放程序中不再使用的变量和结构占用的内存，它搜索不再使用的变量然后释放它们的内存。可以通过
+                      runtime 包访问 GC 进程。</p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/Go/" rel="tag"># Go</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/09/01/GO学习1-基本语法及数据结构（1）/" rel="next"
+                                                                                                        title="GO学习1--基本语法及数据结构（1）">
+                          <i class="fa fa-chevron-left"></i> GO学习1--基本语法及数据结构（1）
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/09/01/GO学习1-基本语法及数据结构（3）/" rel="prev"
+                                                                                                        title="GO学习1--基本语法及数据结构（3）">
+                          GO学习1--基本语法及数据结构（3） <i
+                                                                                                          class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                      href="#Go容器（container）"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">Go容器（container）
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                          href="#Go语言数组"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">Go语言数组
+                            </span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                              href="#Go语言切片（Slice）"><span
+                                                                                                                class="nav-number">1.1.1.</span>
+                                <span class="nav-text">Go语言切片（Slice）
+                                </span></a>
+                              <ol class="nav-child">
+                                <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                                  href="#slice"><span
+                                                                                                                    class="nav-number">1.1.1.1.</span>
+                                    <span class="nav-text">slice
+                                    </span></a></li>
+                                <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                                  href="#make-T-length-capacity"><span
+                                                                                                                    class="nav-number">1.1.1.2.</span>
+                                    <span class="nav-text">make([]T,
+                                      length, capacity)</span></a></li>
+                                <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                                  href="#append-为切片添加元素"><span
+                                                                                                                    class="nav-number">1.1.1.3.</span>
+                                    <span class="nav-text">append()为切片添加元素
+                                    </span></a></li>
+                                <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                                  href="#copy（）（切片拷贝）"><span
+                                                                                                                    class="nav-number">1.1.1.4.</span>
+                                    <span class="nav-text">copy（）（切片拷贝）
+                                    </span></a></li>
+                                <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                                  href="#删除元素（使用切片，copy-append）"><span
+                                                                                                                    class="nav-number">1.1.1.5.</span>
+                                    <span class="nav-text">删除元素（使用切片，copy,
+                                      append）</span></a></li>
+                              </ol>
+                            </li>
+                            <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                              href="#多维数组"><span
+                                                                                                                class="nav-number">1.1.2.</span>
+                                <span class="nav-text">多维数组</span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                          href="#Go语言range关键字"><span
+                                                                                                            class="nav-number">1.2.</span>
+                            <span class="nav-text">Go语言range关键字
+                            </span></a></li>
+                        <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                          href="#Go语言Map（映射、集合）"><span
+                                                                                                            class="nav-number">1.3.</span>
+                            <span class="nav-text">Go语言Map（映射、集合）
+                            </span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#delete-函数"><span
+                                                                                                                class="nav-number">1.3.0.1.</span>
+                                <span class="nav-text">delete()
+                                  函数</span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#清空-map-中的所有元素"><span
+                                                                                                                class="nav-number">1.3.0.2.</span>
+                                <span class="nav-text">清空
+                                  map 中的所有元素</span></a></li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#GO语言的Sync-map"><span
+                                                                                                        class="nav-number">1.4.</span>
+                        <span class="nav-text">GO语言的Sync.map
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#GO语言的list（列表）"><span
+                                                                                                        class="nav-number">1.5.</span>
+                        <span class="nav-text">GO语言的list（列表）
+                        </span></a></li>
+                  </ol>
+                  <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                    href="#Go语言结构体"><span
+                                                                                                      class="nav-number">2.</span>
+                      <span class="nav-text">Go语言结构体
+                      </span></a>
+                    <ol class="nav-child">
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#定义"><span
+                                                                                                          class="nav-number">2.0.1.</span>
+                          <span class="nav-text">定义</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#初始化匿名结构体"><span
+                                                                                                          class="nav-number">2.0.2.</span>
+                          <span class="nav-text">初始化匿名结构体
+                          </span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#实例化形式"><span
+                                                                                                          class="nav-number">2.0.3.</span>
+                          <span class="nav-text">实例化形式</span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#创建指针类型的结构体"><span
+                                                                                                          class="nav-number">2.0.4.</span>
+                          <span class="nav-text">创建指针类型的结构体
+                          </span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#取结构体的地址实例化"><span
+                                                                                                          class="nav-number">2.0.5.</span>
+                          <span class="nav-text">取结构体的地址实例化
+                          </span></a></li>
+                      <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                        href="#接收器（receiver）"><span
+                                                                                                          class="nav-number">2.0.6.</span>
+                          <span class="nav-text">接收器（receiver）
+                          </span></a>
+                        <ol class="nav-child">
+                          <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                            href="#接收器格式"><span
+                                                                                                              class="nav-number">2.0.6.1.</span>
+                              <span class="nav-text">接收器格式</span></a></li>
+                          <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                            href="#1-理解指针类型的接收器"><span
+                                                                                                              class="nav-number">2.0.6.2.</span>
+                              <span class="nav-text">1)
+                                理解指针类型的接收器</span></a></li>
+                          <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                            href="#2-理解非指针类型的接收器"><span
+                                                                                                              class="nav-number">2.0.6.3.</span>
+                              <span class="nav-text">2)
+                                理解非指针类型的接收器</span></a></li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                    href="#语言垃圾回收和SetFinalizer"><span
+                                                                                                      class="nav-number">3.</span>
+                      <span class="nav-text">语言垃圾回收和SetFinalizer
+                      </span></a></li>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">84.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共84.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
