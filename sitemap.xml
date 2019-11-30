@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A02-%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8E%A5%E5%8F%A3%EF%BC%881%EF%BC%89/</loc>
+    
+    <lastmod>2019-11-30T13:02:47.541Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A01-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%883%EF%BC%89/</loc>
+    
+    <lastmod>2019-11-30T12:57:23.586Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A01-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%882%EF%BC%89-%E5%AE%B9%E5%99%A8/</loc>
+    
+    <lastmod>2019-11-30T12:54:28.714Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A01-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%881%EF%BC%89/</loc>
+    
+    <lastmod>2019-11-30T12:50:25.730Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://xixili.online/2019/11/17/odoo%E9%82%AE%E4%BB%B6%E5%A4%84%E7%90%86/</loc>
     
     <lastmod>2019-11-17T02:44:04.246Z</lastmod>
@@ -135,13 +163,6 @@
   </url>
   
   <url>
-    <loc>http://xixili.online/2019/09/04/odoo-action%E8%B7%B3%E8%BD%AC/</loc>
-    
-    <lastmod>2019-11-16T02:04:26.565Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://xixili.online/2019/11/07/odoo-ORM%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2019-11-16T02:04:26.565Z</lastmod>
@@ -149,14 +170,21 @@
   </url>
   
   <url>
-    <loc>http://xixili.online/2019/09/05/WSGI%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89-werkzeug%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1/</loc>
+    <loc>http://xixili.online/2019/09/04/odoo-action%E8%B7%B3%E8%BD%AC/</loc>
+    
+    <lastmod>2019-11-16T02:04:26.565Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://xixili.online/2019/11/16/hexo-github/</loc>
     
     <lastmod>2019-11-16T02:04:26.551Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://xixili.online/2019/11/16/hexo-github/</loc>
+    <loc>http://xixili.online/2019/09/05/WSGI%E5%AD%A6%E4%B9%A0%EF%BC%882%EF%BC%89-werkzeug%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1/</loc>
     
     <lastmod>2019-11-16T02:04:26.551Z</lastmod>
     
@@ -180,41 +208,6 @@
     <loc>http://xixili.online/2019/06/30/HTTP%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/</loc>
     
     <lastmod>2019-11-16T02:04:26.303Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A02-%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8E%A5%E5%8F%A3%EF%BC%882%EF%BC%89/</loc>
-    
-    <lastmod>2019-11-16T02:04:26.302Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A02-%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8E%A5%E5%8F%A3%EF%BC%881%EF%BC%89/</loc>
-    
-    <lastmod>2019-11-16T02:04:26.301Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A01-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%883%EF%BC%89/</loc>
-    
-    <lastmod>2019-11-16T02:04:26.301Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A01-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%882%EF%BC%89-%E5%AE%B9%E5%99%A8/</loc>
-    
-    <lastmod>2019-11-16T02:04:26.300Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://xixili.online/2019/09/01/GO%E5%AD%A6%E4%B9%A01-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%881%EF%BC%89/</loc>
-    
-    <lastmod>2019-11-16T02:04:26.299Z</lastmod>
     
   </url>
   

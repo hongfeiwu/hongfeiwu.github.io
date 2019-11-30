@@ -82,7 +82,7 @@
                                                                                   type="application/atom+xml">
 
   <meta name="description"
-                                                                                  content="变量逃逸分析  什么是栈 栈（Stack）是一种拥有特殊规则的线性表数据结构。 1) 概念 栈只允许往线性表的一端放入数据，之后在这一端取出数据，按照后进先出（LIFO，Last InFirst Out）的顺序，如下图所示。往栈中放入元素的过程叫做入栈。入栈会增加栈的元素数量，最后放入的元素总是位于栈的顶部，最先放入的元素总是位于栈的底部。从栈中取出元素时，只能从栈顶部取出。取出元素后，栈的数">
+                                                                                  content="变量逃逸分析  什么是栈 栈（Stack）是一种拥有特殊规则的线性表数据结构。 1) 概念 栈只允许往线性表的一端放入数据，之后在这一端取出数据，按照后进先出（LIFO，Last InFirst Out）的顺序，如下图所示。     往栈中放入元素的过程叫做入栈。入栈会增加栈的元素数量，最后放入的元素总是位于栈的顶部，最先放入的元素总是位于栈的底部。从栈中取出元素时，只能从栈顶部取出。取出元素">
   <meta name="keywords" content="Go">
   <meta property="og:type" content="article">
   <meta property="og:title" content="GO学习1--基本语法及数据结构（3）">
@@ -90,19 +90,21 @@
                                                                                   content="http://xixili.online/2019/09/01/GO学习1-基本语法及数据结构（3）/index.html">
   <meta property="og:site_name" content="Xixili">
   <meta property="og:description"
-                                                                                  content="变量逃逸分析  什么是栈 栈（Stack）是一种拥有特殊规则的线性表数据结构。 1) 概念 栈只允许往线性表的一端放入数据，之后在这一端取出数据，按照后进先出（LIFO，Last InFirst Out）的顺序，如下图所示。往栈中放入元素的过程叫做入栈。入栈会增加栈的元素数量，最后放入的元素总是位于栈的顶部，最先放入的元素总是位于栈的底部。从栈中取出元素时，只能从栈顶部取出。取出元素后，栈的数">
+                                                                                  content="变量逃逸分析  什么是栈 栈（Stack）是一种拥有特殊规则的线性表数据结构。 1) 概念 栈只允许往线性表的一端放入数据，之后在这一端取出数据，按照后进先出（LIFO，Last InFirst Out）的顺序，如下图所示。     往栈中放入元素的过程叫做入栈。入栈会增加栈的元素数量，最后放入的元素总是位于栈的顶部，最先放入的元素总是位于栈的底部。从栈中取出元素时，只能从栈顶部取出。取出元素">
   <meta property="og:locale" content="zh-Hans">
   <meta property="og:image"
-                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2495">
+                                                                                  content="http://xixili.online/2019/09/01/GO学习1-基本语法及数据结构（3）/01.png">
   <meta property="og:image"
-                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2496">
-  <meta property="og:updated_time" content="2019-11-16T02:04:26.301Z">
+                                                                                  content="http://xixili.online/2019/09/01/GO学习1-基本语法及数据结构（3）/02.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/09/01/GO学习1-基本语法及数据结构（3）/03.png">
+  <meta property="og:updated_time" content="2019-11-30T12:57:23.586Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="GO学习1--基本语法及数据结构（3）">
   <meta name="twitter:description"
-                                                                                  content="变量逃逸分析  什么是栈 栈（Stack）是一种拥有特殊规则的线性表数据结构。 1) 概念 栈只允许往线性表的一端放入数据，之后在这一端取出数据，按照后进先出（LIFO，Last InFirst Out）的顺序，如下图所示。往栈中放入元素的过程叫做入栈。入栈会增加栈的元素数量，最后放入的元素总是位于栈的顶部，最先放入的元素总是位于栈的底部。从栈中取出元素时，只能从栈顶部取出。取出元素后，栈的数">
+                                                                                  content="变量逃逸分析  什么是栈 栈（Stack）是一种拥有特殊规则的线性表数据结构。 1) 概念 栈只允许往线性表的一端放入数据，之后在这一端取出数据，按照后进先出（LIFO，Last InFirst Out）的顺序，如下图所示。     往栈中放入元素的过程叫做入栈。入栈会增加栈的元素数量，最后放入的元素总是位于栈的顶部，最先放入的元素总是位于栈的底部。从栈中取出元素时，只能从栈顶部取出。取出元素">
   <meta name="twitter:image"
-                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2495">
+                                                                                  content="http://xixili.online/2019/09/01/GO学习1-基本语法及数据结构（3）/01.png">
 
   <script type="text/javascript" id="hexo.configurations">
     var NexT = window.NexT || {};
@@ -396,7 +398,8 @@
 
                     <h4 id="变量逃逸分析"><a href="#变量逃逸分析" class="headerlink"
                                                                                                       title="变量逃逸分析"></a>变量逃逸分析
-                    </h4>
+                    </h4><img src="/2019/09/01/GO学习1-基本语法及数据结构（3）/01.png"
+                                                                                                    title="-">
                     <h5 id="什么是栈"><a href="#什么是栈" class="headerlink"
                                                                                                       title="什么是栈"></a>什么是栈
                     </h5>
@@ -405,8 +408,10 @@
                                                                                                       title="1) 概念"></a>1)
                       概念</h6>
                     <p>栈只允许往线性表的一端放入数据，之后在这一端取出数据，按照后进先出（LIFO，Last InFirst
-                      Out）的顺序，如下图所示。<br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2495"
-                                                                                                      alt="3515b130ed67eb12075a026ca7c0a3a9.png"><br>往栈中放入元素的过程叫做入栈。入栈会增加栈的元素数量，最后放入的元素总是位于栈的顶部，最先放入的元素总是位于栈的底部。<br>从栈中取出元素时，只能从栈顶部取出。取出元素后，栈的数量会变少。最先放入的元素总是最后被取出，最后放入的元素总是最先被取出。不允许从栈底获取数据，也不允许对栈成员（除栈顶外的成员）进行任何查看和修改操作。
+                      Out）的顺序，如下图所示。</p>
+                    <img src="/2019/09/01/GO学习1-基本语法及数据结构（3）/02.png" title="-">
+                    <p>
+                      往栈中放入元素的过程叫做入栈。入栈会增加栈的元素数量，最后放入的元素总是位于栈的顶部，最先放入的元素总是位于栈的底部。<br>从栈中取出元素时，只能从栈顶部取出。取出元素后，栈的数量会变少。最先放入的元素总是最后被取出，最后放入的元素总是最先被取出。不允许从栈底获取数据，也不允许对栈成员（除栈顶外的成员）进行任何查看和修改操作。
                     </p>
                     <h6 id="2-变量和栈有什么关系"><a href="#2-变量和栈有什么关系" class="headerlink"
                                                                                                       title="2) 变量和栈有什么关系"></a>2)
@@ -431,10 +436,9 @@
                       的栈内存再出栈释放内存，整个分配内存的过程通过栈的分配和回收都会非常迅速。</p>
                     <h5 id="什么是堆"><a href="#什么是堆" class="headerlink"
                                                                                                       title="什么是堆"></a>什么是堆
-                    </h5>
-                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2496"
-                                                                                                      alt="a97270b27eaf4cc5fb4ea91018ccb653.png">
-                    </p>
+                    </h5><img src="/2019/09/01/GO学习1-基本语法及数据结构（3）/03.png"
+                                                                                                    title="-">
+
                     <p>堆分配内存和栈分配内存相比，堆适合不可预知大小的内存分配。但是为此付出的代价是分配速度较慢，而且会形成内存碎片。
                     </p>
                     <h5 id="变量逃逸（Escape-Analysis）——自动决定变量分配方式，提高运行效率"><a href="#变量逃逸（Escape-Analysis）——自动决定变量分配方式，提高运行效率"
@@ -699,7 +703,7 @@
 
                     <a href="/archives/">
 
-                      <span class="site-state-item-count">28</span>
+                      <span class="site-state-item-count">27</span>
                       <span class="site-state-item-name">日志</span>
                     </a>
                   </div>
@@ -892,7 +896,7 @@
 
           <span class="post-meta-item-text">Site words total count&#58;</span>
 
-          <span title="Site words total count">84.5k</span>
+          <span title="Site words total count">82.1k</span>
 
         </div>
 
@@ -908,7 +912,7 @@
 
         <div class="theme-info">
           <div class="powered-by"></div>
-          <span class="post-count">博客全站共84.5k字</span>
+          <span class="post-count">博客全站共82.1k字</span>
         </div>
 
         <div class="busuanzi-count">
