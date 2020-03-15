@@ -1822,7 +1822,7 @@ pre .javascript .function, pre .keyword {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e86b63
+  background: #fff614
 }
 
 .links-of-blogroll {
@@ -2742,6 +2742,10 @@ pre .javascript .function, pre .keyword {
   .main {
     padding-bottom: 100px
   }
+
+  .container .main-inner {
+    width: auto
+  }
 }
 
 @media (max-width:767px) {
@@ -2754,19 +2758,7 @@ pre .javascript .function, pre .keyword {
   .main {
     padding-bottom: 100px
   }
-}
 
-.container .main-inner {
-  width: 1050px
-}
-
-@media (min-width:768px) and (max-width:991px) {
-  .container .main-inner {
-    width: auto
-  }
-}
-
-@media (max-width:767px) {
   .container .main-inner {
     width: auto
   }
@@ -2776,7 +2768,6 @@ pre .javascript .function, pre .keyword {
   float: right;
   box-sizing: border-box;
   padding: 30px;
-  width: 760px;
   min-height: 700px;
   margin-right: 30px
 }
@@ -2829,10 +2820,6 @@ pre .javascript .function, pre .keyword {
     padding-left: 0 !important;
     padding-right: 0 !important
   }
-
-  .site-meta {
-    box-shadow: 0 0 16px rgba(0, 0, 0, .5)
-  }
 }
 
 @media (max-width:767px) {
@@ -2840,10 +2827,6 @@ pre .javascript .function, pre .keyword {
     width: auto;
     padding-left: 0 !important;
     padding-right: 0 !important
-  }
-
-  .site-meta {
-    box-shadow: 0 0 16px rgba(0, 0, 0, .5)
   }
 }
 
@@ -2860,6 +2843,38 @@ pre .javascript .function, pre .keyword {
   padding-right: 260px
 }
 
+header {
+  width: 80% !important
+}
+
+header.post-header {
+  width: auto !important
+}
+
+.container .main-inner {
+  width: 80%
+}
+
+.content-wrap {
+  width: calc(100% - 260px)
+}
+
+@media (min-width:768px) and (max-width:991px) {
+  .container .main-inner, .header {
+    width: auto !important
+  }
+}
+
+@media (max-width:767px) {
+  .container .main-inner, .header {
+    width: auto !important
+  }
+
+  .content-wrap {
+    width: 100% !important
+  }
+}
+
 .site-brand-wrapper {
   position: relative
 }
@@ -2867,6 +2882,12 @@ pre .javascript .function, pre .keyword {
 .site-meta {
   padding: 20px 0;
   background: #222
+}
+
+@media (max-width:767px) {
+  .site-meta {
+    box-shadow: 0 0 16px rgba(0, 0, 0, .5)
+  }
 }
 
 .brand {
@@ -2884,6 +2905,14 @@ pre .javascript .function, pre .keyword {
 }
 
 @media (min-width:768px) and (max-width:991px) {
+  .content-wrap {
+    width: 100% !important
+  }
+
+  .site-meta {
+    box-shadow: 0 0 16px rgba(0, 0, 0, .5)
+  }
+
   .site-nav {
     display: none !important
   }
