@@ -82,7 +82,7 @@
                                                                                   type="application/atom+xml">
 
   <meta name="description"
-                                                                                  content="设置-用户中编辑用户信息是我们常用到的功能,查看用户form视图字段时,里面访问权限字段设置显示如下:">
+                                                                                  content="用户信息的form  设置-用户中编辑用户信息是我们常用到的功能,查看用户form视图字段时,里面访问权限字段设置显示如下:  只有一个groups_id但是在界面上却是  继承处    很明显地应该是在哪个地方继承改写了这个xml中groups_id的视图在addons/base/res/res_users_view.xml中我们可以发现id=”view_users_form”的record">
   <meta name="keywords" content="odoo, 权限">
   <meta property="og:type" content="article">
   <meta property="og:title" content="odoo用户视图中groups_id权限字段的实现">
@@ -90,13 +90,19 @@
                                                                                   content="http://xixili.online/2019/09/04/odoo用户视图中groups-id权限字段的实现/index.html">
   <meta property="og:site_name" content="Xixili">
   <meta property="og:description"
-                                                                                  content="设置-用户中编辑用户信息是我们常用到的功能,查看用户form视图字段时,里面访问权限字段设置显示如下:">
+                                                                                  content="用户信息的form  设置-用户中编辑用户信息是我们常用到的功能,查看用户form视图字段时,里面访问权限字段设置显示如下:  只有一个groups_id但是在界面上却是  继承处    很明显地应该是在哪个地方继承改写了这个xml中groups_id的视图在addons/base/res/res_users_view.xml中我们可以发现id=”view_users_form”的record">
   <meta property="og:locale" content="zh-Hans">
-  <meta property="og:updated_time" content="2019-11-16T02:04:26.572Z">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/09/04/odoo用户视图中groups-id权限字段的实现/01.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2019/09/04/odoo用户视图中groups-id权限字段的实现/01.png">
+  <meta property="og:updated_time" content="2020-03-15T06:05:06.339Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="odoo用户视图中groups_id权限字段的实现">
   <meta name="twitter:description"
-                                                                                  content="设置-用户中编辑用户信息是我们常用到的功能,查看用户form视图字段时,里面访问权限字段设置显示如下:">
+                                                                                  content="用户信息的form  设置-用户中编辑用户信息是我们常用到的功能,查看用户form视图字段时,里面访问权限字段设置显示如下:  只有一个groups_id但是在界面上却是  继承处    很明显地应该是在哪个地方继承改写了这个xml中groups_id的视图在addons/base/res/res_users_view.xml中我们可以发现id=”view_users_form”的record">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2019/09/04/odoo用户视图中groups-id权限字段的实现/01.png">
 
   <script type="text/javascript" id="hexo.configurations">
     var NexT = window.NexT || {};
@@ -355,7 +361,7 @@
                         <span class="post-meta-item-text">字数统计&#58;</span>
 
                         <span title="字数统计">
-                          44
+                          738
                         </span>
 
                         <span class="post-meta-divider">|</span>
@@ -367,7 +373,7 @@
                         <span class="post-meta-item-text">阅读时长 &asymp;</span>
 
                         <span title="阅读时长">
-                          1
+                          4
                         </span>
 
                       </div>
@@ -388,7 +394,117 @@
                     </script>
                     <meta name="referrer" content="no-referrer">
 
+                    <h4 id="用户信息的form"><a href="#用户信息的form" class="headerlink"
+                                                                                                      title="用户信息的form"></a>用户信息的form
+                    </h4>
                     <p>设置-用户中编辑用户信息是我们常用到的功能,查看用户form视图字段时,里面访问权限字段设置显示如下:</p>
+                    <img src="/2019/09/04/odoo用户视图中groups-id权限字段的实现/01.png"
+                                                                                                    title="form">
+                    <p>只有一个groups_id<br>但是在界面上却是</p>
+                    <img src="/2019/09/04/odoo用户视图中groups-id权限字段的实现/01.png"
+                                                                                                    title="前端">
+                    <h4 id="继承处"><a href="#继承处" class="headerlink"
+                                                                                                      title="继承处"></a>继承处
+                    </h4>
+                    <p>
+                      很明显地应该是在哪个地方继承改写了这个xml中groups_id的视图<br>在addons/base/res/res_users_view.xml中我们可以发现id=”view_users_form”的record,<br>在同一文件下，有继承继承了id=”view_users_form”的一个id=”user_groups_view”的record.在这段record中,主要定义了
+                    </p>
+                    <pre><code>&lt;record id=&quot;user_groups_view&quot; model=&quot;ir.ui.view&quot;&gt;
+&lt;field name=&quot;name&quot;&gt;res.users.groups&lt;/field&gt;
+&lt;field name=&quot;model&quot;&gt;res.users&lt;/field&gt;
+&lt;field name=&quot;inherit_id&quot; ref=&quot;view_users_form&quot;/&gt;
+&lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;
+    &lt;!-- dummy, will be modified by groups --&gt;
+    &lt;field name=&quot;groups_id&quot; position=&quot;after&quot;/&gt;
+&lt;/field&gt;
+&lt;/record&gt;</code></pre>
+                    <p>这里可以看出正常的groups_id后面追加了一部分视图，但是此地却没有给出具体视图</p>
+                    <p>此时的疑问就剩一个，如果将组视图加到用户视图中去的</p>
+                    <p>
+                      在addons/base/res/res_users.py中发现了一个继承了res.groups的类GroupsView里面存在一个方法<br>_update_user_groups_view,在这个方法的介绍里,作者介绍了作用:
+                    </p>
+                    <pre><code>Modify the view with xmlid base.user_groups_view, which inherits
+the user form view, and introduces the reified group fields.</code></pre>
+                    <p>
+                      这段代码即便没仔细的阅读,我们也可以很轻松的了解到大体功能:得到所有application(也就是categroy),<br>构造出field,其中field会根据该选项是否是selection类型以及其他处理(意味着选项是boolean)<br>最后,把构造好的XML重新写入数据库中id
+                      =
+                      user_groups_view的记录.<br>.首先继承res.groups模块,然后重写_update_user_groups_view方法
+                    </p>
+                    <pre><code>api.model</code></pre>
+                    <p>def <em>update_user_groups_view(self):<br> “”” Modify the
+                        view with xmlid
+                        <code>base.user_groups_view</code>, which inherits<br>
+                        the user form view,
+                        and introduces the reified group fields.<br>
+                        .首先继承res.groups模块,然后重写_update_user_groups_view方法<br>
+                        “””<br> if
+                        self._context.get(‘install_mode’):<br> # use
+                        installation/admin language for
+                        translatable names in the<br> # view<br> user_context =
+                        self.env[‘res.users’].context_get()<br> self =
+                        self.with_context(**user_context)<br><br><br> # We have
+                        to try-catch this,
+                        because at first init the view does not<br> # exist but
+                        we are already
+                        creating some basic groups.<br> #
+                        base.user_groups_view继承了res.users.form，修改groups_id,增加内容<br>
+                        view =
+                        self.env.ref(‘base.user_groups_view’,
+                        raise_if_not_found=False)<br> if view
+                        and view.exists() and view._name == ‘ir.ui.view’:<br>
+                        group_no_one =
+                        view.env.ref(‘base.group_no_one’)<br> xml1, xml2 = [],
+                        []<br>
+                        xml1.append(E.separator(string=</em>(‘Application’),
+                      colspan=”2”))<br> for
+                      app, kind, gs in self.get_groups_by_application():<br> #
+                      hide groups in
+                      categories ‘Hidden’ and ‘Extra’ (except for<br> #
+                      group_no_one)<br> attrs =
+                      {}<br> if app.xml_id in (<br>
+                      ‘base.module_category_hidden’,<br>
+                      ‘base.module_category_extra’,<br>
+                      ‘base.module_category_usability’):<br>
+                      attrs[‘groups’] = ‘base.group_no_one’<br><br><br> if kind
+                      == ‘selection’:<br>
+                      # application name with a selection field<br> field_name =
+                      name_selection_groups(gs.ids)<br>
+                      xml1.append(E.field(name=field_name,
+                      *<em>attrs))<br> xml1.append(E.newline())<br> else:<br> #
+                        application
+                        separator with boolean fields<br> app_name = app.name or
+                        _(‘Other’)<br>
+                        xml2.append(<br> E.separator(<br> string=app_name,<br>
+                        colspan=”4”,<br>
+                        *</em>attrs))<br> for g in gs:<br> field_name =
+                      name_boolean_group(g.id)<br>
+                      if g == group_no_one:<br> # make the group_no_one
+                      invisible in the form
+                      view<br> xml2.append(<br> E.field(<br>
+                      name=field_name,<br> invisible=”1”,<br>
+                      *<em>attrs))<br> else:<br>
+                        xml2.append(E.field(name=field_name,
+                        *</em>attrs))<br><br><br> xml2.append({‘class’:
+                      “o_label_nowrap”})<br> xml =
+                      E.field(<br> E.group(<br> *(xml1),<br> col=”2”),<br>
+                      E.group(<br> *(xml2),<br>
+                      col=”4”),<br> name=”groups_id”,<br>
+                      position=”replace”)<br>
+                      xml.addprevious(etree.Comment(“GENERATED AUTOMATICALLY BY
+                      GROUPS”))<br>
+                      xml_content = etree.tostring(<br> xml,<br>
+                      pretty_print=True,<br>
+                      xml_declaration=True,<br> encoding=”utf-8”)<br> if not
+                      view.check_access_rights(‘write’,
+                      raise_exception=False):<br> # erp manager
+                      has the rights to update groups/users but not<br> # to
+                      modify ir.ui.view<br>
+                      if self.env.user.has_group(‘base.group_erp_manager’):<br>
+                      view =
+                      view.sudo()<br> # 更新res.users的group_id<br>
+                      view.with_context(lang=None).write(<br> {‘arch’:
+                      xml_content, ‘arch_fs’:
+                      False})</p>
 
                   </div>
 
@@ -496,8 +612,17 @@
 
           <div class="sidebar-inner">
 
-            <section
-                                                                                            class="site-overview-wrap sidebar-panel sidebar-panel-active">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
               <div class="site-overview">
                 <div class="site-author motion-element" itemprop="author" itemscope
                                                                                                 itemtype="http://schema.org/Person">
@@ -516,14 +641,14 @@
 
                     <a href="/archives/">
 
-                      <span class="site-state-item-count">27</span>
+                      <span class="site-state-item-count">32</span>
                       <span class="site-state-item-name">日志</span>
                     </a>
                   </div>
 
                   <div class="site-state-item site-state-tags">
                     <a href="/tags/index.html">
-                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-count">12</span>
                       <span class="site-state-item-name">标签</span>
                     </a>
                   </div>
@@ -578,6 +703,29 @@
               </div>
             </section>
 
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#用户信息的form"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">用户信息的form
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#继承处"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">继承处</span></a></li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
             <div class="back-to-top">
               <i class="fa fa-arrow-up"></i>
 
@@ -597,7 +745,7 @@
                                                                                         src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
         </script>
         <div class="copyright">&copy; 2015 &mdash; <span
-                                                                                          itemprop="copyrightYear">2019</span>
+                                                                                          itemprop="copyrightYear">2020</span>
           <span class="with-love">
             <i class="fa fa-user"></i>
           </span>
@@ -613,7 +761,7 @@
 
           <span class="post-meta-item-text">Site words total count&#58;</span>
 
-          <span title="Site words total count">82.1k</span>
+          <span title="Site words total count">93.5k</span>
 
         </div>
 
@@ -629,7 +777,7 @@
 
         <div class="theme-info">
           <div class="powered-by"></div>
-          <span class="post-count">博客全站共82.1k字</span>
+          <span class="post-count">博客全站共93.5k字</span>
         </div>
 
         <div class="busuanzi-count">

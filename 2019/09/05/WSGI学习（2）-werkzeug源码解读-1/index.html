@@ -93,20 +93,20 @@
                                                                                   content="wsgi wsgi server (比如uWSGI） 要和 wsgi application（比如django ）交互，uwsgi需要将过来的请求转给django   处理，那么uWSGI 和 django的交互和调用就需要一个统一的规范，这个规范就是WSGI WSGI（Web Server Gateway   Interface） Python Web Server Gateway Inte">
   <meta property="og:locale" content="zh-Hans">
   <meta property="og:image"
-                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2968">
+                                                                                  content="http://xixili.online/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/01.png">
   <meta property="og:image"
-                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2971">
+                                                                                  content="http://xixili.online/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/02.png">
   <meta property="og:image"
-                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2969">
+                                                                                  content="http://xixili.online/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/03.png">
   <meta property="og:image"
-                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2970">
-  <meta property="og:updated_time" content="2019-11-16T02:04:26.551Z">
+                                                                                  content="http://xixili.online/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/04.png">
+  <meta property="og:updated_time" content="2020-03-15T05:56:10.219Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="WSGI学习（2）---werkzeug源码解读(1)">
   <meta name="twitter:description"
                                                                                   content="wsgi wsgi server (比如uWSGI） 要和 wsgi application（比如django ）交互，uwsgi需要将过来的请求转给django   处理，那么uWSGI 和 django的交互和调用就需要一个统一的规范，这个规范就是WSGI WSGI（Web Server Gateway   Interface） Python Web Server Gateway Inte">
   <meta name="twitter:image"
-                                                                                  content="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2968">
+                                                                                  content="http://xixili.online/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/01.png">
 
   <script type="text/javascript" id="hexo.configurations">
     var NexT = window.NexT || {};
@@ -413,9 +413,10 @@
                       Server负责接受客户端请求、解析请求、并按照协议规范将请求转发给WSGI
                       Application，同时负责接受WSGI
                       Application的响应并发送给客户端；WSGI Application负责接受由WSGI
-                      Server发送过来的请求，实现业务处理逻辑，并将标准的响应发回给WSGI Server：<br><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2968"
-                                                                                                      alt="07fd4914697167ace692eb4c0ae18b41.png">
-                    </p>
+                      Server发送过来的请求，实现业务处理逻辑，并将标准的响应发回给WSGI Server：</p>
+                    <img src="/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/01.png"
+                                                                                                    title="规范">
+
                     <p>WSGI Server解析客户端由socket发送过来的http数据包，将请求的http
                       version、method、host、path等包装成environ参数，并提供start_response回调函数，并将environ和
                     </p>
@@ -424,10 +425,8 @@
                     </p>
                     <h5 id="两种模式"><a href="#两种模式" class="headerlink"
                                                                                                       title="两种模式"></a>两种模式
-                    </h5>
-                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2971"
-                                                                                                      alt="c8b7bdc0b045286fe2368f7181edd1f1.png">
-                    </p>
+                    </h5><img src="/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/02.png"
+                                                                                                    title="模式">
                     <h6 id="1、WSGI-APP应用程序-框架"><a href="#1、WSGI-APP应用程序-框架" class="headerlink"
                                                                                                       title="1、WSGI APP应用程序/框架"></a>1、WSGI
                       APP应用程序/框架</h6>
@@ -534,12 +533,11 @@
                     </table>
                     <h5 id="uWSGI、WSGI和uwsgi"><a href="#uWSGI、WSGI和uwsgi" class="headerlink"
                                                                                                       title="uWSGI、WSGI和uwsgi"></a>uWSGI、WSGI和uwsgi
-                    </h5>
-                    <p><img src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2969"
-                                                                                                      alt="85a43d7de8c1f266672facbf9506ed36.jpeg"><br><img
-                                                                                                      src="evernotecid://0E22B638-0363-429E-85C8-4299D11A32C4/appyinxiangcom/1386727/ENResource/p2970"
-                                                                                                      alt="06a0083fd409d38ada45fbad48ca402e.png">
-                    </p>
+                    </h5><img src="/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/03.png"
+                                                                                                    title="区别1">
+                    <img src="/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/04.png"
+                                                                                                    title="区别2">
+
                     <h5 id="Werkzeug介绍"><a href="#Werkzeug介绍" class="headerlink"
                                                                                                       title="Werkzeug介绍"></a>Werkzeug介绍
                     </h5>
@@ -695,14 +693,14 @@
 
                     <a href="/archives/">
 
-                      <span class="site-state-item-count">27</span>
+                      <span class="site-state-item-count">32</span>
                       <span class="site-state-item-name">日志</span>
                     </a>
                   </div>
 
                   <div class="site-state-item site-state-tags">
                     <a href="/tags/index.html">
-                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-count">12</span>
                       <span class="site-state-item-name">标签</span>
                     </a>
                   </div>
@@ -829,7 +827,7 @@
                                                                                         src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
         </script>
         <div class="copyright">&copy; 2015 &mdash; <span
-                                                                                          itemprop="copyrightYear">2019</span>
+                                                                                          itemprop="copyrightYear">2020</span>
           <span class="with-love">
             <i class="fa fa-user"></i>
           </span>
@@ -845,7 +843,7 @@
 
           <span class="post-meta-item-text">Site words total count&#58;</span>
 
-          <span title="Site words total count">82.1k</span>
+          <span title="Site words total count">93.5k</span>
 
         </div>
 
@@ -861,7 +859,7 @@
 
         <div class="theme-info">
           <div class="powered-by"></div>
-          <span class="post-count">博客全站共82.1k字</span>
+          <span class="post-count">博客全站共93.5k字</span>
         </div>
 
         <div class="busuanzi-count">

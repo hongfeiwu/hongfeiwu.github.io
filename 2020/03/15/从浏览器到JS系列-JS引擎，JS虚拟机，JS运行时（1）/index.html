@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="前端基础,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="浏览器 浏览器内核分成两部分：渲染引擎和JS引擎浏览器内核名字有很多，渲染引擎、排版引擎、解释引擎，英文（Rendering Engine）   ,在早期内核也是包含 js 引擎的，而现在 js 引擎越来越独立了，可以把它单独提出来，所以，我们所说的内核更偏向于指渲染引擎。 js代码执行分为两个部分：  1、代码的检查装载阶段（预编译阶段），此阶段进行变量和函数的声明，但是不对变量进行赋值，">
+  <meta name="keywords" content="前端基础">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="（转）从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（1）">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="浏览器 浏览器内核分成两部分：渲染引擎和JS引擎浏览器内核名字有很多，渲染引擎、排版引擎、解释引擎，英文（Rendering Engine）   ,在早期内核也是包含 js 引擎的，而现在 js 引擎越来越独立了，可以把它单独提出来，所以，我们所说的内核更偏向于指渲染引擎。 js代码执行分为两个部分：  1、代码的检查装载阶段（预编译阶段），此阶段进行变量和函数的声明，但是不对变量进行赋值，">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/1.gif">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/3.jpg">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/4.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/5.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/异步任务1.jpg">
+  <meta property="og:updated_time" content="2020-03-15T06:36:50.874Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="（转）从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（1）">
+  <meta name="twitter:description"
+                                                                                  content="浏览器 浏览器内核分成两部分：渲染引擎和JS引擎浏览器内核名字有很多，渲染引擎、排版引擎、解释引擎，英文（Rendering Engine）   ,在早期内核也是包含 js 引擎的，而现在 js 引擎越来越独立了，可以把它单独提出来，所以，我们所说的内核更偏向于指渲染引擎。 js代码执行分为两个部分：  1、代码的检查装载阶段（预编译阶段），此阶段进行变量和函数的声明，但是不对变量进行赋值，">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/1.gif">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/">
+
+  <title>（转）从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（1） | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      （转）从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（1）</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2020-03-15T14:22:00+08:00">
+                          2020-03-15
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          4,060
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          15
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="浏览器"><a href="#浏览器" class="headerlink"
+                                                                                                      title="浏览器"></a>浏览器
+                    </h4>
+                    <p>
+                      浏览器内核分成两部分：渲染引擎和JS引擎<br>浏览器内核名字有很多，渲染引擎、排版引擎、解释引擎，英文（Rendering
+                      Engine）
+                      ,在早期内核也是包含 js 引擎的，而现在 js
+                      引擎越来越独立了，可以把它单独提出来，所以，我们所说的内核更偏向于指渲染引擎。</p>
+                    <p>js代码执行分为两个部分： </p>
+                    <p>1、代码的检查装载阶段（预编译阶段），此阶段进行变量和函数的声明，但是不对变量进行赋值，
+                      变量的默认值为undefined。<br>2、代码的执行阶段，此阶段对变量进行赋值和函数的声明。
+                      所以：Js的变量提升和函数提升会影响JS的执行结果，ES6中的let定义的变量不会提升<br>3、js的执行顺序，先同步后异步<br>4、异步中任务队列的执行顺序：
+                      先微任务microtask队列，再宏任务macrotask队列<br>5、调用Promise
+                      中的resolve，reject属于微任务队列，setTimeout属于宏任务队列
+                      所以：【同步&gt;异步；微任务&gt;宏任务】 </p>
+                    <h4 id="JavaScript"><a href="#JavaScript" class="headerlink"
+                                                                                                      title="JavaScript"></a>JavaScript
+                    </h4>
+                    <p>JavaScript 是一种解释型语言，也就是说，它不需要编译，由解释器实时运行</p>
+                    <ul>
+                      <li><strong>好处：</strong>是运行和修改都比较方便，刷新页面就可以重新解释；</li>
+                      <li><strong>缺点：</strong>是每次运行都要调用解释器，系统开销较大，运行速度慢于编译型语言。
+                      </li>
+                    </ul>
+                    <p>JS的组成部分：</p>
+                    <ul>
+                      <li>ECMAScript，描述了该语言的语法和基本对象。</li>
+                      <li>文档对象模型（DOM），描述处理网页内容的方法和接口。<img src="/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/1.gif"
+                                                                                                        title="js">
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">var x = 1; //全局变量x</span><br><span class="line">function A(y) &#123;</span><br><span class="line">  var x = 2; //局部变量x</span><br><span class="line">  function B(z) &#123;</span><br><span class="line">    console.log(x+y+z);</span><br><span class="line">  &#125;</span><br><span class="line">  return B;</span><br><span class="line">&#125;</span><br><span class="line">var C = A(1);</span><br><span class="line">C(1);</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <p>全局初始化:JS引擎在进入一段可执行的代码时，需要完成以下三个初始化工作：</p>
+                    <ol>
+                      <li>创建一个全局对象（Global
+                        Object），这个对象全局只存在一份，它的属性在任何地方都可以访问，它的存在伴随着应用程序的整个生命周期。全局对象在创建时，将Math，String，Date，document等常用的JS对象作为其属性。由于这个全局对象不能通过名字直接访问，因此还有另一个属性window，并将window指向了自身这样就可以通过window访问这个全局对象了
+                      </li>
+                      <li>JS引擎需要构建一个执行环境（Execution Context
+                        Stack),与此同时，也要创建一个全局执行环境（Execution
+                        Context）EC，并将这个全局执行环境EC压入执行环境栈中。执行环境栈的作用时为了保证程序能够按照正确的顺序被执行。
+                      </li>
+                      <li>JS引擎创建一个与EC关联的全局变量对象（Varibale
+                        Object）VO，并把VO指向全局对象，VO不仅包含了全局对象的原有属性，还包括在全局定义的变量x和函数A，与此同时，在定义函数A的时候，还为A添加了一个内部属性scope，并将scope指向了VO。
+                      </li>
+                    </ol>
+                    <p>执行一个函数，会发生什么？</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">function say() &#123;</span><br><span class="line">  let str = &apos;hello world&apos;</span><br><span class="line">  console.log(str)</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>创建函数，过程：</p>
+                    <ol>
+                      <li>开辟一个新的堆内存</li>
+                      <li>创建函数say，把这个函数体中的代码放在这个堆内存中。（字符串形式）</li>
+                      <li>在当前上下文中声明say函数（变量），函数声明和定义会提升到最前面</li>
+                      <li>把开辟的堆内存的地址赋值给函数名say</li>
+                    </ol>
+                    <p>执行函数：</p>
+                    <ol>
+                      <li>形成一个供代码执行的环境，也是一个栈内存。</li>
+                      <li>将存储的字符串复制一份到新开辟的栈内存中，使其变为真正的JS代码。</li>
+                      <li>先对形参进行赋值，再进行变量提升。</li>
+                      <li>在这个新开辟的作用域中自上而下执行。</li>
+                    </ol>
+                    <h4 id="JavaScript引擎"><a href="#JavaScript引擎" class="headerlink"
+                                                                                                      title="JavaScript引擎　"></a>JavaScript引擎　
+                    </h4>
+                    <p>
+                      所谓JavaScript引擎是一个专门处理JavaScript脚本的虚拟机，一般会附带在网页浏览器之中，用于解释和执行js脚本。　<br>JavaScript
+                      引擎的基本工作是把开发人员写的 JavaScript
+                      代码转换成高效、优化的代码，这样就可以通过浏览器进行解释甚至嵌入到应用中。事实上，JavaScriptCore
+                      自称为“优化虚拟机”。&nbsp;&nbsp; &nbsp;每个js引擎都实现了ECMAScript规范；</p>
+                    <p>早期，浏览器内部对 JavaScript 的处理过程如下：</p>
+                    <ul>
+                      <li>读取代码，进行词法分析（Lexical analysis），将代码分解成词元（token）。</li>
+                      <li>对词元进行语法分析（parsing），将代码整理成“语法树”（syntax tree）。</li>
+                      <li>使用“翻译器”（translator），将代码转为字节码（bytecode）。</li>
+                      <li>使用“字节码解释器”（bytecode interpreter），将字节码转为机器码。</li>
+                    </ul>
+                    <p>js引擎从原始的遍历语法树，到字节码方式到引入<strong>即时编译（Just In Time
+                        compiler，缩写JIT</strong>），性能得到了质的飞跃
+                      ，即<strong>字节码只在运行时编译，用到哪一行就编译哪一行，并且把编译结果缓存（inline
+                        cache）</strong>　。<br>为了提高运行速度，目前的浏览器都将 JavaScript
+                      进行一定程度的编译，生成类似字节码（bytecode）的中间代码，以提高运行速度。</p>
+
+                    <p>著名的js引擎：　　　　</p>
+                    <ul>
+                      <li>
+                        Mozilla：SpiderMonkey引擎，世界第一款JavaScript引擎，有C/C++编写，用于Mozilla
+                        Firefox
+                        1.0～3.0版本　　　　</li>
+                      <li>Google：V8引擎，由C++/汇编语言编写，用于chrome浏览器　　　　</li>
+                      <li>微软：Chakra（查克拉，笑）引擎，用于Internet Explorer
+                        9的32位版本二、js虚拟机(进程虚拟机)：　</li>
+                    </ul>
+                    <h5 id="深入理解JS引擎的执行机制"><a href="#深入理解JS引擎的执行机制" class="headerlink"
+                                                                                                      title="深入理解JS引擎的执行机制"></a>深入理解JS引擎的执行机制
+                    </h5>
+                    <p>(1) JS是单线程语言</p>
+                    <p>(2) JS的Event Loop是JS的执行机制。深入了解JS的执行,就等于深入了解JS里的event loop
+                    </p>
+                    <h6 id="JS为什么是单线程的？"><a href="#JS为什么是单线程的？" class="headerlink"
+                                                                                                      title="JS为什么是单线程的？"></a>JS为什么是单线程的？
+                    </h6>
+                    <p>JS最初被设计用在浏览器中,那么想象一下,如果浏览器中的JS是多线程的。</p>
+                    <blockquote>
+                      <p>场景描述:<br>那么现在有2个线程,process1
+                        process2,由于是多线程的JS,所以他们对同一个dom,同时进行操作.<br>process1
+                        删除了该dom,而process2
+                        编辑了该dom,同时下达2个矛盾的命令,浏览器究竟该如何执行呢?</p>
+                    </blockquote>
+                    <h6 id="为什么需要异步"><a href="#为什么需要异步" class="headerlink"
+                                                                                                      title="为什么需要异步?"></a>为什么需要异步?
+                    </h6>
+                    <blockquote>
+                      <p>
+                        场景描述:<br>如果JS中不存在异步,只能自上而下执行,如果上一行解析时间很长,那么下面的代码就会被阻塞。<br>对于用户而言,阻塞就意味着”卡死”,这样就导致了很差的用户体验<br>所以,JS中存在异步执行。
+                      </p>
+                    </blockquote>
+                    <h6 id="单线程又是如何实现异步的呢"><a href="#单线程又是如何实现异步的呢" class="headerlink"
+                                                                                                      title="单线程又是如何实现异步的呢?"></a>单线程又是如何实现异步的呢?
+                    </h6>
+                    <p>既然JS是单线程的,只能在一条线程上执行,又是如何实现的异步呢?<br>是通过的事件循环(event
+                      loop),理解了event
+                      loop机制,就理解了JS的执行机制<br>js中包含诸多创建异步的函数如:<br>seTimeout，setInterval，dom事件，ajax，Promise，process.nextTick等函数
+                    </p>
+                    <h5 id="event-loop（1）"><a href="#event-loop（1）" class="headerlink"
+                                                                                                      title="event loop（1）"></a>event
+                      loop（1）</h5>
+                    <p>观察它的执行顺序</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">console.log(1)</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">    console.log(2)</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(3)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>运行结果是: 1 3
+                      2<br>也就是说,setTimeout里的函数并没有立即执行,而是延迟了一段时间,满足一定条件后,才去执行的,这类代码,我们叫异步代码。JS
+                      分为同步任务和异步任务</p>
+                    <img src="/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/3.jpg"
+                                                                                                    title="同步、异步">
+                    <p><a href="https://blog.csdn.net/lin_credible/article/details/40143961" target="_blank"
+                                                                                                      rel="noopener">按照这种分类方式,JS的执行机制是</a>
+                    </p>
+                    <ul>
+                      <li>首先判断JS是同步还是异步,同步就进入主线程，形成一个<strong>执行栈（execution
+                          context stack） event
+                          queue</strong>,异步就进入event table</li>
+                      <li>事件触发线程管理着一个<strong>任务队列（task
+                          queue）</strong>,异步任务在event
+                        table中注册函数,当满足触发条件后,被推入<strong>执行栈event queue</strong>
+                      </li>
+                      <li>同步任务进入主线程后一直执行,直到主线程空闲时,才会去event
+                        queue中查看是否有可执行的异步任务,如果有就推入主线程中</li>
+                    </ul>
+                    <p>**1. 因为单线程，所以代码自上而下执行，所有代码被放到执行栈中执行；</p>
+                    <ol start="2">
+                      <li>遇到异步函数将回调函数添加到一个任务队列里面；</li>
+                      <li>当执行栈中的代码执行完以后，会去循环任务队列里的函数;</li>
+                      <li>将任务队列里的函数放到执行栈中执行;</li>
+                      <li>如此往复，称为事件循环;**</li>
+                    </ol>
+                    <p>以上三步循环执行,这就是event loop</p>
+                    <img src="/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/4.png"
+                                                                                                    title="event-loop">
+                    <p>重新描述下上述的js</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">console.log(1) 是同步任务,放入主线程里</span><br><span class="line">setTimeout() 是异步任务,被放入event table, 0秒之后被推入event queue里</span><br><span class="line">console.log(3 是同步任务,放到主线程里</span><br><span class="line"></span><br><span class="line">当 1、 3在控制条被打印后,主线程去event queue(事件队列)里查看是否有可执行的函数,执行setTimeout里的函数</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>有时候 setTimeOut 推入队列里的事件执行时间不准确。原因便是推入的事件被推入队列的时候，js
+                      引擎线程比较繁忙，没有立即执行，所以有误差。
+                    </p>
+                    <img src="/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/5.png"
+                                                                                                    title="form">
+                    <p>上图的大致描述：<br>主线程在执行时产生执行栈，栈中的代码调用 API
+                      时，会往任务队列里添加各种事件（当满足触发条件后推入任务队列，如 ajax
+                      请求完成）<br>栈中的代码执行完毕，就会读取任务队列中的事件，去执行那些回调，如此循环</p>
+                    <h5 id="event-loop（2）"><a href="#event-loop（2）" class="headerlink"
+                                                                                                      title="event loop（2）"></a>event
+                      loop（2）</h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">setTimeout(function()&#123;</span><br><span class="line">     console.log(&apos;定时器开始啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line"> </span><br><span class="line"> new Promise(function(resolve)&#123;</span><br><span class="line">     console.log(&apos;马上执行for循环啦&apos;);</span><br><span class="line">     for(var i = 0; i &lt; 10000; i++)&#123;</span><br><span class="line">         i == 99 &amp;&amp; resolve();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;).then(function()&#123;</span><br><span class="line">     console.log(&apos;执行then函数啦&apos;)</span><br><span class="line"> &#125;);</span><br><span class="line"> </span><br><span class="line"> console.log(&apos;代码执行结束&apos;);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>执行结果为：<br>【马上执行for循环啦 — 代码执行结束 — 执行then函数啦 — 定时器开始啦】</p>
+                    <p>
+                      <u><strong>Promise中的异步体现在then和catch中，所以写在Promise中的代码是被当做同步任务立即执行的</strong></u>
+                    </p>
+                    <p>
+                      准确的划分方式是:<br>macro-task(宏任务)：包括整体代码script，setTimeout，setInterval
+                    </p>
+                    <blockquote>
+                      <p>异步任务的回调会依次进入macro task queue，等待后续被调用</p>
+                    </blockquote>
+                    <p>micro-task(微任务)：Promise，process.nextTick</p>
+                    <blockquote>
+                      <p>异步任务的回调会依次进入micro task queue，等待后续被调用</p>
+                    </blockquote>
+                    <img src="/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（1）/异步任务1.jpg"
+                                                                                                    title="异步任务1">
+
+                    <p>
+                      按照这种分类方式:JS的执行机制是<br>执行一个宏任务,过程中如果遇到微任务,就将其放到微任务的【事件队列】里<br>当前宏任务执行完成后,会查看微任务的【事件队列】,并将里面全部的微任务依次执行完
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">首先执行script下的宏任务,遇到setTimeout,将其放到宏任务的【队列】里</span><br><span class="line">遇到 new Promise直接执行,打印&quot;马上执行for循环啦&quot;</span><br><span class="line">遇到then方法,是微任务,将其放到微任务的【队列里】</span><br><span class="line">打印 &quot;代码执行结束&quot;</span><br><span class="line">本轮宏任务执行完毕,查看本轮的微任务,发现有一个then方法里的函数, 打印&quot;执行then函数啦&quot;</span><br><span class="line">到此,本轮的event loop 全部完成。</span><br><span class="line">下一轮的循环里,先执行一个宏任务,发现宏任务的【队列】里有一个 setTimeout里的函数,执行打印&quot;定时器开始啦&quot;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="定时器线程"><a href="#定时器线程" class="headerlink"
+                                                                                                      title="定时器线程"></a>定时器线程
+                    </h5>
+                    <p>为什么要单独的定时器线程？</p>
+                    <blockquote>
+                      <p>JavaScript引擎是单线程的,
+                        如果处于阻塞线程状态就会影响记计时的准确，因此很有必要单独开一个线程用来计时。</p>
+                    </blockquote>
+                    <p>什么时候会用到定时器线程？</p>
+                    <blockquote>
+                      <p>
+                        当使用setTimeout或setInterval时，定时器需要定时器线程计时，计时完成后就会将特定的事件推入事件队列中。
+                      </p>
+                    </blockquote>
+                    <p>举例：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">setTimeout(function()&#123;</span><br><span class="line">    console.log(&apos;setTimeOut&apos;);</span><br><span class="line">&#125;, 0);</span><br><span class="line">console.log(&apos;Hi&apos;);</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line">Hi</span><br><span class="line">setTimeOut</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>虽然代码的本意是 0 毫秒后就推入事件队列，但是 W3C 在 HTML
+                      标准中规定，规定要求setTimeout中低于 4ms
+                      的时间间隔算为4ms。再退一步讲，即使不用等待 4ms 结果依然如此。因为在 J<u><strong>S
+                          引擎线程执行空闲时才会执去行被定时器推入到事件队列中的回调函数</strong></u>。<br>对上述的解释应为:<br>3秒后,setTimeout里的函数被会推入event
+                      queue,而event queue(事件队列)里的任务,只有在主线程空闲时才会执行。</p>
+                    <h4 id="js虚拟机"><a href="#js虚拟机" class="headerlink"
+                                                                                                      title="js虚拟机"></a>js虚拟机
+                    </h4>
+                    <p>1.“虚拟机”是指软件驱动的给定的计算机系统的模拟器</p>
+                    <p>2.虚拟机根据其在多大程度上精确地模拟或代替真实的物理机器来分类，可分为”系统虚拟机”和”进程虚拟机”</p>
+                    <p>3.虚拟机应该具备的一个特征就是有一个虚拟的指令集（ISA）</p>
+                    <p>4.js引擎通常被称作一种虚拟机，准确来讲是一种”进程虚拟机”</p>
+                    <p>5.JavaScript引擎可以向“虚拟机”的叫法上贴，正是将其字节码指令集看作一个虚拟机器的特征</p>
+                    <p>
+                      <strong>js虚拟机是一种进程虚拟机（不具备全部的功能，(只)能运行一个程序或者进程）</strong>，它具备的一个特征就是有一个虚拟的指令集（ISA），对比下系统虚拟机即可。<br>虚拟机是一种进程虚拟机，专门设计来解释和执行的
+                      JavaScript </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">async function async1() &#123;</span><br><span class="line">    console.log(&apos;async1 start&apos;);</span><br><span class="line">    await async2();</span><br><span class="line">    console.log(&apos;async1 end&apos;);</span><br><span class="line">&#125;</span><br><span class="line">async function async2() &#123;</span><br><span class="line">    console.log(&apos;async2&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(&apos;script start&apos;);</span><br><span class="line"></span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(&apos;setTimeout&apos;);</span><br><span class="line">&#125;, 0)</span><br><span class="line"></span><br><span class="line">async1();</span><br><span class="line"></span><br><span class="line">new Promise(function(resolve) &#123;</span><br><span class="line">    console.log(&apos;promise1&apos;);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(function() &#123;</span><br><span class="line">    console.log(&apos;promise2&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">console.log(&apos;script end&apos;);</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">script start</span><br><span class="line">async1 start</span><br><span class="line">async2</span><br><span class="line">promise1</span><br><span class="line">script end</span><br><span class="line">async1 end</span><br><span class="line">promise2</span><br><span class="line">setTimeout</span><br><span class="line">*/</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="await做了什么"><a href="#await做了什么" class="headerlink"
+                                                                                                      title="await做了什么"></a>await做了什么
+                    </h5>
+                    <p>先执行宏任务，再执行微任务，再</p>
+                    <p>await 等待的是一个表达式，这个表达式的返回值可以是一个promise对象也可以是其他值。</p>
+                    <p>
+                      实际上await是一个让出线程的标志。await后面的表达式会先执行一遍，将await后面的代码加入到microtask中，然后就会跳出整个async函数来执行后面的代码。
+                    </p>
+                    <ol>
+                      <li>
+                        首先，事件循环从宏任务(macrotask)队列开始，这个时候，宏任务队列中，只有一个script(整体代码)任务；当遇到任务源(task
+                        source)时，则会先分发任务到对应的任务队列中去。</li>
+                      <li>然后我们看到首先定义了两个async函数，接着往下看，然后遇到了 console 语句，直接输出
+                        script start。输出之后，script
+                        任务继续往下执行，遇到 setTimeout，其作为一个宏任务源，则会先将其任务分发到对应的队列中</li>
+                      <li>script
+                        任务继续往下执行，执行了async1()函数，前面讲过async函数中在await之前的代码是立即执行的，所以会立即输出async1
+                        start。<br>遇到了await时，会将await后面的表达式执行一遍，所以就紧接着输出async2，然后将await后面的代码也就是console.log(‘async1
+                        end’)加入到microtask中的Promise队列中，接着跳出async1函数来执行后面的代码</li>
+                      <li>script任务继续往下执行，遇到Promise实例。由于Promise中的函数是立即执行的，而后续的
+                        .then 则会被分发到 microtask
+                        的 Promise 队列中去。所以会先输出 promise1，然后执行 resolve，将 promise2
+                        分配到对应队列</li>
+                      <li>script任务继续往下执行，最后只有一句输出了 script
+                        end，至此，全局任务就执行完毕了。<br>根据上述，每次执行完一个宏任务之后，会去检查是否存在
+                        Microtasks；如果有，则执行
+                        Microtasks 直至清空 Microtask
+                        Queue。<br>因而在script任务执行完毕之后，开始查找清空微任务队列。此时，微任务中，
+                        Promise 队列有的两个任务async1 end和promise2，因此按先后顺序输出 async1
+                        end，promise2。当所有的
+                        Microtasks 执行完毕之后，表示第一轮的循环就结束了</li>
+                      <li>第二轮循环依旧从宏任务队列开始。此时宏任务中只有一个
+                        setTimeout，取出直接输出即可，至此整个流程结束</li>
+                    </ol>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/前端基础/" rel="tag"># 前端基础</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2020/03/15/前端基本之浏览器渲染/" rel="next"
+                                                                                                        title="前端基本之浏览器渲染">
+                          <i class="fa fa-chevron-left"></i> 前端基本之浏览器渲染
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（2）/" rel="prev"
+                                                                                                        title="（转）从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（2）">
+                          （转）从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（2） <i
+                                                                                                          class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">32</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">12</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#浏览器"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">浏览器</span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#JavaScript"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">JavaScript
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#JavaScript引擎"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">JavaScript引擎　
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#深入理解JS引擎的执行机制"><span
+                                                                                                            class="nav-number">3.1.</span>
+                            <span class="nav-text">深入理解JS引擎的执行机制
+                            </span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#JS为什么是单线程的？"><span
+                                                                                                                class="nav-number">3.1.1.</span>
+                                <span class="nav-text">JS为什么是单线程的？
+                                </span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#为什么需要异步"><span
+                                                                                                                class="nav-number">3.1.2.</span>
+                                <span class="nav-text">为什么需要异步?
+                                </span></a></li>
+                            <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                              href="#单线程又是如何实现异步的呢"><span
+                                                                                                                class="nav-number">3.1.3.</span>
+                                <span class="nav-text">单线程又是如何实现异步的呢?
+                                </span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#event-loop（1）"><span
+                                                                                                            class="nav-number">3.2.</span>
+                            <span class="nav-text">event
+                              loop（1）</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#event-loop（2）"><span
+                                                                                                            class="nav-number">3.3.</span>
+                            <span class="nav-text">event
+                              loop（2）</span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#定时器线程"><span
+                                                                                                            class="nav-number">3.4.</span>
+                            <span class="nav-text">定时器线程</span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#js虚拟机"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">js虚拟机</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#await做了什么"><span
+                                                                                                            class="nav-number">4.1.</span>
+                            <span class="nav-text">await做了什么
+                            </span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2020</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">93.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共93.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

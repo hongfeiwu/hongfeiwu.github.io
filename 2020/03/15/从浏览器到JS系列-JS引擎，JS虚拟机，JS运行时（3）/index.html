@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="前端基础,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="JS引擎的组成部分  一个JS引擎大概包含以下几个部分:    编译器：将源码转变为抽象语法树，某些引擎还将语法树转变为了字节码。编译过程会占用用户时间。   解释器：接收字节码，执行它。需要处理内存分配，动态优化等   JIT：运行时优化，热点代码字节码转变为本地代码。和Java中的JIT类似。如果优化没有达到效果，还会回退为优化前代码。   垃圾回收器GC和分析工具，分析工具收集运行时信息">
+  <meta name="keywords" content="前端基础">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（3）">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（3）/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="JS引擎的组成部分  一个JS引擎大概包含以下几个部分:    编译器：将源码转变为抽象语法树，某些引擎还将语法树转变为了字节码。编译过程会占用用户时间。   解释器：接收字节码，执行它。需要处理内存分配，动态优化等   JIT：运行时优化，热点代码字节码转变为本地代码。和Java中的JIT类似。如果优化没有达到效果，还会回退为优化前代码。   垃圾回收器GC和分析工具，分析工具收集运行时信息">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:updated_time" content="2020-03-15T06:41:08.196Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（3）">
+  <meta name="twitter:description"
+                                                                                  content="JS引擎的组成部分  一个JS引擎大概包含以下几个部分:    编译器：将源码转变为抽象语法树，某些引擎还将语法树转变为了字节码。编译过程会占用用户时间。   解释器：接收字节码，执行它。需要处理内存分配，动态优化等   JIT：运行时优化，热点代码字节码转变为本地代码。和Java中的JIT类似。如果优化没有达到效果，还会回退为优化前代码。   垃圾回收器GC和分析工具，分析工具收集运行时信息">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（3）/">
+
+  <title>从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（3） | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（3）/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（3）</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2020-03-15T14:40:32+08:00">
+                          2020-03-15
+                        </time>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          1,479
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          5
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="JS引擎的组成部分"><a href="#JS引擎的组成部分" class="headerlink"
+                                                                                                      title="JS引擎的组成部分"></a>JS引擎的组成部分
+                    </h4>
+                    <p>一个JS引擎大概包含以下几个部分:</p>
+                    <ul>
+                      <li>编译器：将源码转变为抽象语法树，某些引擎还将语法树转变为了字节码。编译过程会占用用户时间。</li>
+                      <li>解释器：接收字节码，执行它。需要处理内存分配，动态优化等</li>
+                      <li>
+                        JIT：运行时优化，热点代码字节码转变为本地代码。和Java中的JIT类似。如果优化没有达到效果，还会回退为优化前代码。
+                      </li>
+                      <li>垃圾回收器GC和分析工具，分析工具收集运行时信息，如热点代码探测。 </li>
+                    </ul>
+                    <p>
+                      编译，是从源代码（通常为高级语言）到能直接被计算机或虚拟机执行的目标代码（通常为低级语言或机器语言）的翻译过程，而字节码正是虚拟机所能执行的的目标代码。
+                    </p>
+                    <p>Google 的 V8 引擎 是用 C++ 编写的，它也能够编译并执行 JavaScript
+                      源代码、处理内存分配和垃圾回收。它被设计成由两个编译器组成，可以把源码直接编译成机器码：</p>
+                    <ul>
+                      <li>Full-codegen：输出未优化代码的快速编译器 </li>
+                      <li>Crankshaft: 输出执行效率高、优化过的代码的慢速编译器</li>
+                    </ul>
+                    <p>但v8 5.9 发布后，其中的 Ignition
+                      字节码解释器将默认启动。即V8不再是直接将源码编译成机器码，而是选择加入了中间码处理。</p>
+                    <h5 id="JS引擎和解释器，编译器的关系"><a href="#JS引擎和解释器，编译器的关系" class="headerlink"
+                                                                                                      title="JS引擎和解释器，编译器的关系"></a>JS引擎和解释器，编译器的关系
+                    </h5>
+                    <p>
+                      简单地说，JavaScript解析引擎就是能够“读懂”JavaScript代码，并准确地给出代码运行结果的一段程序。比方说，当你写了
+                      var a = 1
+                      + 1; 这样一段代码，JavaScript引擎做的事情就是看懂（解析）你这段代码，并且将a的值变为2。</p>
+                    <p>
+                      学过编译原理的人都知道，对于静态语言来说（如Java、C++、C），处理上述这些事情的叫编译器（Compiler），相应地对于JavaScript这样的动态语言则叫解释器（Interpreter）。这两者的区别用一句话来概括就是：<strong>编译器是将源代码编译为另外一种代码（比如机器码，或者字节码），而解释器是直接解析并将代码运行结果输出</strong>。
+                      比方说，firebug的console就是一个JavaScript的解释器。</p>
+                    <p>
+                      解释器就是个黑箱，输入是源码，输出就是输入程序的执行结果，对用户来说中间没有独立的“编译”步骤。这非常抽象，内部是怎么实现的都没关系，只要能实现语义就行。你可以写一个C语言的解释器，里面只是先用普通的C编译器把源码编译为in-memory
+                      image，然后直接调用那个image去得到运行结果；用户拿过去，发现直接输入源码可以得到源程序对应的运行结果就满足需求了，无需在意解释器这个“黑箱子”里到底是什么。<br>*<em>实际上很多解释器内部是以“编译器+虚拟机”的方式来实现的，先通过编译器将源码转换为AST或者字节码，然后由虚拟机去完成实际的执行。所谓“解释型语言”并不是不用编译，而只是不需要用户显式去使用编译器得到可执行代码而已。
+                        *</em></p>
+                    <h4 id="什么是JIT"><a href="#什么是JIT" class="headerlink"
+                                                                                                      title="什么是JIT"></a>什么是JIT
+                    </h4>
+                    <p>
+                      Java程序一开始是通过解释器（Interpreter）进行解释执行的。当JVM发现某个方法或代码块运行特别频繁时，就会把这些代码认定为“热点代码（Hot
+                      Spot
+                      Code）”，然后JVM会把这些代码编译成与本地平台相关的机器码，并进行各种层次的优化，完成这个任务的编译器称为：即时编译器（Just
+                      In
+                      Time Compiler，JIT）</p>
+                    <p>
+                      <strong>JIT编译器是“动态编译器”的一种，相对的“静态编译器”则是指的比如：C/C++的编译器</strong>
+                    </p>
+                    <p>JIT是”just in
+                      time”的简写，在编程中它指代一种动态编译技术。即在运行时将”热点代码”编译成相关机器码并存储起来以待下次运行（本地代码）。这样的优点是运行速度更快，缺点也很显然，就是占据更多的空间（因为需要将编译好的机器码存储起来），以空间换时间，那如何更精准地识别”热点代码”，更有效地利用空间应该就是JIT的优化内容之一
+                    </p>
+                    <h4 id="运行时"><a href="#运行时" class="headerlink"
+                                                                                                      title="运行时"></a>运行时
+                    </h4>
+                    <p>
+                      运行时，如果直译的话就是”运行的时刻”，顾名思义也即程序运行的时刻。既然引擎和虚拟机是一种工具，程序，那运行时在此处不应该被理解为是一种状态，而是一种东西，这个”东西”我理解为是运行时的环境。
+                    </p>
+                    <p>
+                      <strong>运行时要掌管程序执行的某些重要的方面</strong>，以保证程序执行的安全性之类的。<br>例如：
+                    </p>
+                    <ul>
+                      <li>
+                        <p>
+                          内存管理：通过强制的自动内存管理，配合强制的类型系统安全性保证（静态/动态都可以，静态类型系统无法保证的方面由运行时插入代码动态保证），以及诸如数组越界检查等功能，保证程序在内存分配、访问、释放上都能保持类型安全。
+                        </p>
+                      </li>
+                      <li>
+                        <p>
+                          代码执行：例如对代码的执行做权限管理、可见性限制之类，保证代码只在其应用的权限内执行，并且拒绝无法通过验证的代码的执行。
+                        </p>
+                      </li>
+                    </ul>
+                    <p>
+                      生物需要环境才能生存，工具需要环境才能工作，语言需要环境才能运行。环境提供支持与约束，支持让语言更强大便捷，约束让语言更安全。
+                    </p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/前端基础/" rel="tag"># 前端基础</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2020/03/15/从浏览器到JS系列-JS引擎，JS虚拟机，JS运行时（2）/" rel="next"
+                                                                                                        title="（转）从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（2）">
+                          <i class="fa fa-chevron-left"></i>
+                          （转）从浏览器到JS系列----JS引擎，JS虚拟机，JS运行时（2）
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">32</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">12</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/83cd44fec739" target="_blank"
+                                                                                                    title="简书">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-chalkboard"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#JS引擎的组成部分"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">JS引擎的组成部分
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#JS引擎和解释器，编译器的关系"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">JS引擎和解释器，编译器的关系
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#什么是JIT"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">什么是JIT
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#运行时"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">运行时</span></a></li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2020</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">93.5k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共93.5k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+          <span class="site-uv">
+            访客数
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+            人
+          </span>
+
+          <span class="site-pv">
+            总访问量
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+            次
+          </span>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
