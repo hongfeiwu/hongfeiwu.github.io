@@ -76,22 +76,39 @@
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="工具,">
 
   <link rel="alternate" href="/atom.xml" title="Xixili"
                                                                                   type="application/atom+xml">
 
-  <meta name="description" content="偶偶来写下">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Xixili">
+  <meta name="description"
+                                                                                  content="windows部署word转pdf服务  既然程序功能部分已经完成，接下来就是部署了 这里以windows server 2008 R2部署为例子。 需要注意的是，在自己电脑是测试直接运行flask   时，整个程序可以正常运行，但是在服务器上部署之后，到了转换的部分一直不成功，后来经过尝试，发现卡在这一步                         1">
+  <meta name="keywords" content="工具">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="word文件转pdf-python实现(2)">
   <meta property="og:url"
-                                                                                  content="http://xixili.online/archives/2019/09/index.html">
+                                                                                  content="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/index.html">
   <meta property="og:site_name" content="Xixili">
-  <meta property="og:description" content="偶偶来写下">
+  <meta property="og:description"
+                                                                                  content="windows部署word转pdf服务  既然程序功能部分已经完成，接下来就是部署了 这里以windows server 2008 R2部署为例子。 需要注意的是，在自己电脑是测试直接运行flask   时，整个程序可以正常运行，但是在服务器上部署之后，到了转换的部分一直不成功，后来经过尝试，发现卡在这一步                         1">
   <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/1.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/2.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/3.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/4.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/5.png">
+  <meta property="og:updated_time" content="2020-03-28T08:33:09.646Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Xixili">
-  <meta name="twitter:description" content="偶偶来写下">
+  <meta name="twitter:title" content="word文件转pdf-python实现(2)">
+  <meta name="twitter:description"
+                                                                                  content="windows部署word转pdf服务  既然程序功能部分已经完成，接下来就是部署了 这里以windows server 2008 R2部署为例子。 需要注意的是，在自己电脑是测试直接运行flask   时，整个程序可以正常运行，但是在服务器上部署之后，到了转换的部分一直不成功，后来经过尝试，发现卡在这一步                         1">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/1.png">
 
   <script type="text/javascript" id="hexo.configurations">
     var NexT = window.NexT || {};
@@ -141,9 +158,10 @@
 
   </script>
 
-  <link rel="canonical" href="http://xixili.online/archives/2019/09/">
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/">
 
-  <title>归档 | Xixili</title>
+  <title>word文件转pdf-python实现(2) | Xixili</title>
 
   <script type="text/javascript">
     var _hmt = _hmt || [];
@@ -163,7 +181,7 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <header id="header" class="header" itemscope
                                                                                     itemtype="http://schema.org/WPHeader">
@@ -292,282 +310,275 @@
         <div class="content-wrap">
           <div id="content" class="content">
 
-            <div class="post-block archive">
-              <div id="posts" class="posts-collapse">
-                <span class="archive-move-on"></span>
+            <div id="posts" class="posts-expand">
 
-                <span class="archive-page-counter">
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
 
-                  OK! 目前共计 36 篇日志。 继续努力。
-                </span>
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2020/03/28/word文件转pdf-python实现（2）/">
 
-                <div class="collection-title">
-                  <h1 class="archive-year" id="archive-year-2019">2019</h1>
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      word文件转pdf-python实现(2)</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2020-03-28T16:16:11+08:00">
+                          2020-03-28
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/python/" itemprop="url"
+                                                                                                          rel="index">
+                            <span itemprop="name">python</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          835
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          4
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="windows部署word转pdf服务"><a href="#windows部署word转pdf服务" class="headerlink"
+                                                                                                      title="windows部署word转pdf服务"></a>windows部署word转pdf服务
+                    </h4>
+                    <p>既然程序功能部分已经完成，接下来就是部署了</p>
+                    <p>这里以windows server 2008 R2部署为例子。</p>
+                    <p>需要注意的是，在自己电脑是测试直接运行flask
+                      时，整个程序可以正常运行，<br>但是在服务器上部署之后，到了转换的部分一直不成功，后来经过尝试，发现卡在这一步
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">word.Documents.Open(FileName=input)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      查询得知是权限问题<br>由于我是通过IIS启动flask的，操作word是IIS用户，而非登录的用户，IIS默认是没有操作word权限的,<br>开发环境Word操作没有问题，在部署环境出现错误1：“检索
+                      COM 类工厂中 CLSID 为 {000209FF-0000-0000-C000-000000000046}
+                      的组件时失败，原因是出现以下错误:
+                      80070005。</p>
+                    <img src="/2020/03/28/word文件转pdf-python实现（2）/1.png"
+                                                                                                    title="应用池">
+
+                    <p>标识改为管理员</p>
+                    <img src="/2020/03/28/word文件转pdf-python实现（2）/2.png"
+                                                                                                    title="标识更改">
+
+                    <p>在IIS中选择网站，点击身份验证，选中ASP.NET，右侧操作点击启用，当时ASP.NET模拟变为已启用后即可
+                    </p>
+                    <img src="/2020/03/28/word文件转pdf-python实现（2）/3.png"
+                                                                                                    title="身份验证">
+                    <p>组件服务（Component Service）”-&gt;计算机（Computers）-&gt;我的电脑（My
+                      Computer）-&gt;DCOM配置（DCOM Config）-&gt;Microsoft Office
+                      Word 97 - 2003
+                      文档，右击“Microsoft Office Word 97 - 2003 文档”
+                      ,<br>或者打开“组件服务”。打开“控制面板”，进入“管理工具”就能找到“组件服务”，或者在开始菜单的运行对话框中输入“dcomcnfg”运行。<br>64位机器直接打开是看不到
+                      ，需要运行下面命令： comexp.msc /32<br>参考：<a href="https://www.cnblogs.com/29ing/archive/2013/01/06/2847602.html"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">https://www.cnblogs.com/29ing/archive/2013/01/06/2847602.html</a>
+                    </p>
+                    <h5 id="操作Word的IIS权限配置"><a href="#操作Word的IIS权限配置" class="headerlink"
+                                                                                                      title="操作Word的IIS权限配置"></a>操作Word的IIS权限配置
+                    </h5><img src="/2020/03/28/word文件转pdf-python实现（2）/4.png"
+                                                                                                    title="word服务权限">
+                    <p>标识中选用下列用户，即管理员用户，增加权限</p>
+                    <img src="/2020/03/28/word文件转pdf-python实现（2）/5.png"
+                                                                                                    title="添加管理员">
+                    <p>
+                      增加文件夹Desktop（这个文件夹操作不太理解）<br>1、C:\Windows\SysWOW64\config\systemprofile\Desktop<br>2、C:\Windows\System32\config\systemprofile\Desktop
+                    </p>
+                    <h5 id="代码"><a href="#代码" class="headerlink"
+                                                                                                      title="代码"></a>代码
+                    </h5>
+                    <p>以下为简单的程序代码</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from flask import Flask</span><br><span class="line">from flask import send_file, send_from_directory</span><br><span class="line">import os</span><br><span class="line">from flask import make_response</span><br><span class="line">from flask import request</span><br><span class="line">import requests</span><br><span class="line">import urllib</span><br><span class="line">import os</span><br><span class="line">import uuid</span><br><span class="line">import sys</span><br><span class="line">import base64</span><br><span class="line">import shutil</span><br><span class="line"></span><br><span class="line">import subprocess</span><br><span class="line">from subprocess import PIPE, Popen</span><br><span class="line">import struct</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">docx_cache = &apos;文件下载存储路径&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def docx2pdf(input, output):</span><br><span class="line">    import win32com</span><br><span class="line">    from win32com import client as wc</span><br><span class="line"></span><br><span class="line">    word = wc.Dispatch(&apos;kwps.Application&apos;)</span><br><span class="line">    word.Visible = False</span><br><span class="line">    docx = word.Documents.Open(FileName=input)</span><br><span class="line">    docx.ExportAsFixedFormat(output, 17)</span><br><span class="line">    word.Quit()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def create_cache_folder():</span><br><span class="line">    global docx_cache</span><br><span class="line">    if os.path.exists(docx_cache):</span><br><span class="line">        # 强制删除文件夹</span><br><span class="line">        shutil.rmtree(docx_cache)</span><br><span class="line">    os.mkdir(docx_cache)  # 新建同名文件夹</span><br><span class="line"></span><br><span class="line">@app.route(&apos;/convert/&lt;int:attr_id&gt;&apos;)</span><br><span class="line">def convert_docx_pdf(attr_id):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    获取附件并进行转换</span><br><span class="line">    :param attr_id:</span><br><span class="line">    :return:</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    captcha = request.args.get(&apos;captcha&apos;)    # 校验码</span><br><span class="line">    attr_url = request.args.get(&apos;attr_url&apos;)     # 附件地址</span><br><span class="line">    if captcha != AuthorizationCode:</span><br><span class="line">        return &apos;验证码不正确。&apos;</span><br><span class="line"></span><br><span class="line">    global docx_cache</span><br><span class="line">    # create_cache_folder()</span><br><span class="line">    app_response = get_attr(attr_url, attr_id)</span><br><span class="line"></span><br><span class="line">    name = app_response.headers[&apos;Content-Disposition&apos;].split(&quot;&apos;&apos;&quot;)[1]</span><br><span class="line">    # file_full_name = urllib.unquote(name)  # Python进行URL解码</span><br><span class="line"></span><br><span class="line">    file_type = urllib.unquote(name).split(&apos;.&apos;)[-1]</span><br><span class="line">    file_full_name = uuid.uuid1().__str__() + &apos;.&apos; + file_type</span><br><span class="line">    input_path = docx_cache + file_full_name</span><br><span class="line"></span><br><span class="line">    # 存储附件</span><br><span class="line">    with open(input_path, &apos;wb+&apos;) as f:</span><br><span class="line">        f.write(app_response.content)</span><br><span class="line">    print &apos;保存成功，file_type:&#123;&#125;, input_path:&#123;&#125;&apos;.format(file_type, input_path)</span><br><span class="line">    pdf_name = uuid.uuid1().__str__() + &apos;.pdf&apos;</span><br><span class="line">    pdf_path = docx_cache + pdf_name</span><br><span class="line">    if file_type in [&apos;DOCX&apos;, &apos;docx&apos;]:  # 判断附件类型</span><br><span class="line">        docx2pdf(input_path, pdf_path)</span><br><span class="line"></span><br><span class="line">    # 需要知道2个参数, 第1个参数是本地目录的path,</span><br><span class="line">    #  第2个参数是文件名(带扩展名)</span><br><span class="line">    response = make_response(send_from_directory(</span><br><span class="line">        docx_cache,</span><br><span class="line">        pdf_name,</span><br><span class="line">        as_attachment=True))</span><br><span class="line">    response.headers[&quot;Content-Disposition&quot;] = &quot;attachment;\</span><br><span class="line">    filename=&#123;&#125;&quot;.format(pdf_name)</span><br><span class="line">    return response</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    app.run(host=&apos;0.0.0.0&apos;, port=8001)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/工具/" rel="tag"># 工具</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2020/03/28/word文件转pdf-python实现（1）/" rel="next"
+                                                                                                        title="word文件转pdf-python实现(1)">
+                          <i class="fa fa-chevron-left"></i>
+                          word文件转pdf-python实现(1)
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
                 </div>
 
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/12/Qweb使用/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">Qweb使用</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-12T23:26:46+08:00"
-                                                                                                      content="2019-09-12">
-                        09-12
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/05/WSGI学习（2）-werkzeug源码解读-1/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">WSGI学习（2）---werkzeug源码解读(1)</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-05T15:40:13+08:00"
-                                                                                                      content="2019-09-05">
-                        09-05
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/05/WSGI学习（1）-python自带库-wsgiref/"
-                                                                                                      itemprop="url">
-
-                        <span
-                                                                                                        itemprop="name">WSGI学习（1）--python自带库--wsgiref</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-05T15:39:31+08:00"
-                                                                                                      content="2019-09-05">
-                        09-05
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/05/python-WGSI标准（中文版）-转/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">python-WGSI标准（中文版）-转</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-05T15:07:07+08:00"
-                                                                                                      content="2019-09-05">
-                        09-05
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/04/odoo-action跳转/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">odoo-action跳转</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-04T13:09:50+08:00"
-                                                                                                      content="2019-09-04">
-                        09-04
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/04/odoo用户视图中groups-id权限字段的实现/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">odoo用户视图中groups_id权限字段的实现</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-04T13:05:43+08:00"
-                                                                                                      content="2019-09-04">
-                        09-04
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/01/odoo视图属性/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">odoo视图属性</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-01T22:58:09+08:00"
-                                                                                                      content="2019-09-01">
-                        09-01
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/01/GO学习2-方法与接口（1）/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">GO学习2--方法与接口（1）</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-01T21:51:23+08:00"
-                                                                                                      content="2019-09-01">
-                        09-01
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/01/GO学习1-基本语法及数据结构（3）/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">GO学习1--基本语法及数据结构（3）</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-01T21:50:35+08:00"
-                                                                                                      content="2019-09-01">
-                        09-01
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
-
-                <article class="post post-type-normal" itemscope
-                                                                                                itemtype="http://schema.org/Article">
-                  <header class="post-header">
-
-                    <h2 class="post-title">
-
-                      <a class="post-title-link" href="/2019/09/01/GO学习1-基本语法及数据结构（2）-容器/"
-                                                                                                      itemprop="url">
-
-                        <span itemprop="name">GO学习1--基本语法及数据结构（2）---容器</span>
-
-                      </a>
-
-                    </h2>
-
-                    <div class="post-meta">
-                      <time class="post-time" itemprop="dateCreated" datetime="2019-09-01T21:49:56+08:00"
-                                                                                                      content="2019-09-01">
-                        09-01
-                      </time>
-                    </div>
-
-                  </header>
-                </article>
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
 
               </div>
             </div>
 
-            <nav class="pagination">
-              <span class="page-number current">1</span><a class="page-number"
-                                                                                              href="/archives/2019/09/page/2/">2</a><a
-                                                                                              class="extend next"
-                                                                                              rel="next"
-                                                                                              href="/archives/2019/09/page/2/"><i
-                                                                                                class="fa fa-angle-right"></i></a>
-            </nav>
+          </div>
 
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
           </div>
 
         </div>
@@ -584,8 +595,17 @@
 
           <div class="sidebar-inner">
 
-            <section
-                                                                                            class="site-overview-wrap sidebar-panel sidebar-panel-active">
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
               <div class="site-overview">
                 <div class="site-author motion-element" itemprop="author" itemscope
                                                                                                 itemtype="http://schema.org/Person">
@@ -665,6 +685,37 @@
 
               </div>
             </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#windows部署word转pdf服务"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">windows部署word转pdf服务
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#操作Word的IIS权限配置"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">操作Word的IIS权限配置
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#代码"><span
+                                                                                                            class="nav-number">1.2.</span>
+                            <span class="nav-text">代码</span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
 
             <div class="back-to-top">
               <i class="fa fa-arrow-up"></i>
@@ -776,7 +827,24 @@
   <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
   </script>
 
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
   <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
 
   <script type="text/javascript">
     // Popup Window;
