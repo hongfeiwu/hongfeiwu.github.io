@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="前端基础,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="为什么要生成虚拟DOM  览器内核拿到html文件后，大致分为一下5个步骤：    解析html元素，构建dom 树   解析CSS，生成页面css规则树（Style Rules）   将dom树 和 css规则树关联起来，生成render树   布局（layout/ reflow），浏览器会为Render树上的每个节点确定在屏幕上的尺寸、位置5.     绘制Render树，绘制页面像素信息">
+  <meta name="keywords" content="前端基础">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="前端基本之虚拟dom（virtual DOM）的工作原理">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual DOM）的工作原理/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="为什么要生成虚拟DOM  览器内核拿到html文件后，大致分为一下5个步骤：    解析html元素，构建dom 树   解析CSS，生成页面css规则树（Style Rules）   将dom树 和 css规则树关联起来，生成render树   布局（layout/ reflow），浏览器会为Render树上的每个节点确定在屏幕上的尺寸、位置5.     绘制Render树，绘制页面像素信息">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/1.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/2.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/3.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/4.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/5.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/6.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/7.png">
+  <meta property="og:updated_time" content="2020-03-28T07:36:54.932Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="前端基本之虚拟dom（virtual DOM）的工作原理">
+  <meta name="twitter:description"
+                                                                                  content="为什么要生成虚拟DOM  览器内核拿到html文件后，大致分为一下5个步骤：    解析html元素，构建dom 树   解析CSS，生成页面css规则树（Style Rules）   将dom树 和 css规则树关联起来，生成render树   布局（layout/ reflow），浏览器会为Render树上的每个节点确定在屏幕上的尺寸、位置5.     绘制Render树，绘制页面像素信息">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/1.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual DOM）的工作原理/">
+
+  <title>前端基本之虚拟dom（virtual DOM）的工作原理 | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2020/03/28/前端基本之虚拟dom（virtual DOM）的工作原理/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      前端基本之虚拟dom（virtual DOM）的工作原理</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2020-03-28T15:20:53+08:00">
+                          2020-03-28
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/前端基础/" itemprop="url"
+                                                                                                          rel="index">
+                            <span itemprop="name">前端基础</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          1,982
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          7
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="为什么要生成虚拟DOM"><a href="#为什么要生成虚拟DOM" class="headerlink"
+                                                                                                      title="为什么要生成虚拟DOM"></a>为什么要生成虚拟DOM
+                    </h4>
+                    <p>览器内核拿到html文件后，大致分为一下5个步骤：</p>
+                    <ol>
+                      <li>解析html元素，构建dom 树</li>
+                      <li>解析CSS，生成页面css规则树（Style Rules）</li>
+                      <li>将dom树 和 css规则树关联起来，生成render树</li>
+                      <li>布局（layout/ reflow），浏览器会为Render树上的每个节点确定在屏幕上的尺寸、位置5.
+                        绘制Render树，绘制页面像素信息到屏幕上，这个过程叫paint<img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/1.png"
+                                                                                                        title="渲染">
+
+                      </li>
+                    </ol>
+                    <p>当你用原生js
+                      或jquery等库去操作DOM时，浏览器会从构建DOM树开始讲整个流程执行一遍，比如当你在一次操作时，需要更新10个DOM节点，理想状态是一次性构建完DOM树，再执行后续操作。但浏览器没这么智能，收到第一个更新DOM请求后，并不知道后续还有9次更新操作，因此会马上执行流程，最终执行10次流程。<br>
+                      所以<strong><u>频繁操作DOM会引起不需要的计算，导致页面卡顿，影响用户体验</u></strong>。而Virtual
+                      DOM能很好的解决这个问题。它用javascript对象表示virtual node(VNode)，根据VNode
+                      计算出真实DOM需要做的最小变动，然后再操作真实DOM节点，提高渲染效率。<br>
+                      例如前面的例子，假如一次操作中有<strong>10次更新DOM的动作</strong>，虚拟DOM不会立即操作DOM，而是将这10次更新的diff内容保存到本地的一个js对象中，最终将这个js对象<strong>一次性attach到DOM树上，通知浏览器去执行绘制工作，这样可以避免大量的无谓的计算量。</strong>
+                    </p>
+                    <h4 id="Virtual-DOM"><a href="#Virtual-DOM" class="headerlink"
+                                                                                                      title="Virtual DOM"></a>Virtual
+                      DOM</h4>
+                    <p><a href="https://zhuanlan.zhihu.com/p/35876032" target="_blank"
+                                                                                                      rel="noopener">VirtualDOM的主要思想就是模拟DOM的树状结构，在内存中创建保存映射DOM信息的节点数据，在由于交互等因素需要视图更新时，先通过对节点数据进行diff后得到差异结果后，再一次性对DOM进行批量更新操作，这就好比在内存中创建了一个平行世界，浏览器中DOM树的每一个节点与属性数据都在这个平行世界中存在着另一个版本的虚拟DOM树，所有复杂曲折的更新逻辑都在平行世界中的VirtualDOM处理完成，只将最终的更新结果发送给浏览器中的DOM树执行，这样就避免了冗余琐碎的DOM树操作负担，进而有效提高了性能。</a>
+                    </p>
+                    <img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/2.png"
+                                                                                                    title="虚拟DOM">
+
+                    <p><a href="https://segmentfault.com/a/1190000016647776" target="_blank"
+                                                                                                      rel="noopener">简单概括</a>有三点：
+                    </p>
+                    <ol>
+                      <li>用JavaScript模拟DOM树，并渲染这个DOM树</li>
+                      <li>比较新老DOM树，得到比较的差异对象</li>
+                      <li>把差异对象应用到渲染的DOM树。</li>
+                    </ol>
+                    <p>虚拟DOM的流程图</p>
+                    <img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/3.png"
+                                                                                                    title="虚拟DOM流程">
+
+                    <h5 id="createEI—用JavaScript模拟DOM树并渲染到页面上"><a href="#createEI—用JavaScript模拟DOM树并渲染到页面上"
+                                                                                                      class="headerlink"
+                                                                                                      title="createEI—用JavaScript模拟DOM树并渲染到页面上"></a>createEI—用JavaScript模拟DOM树并渲染到页面上
+                    </h5>
+                    <p>其实虚拟DOM，本质上是基于javascript实现的，相对于dom对象，就是用JS对象结构的一种映射</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">let element=&#123;</span><br><span class="line">    tagName:&apos;ul&apos;,//节点标签名</span><br><span class="line">    props:&#123;//dom的属性，用一个对象存储键值对</span><br><span class="line">        id:&apos;list&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    children:[//该节点的子节点</span><br><span class="line">        &#123;tagName:&apos;li&apos;,props:&#123;class:&apos;item&apos;&#125;,children:[&apos;aa&apos;]&#125;，</span><br><span class="line">        &#123;tagName:&apos;li&apos;,props:&#123;class:&apos;item&apos;&#125;,children:[&apos;bb&apos;]&#125;,</span><br><span class="line">        &#123;tagName:&apos;li&apos;,props:&#123;class:&apos;item&apos;&#125;,children:[&apos;cc&apos;]&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">对应的html写法是：</span><br><span class="line">&lt;ul id=&apos;list&apos;&gt;</span><br><span class="line">    &lt;li class=&apos;item&apos;&gt;aa&lt;/li&gt;</span><br><span class="line">    &lt;li class=&apos;item&apos;&gt;aa&lt;/li&gt;</span><br><span class="line">    &lt;li class=&apos;item&apos;&gt;aa&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>Virtual DOM并没有完全实现DOM，Virtual
+                      DOM最主要的还是保留了Element之间的层次关系和一些基本属性.
+                      你给我一个数据，我根据这个数据生成一个全新的Virtual DOM，然后跟我上一次生成的Virtual DOM去
+                      diff，得到一个Patch，然后把这个Patch打到浏览器的DOM上去。<br>
+                      我们可以通过javascript对象表示的树结构来构建一棵真正的dom树，当数据状态发生变化时，可以直接修改这个javascript对象，接着对比修改后的javascript对象，记录下需要对页面做的dom操作，然后将其应用到真正的dom树，实现视图的更新，这个过程就是Virtual
+                      DOM的核心思想。</p>
+                    <h5 id="diff—比较新老dom树，得到比较的差异对象"><a href="#diff—比较新老dom树，得到比较的差异对象" class="headerlink"
+                                                                                                      title="diff—比较新老dom树，得到比较的差异对象"></a>diff—比较新老dom树，得到比较的差异对象
+                    </h5>
+                    <p>
+                      比较两棵DOM树的差异，是虚拟DOM的最核心部分，这也是人们常说的虚拟DOM的diff算法，两颗完全的树差异比较一个时间复杂度为
+                      O(n^3)。但是在我们的web中很少用到跨层级DOM树的比较，所以一个层级跟一个层级对比，这样算法复杂度就可以达到
+                      O(n)</p>
+                    <img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/4.png"
+                                                                                                    title="diff">
+
+                    <p>
+                      其实在代码中，我们会从根节点开始标志遍历，遍历的时候把每个节点的差异(包括文本不同，属性不同，节点不同)记录保存起来。如下图：
+                    </p>
+                    <img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/5.png"
+                                                                                                    title="比较">
+
+                    <p>React的Diff算法的时间复杂度是O(n)。<strong>React 的 DOM Diff
+                        算法实际上只会对树进行逐层比较</strong>，两棵树只会对同一层次的节点进行比较，放弃了深度遍历。这样做，似乎牺牲了一定的精确性来换取速度，如下所述。
+                    </p>
+                    <img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/6.png"
+                                                                                                    title="层级比较">
+
+                    <p>只考虑平层地Diff的话，两个节点之间的差异有总结起来有下面4种情况</p>
+                    <ol>
+                      <li>直接替换（REPLACE）原有节点</li>
+                      <li>调整子节点，包括移动、删除等（REORDER）</li>
+                      <li>修改节点属性（PROPS）</li>
+                      <li>修改节点文本内容（TEXT）</li>
+                    </ol>
+                    <img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/7.png"
+                                                                                                    title="差异情况">
+
+                    <p>得到差异对象之后，剩下就是把差异对象应用到我们的dom节点上面了</p>
+                    <h5 id="patch—把差异对象应用到渲染的dom树"><a href="#patch—把差异对象应用到渲染的dom树" class="headerlink"
+                                                                                                      title="patch—把差异对象应用到渲染的dom树"></a>patch—把差异对象应用到渲染的dom树
+                    </h5>
+                    <p>
+                      VirtualDOM的设计是提升前端渲染性能的有效方案，也因此提供了以数据为驱动的前端框架工具的基础，将我们从DOM的繁琐操作中解放出来，不同的VirtualDOM方案在diff方面基本基于三条diff原则，具体diff过程则考虑自身运行上下文中的数据结构，算法效率，组件生命周期与设计来选择diff实现。例如上文snabbdom的updateChildren执行中使用了两端同时对比以及根据位置顺序进行移动的更新策略，而React则受限于Fiber的单向结构采用按顺序直接替换的方式更新，但React优化的组件设计与Fiber的工作线程机制在整体渲染性能方面带来了效率提升，同时两者都提供了基于key值进行diff的策略改善方式。
+                    </p>
+                    <h4 id="虚拟DOM和真是DOM的区别"><a href="#虚拟DOM和真是DOM的区别" class="headerlink"
+                                                                                                      title="虚拟DOM和真是DOM的区别"></a>虚拟DOM和真是DOM的区别
+                    </h4>
+                    <ol>
+                      <li>虚拟DOM不会进行排版与重绘操作</li>
+                      <li>
+                        虚拟DOM进行频繁修改，然后一次性比较并修改真实DOM中需要改的部分（注意！），最后并在真实DOM中进行排版与重绘，减少过多DOM节点排版与重绘损耗
+                      </li>
+                      <li>真实DOM频繁排版与重绘的效率是相当低的</li>
+                      <li>虚拟DOM有效降低大面积（真实DOM节点）的重绘与排版，因为最终与真实DOM比较差异，可以只渲染局部（同2）
+                      </li>
+                    </ol>
+                    <p>使用虚拟DOM的损耗计算：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">总损耗 = 虚拟DOM增删改 + （与Diff算法效率有关）真实DOM差异增删改 + （较少的节点）排版与重绘</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>直接使用真实DOM的损耗计算：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">总损耗 = 真实DOM完全增删改 + （可能较多的节点）排版与重绘</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h4 id="扩展，vue虚拟dom和react虚拟dom有什么不同"><a href="#扩展，vue虚拟dom和react虚拟dom有什么不同" class="headerlink"
+                                                                                                      title="扩展，vue虚拟dom和react虚拟dom有什么不同"></a>扩展，vue虚拟dom和react虚拟dom有什么不同
+                    </h4>
+                    <p>react 函数式组件思想 当你 setstate 就会遍历 diff 当前组件所有的子节点子组件,
+                      这种方式开销是很大的, 所以 react 16
+                      采用了 fiber 链表代替之前的树，可以中断的，分片的在浏览器空闲时候执行vue 组件响应式思想
+                      采用代理监听数据，我在某个组件里修改数据，就会明确知道那个组件产生了变化，只用 diff 这个组件就可以了</p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/前端基础/" rel="tag"># 前端基础</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2020/03/28/前端基本之html网页渲染过程/" rel="next"
+                                                                                                        title="前端基本之html网页渲染过程">
+                          <i class="fa fa-chevron-left"></i> 前端基本之html网页渲染过程
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">34</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">9</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#为什么要生成虚拟DOM"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">为什么要生成虚拟DOM
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#Virtual-DOM"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">Virtual
+                          DOM</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#createEI—用JavaScript模拟DOM树并渲染到页面上"><span
+                                                                                                            class="nav-number">2.1.</span>
+                            <span
+                                                                                                            class="nav-text">createEI—用JavaScript模拟DOM树并渲染到页面上
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#diff—比较新老dom树，得到比较的差异对象"><span
+                                                                                                            class="nav-number">2.2.</span>
+                            <span class="nav-text">diff—比较新老dom树，得到比较的差异对象
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#patch—把差异对象应用到渲染的dom树"><span
+                                                                                                            class="nav-number">2.3.</span>
+                            <span class="nav-text">patch—把差异对象应用到渲染的dom树
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#虚拟DOM和真是DOM的区别"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">虚拟DOM和真是DOM的区别
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#扩展，vue虚拟dom和react虚拟dom有什么不同"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">扩展，vue虚拟dom和react虚拟dom有什么不同
+                        </span></a></li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2020</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">97.1k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共97.1k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

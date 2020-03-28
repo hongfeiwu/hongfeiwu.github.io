@@ -98,7 +98,7 @@
                                                                                   content="http://xixili.online/2020/03/15/前端基本之浏览器渲染/3.png">
   <meta property="og:image"
                                                                                   content="http://xixili.online/2020/03/15/前端基本之浏览器渲染/5.png">
-  <meta property="og:updated_time" content="2020-03-15T07:12:23.600Z">
+  <meta property="og:updated_time" content="2020-03-28T07:31:44.232Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="前端基本之浏览器渲染">
   <meta name="twitter:description"
@@ -429,24 +429,30 @@
                       <li>浏览器是多进程的</li>
                       <li>浏览器之所以能够运行，是因为系统给它的进程分配了资源（cpu、内存）</li>
                       <li>简单点理解，每打开一个Tab页，就相当于创建了一个独立的浏览器进程。
-                        <h4 id="浏览器多进程的优势"><a href="#浏览器多进程的优势" class="headerlink"
-                                                                                                          title="浏览器多进程的优势"></a>浏览器多进程的优势
-                        </h4>相比于单进程浏览器，多进程有如下优点：</li>
+
+                      </li>
+                    </ul>
+                    <h4 id="浏览器多进程的优势"><a href="#浏览器多进程的优势" class="headerlink"
+                                                                                                      title="浏览器多进程的优势"></a>浏览器多进程的优势
+                    </h4>
+                    <p>相比于单进程浏览器，多进程有如下优点：</p>
+                    <ul>
                       <li>避免单个page crash影响整个浏览器</li>
                       <li>避免第三方插件crash影响整个浏览器</li>
                       <li>多进程充分利用多核优势</li>
                       <li>方便使用沙盒模型隔离插件等进程，提高浏览器稳定性</li>
                       <li>
                         简单点理解：如果浏览器是单进程，那么某个Tab页崩溃了，就影响了整个浏览器，体验有多差；同理如果是单进程，插件崩溃了也会影响整个浏览器；而且多进程还有其它的诸多优势。。
-                        <h4 id="浏览器内核（渲染进程）"><a href="#浏览器内核（渲染进程）" class="headerlink"
-                                                                                                          title="浏览器内核（渲染进程）"></a>浏览器内核（渲染进程）
-                        </h4>
                       </li>
                     </ul>
+                    <h4 id="浏览器内核（渲染进程）"><a href="#浏览器内核（渲染进程）" class="headerlink"
+                                                                                                      title="浏览器内核（渲染进程）"></a>浏览器内核（渲染进程）
+                    </h4>
                     <p>
                       请牢记，浏览器的渲染进程是多线程的（这点如果不理解，请回头看进程和线程的区分）<br>那么接下来看看它都包含了哪些线程（列举一些主要常驻线程）：
                     </p>
                     <img src="/2020/03/15/前端基本之浏览器渲染/2.png" title="内核">
+
                     <h5 id="GUI渲染线程"><a href="#GUI渲染线程" class="headerlink"
                                                                                                       title="GUI渲染线程"></a>GUI渲染线程
                     </h5>
@@ -731,7 +737,7 @@
 
                     <a href="/archives/">
 
-                      <span class="site-state-item-count">32</span>
+                      <span class="site-state-item-count">34</span>
                       <span class="site-state-item-name">日志</span>
                     </a>
                   </div>
@@ -939,7 +945,7 @@
 
           <span class="post-meta-item-text">Site words total count&#58;</span>
 
-          <span title="Site words total count">93.5k</span>
+          <span title="Site words total count">97.1k</span>
 
         </div>
 
@@ -955,7 +961,7 @@
 
         <div class="theme-info">
           <div class="powered-by"></div>
-          <span class="post-count">博客全站共93.5k字</span>
+          <span class="post-count">博客全站共97.1k字</span>
         </div>
 
         <div class="busuanzi-count">

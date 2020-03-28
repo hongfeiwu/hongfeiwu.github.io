@@ -1,6 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>前端基本之虚拟dom（virtual DOM）的工作原理</title>
+    <url>/2020/03/28/%E5%89%8D%E7%AB%AF%E5%9F%BA%E6%9C%AC%E4%B9%8B%E8%99%9A%E6%8B%9Fdom%EF%BC%88virtual%20DOM%EF%BC%89%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><meta name="referrer" content="no-referrer">
+
+<h4 id="为什么要生成虚拟DOM"><a href="#为什么要生成虚拟DOM" class="headerlink" title="为什么要生成虚拟DOM"></a>为什么要生成虚拟DOM
+</h4>
+<p>览器内核拿到html文件后，大致分为一下5个步骤：</p>
+<ol>
+  <li>解析html元素，构建dom 树</li>
+  <li>解析CSS，生成页面css规则树（Style Rules）</li>
+  <li>将dom树 和 css规则树关联起来，生成render树</li>
+  <li>布局（layout/ reflow），浏览器会为Render树上的每个节点确定在屏幕上的尺寸、位置5.
+    绘制Render树，绘制页面像素信息到屏幕上，这个过程叫paint<img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/1.png" title="渲染">
+
+  </li>
+</ol>
+<p>当你用原生js
+  或jquery等库去操作DOM时，浏览器会从构建DOM树开始讲整个流程执行一遍，比如当你在一次操作时，需要更新10个DOM节点，理想状态是一次性构建完DOM树，再执行后续操作。但浏览器没这么智能，收到第一个更新DOM请求后，并不知道后续还有9次更新操作，因此会马上执行流程，最终执行10次流程。<br>
+  所以<strong><u>频繁操作DOM会引起不需要的计算，导致页面卡顿，影响用户体验</u></strong>。而Virtual
+  DOM能很好的解决这个问题。它用javascript对象表示virtual node(VNode)，根据VNode
+  计算出真实DOM需要做的最小变动，然后再操作真实DOM节点，提高渲染效率。<br>
+  例如前面的例子，假如一次操作中有<strong>10次更新DOM的动作</strong>，虚拟DOM不会立即操作DOM，而是将这10次更新的diff内容保存到本地的一个js对象中，最终将这个js对象<strong>一次性attach到DOM树上，通知浏览器去执行绘制工作，这样可以避免大量的无谓的计算量。</strong>
+</p>
+<h4 id="Virtual-DOM"><a href="#Virtual-DOM" class="headerlink" title="Virtual DOM"></a>Virtual
+  DOM</h4>
+<p><a href="https://zhuanlan.zhihu.com/p/35876032" target="_blank" rel="noopener">VirtualDOM的主要思想就是模拟DOM的树状结构，在内存中创建保存映射DOM信息的节点数据，在由于交互等因素需要视图更新时，先通过对节点数据进行diff后得到差异结果后，再一次性对DOM进行批量更新操作，这就好比在内存中创建了一个平行世界，浏览器中DOM树的每一个节点与属性数据都在这个平行世界中存在着另一个版本的虚拟DOM树，所有复杂曲折的更新逻辑都在平行世界中的VirtualDOM处理完成，只将最终的更新结果发送给浏览器中的DOM树执行，这样就避免了冗余琐碎的DOM树操作负担，进而有效提高了性能。</a>
+</p>
+<img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/2.png" title="虚拟DOM">
+
+<p><a href="https://segmentfault.com/a/1190000016647776" target="_blank" rel="noopener">简单概括</a>有三点：</p>
+<ol>
+  <li>用JavaScript模拟DOM树，并渲染这个DOM树</li>
+  <li>比较新老DOM树，得到比较的差异对象</li>
+  <li>把差异对象应用到渲染的DOM树。</li>
+</ol>
+<p>虚拟DOM的流程图</p>
+<img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/3.png" title="虚拟DOM流程">
+
+<h5 id="createEI—用JavaScript模拟DOM树并渲染到页面上"><a href="#createEI—用JavaScript模拟DOM树并渲染到页面上" class="headerlink" title="createEI—用JavaScript模拟DOM树并渲染到页面上"></a>createEI—用JavaScript模拟DOM树并渲染到页面上
+</h5>
+<p>其实虚拟DOM，本质上是基于javascript实现的，相对于dom对象，就是用JS对象结构的一种映射</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+      </td>
+      <td class="code">
+        <pre><span class="line">let element=&#123;</span><br><span class="line">    tagName:&apos;ul&apos;,//节点标签名</span><br><span class="line">    props:&#123;//dom的属性，用一个对象存储键值对</span><br><span class="line">        id:&apos;list&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    children:[//该节点的子节点</span><br><span class="line">        &#123;tagName:&apos;li&apos;,props:&#123;class:&apos;item&apos;&#125;,children:[&apos;aa&apos;]&#125;，</span><br><span class="line">        &#123;tagName:&apos;li&apos;,props:&#123;class:&apos;item&apos;&#125;,children:[&apos;bb&apos;]&#125;,</span><br><span class="line">        &#123;tagName:&apos;li&apos;,props:&#123;class:&apos;item&apos;&#125;,children:[&apos;cc&apos;]&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">对应的html写法是：</span><br><span class="line">&lt;ul id=&apos;list&apos;&gt;</span><br><span class="line">    &lt;li class=&apos;item&apos;&gt;aa&lt;/li&gt;</span><br><span class="line">    &lt;li class=&apos;item&apos;&gt;aa&lt;/li&gt;</span><br><span class="line">    &lt;li class=&apos;item&apos;&gt;aa&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+
+<p>Virtual DOM并没有完全实现DOM，Virtual DOM最主要的还是保留了Element之间的层次关系和一些基本属性.
+  你给我一个数据，我根据这个数据生成一个全新的Virtual DOM，然后跟我上一次生成的Virtual DOM去
+  diff，得到一个Patch，然后把这个Patch打到浏览器的DOM上去。<br>
+  我们可以通过javascript对象表示的树结构来构建一棵真正的dom树，当数据状态发生变化时，可以直接修改这个javascript对象，接着对比修改后的javascript对象，记录下需要对页面做的dom操作，然后将其应用到真正的dom树，实现视图的更新，这个过程就是Virtual
+  DOM的核心思想。</p>
+<h5 id="diff—比较新老dom树，得到比较的差异对象"><a href="#diff—比较新老dom树，得到比较的差异对象" class="headerlink" title="diff—比较新老dom树，得到比较的差异对象"></a>diff—比较新老dom树，得到比较的差异对象
+</h5>
+<p>比较两棵DOM树的差异，是虚拟DOM的最核心部分，这也是人们常说的虚拟DOM的diff算法，两颗完全的树差异比较一个时间复杂度为
+  O(n^3)。但是在我们的web中很少用到跨层级DOM树的比较，所以一个层级跟一个层级对比，这样算法复杂度就可以达到 O(n)</p>
+<img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/4.png" title="diff">
+
+<p>其实在代码中，我们会从根节点开始标志遍历，遍历的时候把每个节点的差异(包括文本不同，属性不同，节点不同)记录保存起来。如下图：</p>
+<img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/5.png" title="比较">
+
+<p>React的Diff算法的时间复杂度是O(n)。<strong>React 的 DOM Diff
+    算法实际上只会对树进行逐层比较</strong>，两棵树只会对同一层次的节点进行比较，放弃了深度遍历。这样做，似乎牺牲了一定的精确性来换取速度，如下所述。
+</p>
+<img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/6.png" title="层级比较">
+
+<p>只考虑平层地Diff的话，两个节点之间的差异有总结起来有下面4种情况</p>
+<ol>
+  <li>直接替换（REPLACE）原有节点</li>
+  <li>调整子节点，包括移动、删除等（REORDER）</li>
+  <li>修改节点属性（PROPS）</li>
+  <li>修改节点文本内容（TEXT）</li>
+</ol>
+<img src="/2020/03/28/前端基本之虚拟dom（virtual%20DOM）的工作原理/7.png" title="差异情况">
+
+<p>得到差异对象之后，剩下就是把差异对象应用到我们的dom节点上面了</p>
+<h5 id="patch—把差异对象应用到渲染的dom树"><a href="#patch—把差异对象应用到渲染的dom树" class="headerlink" title="patch—把差异对象应用到渲染的dom树"></a>patch—把差异对象应用到渲染的dom树
+</h5>
+<p>
+  VirtualDOM的设计是提升前端渲染性能的有效方案，也因此提供了以数据为驱动的前端框架工具的基础，将我们从DOM的繁琐操作中解放出来，不同的VirtualDOM方案在diff方面基本基于三条diff原则，具体diff过程则考虑自身运行上下文中的数据结构，算法效率，组件生命周期与设计来选择diff实现。例如上文snabbdom的updateChildren执行中使用了两端同时对比以及根据位置顺序进行移动的更新策略，而React则受限于Fiber的单向结构采用按顺序直接替换的方式更新，但React优化的组件设计与Fiber的工作线程机制在整体渲染性能方面带来了效率提升，同时两者都提供了基于key值进行diff的策略改善方式。
+</p>
+<h4 id="虚拟DOM和真是DOM的区别"><a href="#虚拟DOM和真是DOM的区别" class="headerlink" title="虚拟DOM和真是DOM的区别"></a>虚拟DOM和真是DOM的区别
+</h4>
+<ol>
+  <li>虚拟DOM不会进行排版与重绘操作</li>
+  <li>虚拟DOM进行频繁修改，然后一次性比较并修改真实DOM中需要改的部分（注意！），最后并在真实DOM中进行排版与重绘，减少过多DOM节点排版与重绘损耗
+  </li>
+  <li>真实DOM频繁排版与重绘的效率是相当低的</li>
+  <li>虚拟DOM有效降低大面积（真实DOM节点）的重绘与排版，因为最终与真实DOM比较差异，可以只渲染局部（同2）</li>
+</ol>
+<p>使用虚拟DOM的损耗计算：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><span class="line">1</span><br></pre>
+      </td>
+      <td class="code">
+        <pre><span class="line">总损耗 = 虚拟DOM增删改 + （与Diff算法效率有关）真实DOM差异增删改 + （较少的节点）排版与重绘</span><br></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+
+<p>直接使用真实DOM的损耗计算：</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><span class="line">1</span><br></pre>
+      </td>
+      <td class="code">
+        <pre><span class="line">总损耗 = 真实DOM完全增删改 + （可能较多的节点）排版与重绘</span><br></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+
+<h4 id="扩展，vue虚拟dom和react虚拟dom有什么不同"><a href="#扩展，vue虚拟dom和react虚拟dom有什么不同" class="headerlink" title="扩展，vue虚拟dom和react虚拟dom有什么不同"></a>扩展，vue虚拟dom和react虚拟dom有什么不同
+</h4>
+<p>react 函数式组件思想 当你 setstate 就会遍历 diff 当前组件所有的子节点子组件, 这种方式开销是很大的, 所以 react 16
+  采用了 fiber 链表代替之前的树，可以中断的，分片的在浏览器空闲时候执行vue 组件响应式思想
+  采用代理监听数据，我在某个组件里修改数据，就会明确知道那个组件产生了变化，只用 diff 这个组件就可以了</p>
+]]></content>
+      <categories>
+        <category>前端基础</category>
+      </categories>
+      <tags>
+        <tag>前端基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端基本之html网页渲染过程</title>
+    <url>/2020/03/28/%E5%89%8D%E7%AB%AF%E5%9F%BA%E6%9C%AC%E4%B9%8Bhtml%E7%BD%91%E9%A1%B5%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><meta name="referrer" content="no-referrer">
+
+<h4 id="html网页渲染的基本过程"><a href="#html网页渲染的基本过程" class="headerlink" title="html网页渲染的基本过程"></a>html网页渲染的基本过程
+</h4>
+<h5 id="1-解析html元素，构建dom-树"><a href="#1-解析html元素，构建dom-树" class="headerlink" title="1. 解析html元素，构建dom 树"></a>1.
+  解析html元素，构建dom 树</h5>
+<p>将文本的HTML文档，提炼出关键信息，嵌套层级的树形结构，便于计算拓展</p>
+<img src="/2020/03/28/前端基本之html网页渲染过程/1.png" title="树形结构">
+
+<blockquote>
+  <ol>
+    <li>自上而下解析，遇到任何样式（link、style）和脚本（script）都会阻塞</li>
+    <li>js会阻塞html的解析和渲染</li>
+    <li>没有defer和async标签的script会立即加载并执行</li>
+    <li>有async标签的js，js的加载执行和html的解析和渲染并行</li>
+    <li>有defer标签的js，js的加载和html的解析和渲染并行，但会在html解析完成后执行,在触发DOMContentLoaded事件前执行
+    </li>
+    <li>
+      DOMContentLoaded和onload的区别：DOMContentLoaded在html解析完毕后执行，loload在页面完全加载完成后执行（包括样式和图片）
+    </li>
+  </ol>
+</blockquote>
+<h6 id="脚本处理"><a href="#脚本处理" class="headerlink" title="脚本处理"></a>脚本处理</h6>
+<p>浏览器解析文档，当遇到&lt;
+  script&gt;标签的时候，会立即解析脚本，停止解析文档（因为JS可能会改动DOM和CSS，所以继续解析会造成浪费）。<br>如果脚本是外部的，会等待脚本下载完毕，再继续解析文档。现在可以在script标签上增加属性
+  defer或者async。<br>脚本解析会将脚本中改变DOM和CSS的地方分别解析出来，追加到DOM Tree和Style Rules上。</p>
+<p>
+  JavaScript执行过程中如果操作DOM，但是DOM树又是在JavaScript之后才能构建，就会报错，找不到节点（解决方式异步回调执行js，或者把js加载文件放在界面最下方）
+</p>
+<h5 id="2-解析CSS，生成页面css规则树（Style-Rules）"><a href="#2-解析CSS，生成页面css规则树（Style-Rules）" class="headerlink" title="2. 解析CSS，生成页面css规则树（Style Rules）"></a>2.
+  解析CSS，生成页面css规则树（Style Rules）</h5>
+<p> CSS Parser将CSS解析成Style Rules，Style Rules也叫CSSOM（CSS Object Model）。</p>
+<ol>
+  <li>页面的渲染是依靠render树，也就是说如果css没有加载完成，页面也不会渲染显示。</li>
+  <li>JavaScript执行过程中有可能需要改变样式，所以css加载也会阻塞JavaScript的加载。</li>
+</ol>
+<p>StyleRules也是一个树形结构，根据CSS文件整理出来的类似DOM Tree的树形结构：</p>
+<img src="/2020/03/28/前端基本之html网页渲染过程/2.png" title="css DOM Tree">
+
+<h5 id="3-构建渲染树（Render-Tree）"><a href="#3-构建渲染树（Render-Tree）" class="headerlink" title="3. 构建渲染树（Render Tree）"></a>3.
+  构建渲染树（Render Tree）</h5>
+<p>Render Tree的构建其实就是DOM Tree和CSSOM Attach的过程。<br>呈现器是和 DOM
+  元素相对应的，但并非一一对应。Render Tree实际上就是一个计算好样式，与HTML对应的（包括哪些显示，那些不显示）的Tree。</p>
+<blockquote>
+  <p>在 WebKit 中，解析样式和创建呈现器的过程称为“附加”。每个 DOM 节点都有一个“attach”方法。附加是同步进行的，将节点插入 DOM
+    树需要调用新的节点“attach”方法。</p>
+</blockquote>
+<img src="/2020/03/28/前端基本之html网页渲染过程/3.png" title="渲染树">
+
+<h5 id="4-布局（layout）或者叫回流（reflow-relayout）"><a href="#4-布局（layout）或者叫回流（reflow-relayout）" class="headerlink" title="4. 布局（layout）或者叫回流（reflow,relayout）"></a>4.
+  布局（layout）或者叫回流（reflow,relayout）</h5>
+<p>
+  浏览器会为Render树上的每个节点确定在屏幕上的尺寸、位置<br>这个过程就是通过渲染树中渲染对象的信息，计算出每一个渲染对象的位置和尺寸，将其安置在浏览器窗口的正确位置，而有些时候我们会在文档布局完成后对DOM进行修改，这时候可能需要重新进行布局，也可称其为回流，本质上还是一个布局的过程，每一个渲染对象都有一个布局或者回流方法，实现其布局或回流。
+</p>
+<p>
+  对渲染树的布局可以分为全局和局部的，全局即对整个渲染树进行重新布局，如当我们改变了窗口尺寸或方向或者是修改了根元素的尺寸或者字体大小等；而局部布局可以是对渲染树的某部分或某一个渲染对象进行重新布局。<br>大多数web应用对DOM的操作都是比较频繁，这意味着经常需要对DOM进行布局和回流，而如果仅仅是一些小改变，就触发整个渲染树的回流，这显然是不好的，为了避免这种情况，浏览器使用了脏位系统，只有一个渲染对象改变了或者某渲染对象及其子渲染对象脏位值为”dirty”时，说明需要回流。
+</p>
+<p>表示需要布局的脏位值有两种：</p>
+<p>“dirty”–自身改变，需要回流</p>
+<p>“children are dirty”–子节点改变，需要回流</p>
+<h6 id="每一个渲染对象的布局流程"><a href="#每一个渲染对象的布局流程" class="headerlink" title="每一个渲染对象的布局流程"></a>每一个渲染对象的布局流程
+</h6>
+<p>每一个渲染对象的布局流程基本如：</p>
+<ol>
+  <li>计算此渲染对象的宽度（width）；</li>
+  <li>遍历此渲染对象的所有子级，依次：<br> 设置子级渲染对象的坐标<br>
+    判断是否需要触发子渲染对象的布局或回流方法，计算子渲染对象的高度（height）</li>
+  <li>设置此渲染对象的高度：根据子渲染对象的累积高，margin和padding的高度设置其高度；</li>
+  <li>设置此渲染对象脏位值为false。</li>
+</ol>
+<h5 id="5-绘制（Painting）"><a href="#5-绘制（Painting）" class="headerlink" title="5. 绘制（Painting）"></a>5.
+  绘制（Painting）</h5>
+<p> 在绘制阶段，系统会遍历呈现树，并调用呈现器的“paint”方法，将呈现器的内容显示在屏幕上。绘制工作是使用用户界面基础组件完成的。<br>
+  像素信息到屏幕上，这个过程叫paint，浏览器会将各层的信息发送给GPU，GPU会将各层合成（composite），显示在屏幕上。<br> CSS2
+  规范定义了绘制流程的顺序。绘制的顺序其实就是元素进入堆栈样式上下文的顺序。这些堆栈会从后往前绘制，因此这样的顺序会影响绘制。块呈现器的堆栈顺序如下：</p>
+<ul>
+  <li>背景颜色</li>
+  <li>背景图片</li>
+  <li>边框</li>
+  <li>子代</li>
+  <li>轮廓</li>
+</ul>
+<h5 id="6-重排（reflow-回流）"><a href="#6-重排（reflow-回流）" class="headerlink" title="6. 重排（reflow/回流）"></a>6.
+  重排（reflow/回流）</h5>
+<p> 当渲染树中的一部分因为元素的规模尺寸，布局，隐藏等改变而需要重新构建</p>
+<h5 id="7-重绘（repaint）"><a href="#7-重绘（repaint）" class="headerlink" title="7. 重绘（repaint）"></a>7.
+  重绘（repaint）</h5>
+<p> 根据元素的新属性重新绘制，使元素呈现新的外观</p>
+<img src="/2020/03/28/前端基本之html网页渲染过程/3.png" title="重绘">
+
+<p>监听资源加载完成有四种方式</p>
+<figure class="highlight plain">
+  <table>
+    <tr>
+      <td class="gutter">
+        <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+      </td>
+      <td class="code">
+        <pre><span class="line">1. window.onload = function()&#123;....&#125;</span><br><span class="line">2. window.addEventListener(&quot;load&quot;,function()&#123;....&#125;);</span><br><span class="line">3. document.body.onload = function()&#123;....&#125;</span><br><span class="line">4. &lt;body onload = &quot;load()&quot;&gt;</span><br></pre>
+      </td>
+    </tr>
+  </table>
+</figure>
+
+<h4 id="load事件与DOMContentLoaded事件的先后"><a href="#load事件与DOMContentLoaded事件的先后" class="headerlink" title="load事件与DOMContentLoaded事件的先后"></a>load事件与DOMContentLoaded事件的先后
+</h4>
+<p>当 DOMContentLoaded 事件触发时，仅当DOM加载完成，不包括样式表，图片。<br>(譬如如果有async加载的脚本就不一定完成)</p>
+<p>当 onload 事件触发时，页面上所有的DOM，样式表，脚本，图片都已经加载完成了。<br>（渲染完毕了）</p>
+<p>所以，顺序是：<strong>DOMContentLoaded -&gt; load(全部加载完成)</strong></p>
+<h6 id="css加载是否会阻塞dom树渲染"><a href="#css加载是否会阻塞dom树渲染" class="headerlink" title="css加载是否会阻塞dom树渲染"></a>css加载是否会阻塞dom树渲染
+</h6>
+<p>
+  首先，我们都知道：<strong>css是由单独的下载线程异步下载的。</strong><br>css加载不会阻塞DOM树解析（异步加载时DOM照常构建）<br>但会阻塞render树渲染（渲染时需等css加载完毕，因为render树需要css信息）
+</p>
+]]></content>
+      <categories>
+        <category>前端基础</category>
+      </categories>
+      <tags>
+        <tag>前端基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo + github 搭建个人博客</title>
     <url>/2020/03/15/hexo-github/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><meta name="referrer" content="no-referrer">
@@ -711,20 +975,26 @@
   <li>浏览器是多进程的</li>
   <li>浏览器之所以能够运行，是因为系统给它的进程分配了资源（cpu、内存）</li>
   <li>简单点理解，每打开一个Tab页，就相当于创建了一个独立的浏览器进程。
-    <h4 id="浏览器多进程的优势"><a href="#浏览器多进程的优势" class="headerlink" title="浏览器多进程的优势"></a>浏览器多进程的优势
-    </h4>相比于单进程浏览器，多进程有如下优点：</li>
+
+  </li>
+</ul>
+<h4 id="浏览器多进程的优势"><a href="#浏览器多进程的优势" class="headerlink" title="浏览器多进程的优势"></a>浏览器多进程的优势
+</h4>
+<p>相比于单进程浏览器，多进程有如下优点：</p>
+<ul>
   <li>避免单个page crash影响整个浏览器</li>
   <li>避免第三方插件crash影响整个浏览器</li>
   <li>多进程充分利用多核优势</li>
   <li>方便使用沙盒模型隔离插件等进程，提高浏览器稳定性</li>
   <li>
     简单点理解：如果浏览器是单进程，那么某个Tab页崩溃了，就影响了整个浏览器，体验有多差；同理如果是单进程，插件崩溃了也会影响整个浏览器；而且多进程还有其它的诸多优势。。
-    <h4 id="浏览器内核（渲染进程）"><a href="#浏览器内核（渲染进程）" class="headerlink" title="浏览器内核（渲染进程）"></a>浏览器内核（渲染进程）
-    </h4>
   </li>
 </ul>
+<h4 id="浏览器内核（渲染进程）"><a href="#浏览器内核（渲染进程）" class="headerlink" title="浏览器内核（渲染进程）"></a>浏览器内核（渲染进程）
+</h4>
 <p>请牢记，浏览器的渲染进程是多线程的（这点如果不理解，请回头看进程和线程的区分）<br>那么接下来看看它都包含了哪些线程（列举一些主要常驻线程）：</p>
 <img src="/2020/03/15/前端基本之浏览器渲染/2.png" title="内核">
+
 <h5 id="GUI渲染线程"><a href="#GUI渲染线程" class="headerlink" title="GUI渲染线程"></a>GUI渲染线程
 </h5>
 <p>
