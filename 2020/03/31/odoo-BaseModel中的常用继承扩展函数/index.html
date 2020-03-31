@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="odoo,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="模型层面 _table_exist—–检查该模型对于的数据库表  检查该模型对于的数据库表是否存在，是则返回1，否则返回0.                         123                        @api.model_crdef _table_exist(self):    pass                  模型记录层面  CRUD—–增删改查  cr">
+  <meta name="keywords" content="odoo">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="odoo-BaseModel中的常用继承扩展函数">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="模型层面 _table_exist—–检查该模型对于的数据库表  检查该模型对于的数据库表是否存在，是则返回1，否则返回0.                         123                        @api.model_crdef _table_exist(self):    pass                  模型记录层面  CRUD—–增删改查  cr">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/1.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/2.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/3.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/4.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/5.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/6.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/7.png">
+  <meta property="og:updated_time" content="2020-03-31T14:27:55.687Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="odoo-BaseModel中的常用继承扩展函数">
+  <meta name="twitter:description"
+                                                                                  content="模型层面 _table_exist—–检查该模型对于的数据库表  检查该模型对于的数据库表是否存在，是则返回1，否则返回0.                         123                        @api.model_crdef _table_exist(self):    pass                  模型记录层面  CRUD—–增删改查  cr">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/1.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/">
+
+  <title>odoo-BaseModel中的常用继承扩展函数 | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2020/03/31/odoo-BaseModel中的常用继承扩展函数/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      odoo-BaseModel中的常用继承扩展函数</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2020-03-31T22:16:30+08:00">
+                          2020-03-31
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/odoo/" itemprop="url"
+                                                                                                          rel="index">
+                            <span itemprop="name">odoo</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          2,262
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          11
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="模型层面"><a href="#模型层面" class="headerlink"
+                                                                                                      title="模型层面"></a>模型层面
+                    </h4>
+                    <h5 id="table-exist—–检查该模型对于的数据库表"><a href="#table-exist—–检查该模型对于的数据库表" class="headerlink"
+                                                                                                      title="_table_exist—–检查该模型对于的数据库表"></a>_table_exist—–检查该模型对于的数据库表
+                    </h5>
+                    <p>检查该模型对于的数据库表是否存在，是则返回1，否则返回0.</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"> @api.model_cr</span><br><span class="line">def _table_exist(self):</span><br><span class="line">    pass</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h4 id="模型记录层面"><a href="#模型记录层面" class="headerlink"
+                                                                                                      title="模型记录层面"></a>模型记录层面
+                    </h4>
+                    <h5 id="CRUD—–增删改查"><a href="#CRUD—–增删改查" class="headerlink"
+                                                                                                      title="CRUD—–增删改查"></a>CRUD—–增删改查
+                    </h5>
+                    <p>
+                      create(self,vals)<br>write(self,vals)<br>read(self,fields)<br>unlink(self)
+                    </p>
+                    <h5 id="search"><a href="#search" class="headerlink"
+                                                                                                      title="_search"></a>_search
+                    </h5>
+                    <p>_search(self, args, offset=0, limit=None, order=None,
+                      count=False,
+                      access_rights_uid=None)<br>模型记录的搜索函数，定义了该模型的记录被关联搜索、搜索视图搜索时的条数、排序字段、总数、检索权限等。
+                    </p>
+                    <h5 id="name-get—–定义关系字段显示"><a href="#name-get—–定义关系字段显示" class="headerlink"
+                                                                                                      title="name_get—–定义关系字段显示"></a>name_get—–定义关系字段显示
+                    </h5>
+                    <p>假如一个公司很大，出现重名的现象，则可以通过name_get来增加显示信息的方式来区别</p>
+                    <img src="/2020/03/31/odoo-BaseModel中的常用继承扩展函数/1.png"
+                                                                                                    title="原图">
+
+                    <p>
+                      hr.employee模块与其他模块关联时，默认只显示名字，可以通过改写hr.employee的name_get函数来加上部门
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">class HrEmployee(models.Model):</span><br><span class="line">    _inherit = &apos;hr.employee&apos;</span><br><span class="line"></span><br><span class="line">    @api.multi</span><br><span class="line">    @api.depends(&apos;name&apos;, &apos;department_id&apos;)</span><br><span class="line">    def name_get(self):</span><br><span class="line">        return [(r.id, (r.name + &apos;(&apos; + (r.department_id.name or _(&apos;Default&apos;)) + &apos;)&apos;)) for r in self]</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <img src="/2020/03/31/odoo-BaseModel中的常用继承扩展函数/2.png"
+                                                                                                    title="增加部门">
+
+                    <p>BaseModel中的name_get如下</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.multi</span><br><span class="line">def name_get(self):</span><br><span class="line">    &quot;&quot;&quot; name_get() -&gt; [(id, name), ...]</span><br><span class="line"></span><br><span class="line">    Returns a textual representation for the records in ``self``.</span><br><span class="line">    By default this is the value of the ``display_name`` field.</span><br><span class="line"></span><br><span class="line">    :return: list of pairs ``(id, text_repr)`` for each records</span><br><span class="line">    :rtype: list(tuple)</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    result = []</span><br><span class="line">    name = self._rec_name</span><br><span class="line">    if name in self._fields:</span><br><span class="line">        convert = self._fields[name].convert_to_display_name</span><br><span class="line">        for record in self:</span><br><span class="line">            result.append((record.id, convert(record[name], record)))</span><br><span class="line">    else:</span><br><span class="line">        for record in self:</span><br><span class="line">            result.append((record.id, &quot;%s,%s&quot; % (record._name, record.id)))</span><br><span class="line"></span><br><span class="line">    return result</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>而调用该函数的是方法_compute_display_name</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.depends(lambda self: (self._rec_name,) if self._rec_name else ())</span><br><span class="line">def _compute_display_name(self):</span><br><span class="line">    names = dict(self.name_get())</span><br><span class="line">    for record in self:</span><br><span class="line">        record.display_name = names.get(record.id, False)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>值最终保存在display_name字段中。</p>
+                    <h5 id="name-search—–定义关系字段搜索"><a href="#name-search—–定义关系字段搜索" class="headerlink"
+                                                                                                      title="name_search—–定义关系字段搜索"></a>name_search—–定义关系字段搜索
+                    </h5>
+                    <p>既然员工显示已经包含了部门，何不直接输入部门，自动搜索带出员工呢，这个功能是通过
+                      name_search实现的<br>在osv下的expression中调用</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">def to_ids(value, comodel):</span><br><span class="line">    &quot;&quot;&quot; Normalize a single id or name, or a list of those, into a list of ids</span><br><span class="line">        :param &#123;int,long,basestring,list,tuple&#125; value:</span><br><span class="line">            if int, long -&gt; return [value]</span><br><span class="line">            if basestring, convert it into a list of basestrings, then</span><br><span class="line">            if list of basestring -&gt;</span><br><span class="line">                perform a name_search on comodel for each name</span><br><span class="line">                return the list of related ids</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    names = []</span><br><span class="line">    if isinstance(value, basestring):</span><br><span class="line">        names = [value]</span><br><span class="line">    elif value and isinstance(value, (tuple, list)) and all(isinstance(item, basestring) for item in value):</span><br><span class="line">        names = value</span><br><span class="line">    elif isinstance(value, (int, long)):</span><br><span class="line">        return [value]</span><br><span class="line">    if names:</span><br><span class="line">        return list(&#123;</span><br><span class="line">            rid</span><br><span class="line">            for name in names</span><br><span class="line">            for rid, rname in comodel.name_search(name, [], &apos;ilike&apos;, limit=None)</span><br><span class="line">        &#125;)</span><br><span class="line">    return list(value)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>这里我们同样在继承的hr.employee中重写name_search函数</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.model</span><br><span class="line">def name_search(self,name=&apos;&apos;,args=None,operator=&apos;ilike&apos;,limit=100):</span><br><span class="line">    args = args or []</span><br><span class="line">    domain = []</span><br><span class="line">    if name:</span><br><span class="line">        domain = [&apos;|&apos;,(&apos;name&apos;,operator,name),(&apos;department_id.name&apos;,operator,name)]</span><br><span class="line">    pos = self.search(domain + args,limit=limit)</span><br><span class="line">    return pos.name_get()</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>效果如图</p>
+                    <img src="/2020/03/31/odoo-BaseModel中的常用继承扩展函数/3.png"
+                                                                                                    title="name_search">
+
+                    <p><a href="https://blog.csdn.net/shanzhizi/article/details/51576547" target="_blank"
+                                                                                                      rel="noopener">参考</a>
+                    </p>
+                    <h5 id="default-get-—–初始化记录的默认值"><a href="#default-get-—–初始化记录的默认值" class="headerlink"
+                                                                                                      title="default_get()—–初始化记录的默认值"></a>default_get()—–初始化记录的默认值
+                    </h5>
+                    <p>default_get(fields)
+                      函数用于初始化记录的默认值，对于模型的某些字段如果需要设置默认值，可以重写模型的default_get()函数达到目的。
+                    </p>
+                    <p>
+                      例如：从表单中携带上下文信息跳转到向导、跳转到一个模型的新建表单视图等，可以在跳转时往context传递数据，然后在向导模型、被跳转创建的模型中重写default_get方法，从context中提前信息，进行字段默认值的初始化。
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.model</span><br><span class="line">def default_get(self, default_fields):</span><br><span class="line">    result = super(类名, self).default_get(default_fields)</span><br><span class="line">    context_data = self.env.context.get(&apos;key&apos;)</span><br><span class="line">    //根据context_data进行相关数据查询、处理操作</span><br><span class="line">    result.update(&#123;&apos;字段&apos;: 默认值&#125;) //更改记录的字段默认值</span><br><span class="line">    return result</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="name-create-name"><a href="#name-create-name" class="headerlink"
+                                                                                                      title="name_create(name)"></a>name_create(name)
+                    </h5>
+                    <p>相当于只传递name字段值，调用create方法创建一条新记录。</p>
+                    <h5 id="fields-get"><a href="#fields-get" class="headerlink"
+                                                                                                      title="fields_get"></a>fields_get
+                    </h5>
+                    <p>
+                      字段查询函数,一般不重写：以数据字典的形式返回字段的定义，通过继承得来的字段也会在其中，string/help/selection属性会自动被翻译
+                    </p>
+                    <p>fields_get([fields]，[attributes])：</p>
+                    <ul>
+                      <li>fields参数是字段列表、为空或不传返回所有字段</li>
+                      <li>attributes 可指定字段的属性、为空或不传时返回全部的</li>
+                    </ul>
+                    <h4 id="视图信息层面"><a href="#视图信息层面" class="headerlink"
+                                                                                                      title="视图信息层面"></a>视图信息层面
+                    </h4>
+                    <h5 id="fields-view-get—–创建动态视图方法"><a href="#fields-view-get—–创建动态视图方法" class="headerlink"
+                                                                                                      title="fields_view_get—–创建动态视图方法"></a><a
+                                                                                                      href="http://www.odoogo.com/post/87/"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">fields_view_get—–创建动态视图方法</a>
+                    </h5>
+                    <p>odoo
+                      fields_view_get方法是一个比较有用比较灵活的广泛，如果使用得当，可以做到一些常规方法无法实现的功能<br>odoo的视图结构是以XML的格式存放于ir.ui.view表中，属于静态格式，设计之后就固定。但可以通过在model中<u><strong>重写fields_view_get函数，在视图加载时修改arch属性，动态修改视图的结构</strong></u>。
+                    </p>
+                    <p>重写fields_view_get一般有3中用途：</p>
+                    <ol>
+                      <li>修改field的属性</li>
+                      <li>根据条件限制view是否可编辑</li>
+                      <li>视图动态增加field</li>
+                    </ol>
+                    <p>
+                      第一，第二种通常可以直接修改view视图，这里着重第三种（个人觉得是需要增加较多field的时候），原理都是通过lxml来修改arch属性
+                    </p>
+                    <p>
+                      必须是通过etree将res[‘arch’]加载到DOM中，通过xpath查找之后进行修改，然后将修改后的dom通过etree.tostring(doc)写回res[‘arch’]
+                    </p>
+                    <p>
+                      阅读源码发现在点击窗口动作的时候，fields_view_get会根据窗口动作中的视图类型加载N次，<br>比如有tree,form的则会自动增加3次，分别为search,tree,form,
+                    </p>
+                    <img src="/2020/03/31/odoo-BaseModel中的常用继承扩展函数/4.png"
+                                                                                                    title="多次执行">
+
+                    <p>当view_type为tree类型是，res的值为。因为我们不管需要修改arch的值，还是增加fields对应的值
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&#123;&apos;name&apos;: u&apos;todo.project.tree&apos;, </span><br><span class="line">&apos;arch&apos;: &apos;&lt;tree&gt;\n                    &lt;field name=&quot;state&quot; modifiers=&quot;&#123;&#125;&quot;/&gt;\n                    &lt;field name=&quot;sequence&quot; modifiers=&quot;&#123;&#125;&quot;/&gt;\n                    &lt;field name=&quot;todo_task_id&quot; can_create=&quot;true&quot; can_write=&quot;true&quot; modifiers=&quot;&#123;&#125;&quot;/&gt;\n                    &lt;field name=&quot;name&quot; bg_color=&quot;blue:state == \&apos;draft\&apos;;green:state == \&apos;half_done\&apos;;red:state == \&apos;confirm\&apos;;#e99f97:state==\&apos;done\&apos;;&quot; on_change=&quot;1&quot; modifiers=&quot;&#123;&amp;quot;required&amp;quot;: true&#125;&quot;/&gt;\n                    &lt;field name=&quot;is_done&quot; modifiers=&quot;&#123;&#125;&quot;/&gt;\n                    &lt;field name=&quot;company_id&quot; can_create=&quot;true&quot; can_write=&quot;true&quot; modifiers=&quot;&#123;&#125;&quot;/&gt;\n                &lt;/tree&gt;&apos;, </span><br><span class="line">&apos;view_id&apos;: 442, </span><br><span class="line">&apos;fields&apos;: &#123;</span><br><span class="line">    &apos;sequence&apos;: &#123;&apos;change_default&apos;: False, &apos;string&apos;: u&apos;\u7f16\u53f7&apos;, &apos;searchable&apos;: True, &apos;views&apos;: &#123;&#125;, &apos;required&apos;: False, &apos;manual&apos;: False, &apos;readonly&apos;: False, &apos;depends&apos;: (), &apos;company_dependent&apos;: False, &apos;sortable&apos;: True, &apos;translate&apos;: False, &apos;type&apos;: &apos;char&apos;, &apos;store&apos;: True&#125;,</span><br><span class="line"></span><br><span class="line">    &apos;is_done&apos;: &#123;&apos;change_default&apos;: False, &apos;string&apos;: u&apos;\u662f\u5426\u5df2\u5b8c\u6210&apos;, &apos;searchable&apos;: True, &apos;views&apos;: &#123;&#125;, &apos;required&apos;: False, &apos;manual&apos;: False, &apos;readonly&apos;: False, &apos;depends&apos;: (), &apos;company_dependent&apos;: False, &apos;sortable&apos;: True, &apos;type&apos;: &apos;boolean&apos;, &apos;store&apos;: True&#125;, </span><br><span class="line"></span><br><span class="line">    &apos;company_id&apos;: &#123;&apos;domain&apos;: [], &apos;change_default&apos;: False, &apos;string&apos;: u&apos;\u6240\u5c5e\u516c\u53f8&apos;, &apos;searchable&apos;: True, &apos;views&apos;: &#123;&#125;, &apos;required&apos;: False, &apos;manual&apos;: False, &apos;readonly&apos;: False, &apos;depends&apos;: (), &apos;relation&apos;: &apos;res.company&apos;, &apos;context&apos;: &#123;&#125;, &apos;company_dependent&apos;: False, &apos;sortable&apos;: True, &apos;type&apos;: &apos;many2one&apos;, &apos;store&apos;: True&#125;, </span><br><span class="line"></span><br><span class="line">    &apos;state&apos;: &#123;&apos;selection&apos;: [(&apos;draft&apos;, u&apos; \u8349\u7a3f&apos;), (&apos;confirm&apos;, u&apos; \u786e\u8ba4&apos;), (&apos;half_done&apos;, u&apos;\u4e2d\u9014\u68c0\u4fee&apos;), (&apos;check&apos;, u&apos;\u5ba1\u6838&apos;), (&apos;done&apos;, u&apos;\u5b8c\u6210&apos;)], &apos;change_default&apos;: False, &apos;string&apos;: u&apos;\u72b6\u6001&apos;, &apos;searchable&apos;: True, &apos;views&apos;: &#123;&#125;, &apos;required&apos;: False, &apos;manual&apos;: False, &apos;readonly&apos;: False, &apos;depends&apos;: (), &apos;company_dependent&apos;: False, &apos;sortable&apos;: True, &apos;type&apos;: &apos;selection&apos;, &apos;store&apos;: True&#125;, </span><br><span class="line"></span><br><span class="line">    &apos;todo_task_id&apos;: &#123;&apos;domain&apos;: [], &apos;change_default&apos;: False, &apos;string&apos;: u&apos;\u5f85\u529e&apos;, &apos;searchable&apos;: True, &apos;views&apos;: &#123;&#125;, &apos;required&apos;: False, &apos;manual&apos;: False, &apos;readonly&apos;: False, &apos;depends&apos;: (), &apos;relation&apos;: &apos;todo.task&apos;, &apos;context&apos;: &#123;&#125;, &apos;company_dependent&apos;: False, &apos;sortable&apos;: True, &apos;type&apos;: &apos;many2one&apos;, &apos;store&apos;: True&#125;, </span><br><span class="line">    </span><br><span class="line">    &apos;name&apos;: &#123;&apos;change_default&apos;: False, &apos;string&apos;: u&apos;\u4e8b\u60c5&apos;, &apos;searchable&apos;: True, &apos;views&apos;: &#123;&#125;, &apos;required&apos;: True, &apos;manual&apos;: False, &apos;readonly&apos;: False, &apos;depends&apos;: (), &apos;company_dependent&apos;: False, &apos;sortable&apos;: True, &apos;translate&apos;: False, &apos;type&apos;: &apos;char&apos;, &apos;store&apos;: True&#125;</span><br><span class="line">&#125;, </span><br><span class="line">&apos;model&apos;: &apos;todo.project&apos;, </span><br><span class="line">&apos;type&apos;: u&apos;tree&apos;,</span><br><span class="line">&apos;toolbar&apos;: &#123;&apos;print&apos;: [], &apos;action&apos;: [], &apos;relate&apos;: []&#125;, </span><br><span class="line">&apos;field_parent&apos;: False&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      其中modifiers=”{}”便是每个节点所包含的不同属性，例如options={},readonly,nolabel等等都是编译后加到字典modifiers中
+                    </p>
+                    <img src="/2020/03/31/odoo-BaseModel中的常用继承扩展函数/5.png"
+                                                                                                    title="modifiers">
+                    <p>这里原有一个tree视图</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">&lt;record model=&quot;ir.ui.view&quot; id=&quot;todo.todo_project_list&quot;&gt;</span><br><span class="line">    &lt;field name=&quot;name&quot;&gt;todo.project.tree&lt;/field&gt;</span><br><span class="line">    &lt;field name=&quot;model&quot;&gt;todo.project&lt;/field&gt;</span><br><span class="line">    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;</span><br><span class="line">        &lt;tree&gt;</span><br><span class="line">            &lt;field name=&quot;state&quot;/&gt;</span><br><span class="line">            &lt;field name=&quot;sequence&quot;/&gt;</span><br><span class="line">            &lt;field name=&quot;todo_task_id&quot;/&gt;</span><br><span class="line">            &lt;field name=&quot;name&quot;/&gt;</span><br><span class="line">            &lt;field name=&quot;is_done&quot;/&gt;</span><br><span class="line">            &lt;field name=&quot;company_id&quot;/&gt;</span><br><span class="line">        &lt;/tree&gt;</span><br><span class="line">    &lt;/field&gt;</span><br><span class="line">&lt;/record&gt;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <img src="/2020/03/31/odoo-BaseModel中的常用继承扩展函数/6.png"
+                                                                                                    title="项目tree视图">
+
+                    <p> 扩展：</p>
+                    <blockquote>
+                      <ol>
+                        <li><a href="https://blog.csdn.net/weixin_36279318/article/details/79176475" target="_blank"
+                                                                                                          rel="noopener">lxml的Element
+                            对象方法使用</a></li>
+                        <li><a href="https://blog.csdn.net/gingerredjade/article/details/21944675" target="_blank"
+                                                                                                          rel="noopener">Python标准库之xml.etree.ElementTree</a>
+                        </li>
+                      </ol>
+                    </blockquote>
+                    <p>此时需要再增加一个字段</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.model</span><br><span class="line">def fields_view_get(self, view_id=None, view_type=None, toolbar=False, submenu=False):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    :param view_id: 视图的id或无</span><br><span class="line">    :param view_type: 如果view_id为none，则返回的视图的类型（&apos;form&apos;，&apos;tree&apos;，…）</span><br><span class="line">    :param toolbar: 工具栏  true以包含上下文操作</span><br><span class="line">    :param submenu: 子菜单,已弃用</span><br><span class="line">    :return: 引用描述所请求视图的组成（包括继承的视图和扩展</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    res = super(TodoProject, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)</span><br><span class="line">    if view_type == &apos;tree&apos;:</span><br><span class="line">        doc = etree.XML(res[&apos;arch&apos;])</span><br><span class="line">        summary = doc.xpath(&quot;//field[@name=&apos;company_id&apos;]&quot;)</span><br><span class="line">        if len(summary):</span><br><span class="line">            summary[0].addnext(etree.Element(&apos;field&apos;, &#123;&apos;name&apos;: &apos;title_sum&apos;,</span><br><span class="line">                                            &apos;string&apos;:&apos;title of new field&apos;,</span><br><span class="line">                                            &apos;nolabel&apos;:&apos;0&apos;,</span><br><span class="line">                                            &#125;))</span><br><span class="line">            res[&apos;fields&apos;][&apos;title_sum&apos;] = res[&apos;fields&apos;][&apos;sequence&apos;]</span><br><span class="line">            res[&apos;arch&apos;] = etree.tostring(doc)</span><br><span class="line">    return res</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <blockquote>
+                      <p>
+                        <u><strong>如果要修改一对多字段下的子视图时，需要先运算到子视图</strong></u><br>treev
+                        =
+                        res[‘fields’][‘line_ids’][‘views’][‘tree’]</p>
+                    </blockquote>
+                    <p>最终效果</p>
+                    <img src="/2020/03/31/odoo-BaseModel中的常用继承扩展函数/7.png"
+                                                                                                    title="添加了新字段">
+
+                    <h5 id="get-formview-action"><a href="#get-formview-action" class="headerlink"
+                                                                                                      title="get_formview_action"></a>get_formview_action
+                    </h5>
+                    <p>
+                      表单视图获取函数，可以重写该函数，使模型加载某个特定的form视图，甚至可以在加载时传递context值，控制视图的行为。<br>源码
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"> @api.multi</span><br><span class="line">def get_formview_action(self):</span><br><span class="line">    &quot;&quot;&quot; Return an action to open the document ``self``. This method is meant</span><br><span class="line">        to be overridden in addons that want to give specific view ids for</span><br><span class="line">        example.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    view_id = self.get_formview_id()</span><br><span class="line">    return &#123;</span><br><span class="line">        &apos;type&apos;: &apos;ir.actions.act_window&apos;,</span><br><span class="line">        &apos;res_model&apos;: self._name,</span><br><span class="line">        &apos;view_type&apos;: &apos;form&apos;,</span><br><span class="line">        &apos;view_mode&apos;: &apos;form&apos;,</span><br><span class="line">        &apos;views&apos;: [(view_id, &apos;form&apos;)],</span><br><span class="line">        &apos;target&apos;: &apos;current&apos;,</span><br><span class="line">        &apos;res_id&apos;: self.id,</span><br><span class="line">        &apos;context&apos;: dict(self._context),</span><br><span class="line">    &#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="load-views-views-options"><a href="#load-views-views-options" class="headerlink"
+                                                                                                      title="load_views(views,options)"></a>load_views(views,options)
+                    </h5>
+                    <p>视图加载函数，可以重写该函数，在加载视图时传递context值，控制视图行为。</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">@api.model</span><br><span class="line">def load_views(self, views, options=None):</span><br><span class="line">    &quot;&quot;&quot; Returns the fields_views of given views, and optionally filters and fields.</span><br><span class="line"></span><br><span class="line">    :param views: list of [view_id, view_type]</span><br><span class="line">    :param options[&apos;toolbar&apos;]: True to include contextual actions when loading fields_views</span><br><span class="line">    :param options[&apos;load_filters&apos;]: True to return the model&apos;s filters</span><br><span class="line">    :param options[&apos;action_id&apos;]: id of the action to get the filters</span><br><span class="line">    :param options[&apos;load_fields&apos;]: True to load the model&apos;s fields</span><br><span class="line">    :return: dictionary with fields_views, filters and fields</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    options = options or &#123;&#125;</span><br><span class="line">    result = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    toolbar = options.get(&apos;toolbar&apos;)</span><br><span class="line">    result[&apos;fields_views&apos;] = &#123;</span><br><span class="line">        v_type: self.fields_view_get(v_id, v_type if v_type != &apos;list&apos; else &apos;tree&apos;,</span><br><span class="line">                                     toolbar=toolbar if v_type != &apos;search&apos; else False)</span><br><span class="line">        for [v_id, v_type] in views</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if options.get(&apos;load_filters&apos;):</span><br><span class="line">        result[&apos;filters&apos;] = self.env[&apos;ir.filters&apos;].get_filters(self._name, options.get(&apos;action_id&apos;))</span><br><span class="line"></span><br><span class="line">    if options.get(&apos;load_fields&apos;):</span><br><span class="line">        result[&apos;fields&apos;] = self.fields_get()</span><br><span class="line"></span><br><span class="line">    return result</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/odoo/" rel="tag"># odoo</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2020/03/30/one2many搜索去重实现/" rel="next"
+                                                                                                        title="one2many搜索去重实现">
+                          <i class="fa fa-chevron-left"></i> one2many搜索去重实现
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">38</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">9</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#模型层面"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">模型层面</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#table-exist—–检查该模型对于的数据库表"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">_table_exist—–检查该模型对于的数据库表
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#模型记录层面"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">模型记录层面
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#CRUD—–增删改查"><span
+                                                                                                            class="nav-number">2.1.</span>
+                            <span class="nav-text">CRUD—–增删改查
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#search"><span
+                                                                                                            class="nav-number">2.2.</span>
+                            <span class="nav-text">_search
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#name-get—–定义关系字段显示"><span
+                                                                                                            class="nav-number">2.3.</span>
+                            <span class="nav-text">name_get—–定义关系字段显示
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#name-search—–定义关系字段搜索"><span
+                                                                                                            class="nav-number">2.4.</span>
+                            <span class="nav-text">name_search—–定义关系字段搜索
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#default-get-—–初始化记录的默认值"><span
+                                                                                                            class="nav-number">2.5.</span>
+                            <span class="nav-text">default_get()—–初始化记录的默认值
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#name-create-name"><span
+                                                                                                            class="nav-number">2.6.</span>
+                            <span class="nav-text">name_create(name)
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#fields-get"><span
+                                                                                                            class="nav-number">2.7.</span>
+                            <span class="nav-text">fields_get
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#视图信息层面"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">视图信息层面
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#fields-view-get—–创建动态视图方法"><span
+                                                                                                            class="nav-number">3.1.</span>
+                            <span class="nav-text">fields_view_get—–创建动态视图方法
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#get-formview-action"><span
+                                                                                                            class="nav-number">3.2.</span>
+                            <span class="nav-text">get_formview_action
+                            </span></a></li>
+                        <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                          href="#load-views-views-options"><span
+                                                                                                            class="nav-number">3.3.</span>
+                            <span class="nav-text">load_views(views,options)
+                            </span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2020</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">102.1k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共102.1k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
