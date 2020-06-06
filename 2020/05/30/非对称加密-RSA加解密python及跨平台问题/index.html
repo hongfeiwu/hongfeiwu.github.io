@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="WSGI,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="非对称加密算法  最近跟另外一个系统做对接，调取接口获取数据，请求头中需求使用公钥来对一些校验信息进行加密。对方使用的是RSA加密算法 1976年以前，所有的加密方法都是同一种模式：加密和解密使用同样规则（简称”密钥”），这被称为”对称加密算法”，使用相同的密钥，两次连续的对等加密运算后会回复原始文字，也有很大的安全隐患。  1977年，三位数学家Rivest、Shamir 和 Adleman">
+  <meta name="keywords" content="WSGI">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="非对称加密--RSA加解密python及跨平台问题">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2020/05/30/非对称加密-RSA加解密python及跨平台问题/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="非对称加密算法  最近跟另外一个系统做对接，调取接口获取数据，请求头中需求使用公钥来对一些校验信息进行加密。对方使用的是RSA加密算法 1976年以前，所有的加密方法都是同一种模式：加密和解密使用同样规则（简称”密钥”），这被称为”对称加密算法”，使用相同的密钥，两次连续的对等加密运算后会回复原始文字，也有很大的安全隐患。  1977年，三位数学家Rivest、Shamir 和 Adleman">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/05/30/非对称加密-RSA加解密python及跨平台问题/1.jpg">
+  <meta property="og:updated_time" content="2020-06-06T13:10:42.174Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="非对称加密--RSA加解密python及跨平台问题">
+  <meta name="twitter:description"
+                                                                                  content="非对称加密算法  最近跟另外一个系统做对接，调取接口获取数据，请求头中需求使用公钥来对一些校验信息进行加密。对方使用的是RSA加密算法 1976年以前，所有的加密方法都是同一种模式：加密和解密使用同样规则（简称”密钥”），这被称为”对称加密算法”，使用相同的密钥，两次连续的对等加密运算后会回复原始文字，也有很大的安全隐患。  1977年，三位数学家Rivest、Shamir 和 Adleman">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2020/05/30/非对称加密-RSA加解密python及跨平台问题/1.jpg">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2020/05/30/非对称加密-RSA加解密python及跨平台问题/">
+
+  <title>非对称加密--RSA加解密python及跨平台问题 | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2020/05/30/非对称加密-RSA加解密python及跨平台问题/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      非对称加密--RSA加解密python及跨平台问题</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2020-05-30T15:35:36+08:00">
+                          2020-05-30
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/python/" itemprop="url"
+                                                                                                          rel="index">
+                            <span itemprop="name">python</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          2,873
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          14
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h4 id="非对称加密算法"><a href="#非对称加密算法" class="headerlink"
+                                                                                                      title="非对称加密算法"></a>非对称加密算法
+                    </h4>
+                    <p>
+                      最近跟另外一个系统做对接，调取接口获取数据，请求头中需求使用公钥来对一些校验信息进行加密。对方使用的是RSA加密算法
+                    </p>
+                    <p><a href="https://www.jianshu.com/p/ad3d1dea63af" target="_blank"
+                                                                                                      rel="noopener">1976年以前，所有的加密方法都是同一种模式：加密和解密使用同样规则（简称”密钥”），这被称为”对称加</a>密算法”，使用相同的密钥，两次连续的对等加密运算后会回复原始文字，也有很大的安全隐患。
+                    </p>
+                    <p>1977年，三位数学家Rivest、Shamir 和 Adleman
+                      设计了一种算法，可以实现非对称加密。这种算法用他们三个人的名字命名，叫做RSA算法。目前被破解的最长RSA密钥是232个十进制位，也就是768个二进制位，因此可以认为，1024位的RSA密钥基本安全，2048位的密钥极其安全，当然量子计算机除外。
+                    </p>
+                    <ol>
+                      <li>B要先生成两把密钥（公钥和私钥）。公钥是公开的，任何人都可以获得，私钥则是保密的。</li>
+                      <li>A获取B的公钥，然后用它对信息加密。</li>
+                      <li>B得到加密后的信息，用私钥解密。理论上如果公钥加密的信息只有私钥解得开，那么只要私钥不泄漏，通信就是安全的。
+                      </li>
+                    </ol>
+                    <h4 id="RSA加密原理"><a href="#RSA加密原理" class="headerlink"
+                                                                                                      title="RSA加密原理"></a>RSA加密原理
+                    </h4>
+                    <p>先准备一下数理知识：</p>
+                    <blockquote>
+                      <ol>
+                        <li>
+                          <u><strong>素数：又称质数</strong></u>，指在一个大于1的自然数中，除了1和此整数自身外，不能被其他自然数整除的数。
+                        </li>
+                        <li>
+                          <u><strong>互质，又称互素</strong></u>。若N个整数的最大公因子是1，则称这N个整数互质。
+                        </li>
+                        <li>
+                          <u><strong>模运算即求余运算</strong></u>。“模”是“Mod”的音译。和模运算紧密相关的一个概念是
+                        </li>
+                      </ol>
+                    </blockquote>
+                    <p>
+                      “同余”。数学上，当两个整数除以同一个正整数，若得相同余数，则二整数同余。<br>欧拉函数<br>任意给定正整数n，请问在小于等于n的正整数之中，有多少个与n构成互质关系？（比如，在1到8之中，有多少个数与8构成互质关系？）计算这个值的方法就叫做欧拉函数，以φ(n)表示。<br>计算8的欧拉函数，和8互质的
+                      1、2、3、4、5、6、7、8<br> φ(8) = 4<br>计算56的欧拉函数<br> φ(56) = φ(8)
+                      * φ(7) = 4 * 6 =
+                      24<br>如果n可以分解成两个互质的整数之积，即 n = p * k ，则φ(n) = φ(p * k) =
+                      φ(p1)*φ(p2)</p>
+                    <blockquote>
+                      <p>
+                        <strong>欧拉定理：如果两个正整数m和n互质，那么m的φ(n)次方减去1，可以被n整除。<br>费马小定理：欧拉定理的特殊情况，如果两个正整数m和n互质，而且n为质数！那么φ(n)结果就是n-1。</strong>
+                      </p>
+                    </blockquote>
+                    <img src="/2020/05/30/非对称加密-RSA加解密python及跨平台问题/1.jpg"
+                                                                                                    title="RSA加解密原理">
+                    <p>m^e % n = c是加密，c^d % n =
+                      m是解密，m就是原始数据，c是密文，公钥是n和e，私钥是n和d，所以<a href="https://blog.csdn.net/chroje/article/details/79477329"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">只有n和e是公开的。加密时我们也要知道φ(n)的值，最简单的方式是用两个质数之积得到，别人想破解RSA也要知道φ(n)的值，只能对n进行因数分解，那么我们不想m被破解，n的值就要非常大，就是我们之前说的，长度一般为1024个二进制位，这样就很安全了</a>
+                    </p>
+                    <h4 id="C-，JAVA，python-RSA公钥加密"><a href="#C-，JAVA，python-RSA公钥加密" class="headerlink"
+                                                                                                      title="C#，JAVA，python RSA公钥加密"></a>C#，JAVA，python
+                      RSA公钥加密</h4>
+                    <p><strong>每个平台语言之间的RSA密钥不能直接通用</strong></p>
+                    <p>
+                      原理上我们是知道他是由两个大素数p和q的乘积，正常的情况下含有私钥的文件会反这些参数全部给出，而如果只给出公钥时，事实上是<u><strong>给定了n(Modules)和e(Exponent)两个参数</strong></u>，<u><strong>这两个参数可以用来加密</strong></u>，我们也都知道，如何将这两个参数有效地传递给另一方呢？或者说我们把这两个参数如何给其他人呢，这个就是我们常说的公钥文件，当然有什么pfx等等，但这里我们如果简要地传递给第二方时，我们会经常使用一个对象RSAParameters类，这个对象就是这几个参数，如果我需要传递给你时，有效的方式就是把RSAParameters序列化，然后把序列化的内容给你就可以了。
+                    </p>
+                    <blockquote>
+                      <p>RSA公钥加密其实只需要知道n(Modules)和e(Exponent)两个参数</p>
+                    </blockquote>
+                    <ul>
+                      <li>C#：在 C# 中 RSA 的私钥和公钥文件是使用 XML 格式存储的，RSA密钥对有很多个参数，d
+                        /dp/dq/Expoent/InverseQ/Modulus/p/q。在C#中有两种常用的序列化形式，一种就是byte序列化，一种就是xml序列化（一般使用JSON序列化的时候不多，因为javascript对实现RSA原生支技较为复杂）。在C#中有两种常用的序列化形式，一种就是byte序列化，一种就是xml序列化（一般使用JSON序列化的时候不多，因为javascript对实现RSA原生支技较为复杂）。
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">&lt;RSAKeyValue&gt;</span><br><span class="line">   &lt;Modulus&gt;…&lt;/Modulus&gt;</span><br><span class="line">   &lt;Exponent&gt;…&lt;/Exponent&gt;</span><br><span class="line">   &lt;P&gt;…&lt;/P&gt;</span><br><span class="line">   &lt;Q&gt;…&lt;/Q&gt;</span><br><span class="line">   &lt;DP&gt;…&lt;/DP&gt;</span><br><span class="line">   &lt;DQ&gt;…&lt;/DQ&gt;</span><br><span class="line">   &lt;InverseQ&gt;…&lt;/InverseQ&gt;</span><br><span class="line">   &lt;D&gt;…&lt;/D&gt;</span><br><span class="line">&lt;/RSAKeyValue&gt;</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <p>这是一个序列化后的xml形式，其中几个参数都是被自动序列化成base64编码，如果是公钥的话，其中
+                      <modulus>和<exponent>
+                          两个参数有值，其他的在序列化过程中如果没有值不序列化，所以你可以最终看到只有这两个参数的一个结构。
+                        </exponent>
+                      </modulus>
+                    </p>
+                    <ul>
+                      <li>
+                        <p>
+                          JAVA：公钥私钥:使用openssl生成pkcs#1格式的公钥私钥pem文件。python直接使用该密钥；Java需要转换为pkcs#8格式公钥私钥，密钥字符串不需要BEGIN/END。
+                        </p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line">import java.security.Key;</span><br><span class="line">import java.security.KeyFactory;</span><br><span class="line">import java.security.NoSuchAlgorithmException;</span><br><span class="line">import java.security.PrivateKey;</span><br><span class="line">import java.security.PublicKey;</span><br><span class="line">import java.security.spec.InvalidKeySpecException;</span><br><span class="line">import java.security.spec.PKCS8EncodedKeySpec;</span><br><span class="line">import java.security.spec.X509EncodedKeySpec;</span><br><span class="line">import java.util.Base64;</span><br><span class="line"></span><br><span class="line">import javax.crypto.Cipher;</span><br><span class="line"></span><br><span class="line">public class rsa_demo &#123;</span><br><span class="line">    </span><br><span class="line">    public String encryptoMode =&quot;RSA/ECB/PKCS1Padding&quot;;</span><br><span class="line">    //public String encryptoMode =&quot;RSA/ECB/NoPadding&quot;;</span><br><span class="line"></span><br><span class="line">    private String priKey=&quot;私钥字符串&quot;;</span><br><span class="line">    </span><br><span class="line">    private String pubKey=&quot;公钥字符串&quot;;</span><br><span class="line">    </span><br><span class="line">    public String sign_str = &quot;123456&quot; ;</span><br><span class="line">     /***</span><br><span class="line">      * 秘钥的来源方式 openssl 生成</span><br><span class="line">      */</span><br><span class="line">     </span><br><span class="line">     /**</span><br><span class="line">      * 获得公钥</span><br><span class="line">      * @return</span><br><span class="line">     * @throws NoSuchAlgorithmException </span><br><span class="line">     * @throws InvalidKeySpecException </span><br><span class="line">      */</span><br><span class="line">     private PublicKey getPublicKey(String pubKeyString) throws NoSuchAlgorithmException, InvalidKeySpecException &#123;</span><br><span class="line">         byte[] pubKeyByte = Base64.getDecoder().decode(pubKey);</span><br><span class="line">         X509EncodedKeySpec spec = new X509EncodedKeySpec(pubKeyByte);</span><br><span class="line">         KeyFactory keyFactory = KeyFactory.getInstance(&quot;RSA&quot;);    </span><br><span class="line">         PublicKey pubkey = keyFactory.generatePublic(spec); </span><br><span class="line">         return pubkey;</span><br><span class="line">     &#125;</span><br><span class="line">     /**</span><br><span class="line">      * 获得私钥</span><br><span class="line">      * @return</span><br><span class="line">      */</span><br><span class="line">     private PrivateKey getPrivateKey(String priKeyString) throws NoSuchAlgorithmException, InvalidKeySpecException &#123;</span><br><span class="line">         byte[] priKeyByte = Base64.getDecoder().decode(priKey);</span><br><span class="line">         PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(priKeyByte);</span><br><span class="line">         KeyFactory keyFactory = KeyFactory.getInstance(&quot;RSA&quot;);    </span><br><span class="line">         PrivateKey priKey = keyFactory.generatePrivate(spec);    </span><br><span class="line">         return priKey;</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     /**</span><br><span class="line">      * 公钥加密 （私钥加密）</span><br><span class="line">      */</span><br><span class="line">     public String encrypto(String text,Key key) &#123;</span><br><span class="line">         try&#123;</span><br><span class="line">                Cipher cipher = Cipher.getInstance(encryptoMode);</span><br><span class="line">                cipher.init(Cipher.ENCRYPT_MODE, key);</span><br><span class="line">                byte tempBytes[] = cipher.doFinal(text.getBytes());</span><br><span class="line">                String secretText=Base64.getEncoder().encodeToString(tempBytes);</span><br><span class="line">                return secretText;</span><br><span class="line">            &#125;catch(Exception e)&#123;</span><br><span class="line">                throw new RuntimeException(&quot;加密字符串[&quot; + text + &quot;]时遇到异常&quot;, e);</span><br><span class="line">            &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     /**</span><br><span class="line">      * 私钥解密（公钥解密）</span><br><span class="line">      * @param secretText</span><br><span class="line">      */</span><br><span class="line">     public String decrypto(String secretText,Key key) &#123;</span><br><span class="line">         try&#123;</span><br><span class="line">                //生成公钥</span><br><span class="line">                Cipher cipher = Cipher.getInstance(encryptoMode);</span><br><span class="line">                cipher.init(Cipher.DECRYPT_MODE, key);</span><br><span class="line">                // 密文解码</span><br><span class="line">                byte[] secretText_decode = Base64.getDecoder().decode(secretText.getBytes());</span><br><span class="line">                byte tempBytes[] = cipher.doFinal(secretText_decode);</span><br><span class="line">                String text=new String( tempBytes);</span><br><span class="line">                return text;</span><br><span class="line">            &#125;catch(Exception e)&#123;</span><br><span class="line">                throw new RuntimeException(&quot;解密字符串[&quot; + secretText + &quot;]时遇到异常&quot;, e);</span><br><span class="line">            &#125;</span><br><span class="line">     &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 由于每次公钥 加密出来的结果都不一样，所有python java 每次加密出来的结果都不一样，也就没有可比性。我们只考虑能解密就行 </span><br><span class="line">     * @param args</span><br><span class="line">     */</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        </span><br><span class="line">        rsa_demo rsa = new rsa_demo();</span><br><span class="line">        System.err.println(&quot;明文:&quot;+rsa.sign_str);</span><br><span class="line">        PublicKey pubkey = rsa.getPublicKey(rsa.pubKey);</span><br><span class="line">        PrivateKey prikey = rsa.getPrivateKey(rsa.priKey);</span><br><span class="line">        String secretText = rsa.encrypto(rsa.sign_str,pubkey);//公钥加密，私钥解密</span><br><span class="line">    </span><br><span class="line">        secretText=&quot;Lm9PN4oM1dl17d2XFYRIs+hDV6RkGPVYBjgYAglaj020v5RnYzClHUN6lOVBzpeYKyH1MY5JzyOfxuYZHKCupVqhcvY4+zx+jowBH2nbVp1+/OrzuiPkNivfvmEad6ImAZp5/3Y/dVafABm5xZE78j7Ytlv0ak4seXMGTisU39o=&quot;;</span><br><span class="line">        System.out.println(&quot;密文:&quot;+secretText);</span><br><span class="line">        String text =  rsa.decrypto(secretText,prikey);</span><br><span class="line">        </span><br><span class="line">        System.out.println(&quot;明文:&quot;+text);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+                      </li>
+                      <li>
+                        <p>PYTHON: Python 的 pycrypto 是使用 PEM
+                          格式。python可以将公钥私钥的字符串直接保存使用，避免每次读pem文件。
+                        </p>
+                        <figure class="highlight plain">
+                          <table>
+                            <tr>
+                              <td class="gutter">
+                                <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre>
+                              </td>
+                              <td class="code">
+                                <pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">RSA加解密</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">import base64</span><br><span class="line">from M2Crypto import BIO, RSA</span><br><span class="line"></span><br><span class="line">with open(&quot;public_key.pem&quot;, &apos;r&apos;) as f:</span><br><span class="line">    pubkey = f.read()</span><br><span class="line">with open(&quot;private_key.pem&quot;, &apos;r&apos;) as f:</span><br><span class="line">    prikey = f.read()</span><br><span class="line"></span><br><span class="line"># 加密</span><br><span class="line">text = &quot;ABCDEF&quot;.encode(&apos;utf-8&apos;)  # 明文</span><br><span class="line">pub_bio = BIO.MemoryBuffer(pubkey.encode(&apos;utf-8&apos;))  # 公钥字符串</span><br><span class="line">pub_rsa = RSA.load_pub_key_bio(pub_bio)  # 加载公钥</span><br><span class="line">secret = pub_rsa.public_encrypt(text, RSA.pkcs1_padding)  # 公钥加密</span><br><span class="line">sign = base64.b64encode(secret)  # 密文base64编码</span><br><span class="line">print(sign)</span><br><span class="line"></span><br><span class="line"># 解密</span><br><span class="line">b64_sign = &quot;uhBqhevT0E5+WT++HX+pGzSy7YGskBQODuvoV+hf0k8cSyXG/GuAT4LKYaCiT9qiEGlbWxCIH51Qt1s0y2X56TbNja93AbzXiFWzsC2H6vwo3ZFcoj+YqUBsax+Gad0I6NME9lalpKsPtWqi4W/b3VbG5Mx+WBJ+L17GR7ZvWMo=&quot; # base64密文</span><br><span class="line">cipher = base64.b64decode(b64_sign)  # base64解码</span><br><span class="line">pri_bio = BIO.MemoryBuffer(prikey.encode(&apos;utf-8&apos;))  # 加载私钥</span><br><span class="line">pri_rsa = RSA.load_key_bio(pri_bio)</span><br><span class="line">plain = pri_rsa.private_decrypt(cipher, RSA.pkcs1_padding)  # 解密</span><br><span class="line">print(plain.decode(&apos;utf-8&apos;))</span><br></pre>
+                              </td>
+                            </tr>
+                          </table>
+                        </figure>
+
+                      </li>
+                    </ul>
+                    <h4 id="跨平台问题"><a href="#跨平台问题" class="headerlink"
+                                                                                                      title="跨平台问题"></a>跨平台问题
+                    </h4>
+                    <p>参考：</p>
+                    <ol>
+                      <li><a href="https://www.bbsmax.com/A/VGzly3XOJb/" target="_blank"
+                                                                                                        rel="noopener">.NET与JAVA
+                          RSA密钥格式转换</a>
+                      </li>
+                      <li><a href="https://my.oschina.net/hejunbinlan/blog/1475301" target="_blank"
+                                                                                                        rel="noopener">常见证书格式及相互转换</a>
+                      </li>
+                      <li><a href="https://segmentfault.com/a/1190000016649719" target="_blank"
+                                                                                                        rel="noopener">Python&amp;Java互通rsa加密解密</a>
+                      </li>
+                      <li>转换工具<a href="https://github.com/MisterDaneel/PemToXml" target="_blank"
+                                                                                                        rel="noopener">PemToXml</a>
+                      </li>
+                    </ol>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"></span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">#</span><br><span class="line"># Converting RSA PEM key (PKCS#1) to XML compatible for .Net</span><br><span class="line"># from https://github.com/MisterDaneel/</span><br><span class="line">#</span><br><span class="line"># Need pycrypto installed.</span><br><span class="line">#</span><br><span class="line">from Crypto.Util import number</span><br><span class="line">from Crypto.Util.asn1 import DerSequence</span><br><span class="line">from Crypto.PublicKey import RSA</span><br><span class="line">from base64 import standard_b64encode, b64decode</span><br><span class="line">from binascii import a2b_base64</span><br><span class="line">from os.path import basename, exists</span><br><span class="line">from xml.dom import minidom</span><br><span class="line">import argparse</span><br><span class="line">#</span><br><span class="line"># CreateXMLPubKey</span><br><span class="line">#</span><br><span class="line">def pubKeyXML(pemPublicKeyFile):</span><br><span class="line">   with open (pemPublicKeyFile, &apos;rb&apos;) as pkFile:</span><br><span class="line">      pemPublicKey = pkFile.read()</span><br><span class="line">   publicKey = RSA.importKey(pemPublicKey)</span><br><span class="line">   xml  = &apos;&lt;RSAKeyValue&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;Modulus&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(publicKey.n))</span><br><span class="line">   xml += &apos;&lt;/Modulus&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;Exponent&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(publicKey.e))</span><br><span class="line">   xml += &apos;&lt;/Exponent&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;/RSAKeyValue&gt;&apos;</span><br><span class="line">   fileName = basename(pemPublicKeyFile)</span><br><span class="line">   with open (fileName+&apos;.xml&apos;, &apos;w&apos;) as pkFile:</span><br><span class="line">      pkFile.write(xml)</span><br><span class="line">   return</span><br><span class="line">#</span><br><span class="line"># CreateXMLPrivKey</span><br><span class="line">#</span><br><span class="line">def privKeyXML(pemPrivateKeyFile):</span><br><span class="line">   with open (pemPrivateKeyFile, &apos;rb&apos;) as pkFile:</span><br><span class="line">      pemPrivKey = pkFile.read()</span><br><span class="line">   print pemPrivKey</span><br><span class="line">   lines = pemPrivKey.replace(&quot; &quot;, &apos;&apos;).split()</span><br><span class="line">   print lines</span><br><span class="line">   keyDer = DerSequence()</span><br><span class="line">   keyDer.decode(a2b_base64(&apos;&apos;.join(lines[1:-1])))</span><br><span class="line">   xml  = &apos;&lt;RSAKeyValue&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;Modulus&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(keyDer[1]))</span><br><span class="line">   xml += &apos;&lt;/Modulus&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;Exponent&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(keyDer[2]))</span><br><span class="line">   xml += &apos;&lt;/Exponent&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;D&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(keyDer[3]))</span><br><span class="line">   xml += &apos;&lt;/D&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;P&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(keyDer[4]))</span><br><span class="line">   xml += &apos;&lt;/P&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;Q&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(keyDer[5]))</span><br><span class="line">   xml += &apos;&lt;/Q&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;DP&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(keyDer[6]))</span><br><span class="line">   xml += &apos;&lt;/DP&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;DQ&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(keyDer[7]))</span><br><span class="line">   xml += &apos;&lt;/DQ&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;InverseQ&gt;&apos;</span><br><span class="line">   xml += standard_b64encode(number.long_to_bytes(keyDer[8]))</span><br><span class="line">   xml += &apos;&lt;/InverseQ&gt;&apos;</span><br><span class="line">   xml += &apos;&lt;/RSAKeyValue&gt;&apos;</span><br><span class="line">   fileName = basename(pemPrivateKeyFile)</span><br><span class="line">   with open (fileName+&apos;.xml&apos;, &apos;w&apos;) as pkFile:</span><br><span class="line">      pkFile.write(xml)</span><br><span class="line">   return</span><br><span class="line">#</span><br><span class="line"># Get Long Int</span><br><span class="line">#</span><br><span class="line">def GetLong(nodelist):</span><br><span class="line">   rc = []</span><br><span class="line">   for node in nodelist:</span><br><span class="line">      if node.nodeType == node.TEXT_NODE:</span><br><span class="line">         rc.append(node.data)</span><br><span class="line">   string = &apos;&apos;.join(rc) </span><br><span class="line">   return number.bytes_to_long(b64decode(string))</span><br><span class="line">#</span><br><span class="line"># CreatePEMPubKey</span><br><span class="line">#</span><br><span class="line">def pubKeyPEM(xmlPublicKeyFile):</span><br><span class="line">   with open (xmlPublicKeyFile, &apos;rb&apos;) as pkFile:</span><br><span class="line">      xmlPublicKey = pkFile.read()</span><br><span class="line">   rsaKeyValue = minidom.parseString(xmlPublicKey)</span><br><span class="line">   modulus = GetLong(rsaKeyValue.getElementsByTagName(&apos;Modulus&apos;)[0].childNodes)</span><br><span class="line">   exponent = GetLong(rsaKeyValue.getElementsByTagName(&apos;Exponent&apos;)[0].childNodes)</span><br><span class="line">   publicKey = RSA.construct((modulus, exponent))</span><br><span class="line">   fileName = basename(xmlPublicKeyFile)</span><br><span class="line">   with open (fileName+&apos;.pem&apos;, &apos;w&apos;) as pkFile:</span><br><span class="line">      pkFile.write(publicKey.exportKey())</span><br><span class="line">   return</span><br><span class="line">#</span><br><span class="line"># CreatePEMPrivKey</span><br><span class="line">#</span><br><span class="line">def privKeyPEM(xmlPrivateKeyFile):</span><br><span class="line">   with open (xmlPrivateKeyFile, &apos;rb&apos;) as pkFile:</span><br><span class="line">      xmlPrivateKey = pkFile.read()</span><br><span class="line">   rsaKeyValue = minidom.parseString(xmlPrivateKey)</span><br><span class="line">   modulus = GetLong(rsaKeyValue.getElementsByTagName(&apos;Modulus&apos;)[0].childNodes)</span><br><span class="line">   exponent = GetLong(rsaKeyValue.getElementsByTagName(&apos;Exponent&apos;)[0].childNodes)</span><br><span class="line">   d = GetLong(rsaKeyValue.getElementsByTagName(&apos;D&apos;)[0].childNodes)</span><br><span class="line">   p = GetLong(rsaKeyValue.getElementsByTagName(&apos;P&apos;)[0].childNodes)</span><br><span class="line">   q = GetLong(rsaKeyValue.getElementsByTagName(&apos;Q&apos;)[0].childNodes)</span><br><span class="line">   qInv = GetLong(rsaKeyValue.getElementsByTagName(&apos;InverseQ&apos;)[0].childNodes)</span><br><span class="line">   privateKey = RSA.construct((modulus, exponent, d, p, q, qInv))</span><br><span class="line">   fileName = basename(xmlPrivateKeyFile)</span><br><span class="line">   with open (fileName+&apos;.pem&apos;, &apos;w&apos;) as pkFile:</span><br><span class="line">      pkFile.write(privateKey.exportKey())</span><br><span class="line">   return</span><br><span class="line">#</span><br><span class="line"># Parser args</span><br><span class="line">#</span><br><span class="line">def parse_args():</span><br><span class="line">   &quot;&quot;&quot;Create the arguments&quot;&quot;&quot;</span><br><span class="line">   parser = argparse.ArgumentParser(&apos;\nxmlpem.py --xmltopem --public mypublickeyfile.xml\nxmlpem.py --pentoxml --private myprivatekeyfile.pem&apos;)</span><br><span class="line">   parser.add_argument(&quot;-pub&quot;, &quot;--public&quot;, help=&quot;Public Key&quot;)</span><br><span class="line">   parser.add_argument(&quot;-priv&quot;, &quot;--private&quot;, help=&quot;Private Key&quot;)</span><br><span class="line">   parser.add_argument(&quot;-xtop&quot;, &quot;--xmltopem&quot;, help=&quot;XML to PEM&quot;, action=&apos;store_true&apos;)</span><br><span class="line">   parser.add_argument(&quot;-ptox&quot;, &quot;--pemtoxml&quot;, help=&quot;PEM to XML&quot;, action=&apos;store_true&apos;)</span><br><span class="line">   return parser.parse_args()</span><br><span class="line">#</span><br><span class="line"># Main</span><br><span class="line">#</span><br><span class="line">def main(args):</span><br><span class="line">   if args.pemtoxml:</span><br><span class="line">      if args.public:</span><br><span class="line">         inputfile = args.public</span><br><span class="line">         pubKeyXML(inputfile)</span><br><span class="line">      elif args.private:</span><br><span class="line">         inputfile = args.private</span><br><span class="line">         privKeyXML(inputfile)</span><br><span class="line">   elif args.xmltopem:</span><br><span class="line">      if args.public:</span><br><span class="line">         inputfile = args.public</span><br><span class="line">         pubKeyPEM(inputfile)</span><br><span class="line">      elif args.private:</span><br><span class="line">         inputfile = args.private</span><br><span class="line">         privKeyPEM(inputfile)</span><br><span class="line">   else:</span><br><span class="line">      print &apos;Nothing to do&apos;</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">   main(parse_args())</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/WSGI/" rel="tag"># WSGI</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2020/05/24/python性能优化建议-转载/" rel="next"
+                                                                                                        title="python性能优化建议---转载">
+                          <i class="fa fa-chevron-left"></i> python性能优化建议---转载
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2020/06/06/python网络编程之多进程理论/" rel="prev"
+                                                                                                        title="'python网络编程之多进程理论'">
+                          'python网络编程之多进程理论' <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#非对称加密算法"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">非对称加密算法
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#RSA加密原理"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">RSA加密原理
+                        </span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#C-，JAVA，python-RSA公钥加密"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">C#，JAVA，python
+                          RSA公钥加密</span></a></li>
+                    <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                      href="#跨平台问题"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">跨平台问题</span></a></li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2020</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">113.6k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共113.6k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

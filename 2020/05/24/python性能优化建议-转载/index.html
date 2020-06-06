@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="性能,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="1、优化算法时间复杂度     算法的时间复杂度对程序的执行效率影响最大，在Python中可以通过选择合适的数据结构来优化时间复杂度，如list和set查找某一个元素的时间复杂度分别是O(n)和O(1)。不同的场景有不同的优化方式，总得来说，一般有分治，分支界限，贪心，动态规划等思想。  2、减少冗余数据  如用上三角或下三角的方式去保存一个大的对称矩阵。在0元素占大多数的矩阵里使用稀疏矩阵表">
+  <meta name="keywords" content="性能">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="python性能优化建议---转载">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2020/05/24/python性能优化建议-转载/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="1、优化算法时间复杂度     算法的时间复杂度对程序的执行效率影响最大，在Python中可以通过选择合适的数据结构来优化时间复杂度，如list和set查找某一个元素的时间复杂度分别是O(n)和O(1)。不同的场景有不同的优化方式，总得来说，一般有分治，分支界限，贪心，动态规划等思想。  2、减少冗余数据  如用上三角或下三角的方式去保存一个大的对称矩阵。在0元素占大多数的矩阵里使用稀疏矩阵表">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:updated_time" content="2020-06-06T13:10:42.174Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="python性能优化建议---转载">
+  <meta name="twitter:description"
+                                                                                  content="1、优化算法时间复杂度     算法的时间复杂度对程序的执行效率影响最大，在Python中可以通过选择合适的数据结构来优化时间复杂度，如list和set查找某一个元素的时间复杂度分别是O(n)和O(1)。不同的场景有不同的优化方式，总得来说，一般有分治，分支界限，贪心，动态规划等思想。  2、减少冗余数据  如用上三角或下三角的方式去保存一个大的对称矩阵。在0元素占大多数的矩阵里使用稀疏矩阵表">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://xixili.online/2020/05/24/python性能优化建议-转载/">
+
+  <title>python性能优化建议---转载 | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2020/05/24/python性能优化建议-转载/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      python性能优化建议---转载</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2020-05-24T12:47:03+08:00">
+                          2020-05-24
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/python/" itemprop="url"
+                                                                                                          rel="index">
+                            <span itemprop="name">python</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          2,744
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          12
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <link rel="stylesheet" class="aplayer-secondary-style-marker"
+                                                                                                    href="\assets\css\APlayer.min.css">
+                    <script src="\assets\js\APlayer.min.js"
+                                                                                                    class="aplayer-secondary-script-marker">
+                    </script>
+                    <script class="meting-secondary-script-marker"
+                                                                                                    src="\assets\js\Meting.min.js">
+                    </script>
+                    <meta name="referrer" content="no-referrer">
+
+                    <h5 id="1、优化算法时间复杂度"><a href="#1、优化算法时间复杂度" class="headerlink"
+                                                                                                      title="1、优化算法时间复杂度"></a>1、优化算法时间复杂度
+                    </h5>
+                    <p>
+                      算法的时间复杂度对程序的执行效率影响最大，在Python中可以通过选择合适的数据结构来优化时间复杂度，如list和set查找某一个元素的时间复杂度分别是O(n)和O(1)。不同的场景有不同的优化方式，总得来说，一般有分治，分支界限，贪心，动态规划等思想。
+                    </p>
+                    <h5 id="2、减少冗余数据"><a href="#2、减少冗余数据" class="headerlink"
+                                                                                                      title="2、减少冗余数据"></a>2、减少冗余数据
+                    </h5>
+                    <p>如用上三角或下三角的方式去保存一个大的对称矩阵。在0元素占大多数的矩阵里使用稀疏矩阵表示。</p>
+                    <h5 id="3、合理使用copy与deepcopy"><a href="#3、合理使用copy与deepcopy" class="headerlink"
+                                                                                                      title="3、合理使用copy与deepcopy"></a>3、合理使用copy与deepcopy
+                    </h5>
+                    <p>
+                      对于dict和list等数据结构的对象，直接赋值使用的是引用的方式。而有些情况下需要复制整个对象，这时可以使用copy包里的copy和deepcopy，这两个函数的不同之处在于后者是递归复制的。效率也不一样：（以下程序在ipython中运行），<u><strong>deepcopy更耗费性能</strong></u>
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">import copy</span><br><span class="line">a = range(100000)</span><br><span class="line">%timeit –n 10 copy.copy(a) # 运行10次 copy.copy(a)</span><br><span class="line">%timeit –n 10 copy.deepcopy(a)</span><br><span class="line">10 loops, best of 3: 1.55 ms per loop</span><br><span class="line">10 loops, best of 3: 151 ms per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>timeit后面的-n表示运行的次数，后两行对应的是两个timeit的输出，下同。由此可见后者慢一个数量级。
+                    </p>
+                    <h5 id="4、使用dict或set查找元素"><a href="#4、使用dict或set查找元素" class="headerlink"
+                                                                                                      title="4、使用dict或set查找元素"></a>4、使用dict或set查找元素
+                    </h5>
+                    <p>python
+                      dict和set都是使用hash表来实现(类似c++11标准库中unordered_map)，查找元素的时间复杂度是O(1)
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">a = range(1000)</span><br><span class="line">s = set(a)</span><br><span class="line">d = dict((i,1) for i in a)</span><br><span class="line">%timeit –n 10000 100 in d</span><br><span class="line">%timeit –n 10000 100 in s</span><br><span class="line">10000 loops, best of 3: 43.5 ns per loop</span><br><span class="line">10000 loops, best of 3: 49.6 ns per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>dict的效率略高(占用的空间也多一些)。</p>
+                    <h5 id="5、合理使用生成器（generator）和yield"><a href="#5、合理使用生成器（generator）和yield" class="headerlink"
+                                                                                                      title="5、合理使用生成器（generator）和yield"></a>5、合理使用生成器（generator）和yield
+                    </h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">%timeit –n 100 a = (i for i in range(100000))</span><br><span class="line">%timeit –n 100 b = [i for i in range(100000)]</span><br><span class="line">100 loops, best of 3: 1.54 ms per loop</span><br><span class="line">100 loops, best of 3: 4.56 ms per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      使用()得到的是一个generator对象，所需要的内存空间与列表的大小无关，所以效率会高一些。在具体应用上，比如<u><strong>set(i
+                          for
+                          i in range(100000))会比set([i for i in
+                          range(100000)])快。</strong></u><br>但是对于需要循环遍历的情况：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">%timeit –n 10 for x in (i for i in range(100000)): pass</span><br><span class="line">%timeit –n 10 for x in [i for i in range(100000)]: pass</span><br><span class="line">10 loops, best of 3: 6.51 ms per loop</span><br><span class="line">10 loops, best of 3: 5.54 ms per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      后者的效率反而更高，但是如果循环里有break,用generator的好处是显而易见的。yield也是用于创建generator：
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">def yield_func(ls):</span><br><span class="line">    for i in ls:</span><br><span class="line">        yield i+1</span><br><span class="line">def not_yield_func(ls):</span><br><span class="line">    return [i+1 for i in ls]</span><br><span class="line">ls = range(1000000)</span><br><span class="line">%timeit –n 10 for i in yield_func(ls):pass</span><br><span class="line">%timeit –n 10 for i in not_yield_func(ls):pass</span><br><span class="line">10 loops, best of 3: 63.8 ms per loop</span><br><span class="line">10 loops, best of 3: 62.9 ms per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      对于内存不是非常大的list，可以直接返回一个list，但是可读性yield更佳(人个喜好)。<br>python2.x内置generator功能的有xrange函数、itertools包等。
+                    </p>
+                    <h5 id="6、优化循环"><a href="#6、优化循环" class="headerlink"
+                                                                                                      title="6、优化循环"></a>6、优化循环
+                    </h5>
+                    <p><u><strong>循环之外能做的事不要放在循环内</strong></u>，比如下面的优化可以快一倍：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">a = range(10000)</span><br><span class="line">size_a = len(a)</span><br><span class="line">%timeit –n 1000 for i in a: k = len(a)</span><br><span class="line">%timeit –n 1000 for i in a: k = size_a</span><br><span class="line">1000 loops, best of 3: 569 µs per loop</span><br><span class="line">1000 loops, best of 3: 256 µs per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="7、优化包含多个判断表达式的顺序"><a href="#7、优化包含多个判断表达式的顺序" class="headerlink"
+                                                                                                      title="7、优化包含多个判断表达式的顺序"></a>7、优化包含多个判断表达式的顺序
+                    </h5>
+                    <p>对于and，应该把满足条件少的放在前面，对于or，把满足条件多的放在前面。如：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">a = range(2000)  </span><br><span class="line">%timeit –n 100 [i for i in a if 10 &lt; i &lt; 20 or 1000 &lt; i &lt; 2000]</span><br><span class="line">%timeit –n 100 [i for i in a if 1000 &lt; i &lt; 2000 or 100 &lt; i &lt; 20]    </span><br><span class="line">%timeit –n 100 [i for i in a if i % 2 == 0 and i &gt; 1900]</span><br><span class="line">%timeit –n 100 [i for i in a if i &gt; 1900 and i % 2 == 0]</span><br><span class="line">100 loops, best of 3: 287 µs per loop</span><br><span class="line">100 loops, best of 3: 214 µs per loop</span><br><span class="line">100 loops, best of 3: 128 µs per loop</span><br><span class="line">100 loops, best of 3: 56.1 µs per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <h5 id="8、使用join合并迭代器中的字符串"><a href="#8、使用join合并迭代器中的字符串" class="headerlink"
+                                                                                                      title="8、使用join合并迭代器中的字符串"></a>8、使用join合并迭代器中的字符串
+                    </h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">In [1]: %%timeit</span><br><span class="line">   …: s = ”</span><br><span class="line">   …: for i in a:</span><br><span class="line">   …:         s += i</span><br><span class="line">   …:</span><br><span class="line">10000 loops, best of 3: 59.8 µs per loop</span><br><span class="line">In [2]: %%timeit</span><br><span class="line">s = ”.join(a)</span><br><span class="line">   …:</span><br><span class="line">100000 loops, best of 3: 11.8 µs per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>join对于累加的方式，有大约5倍的提升。</p>
+                    <h5 id="9、选择合适的格式化字符方式"><a href="#9、选择合适的格式化字符方式" class="headerlink"
+                                                                                                      title="9、选择合适的格式化字符方式"></a>9、选择合适的格式化字符方式
+                    </h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">s1, s2 = ‘ax’, ‘bx’</span><br><span class="line">%timeit –n 100000 ‘abc%s%s’ % (s1, s2)</span><br><span class="line">%timeit –n 100000 ‘abc&#123;0&#125;&#123;1&#125;’.format(s1, s2)</span><br><span class="line">%timeit –n 100000 ‘abc’ + s1 + s2</span><br><span class="line">100000 loops, best of 3: 183 ns per loop</span><br><span class="line">100000 loops, best of 3: 169 ns per loop</span><br><span class="line">100000 loops, best of 3: 103 ns per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>三种情况中，%的方式是最慢的，但是三者的差距并不大（都非常快）。(个人觉得%的可读性最好)</p>
+                    <h5 id="10、不借助中间变量交换两个变量的值"><a href="#10、不借助中间变量交换两个变量的值" class="headerlink"
+                                                                                                      title="10、不借助中间变量交换两个变量的值"></a>10、不借助中间变量交换两个变量的值
+                    </h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">In [3]: %%timeit –n 10000</span><br><span class="line">    a,b=1,2</span><br><span class="line">   ….: c=a;a=b;b=c;</span><br><span class="line">   ….:</span><br><span class="line">10000 loops, best of 3: 172 ns per loop</span><br><span class="line">In [4]: %%timeit –n 10000</span><br><span class="line">a,b=1,2</span><br><span class="line">a,b=b,a</span><br><span class="line">   ….:</span><br><span class="line">10000 loops, best of 3: 86 ns per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>
+                      <strong>使用a,b=b,a而不是c=a;a=b;b=c;来交换a,b的值，可以快1倍以上。</strong>
+                    </p>
+                    <h5 id="11、使用if-is"><a href="#11、使用if-is" class="headerlink"
+                                                                                                      title="11、使用if is"></a>11、使用if
+                      is</h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">a = range(10000)</span><br><span class="line">%timeit –n 100 [i for i in a if i == True]</span><br><span class="line">%timeit –n 100 [i for i in a if i is True]</span><br><span class="line">100 loops, best of 3: 531 µs per loop</span><br><span class="line">100 loops, best of 3: 362 µs per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p><u><strong>使用 if is True 比 if == True 将近快一倍。</strong></u>
+                    </p>
+                    <h5 id="12、使用级联比较x-lt-y-lt-z"><a href="#12、使用级联比较x-lt-y-lt-z" class="headerlink"
+                                                                                                      title="12、使用级联比较x &lt; y &lt; z"></a>12、使用级联比较x
+                      &lt; y &lt; z</h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">x, y, z = 1,2,3</span><br><span class="line">%timeit –n 1000000 if x &lt; y &lt; z:pass</span><br><span class="line">%timeit –n 1000000 if x &lt; y and y &lt; z:pass</span><br><span class="line">1000000 loops, best of 3: 101 ns per loop</span><br><span class="line">1000000 loops, best of 3: 121 ns per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>x &lt; y &lt; z效率略高，而且可读性更好。</p>
+                    <h5 id="13、while-1-比-while-True-更快"><a href="#13、while-1-比-while-True-更快" class="headerlink"
+                                                                                                      title="13、while 1 比 while True 更快"></a>13、while
+                      1 比 while True 更快</h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">def while_1():</span><br><span class="line">    n = 100000</span><br><span class="line">    while 1:</span><br><span class="line">        n -= 1</span><br><span class="line">        if n &lt;= 0: break</span><br><span class="line">def while_true():</span><br><span class="line">    n = 100000</span><br><span class="line">    while True:</span><br><span class="line">        n -= 1</span><br><span class="line">        if n &lt;= 0: break    </span><br><span class="line">m, n = 1000000, 1000000</span><br><span class="line">%timeit –n 100 while_1()</span><br><span class="line">%timeit –n 100 while_true()</span><br><span class="line">100 loops, best of 3: 3.69 ms per loop</span><br><span class="line">100 loops, best of 3: 5.61 ms per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>while 1 比 while true快很多，原因是在python2.x中，True是一个全局变量，而非关键字。
+                    </p>
+                    <h5 id="14、使用-而不是pow"><a href="#14、使用-而不是pow" class="headerlink"
+                                                                                                      title="14、使用**而不是pow"></a>14、使用**而不是pow
+                    </h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">%timeit –n 10000 c = pow(2,20)</span><br><span class="line">%timeit –n 10000 c = 2**20</span><br><span class="line">10000 loops, best of 3: 284 ns per loop</span><br><span class="line">10000 loops, best of 3: 16.9 ns per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>使用*<strong>*就是快10倍以上</strong>！</p>
+                    <h5
+                                                                                                    id="15、使用-cProfile-cStringIO-和-cPickle等用c实现相同功能（分别对应profile-StringIO-pickle）的包">
+                      <a href="#15、使用-cProfile-cStringIO-和-cPickle等用c实现相同功能（分别对应profile-StringIO-pickle）的包"
+                                                                                                      class="headerlink"
+                                                                                                      title="15、使用 cProfile, cStringIO 和 cPickle等用c实现相同功能（分别对应profile, StringIO, pickle）的包"></a>15、使用
+                      cProfile, cStringIO 和 cPickle等用c实现相同功能（分别对应profile,
+                      StringIO, pickle）的包</h5>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">import cPickle</span><br><span class="line">import pickle</span><br><span class="line">a = range(10000)</span><br><span class="line">%timeit –n 100 x = cPickle.dumps(a)</span><br><span class="line">%timeit –n 100 x = pickle.dumps(a)</span><br><span class="line">100 loops, best of 3: 1.58 ms per loop</span><br><span class="line">100 loops, best of 3: 17 ms per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>由c实现的包，速度快10倍以上！</p>
+                    <h5 id="16、使用最佳的反序列化方式"><a href="#16、使用最佳的反序列化方式" class="headerlink"
+                                                                                                      title="16、使用最佳的反序列化方式"></a>16、使用最佳的反序列化方式
+                    </h5>
+                    <p>下面比较了eval, cPickle, json方式三种对相应字符串反序列化的效率：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">import json</span><br><span class="line">import cPickle</span><br><span class="line">a = range(10000)</span><br><span class="line">s1 = str(a)</span><br><span class="line">s2 = cPickle.dumps(a)</span><br><span class="line">s3 = json.dumps(a)</span><br><span class="line">%timeit –n 100 x = eval(s1)</span><br><span class="line">%timeit –n 100 x = cPickle.loads(s2)</span><br><span class="line">%timeit –n 100 x = json.loads(s3)</span><br><span class="line">100 loops, best of 3: 16.8 ms per loop</span><br><span class="line">100 loops, best of 3: 2.02 ms per loop</span><br><span class="line">100 loops, best of 3: 798 µs per loop</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                    <p>可见json比cPickle快近3倍，比eval快20多倍。</p>
+                    <h5 id="17、使用C扩展-Extension"><a href="#17、使用C扩展-Extension" class="headerlink"
+                                                                                                      title="17、使用C扩展(Extension)"></a>17、使用C扩展(Extension)
+                    </h5>
+                    <p>目前主要有CPython(python最常见的实现的方式)原生API,
+                      ctypes,Cython，cffi三种方式，它们的作用是使得Python程序可以调用由C编译成的动态链接库，其特点分别是：<br>CPython原生API:
+                      通过引入Python.h头文件，对应的C程序中可以直接使用Python的数据结构。实现过程相对繁琐，但是有比较大的适用范围。<br>ctypes:
+                      通常用于封装(wrap)C程序，让纯Python程序调用动态链接库（Windows中的dll或Unix中的so文件）中的函数。如果想要在python中使用已经有C类库，使用ctypes是很好的选择，有一些基准测试下，python2+ctypes是性能最好的方式。<br>Cython:
+                      Cython是CPython的超集，用于简化编写C扩展的过程。Cython的优点是语法简洁，可以很好地兼容numpy等包含大量C扩展的库。Cython的使得场景一般是针对项目中某个算法或过程的优化。在某些测试中，可以有几百倍的性能提升。<br>cffi:
+                      cffi的就是ctypes在pypy（详见下文）中的实现，同进也兼容CPython。cffi提供了在python使用C类库的方式，可以直接在python代码中编写C代码，同时支持链接到已有的C类库。<br>使用这些优化方式一般是针对已有项目性能瓶颈模块的优化，可以在少量改动原有项目的情况下大幅度地提高整个程序的运行效率。
+                    </p>
+                    <h5 id="18、并行编程"><a href="#18、并行编程" class="headerlink"
+                                                                                                      title="18、并行编程"></a>18、并行编程
+                    </h5>
+                    <p>
+                      因为GIL的存在，Python很难充分利用多核CPU的优势。但是，可以通过内置的模块multiprocessing实现下面几种并行模式：<br>多进程：对于CPU密集型的程序，可以使用multiprocessing的Process,Pool等封装好的类，通过多进程的方式实现并行计算。但是因为进程中的通信成本比较大，对于进程之间需要大量数据交互的程序效率未必有大的提高。<br>多线程：对于IO密集型的程序，multiprocessing.dummy模块使用multiprocessing的接口封装threading，使得多线程编程也变得非常轻松(比如可以使用Pool的map接口，简洁高效)。<br>分布式：multiprocessing中的Managers类提供了可以在不同进程之共享数据的方式，可以在此基础上开发出分布式的程序。<br>不同的业务场景可以选择其中的一种或几种的组合实现程序性能的优化。
+                    </p>
+                    <h5 id="19、终级大杀器：PyPy"><a href="#19、终级大杀器：PyPy" class="headerlink"
+                                                                                                      title="19、终级大杀器：PyPy"></a>19、终级大杀器：PyPy
+                    </h5>
+                    <p>
+                      PyPy是用RPython(CPython的子集)实现的Python，根据官网的基准测试数据，它比CPython实现的Python要快6倍以上。快的原因是使用了Just-in-Time(JIT)编译器，即动态编译器，与静态编译器(如gcc,javac等)不同，它是利用程序运行的过程的数据进行优化。由于历史原因，目前pypy中还保留着GIL，不过正在进行的STM项目试图将PyPy变成没有GIL的Python。<br>如果python程序中含有C扩展(非cffi的方式)，JIT的优化效果会大打折扣，甚至比CPython慢（比Numpy）。所以在PyPy中最好用纯Python或使用cffi扩展。<br>随着STM，Numpy等项目的完善，相信PyPy将会替代CPython。
+                    </p>
+                    <h5 id="20、使用性能分析工具"><a href="#20、使用性能分析工具" class="headerlink"
+                                                                                                      title="20、使用性能分析工具"></a>20、使用性能分析工具
+                    </h5>
+                    <p>除了上面在ipython使用到的timeit模块，还有cProfile。cProfile的使用方式也非常简单：
+                      python -m cProfile
+                      filename.py，filename.py
+                      是要运行程序的文件名，可以在标准输出中看到每一个函数被调用的次数和运行的时间，从而找到程序的性能瓶颈，然后可以有针对性地优化。
+                    </p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/性能/" rel="tag"># 性能</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2020/05/18/Promise初步详解/" rel="next"
+                                                                                                        title="Promise初步详解">
+                          <i class="fa fa-chevron-left"></i> Promise初步详解
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2020/05/30/非对称加密-RSA加解密python及跨平台问题/" rel="prev"
+                                                                                                        title="非对称加密--RSA加解密python及跨平台问题">
+                          非对称加密--RSA加解密python及跨平台问题 <i
+                                                                                                          class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">43</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#1、优化算法时间复杂度"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">1、优化算法时间复杂度
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#2、减少冗余数据"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">2、减少冗余数据
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#3、合理使用copy与deepcopy"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">3、合理使用copy与deepcopy
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#4、使用dict或set查找元素"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">4、使用dict或set查找元素
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#5、合理使用生成器（generator）和yield"><span
+                                                                                                        class="nav-number">5.</span>
+                        <span class="nav-text">5、合理使用生成器（generator）和yield
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#6、优化循环"><span
+                                                                                                        class="nav-number">6.</span>
+                        <span class="nav-text">6、优化循环
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#7、优化包含多个判断表达式的顺序"><span
+                                                                                                        class="nav-number">7.</span>
+                        <span class="nav-text">7、优化包含多个判断表达式的顺序
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#8、使用join合并迭代器中的字符串"><span
+                                                                                                        class="nav-number">8.</span>
+                        <span class="nav-text">8、使用join合并迭代器中的字符串
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#9、选择合适的格式化字符方式"><span
+                                                                                                        class="nav-number">9.</span>
+                        <span class="nav-text">9、选择合适的格式化字符方式
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#10、不借助中间变量交换两个变量的值"><span
+                                                                                                        class="nav-number">10.</span>
+                        <span class="nav-text">10、不借助中间变量交换两个变量的值
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#11、使用if-is"><span
+                                                                                                        class="nav-number">11.</span>
+                        <span class="nav-text">11、使用if
+                          is</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#12、使用级联比较x-lt-y-lt-z"><span
+                                                                                                        class="nav-number">12.</span>
+                        <span class="nav-text">12、使用级联比较x
+                          &lt; y &lt; z</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#13、while-1-比-while-True-更快"><span
+                                                                                                        class="nav-number">13.</span>
+                        <span class="nav-text">13、while
+                          1 比 while True 更快</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#14、使用-而不是pow"><span
+                                                                                                        class="nav-number">14.</span>
+                        <span class="nav-text">14、使用**而不是pow
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#15、使用-cProfile-cStringIO-和-cPickle等用c实现相同功能（分别对应profile-StringIO-pickle）的包"><span
+                                                                                                        class="nav-number">15.</span>
+                        <span class="nav-text">
+                          15、使用
+                          cProfile, cStringIO 和 cPickle等用c实现相同功能（分别对应profile,
+                          StringIO, pickle）的包</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#16、使用最佳的反序列化方式"><span
+                                                                                                        class="nav-number">16.</span>
+                        <span class="nav-text">16、使用最佳的反序列化方式
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#17、使用C扩展-Extension"><span
+                                                                                                        class="nav-number">17.</span>
+                        <span class="nav-text">17、使用C扩展(Extension)
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#18、并行编程"><span
+                                                                                                        class="nav-number">18.</span>
+                        <span class="nav-text">18、并行编程
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#19、终级大杀器：PyPy"><span
+                                                                                                        class="nav-number">19.</span>
+                        <span class="nav-text">19、终级大杀器：PyPy
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#20、使用性能分析工具"><span
+                                                                                                        class="nav-number">20.</span>
+                        <span class="nav-text">20、使用性能分析工具
+                        </span></a></li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2020</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">113.6k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共113.6k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
