@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css"
+                                                                                  rel="stylesheet">
+  <style>
+    .pace .pace-progress {
+      background: #1E92FB;
+      /*进度条颜色*/
+      height: 3px;
+    }
+
+    .pace .pace-progress-inner {
+      box-shadow: 0 0 10px #1E92FB, 0 0 5px #1E92FB;
+      /*阴影颜色*/
+    }
+
+    .pace .pace-activity {
+      border-top-color: #1E92FB;
+      /*上边框颜色*/
+      border-left-color: #1E92FB;
+      /*左边框颜色*/
+    }
+
+  </style>
+  <script>
+    (function() {
+      if ('') {
+        if (prompt('请输入文章密码') !== '') {
+          alert('密码错误！');
+          history.back();
+        }
+      }
+    })();
+
+  </script>
+
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+                                                                                  rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.3">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.3">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+  <meta name="keywords" content="网络编程,">
+
+  <link rel="alternate" href="/atom.xml" title="Xixili"
+                                                                                  type="application/atom+xml">
+
+  <meta name="description"
+                                                                                  content="socket  概述 TCP/IP协议不同于OSI的7个分层，它是根据这7个分层，  TCP/IP协议参考模型把所有的TCP/IP系列协议归类到四个抽象层中| 层次 | 协议 || — | — || 应用层 |   TFTP，HTTP，SNMP，FTP，SMTP，DNS，Telnet 等等 ||传输层 | TCP，UDP || 网络层 |   IP，ICMP，OSPF，EIGRP，IGMP |">
+  <meta name="keywords" content="网络编程">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="python网络编程之IO模型（转）">
+  <meta property="og:url"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/index.html">
+  <meta property="og:site_name" content="Xixili">
+  <meta property="og:description"
+                                                                                  content="socket  概述 TCP/IP协议不同于OSI的7个分层，它是根据这7个分层，  TCP/IP协议参考模型把所有的TCP/IP系列协议归类到四个抽象层中| 层次 | 协议 || — | — || 应用层 |   TFTP，HTTP，SNMP，FTP，SMTP，DNS，Telnet 等等 ||传输层 | TCP，UDP || 网络层 |   IP，ICMP，OSPF，EIGRP，IGMP |">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/1.jpg">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/2.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/3.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/4.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/6.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/7.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/8.png">
+  <meta property="og:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/9.png">
+  <meta property="og:updated_time" content="2020-06-07T02:36:27.859Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="python网络编程之IO模型（转）">
+  <meta name="twitter:description"
+                                                                                  content="socket  概述 TCP/IP协议不同于OSI的7个分层，它是根据这7个分层，  TCP/IP协议参考模型把所有的TCP/IP系列协议归类到四个抽象层中| 层次 | 协议 || — | — || 应用层 |   TFTP，HTTP，SNMP，FTP，SMTP，DNS，Telnet 等等 ||传输层 | TCP，UDP || 网络层 |   IP，ICMP，OSPF，EIGRP，IGMP |">
+  <meta name="twitter:image"
+                                                                                  content="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/1.jpg">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.3',
+      sidebar: {
+        "position": "left",
+        "display": "hide",
+        "offset": 12,
+        "b2t": true,
+        "scrollpercent": true,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/">
+
+  <title>python网络编程之IO模型（转） | Xixili</title>
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f342b671429f61a24603e5ca5a77997c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">Xixili</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">called</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-playlist">
+              <a href="/playlist/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-music"></i> <br>
+
+                歌单
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-photo">
+              <a href="/photo/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-camera"></i> <br>
+
+                摄影
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-search">
+
+              <a href="javascript:;" class="popup-trigger">
+
+                <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+
+                搜索
+              </a>
+            </li>
+
+          </ul>
+
+          <div class="site-search">
+
+            <div class="popup search-popup local-search-popup">
+              <div class="local-search-header clearfix">
+                <span class="search-icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <span class="popup-btn-close">
+                  <i class="fa fa-times-circle"></i>
+                </span>
+                <div class="local-search-input-wrapper">
+                  <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text"
+                                                                                                  id="local-search-input">
+                </div>
+              </div>
+              <div id="local-search-result"></div>
+            </div>
+
+          </div>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://xixili.online/2020/06/07/python网络编程之IO模型（转）/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="WHF">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image" content="/images/Avatar.PNG">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="Xixili">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">
+                      python网络编程之IO模型（转）</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2020-06-07T10:29:36+08:00">
+                          2020-06-07
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/python/" itemprop="url"
+                                                                                                          rel="index">
+                            <span itemprop="name">python</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                      <span class="post-meta-divider">|</span>
+                      <span class="page-pv"><i class="fa fa-file-o"></i> 阅读数
+                        <span class="busuanzi-value"
+                                                                                                        id="busuanzi_value_page_pv"></span>
+                      </span>
+
+                      <div class="post-wordcount">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-file-word-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">字数统计&#58;</span>
+
+                        <span title="字数统计">
+                          3,488
+                        </span>
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-clock-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">阅读时长 &asymp;</span>
+
+                        <span title="阅读时长">
+                          12
+                        </span>
+
+                      </div>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body han-init-context"
+                                                                                                  itemprop="articleBody">
+
+                    <meta name="referrer" content="no-referrer">
+
+                    <h5 id="socket"><a href="#socket" class="headerlink"
+                                                                                                      title="socket"></a><a
+                                                                                                      href="https://www.cnblogs.com/fengff/p/10984251.html"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">socket</a>
+                    </h5>
+                    <h6 id="概述"><a href="#概述" class="headerlink"
+                                                                                                      title="概述"></a>概述
+                    </h6>
+                    <p>TCP/IP协议不同于OSI的7个分层，它是根据这7个分层，</p>
+                    <img src="/2020/06/07/python网络编程之IO模型（转）/1.jpg"
+                                                                                                    title="OSI七层模型">
+                    <p>TCP/IP协议参考模型把所有的TCP/IP系列协议归类到四个抽象层中<br>| 层次 | 协议 |<br>| —
+                      | — |<br>| 应用层 |
+                      TFTP，HTTP，SNMP，FTP，SMTP，DNS，Telnet 等等 |<br>|传输层 | TCP，UDP
+                      |<br>| 网络层 |
+                      IP，ICMP，OSPF，EIGRP，IGMP |<br>|数据链路层 | SLIP，CSLIP，PPP，MTU
+                      |<br>每一抽象层建立在低一层提供的服务上，并且为高一层提供服务，看起来大概是这样子的</p>
+                    <img src="/2020/06/07/python网络编程之IO模型（转）/2.png" title="抽象">
+                    <p>
+                      socket编程是在tcp/IP上的网络编程，socket在上述的模型中的位置被一个天才的理论家或者是抽象的计算机大神提出并且安排出来
+                    </p>
+                    <img src="/2020/06/07/python网络编程之IO模型（转）/3.png"
+                                                                                                    title="socket抽象">
+                    <p>
+                      socket就在应用程序的传输层和应用层之间，设计了一个socket抽象层，传输层的底一层的服务提供给socket抽象层，socket抽象层再提供给应用层
+                    </p>
+                    <h6 id="socket的通讯原理"><a href="#socket的通讯原理" class="headerlink"
+                                                                                                      title="socket的通讯原理"></a>socket的通讯原理
+                    </h6><img src="/2020/06/07/python网络编程之IO模型（转）/4.png"
+                                                                                                    title="socket的通讯原理">
+
+                    <h6 id="SOCKET连接与TCP连接"><a href="#SOCKET连接与TCP连接" class="headerlink"
+                                                                                                      title="SOCKET连接与TCP连接"></a>SOCKET连接与TCP连接
+                    </h6>
+                    <p>
+                      创建Socket连接时，可以指定使用的传输层协议，Socket可以支持不同的传输层协议（TCP或UDP），当使用TCP协议进行连接时，该Socket连接就是一个TCP连接。
+                    </p>
+                    <h6 id="Socket连接与HTTP连接"><a href="#Socket连接与HTTP连接" class="headerlink"
+                                                                                                      title="Socket连接与HTTP连接"></a>Socket连接与HTTP连接
+                    </h6>
+                    <p>
+                      由于通常情况下Socket连接就是TCP连接，因此Socket连接一旦建立，通信双方即可开始相互发送数据内容，直到双方连接断开。但在实际网络应用中，客户端到服务器之间的通信往往需要穿越多个中间节点，例如路由器、网关、防火墙等，<strong>大部分防火墙默认会关闭长时间处于非活跃状态的连接而导致
+                        Socket
+                        连接断连，因此需要通过轮询告诉网络，该连接处于活跃状态</strong>。<br>　　而HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。<br>　　很多情况下，需要服务器端主动向客户端推送数据，保持客户端与服务器数据的实时与同步。此时若双方建立的是Socket连接，服务器就可以直接将数据传送给客户端；若双方建立的是HTTP连接，则服务器需要等到客户端发送一次请求后才能将数据传回给客户端，因此，客户端定时向服务器端发送连接请求，不仅可以保持在线，同时也是在“询问”服务器是否有新的数据，如果有就将数据传给客户端。
+                    </p>
+                    <h5 id="同步、异步、阻塞、非阻塞"><a href="#同步、异步、阻塞、非阻塞" class="headerlink"
+                                                                                                      title="同步、异步、阻塞、非阻塞"></a><a
+                                                                                                      href="https://www.cnblogs.com/wwg945/p/7994088.html"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">同步、异步、阻塞、非阻塞</a>
+                    </h5>
+                    <ul>
+                      <li>
+                        同步（synchronous）：一个进程在执行某个任务时，另外一个进程必须等待其执行完毕，才能继续执行<br>
+                        所谓同步，就是在发出一个功能调用时，在没有得到结果之前，该调用就不会返回。按照这个定义，其实绝大多数函数都是同步调用。但是一般而言，<br>
+                        我们在说同步、异步的时候，特指那些需要其他部件协作或者需要一定时间完成的任务。–串行</li>
+                      <li>异步（asynchronous）：<br>
+                        异步的概念和同步相对。当一个异步功能调用发出后，调用者不能立刻得到结果。当该异步功能完成后，通过状态、通知或回调来通知调用者。如果异步功能用状态来通知，那么调用者就需要每隔一定时间检查一次，效率就很低（有些初学多线程编程的人，总喜欢用一个循环去检查某个变量的值，这其实是一
+                        种很严重的错误）。<u><strong>如果是使用通知的方式，效率则很高</strong></u>，因为异步功能几乎不需要做额外的操作。至于回调函数，其实和通知没太多区别。
+                      </li>
+                      <li>阻塞：<br>
+                        阻塞调用是指调用结果返回之前，当前线程会被挂起（如遇到io操作）。函数只有在得到结果之后才会将阻塞的线程激活。有人也许会把阻塞调用和同步调用等同起来，实际上他是不同的。对于同步调用来说，很多时候当前线程还是激活的，只是从逻辑上当前函数没有返回而已。
+                      </li>
+                      <li>非阻塞：<br>
+                        非阻塞和阻塞的概念相对应，指在不能立刻得到结果之前也会立刻返回，同时该函数不会阻塞当前线程。</li>
+                    </ul>
+                    <blockquote>
+                      <ol>
+                        <li>
+                          同步与异步针对的是函数/任务的调用方式：同步就是当一个进程发起一个函数（任务）调用的时候，一直等到函数（任务）完成，而进程继续处于激活状态。而异步情况下是当一个进程发起一个函数（任务）调用的时候，不会等函数返回，而是继续往下执行当，函数返回的时候通过状态、通知、事件等方式通知进程任务完成。
+                        </li>
+                        <li>阻塞与非阻塞针对的是进程或线程：阻塞是当请求不能满足的时候就将进程挂起，而非阻塞则不会阻塞当前进程
+                        </li>
+                      </ol>
+                    </blockquote>
+                    <h5 id="select、poll、epoll之间的区别"><a href="#select、poll、epoll之间的区别" class="headerlink"
+                                                                                                      title="select、poll、epoll之间的区别"></a><a
+                                                                                                      href="https://www.cnblogs.com/aspirant/p/9166944.html"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">select、poll、epoll之间的区别</a>
+                    </h5>
+                    <ol>
+                      <li>select==&gt;时间复杂度O(n)<br>
+                        它仅仅知道了，有I/O事件发生了，却并不知道是哪那几个流（可能有一个，多个，甚至全部），我们只能无差别轮询所有流，找出能读出数据，或者写入数据的流，对他们进行操作。所以select具有O(n)的无差别轮询复杂度，同时处理的流越多，无差别轮询时间就越长。
+                      </li>
+                      <li>poll==&gt;时间复杂度O(n)<br>
+                        poll本质上和select没有区别，它将用户传入的数组拷贝到内核空间，然后查询每个fd对应的设备状态，
+                        但是它没有最大连接数的限制，原因是它是基于链表来存储的.</li>
+                      <li>epoll==&gt;时间复杂度O(1)<br> epoll可以理解为event
+                        poll，不同于忙轮询和无差别轮询，epoll会把哪个流发生了怎样的I/O事件通知我们。所以我们说epoll实际上是事件驱动（每个事件关联上fd）的，此时我们对这些流的操作都是有意义的。（复杂度降低到了O(1)）
+                        <h5 id="IO模型介绍"><a href="#IO模型介绍" class="headerlink"
+                                                                                                          title="IO模型介绍"></a>IO模型介绍
+                        </h5><a href="https://www.cnblogs.com/haiyan123/p/7465486.html" target="_blank"
+                                                                                                        rel="noopener">IO发生时涉及的对象和步骤。对于一个网络IO(network
+                          IO),它会涉及到两个系统对象，一个是调用这个IO的process (or
+                          thread)，另一个就是系统内核(kernel)。当一个read操作发生时，该操作会经历两个阶段</a>：
+                      </li>
+                      <li>等待数据准备 (Waiting for the data to be ready)</li>
+                      <li>将数据从内核拷贝到进程中(Copying the data from the kernel to the
+                        process) <h5 id="阻塞IO-blocking-IO">
+                          <a href="#阻塞IO-blocking-IO" class="headerlink"
+                                                                                                          title="阻塞IO  (blocking IO)"></a>阻塞IO
+                          (blocking IO)</h5><img src="/2020/06/07/python网络编程之IO模型（转）/6.png"
+                                                                                                        title="阻塞IO">
+                        阻塞IO（blocking
+                        IO）的特点：就是在IO执行的两个阶段（等待数据和拷贝数据两个阶段）都被block了<br>几乎所有的IO接口
+                        (
+                        包括socket接口 )
+                        都是阻塞型的。这给网络编程带来了一个很大的问题，如在调用recv(1024)的同时，线程将被阻塞，在此期间，线程将无法执行任何运算或响应任何的网络请求。
+                      </li>
+                    </ol>
+                    <p><strong>优化一：</strong></p>
+                    <blockquote>
+                      <p>
+                        在服务器端使用多线程（或多进程）。多线程（或多进程）的目的是让每个连接都拥有独立的线程（或进程），这样任何一个连接的阻塞都不会影响其他的连接。<br><strong>缺点</strong>：开启多进程或都线程的方式，在遇到要同时响应成百上千路的连接请求，则无论多线程还是多进程都会严重占据系统资源，降低系统对外界响应效率，而且线程与进程本身也更容易进入假死状态。
+                      </p>
+                    </blockquote>
+                    <p><strong>优化二：</strong></p>
+                    <blockquote>
+                      <p>
+                        考虑使用“线程池”或“连接池”:“线程池”旨在减少创建和销毁线程的频率，其维持一定合理数量的线程，并让空闲的线程重新承担新的执行任务。“连接池”维持连接的缓存池，尽量重用已有的连接、减少创建和关闭连接的频率。这两种技术都可以很好的降低系统开销，都被广泛应用很多大型系统，如websphere、tomcat和各种数据库等。<br><strong>缺点</strong>：线程池”和“连接池”技术也只是在一定程度上缓解了频繁调用IO接口带来的资源占用。而且，所谓“池”始终有其上限，当请求大大超过上限时，“池”构成的系统对外界的响应并不比没有池的时候效果好多少。所以使用“池”必须考虑其面临的响应规模，并根据响应规模调整“池”的大小。
+                      </p>
+                    </blockquote>
+                    <p>
+                      对应上例中的所面临的可能同时出现的上千甚至上万次的客户端请求，“线程池”或“连接池”或许可以缓解部分压力，但是不能解决所有问题。总之，多线程模型可以方便高效的解决小规模的服务请求，但面对大规模的服务请求，多线程模型也会遇到瓶颈，可以用非阻塞接口来尝试解决这个问题。
+                    </p>
+                    <h5 id="非阻塞IO-nonblocking-IO"><a href="#非阻塞IO-nonblocking-IO" class="headerlink"
+                                                                                                      title="非阻塞IO  (nonblocking IO)"></a>非阻塞IO
+                      (nonblocking IO)</h5>
+                    <p>
+                      当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，内核马上返回给进程，如果数据还没准备好，此时会返回一个error。进程在返回之后，可以干点别的事情，然后再发起recvform系统调用。<strong>重复上面的过程，循环往复的进行recvform系统调用。这个过程通常被称之为轮询</strong>。轮询检查内核数据，直到数据准备好，再拷贝数据到进程，进行数据处理。需要注意，拷贝数据整个过程，进程仍然是属于阻塞的状态。
+                    </p>
+                    <img src="/2020/06/07/python网络编程之IO模型（转）/7.png"
+                                                                                                    title="非阻塞IO">
+                    <p>在非阻塞式IO中，<strong>用户进程其实是需要不断的主动询问kernel数据准备好了没有</strong>。
+                    </p>
+                    <p>非阻塞IO模型优点：能够在等待任务完成的时间里干其他活了（包括提交其他任务，也就是 “后台”
+                      可以有多个任务在“”同时“”执行）。</p>
+                    <p>非阻塞IO模型缺点：</p>
+                    <ol>
+                      <li>
+                        循环调用recv()将大幅度推高CPU占用率；这也是我们在代码中留一句time.sleep(2)的原因,否则在低配主机下极容易出现卡机情况
+                      </li>
+                      <li>
+                        任务完成的响应延迟增大了，因为每过一段时间才去轮询一次read操作，而任务可能在两次轮询之间的任意时间完成。这会导致整体数据吞吐量的降低。
+                        <h5 id="多路复用IO-IO-multiplexing">
+                          <a href="#多路复用IO-IO-multiplexing" class="headerlink"
+                                                                                                          title="多路复用IO  (IO multiplexing)"></a>多路复用IO
+                          (IO multiplexing)</h5><img src="/2020/06/07/python网络编程之IO模型（转）/8.png"
+                                                                                                        title="多路复用IO">
+                        IO multiplexing这个词可能有点陌生，但是如果我说<a href="https://www.cnblogs.com/aspirant/p/9166944.html"
+                                                                                                        target="_blank"
+                                                                                                        rel="noopener"><strong>select/epoll</strong></a>，大概就都能明白了。有些地方也称这种IO方式为事件驱动IO(event
+                        driven IO)</li>
+                    </ol>
+                    <ol>
+                      <li>如果处理的连接数不是很高的话，使用select/epoll的web
+                        server不一定比使用multi-threading + blocking
+                        IO的web
+                        server性能更好，可能延迟还更大。select/epoll的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。
+                      </li>
+                      <li>
+                        在多路复用模型中，对于每一个socket，一般都设置成为non-blocking，但是，如上图所示，整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket
+                        IO给block。</li>
+                    </ol>
+                    <p>结论: select的优势在于可以处理多个连接，不适用于单个连接 </p>
+                    <p>
+                      一个进程可以同时对多个客户请求进行服务。也就是说<strong>IO复用的“介质”是进程(准确的说复用的是select和poll，因为进程也是靠调用select和poll来实现的)，复用一个进程(select和poll)来对多个IO进行服务，</strong>虽然客户端发来的IO是并发的但是IO所需的读写数据多数情况下是没有准备好的，因此就可以利用一个函数(select和poll)来监听IO所需的这些数据的状态，一旦IO有数据可以进行读写了，进程就来对这样的IO进行服务。
+                    </p>
+                    <h5 id="异步IO-Asynchronous-I-O"><a href="#异步IO-Asynchronous-I-O" class="headerlink"
+                                                                                                      title="异步IO(Asynchronous I/O)"></a>异步IO(Asynchronous
+                      I/O)</h5><img src="/2020/06/07/python网络编程之IO模型（转）/9.png"
+                                                                                                    title="异步IO">
+                    <p>
+                      用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous
+                      read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。
+                    </p>
+                    <h5 id="区别"><a href="#区别" class="headerlink"
+                                                                                                      title="区别"></a>区别
+                    </h5>
+                    <p>阻塞和非阻塞：调用blocking IO会一直block住对应的进程直到操作完成，而non-blocking
+                      IO在kernel还准备数据的情况下会立刻返回。</p>
+                    <p>
+                      select，poll，epoll都是IO多路复用的机制，I/O多路复用就是通过一种机制，可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知应用程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。三者的原型如下所示：
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);</span><br><span class="line"></span><br><span class="line">int poll(struct pollfd *fds, nfds_t nfds, int timeout);</span><br><span class="line"></span><br><span class="line">int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/网络编程/" rel="tag"># 网络编程</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2020/06/07/python网络编程之协程/" rel="next"
+                                                                                                        title="python网络编程之协程">
+                          <i class="fa fa-chevron-left"></i> python网络编程之协程
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2020/06/14/odoo富文本编辑器/" rel="prev"
+                                                                                                        title="odoo富文本编辑器">
+                          odoo富文本编辑器 <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                    <div>
+
+                      <div>
+
+                        <div
+                                                                                                        style="text-align:center;color: #ccc;font-size:14px;">
+                          ------ 本文--<i class="fa fa-heart"></i>--结束------</div>
+
+                      </div>
+
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style">
+                  <span class="jiathis_txt">分享到：</span>
+                  <a class="jiathis_button_fav">收藏夹</a>
+                  <a class="jiathis_button_copy">复制网址</a>
+                  <a class="jiathis_button_email">邮件</a>
+                  <a class="jiathis_button_weixin">微信</a>
+                  <a class="jiathis_button_qzone">QQ空间</a>
+                  <a class="jiathis_button_tqq">腾讯微博</a>
+                  <a class="jiathis_button_douban">豆瓣</a>
+                  <a class="jiathis_button_share">一键分享</a>
+
+                  <a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+                                                                                                  target="_blank">更多</a>
+                  <a class="jiathis_counter_style"></a>
+                </div>
+                <script type="text/javascript">
+                  var jiathis_config = {
+                    data_track_clickback: true,
+                    summary: "",
+                    shortUrl: false,
+                    hideMore: false
+                  }
+
+                </script>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid="
+                                                                                                charset="utf-8">
+                </script>
+                <!-- JiaThis Button END -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="comments" id="comments">
+            <div id="lv-container" data-id="city"
+                                                                                            data-uid="MTAyMC80NTAxNC8yMTUzNA==">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="/images/Avatar.PNG"
+                                                                                                  alt="WHF">
+
+                  <p class="site-author-name" itemprop="name">WHF</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                    偶偶来写下</p>
+                </div>
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">46</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="feed-link motion-element">
+                  <a href="/atom.xml" rel="alternate">
+                    <i class="fa fa-rss"></i>
+                    RSS
+                  </a>
+                </div>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hongfeiwu" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="455767036@qq.com" target="_blank" title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5881ee46128fe10068279c18" target="_blank"
+                                                                                                    title="掘金">
+
+                      <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="https://space.bilibili.com/52883326" target="_blank"
+                                                                                                    title="B站">
+
+                      <i class="fa fa-fw fa-heartbeat"></i>B站</a>
+                  </span>
+
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#socket"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">socket
+                        </span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#概述"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">概述</span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#socket的通讯原理"><span
+                                                                                                            class="nav-number">1.2.</span>
+                            <span class="nav-text">socket的通讯原理
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#SOCKET连接与TCP连接"><span
+                                                                                                            class="nav-number">1.3.</span>
+                            <span class="nav-text">SOCKET连接与TCP连接
+                            </span></a></li>
+                        <li class="nav-item nav-level-6"><a class="nav-link"
+                                                                                                          href="#Socket连接与HTTP连接"><span
+                                                                                                            class="nav-number">1.4.</span>
+                            <span class="nav-text">Socket连接与HTTP连接
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#同步、异步、阻塞、非阻塞"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">同步、异步、阻塞、非阻塞
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#select、poll、epoll之间的区别"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">select、poll、epoll之间的区别
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#IO模型介绍"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">IO模型介绍
+                        </span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#阻塞IO-blocking-IO"><span
+                                                                                                        class="nav-number">5.</span>
+                        <span class="nav-text">
+                          阻塞IO
+                          (blocking IO)</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#非阻塞IO-nonblocking-IO"><span
+                                                                                                        class="nav-number">6.</span>
+                        <span class="nav-text">非阻塞IO
+                          (nonblocking IO)</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#多路复用IO-IO-multiplexing"><span
+                                                                                                        class="nav-number">7.</span>
+                        <span class="nav-text">
+                          多路复用IO
+                          (IO multiplexing)</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#异步IO-Asynchronous-I-O"><span
+                                                                                                        class="nav-number">8.</span>
+                        <span class="nav-text">异步IO(Asynchronous
+                          I/O)</span></a></li>
+                    <li class="nav-item nav-level-5"><a class="nav-link"
+                                                                                                      href="#区别"><span
+                                                                                                        class="nav-number">9.</span>
+                        <span class="nav-text">区别</span></a></li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+            <div class="back-to-top">
+              <i class="fa fa-arrow-up"></i>
+
+              <span id="scrollpercent"><span>0</span>%</span>
+
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async
+                                                                                        src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <div class="copyright">&copy; 2015 &mdash; <span
+                                                                                          itemprop="copyrightYear">2020</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">WHF</span>
+          <div class="powered-by">
+            <i class="fa fa-user-md"></i>
+          </div>
+
+          <span class="post-meta-divider">|</span>
+          <span class="post-meta-item-icon">
+            <i class="fa fa-area-chart"></i>
+          </span>
+
+          <span class="post-meta-item-text">Site words total count&#58;</span>
+
+          <span title="Site words total count">119.8k</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.3</div>
+
+        <div class="theme-info">
+          <div class="powered-by"></div>
+          <span class="post-count">博客全站共119.8k字</span>
+        </div>
+
+        <div class="busuanzi-count">
+          <script async
+                                                                                          src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+          </script>
+
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+      if (typeof LivereTower === 'function') {
+        return;
+      }
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+
+  </script>
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+    var onPopupClose = function(e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      // start loading animation
+      $("body")
+        .append(
+          '<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css(
+        'text-align', 'center');
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(
+                  /<[^>]+>/g, "");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if (title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text,
+                      caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0,
+                        position = [],
+                        index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word,
+                          startPosition)) > -1) {
+                        index.push({
+                          position: position,
+                          word: word
+                        });
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+                    indexOfTitle = indexOfTitle.concat(
+                      getIndexByWord(keyword,
+                        titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(
+                      getIndexByWord(keyword,
+                        contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent
+                    .length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length +
+                      indexOfContent.length;
+                  }
+                }
+                // show search results
+                if (isMatch) {
+                  // sort index by position of keyword
+                  [indexOfTitle, indexOfContent].forEach(function(
+                    index) {
+                    index.sort(function(itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft
+                        .position) {
+                        return itemRight.position -
+                          itemLeft.position;
+                      } else {
+                        return itemLeft.word.length -
+                          itemRight.word.length;
+                      }
+                    });
+                  });
+                  // merge hits into slices
+                  function mergeIntoSlice(text, start, end,
+                  index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index
+                      .length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({
+                        position: position,
+                        length: word.length
+                      });
+                      var wordEnd = position + word.length;
+                      // move to next position of hit
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0,
+                      title.length, indexOfTitle));
+                  }
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent
+                      .length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if (start < 0) {
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if (end > content.length) {
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content,
+                      start, end, indexOfContent));
+                  }
+                  // sort slices in content by search text's count and hits' count
+                  slicesOfContent.sort(function(sliceLeft,
+                    sliceRight) {
+                    if (sliceLeft.searchTextCount !==
+                      sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount -
+                        sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !==
+                      sliceRight.hits.length) {
+                      return sliceRight.hits.length -
+                        sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight
+                        .start;
+                    }
+                  });
+                  // select top N slices in content
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0,
+                      upperBound);
+                  }
+                  // highlight title and content
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function(hit) {
+                      result += text.substring(prevEnd, hit
+                        .position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' +
+                        text.substring(hit.position, end) +
+                        '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+                  var resultItem = '';
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" +
+                      highlightKeyword(title, slicesOfTitle[0]) +
+                      "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl +
+                      "' class='search-result-title'>" + title +
+                      "</a>";
+                  }
+                  slicesOfContent.forEach(function(slice) {
+                    resultItem += "<a href='" + articleUrl +
+                      "'>" +
+                      "<p class=\"search-result\">" +
+                      highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML =
+                '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function(resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight
+                  .searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft
+                    .searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight
+                  .hitCount) {
+                  return resultRight.hitCount - resultLeft
+                    .hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList =
+                '<ul class=\"search-result-list\">';
+              resultItems.forEach(function(result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function(event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+          proceedsearch();
+        }
+      });
+    }
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e) {
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function(event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+  <script type="text/javascript"
+                                                                                  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05">
+  </script>
+  <script>
+    L2Dwidget.init({
+      "pluginModelPath": "assets/",
+      "model": {
+        "jsonPath": "/live2dw/assets/miku.model.json"
+      },
+      "display": {
+        "position": "right",
+        "width": 150,
+        "height": 300
+      },
+      "mobile": {
+        "show": true
+      },
+      "log": false,
+      "pluginJsPath": "lib/",
+      "pluginRootPath": "live2dw/",
+      "tagMode": false
+    });
+
+  </script>
+</body>
+
+</html>
